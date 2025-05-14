@@ -22,17 +22,17 @@ jobs:
 
       - name: Install Dependencies
         run: | 
-            cd ./themes/insight
+            cd ./themes/american-liquidations
              npm install
 
       - name: Install Tailwind CSS
         run: |
-            cd ./themes/insight
+            cd ./themes/american-liquidations
             npm install -g tailwindcss
 
       - name: Compile Tailwind CSS
         run: |
-            cd ./themes/insight 
+            cd ./themes/american-liquidations 
             npx tailwindcss -i ./assets/src/input.css -o ./assets/dist/output.css --minify
 
       - name: Install rsync
@@ -56,7 +56,7 @@ jobs:
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SFTP_PORT $SFTP_USER@$SFTP_HOST "echo 'SSH connection successful'"
 
           rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SFTP_PORT" \
-            ./themes/insight/ \
-            $SFTP_USER@$SFTP_HOST:/home/755960.cloudwaysapps.com/xgpkqbhmap/public_html/wp-content/themes/insight/
+            ./themes/american-liquidations/ \
+            $SFTP_USER@$SFTP_HOST:/home/755960.cloudwaysapps.com/xgpkqbhmap/public_html/wp-content/themes/american-liquidations/
 
           echo "Upload completed successfully!"
