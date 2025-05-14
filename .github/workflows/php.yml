@@ -1,39 +1,62 @@
-name: PHP Composer
+name: Tailwind CSS Build and Deploy
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+    branches:
+      - main  
+    paths:
+      - "themes/**"  
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Install Dependencies
+        run: | 
+            cd ./themes/american-liquidations
+             npm install
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      - name: Install Tailwind CSS
+        run: |
+            cd ./themes/american-liquidations
+            npm install -g tailwindcss
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+      - name: Compile Tailwind CSS
+        run: |
+            cd ./themes/american-liquidations 
+            npx tailwindcss -i ./assets/src/input.css -o ./assets/dist/output.css --minify
 
-    # - name: Run test suite
-    #   run: composer run-script test
+      - name: Install rsync
+        run: sudo apt-get install -y rsync
+
+      - name: Upload Compiled CSS via SFTP
+        env:
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASS: ${{ secrets.SFTP_PASS }}
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT || 22 }}
+          SFTP_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+        run: |
+          set -e  # Exit on error
+          echo "Uploading compiled Tailwind CSS..."
+          
+          # Set up SSH Key for authentication
+          mkdir -p ~/.ssh
+          echo "$SFTP_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SFTP_PORT $SFTP_USER@$SFTP_HOST "echo 'SSH connection successful'"
+
+          rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SFTP_PORT" \
+            ./themes/american-liquidations/ \
+            $SFTP_USER@$SFTP_HOST:/home/755960.cloudwaysapps.com/xgpkqbhmap/public_html/wp-content/themes/american-liquidations/
+
+          echo "Upload completed successfully!"
