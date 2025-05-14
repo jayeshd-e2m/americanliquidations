@@ -21,7 +21,6 @@ Note: `.no-sidebar` styles are automatically loaded.
 
 Installation
 ---------------
-
 ### Requirements
 
 `_s` requires the following dependencies:
