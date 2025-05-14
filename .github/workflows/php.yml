@@ -57,6 +57,6 @@ jobs:
 
           rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SFTP_PORT" \
             ./themes/american-liquidations/ \
-            $SFTP_USER@$SFTP_HOST:/home/755960.cloudwaysapps.com/xgpkqbhmap/public_html/wp-content/themes/american-liquidations/
+            $SFTP_USER@$SFTP_HOST:/home/755960.cloudwaysapps.com/jwcjubqamu/public_html/wp-content/themes/american-liquidations/
 
           echo "Upload completed successfully!"
