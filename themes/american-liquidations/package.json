@@ -6,7 +6,7 @@
     "tailwindcss": "^3.3.0"
   },
   "scripts": {
-    "watch:css": "tailwindcss -i ./themes/insight/assets/src/input.css -o ./themes/insight/assets/dist/output.css --watch"
+    "watch:css": "tailwindcss -i ./themes/american-liquidations/assets/src/input.css -o ./themes/american-liquidations/assets/dist/output.css --watch"
   }
   
 }
