@@ -13,11 +13,10 @@ module.exports = {
         Poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
-        'primary': '#ff0000',
-        'green': '#D6FC4B',
-        'black': '#000000',
-        'body-color': '#000000',
-        'heading-color': '#000000',
+        'primary': '#FB0404',
+        'black': '#080404',
+        'body-color': '#080404',
+        'heading-color': '#080404',
       },
       fontSize: {
         h1: '36px',
