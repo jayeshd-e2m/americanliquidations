@@ -1,7 +1,7 @@
 /* @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./**/*.{php,html,js}",
+    "./**/*.{php,html,js}", // Scan all subdirectories correctly
     "./template-parts/**/*.{php,html,js}",
     "./blocks/**/*.{php,html,js}",
     "./woocommerce/**/*.{php,html,js}",
@@ -13,9 +13,11 @@ module.exports = {
         Poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
-        'primary': '#FB0404',
-        'lightred': '#fb04040d',
-        'black': '#080404',
+        'primary': '#ff0000',
+        'green': '#D6FC4B',
+        'black': '#000000',
+        'body-color': '#000000',
+        'heading-color': '#000000',
       },
       fontSize: {
         h1: '36px',
