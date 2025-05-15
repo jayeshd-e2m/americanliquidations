@@ -34,7 +34,7 @@
          *
          * @return void
          */
-        get_template_part( 'templates/partials/topbar' );
+        get_template_part( 'templates-parts/partials/topbar' );
 
         ?>
         <?php
@@ -45,6 +45,6 @@
          *
          * @return void
          */
-        get_template_part( 'templates/partials/header' );
+        get_template_part( 'templates-parts/partials/header' );
         ?>
     </header><!-- #masthead -->
