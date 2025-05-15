@@ -14,7 +14,7 @@ module.exports = {
       },
       colors: {
         'primary': '#FB0404',
-        'light-red': '#fb04040d',
+        'lightred': '#fb04040d',
         'black': '#080404',
       },
       fontSize: {
