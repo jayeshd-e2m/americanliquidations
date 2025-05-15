@@ -1,4 +1,4 @@
-<div class="container flex justify-between py-4 gap-1 md:flex-wrap md:py-3" aria-label="<?php echo esc_attr( __( 'Site branding and search', 'amliq' ) ); ?>">
+<div class="container flex justify-between py-4 gap-1 md:flex-wrap md:py-3">
     <div class="flex items-center gap-x-24">
         <a 
             class="block font-barlow font-bold text-secondary-700 text-md max-w-40 md:text-xs md:max-w-20 "

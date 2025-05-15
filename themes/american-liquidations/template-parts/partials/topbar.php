@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 $link_classes = 'text-white text-sm hover:underline md:hidden';
 ?>
 
-<div aria-label="Top promotional links" class="bg-primary-700 py-1.5">
+<div aria-label="Top promotional links" class="bg-primary py-1.5">
     <div class="container flex items-center justify-between ">
         <a href="#" class="text-white text-sm hover:underline md:hidden">Visit Our Pallet Outlet in Waterbury, CT!</a>
 
