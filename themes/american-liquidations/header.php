@@ -25,26 +25,12 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'american-liquidations' ); ?></a>
 
-	<header id="amliq-header" class="site-header relative z-30" role="banner" aria-label="<?php esc_attr_e( 'Site Header', 'amliq_theme' ); ?>">
+	<header id="amliq-header" class="site-header relative z-30">
         <?php
-        /** 
-         * Output the topbar.
-         * 
-         * Uses template-parts/header/topbar.php
-         *
-         * @return void
-         */
-        get_template_part( 'templates-parts/partials/topbar' );
+        get_template_part( '/partials/topbar' );
 
         ?>
         <?php
-        /** 
-         * Output the header.
-         * 
-         * Uses template-parts/header/header.php
-         *
-         * @return void
-         */
-        get_template_part( 'templates-parts/partials/header' );
+        get_template_part( '/partials/header' );
         ?>
     </header><!-- #masthead -->
