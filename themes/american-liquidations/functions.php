@@ -177,3 +177,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 
+function cg_insight_scripts() {
+	wp_enqueue_style( 'output-css', get_template_directory_uri() . '/assets/dist/output.css', array() );
+}
+add_action( 'wp_enqueue_scripts', 'cg_insight_scripts' ); 
