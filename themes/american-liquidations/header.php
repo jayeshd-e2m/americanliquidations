@@ -27,10 +27,10 @@
 
 	<header id="amliq-header" class="site-header relative z-30">
         <?php
-        get_template_part( '/partials/topbar' );
+        get_template_part( 'template-parts/partials/topbar' );
 
         ?>
         <?php
-        get_template_part( '/partials/header' );
+        get_template_part( 'template-parts/partials/header' );
         ?>
     </header><!-- #masthead -->
