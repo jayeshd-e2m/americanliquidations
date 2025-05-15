@@ -27,8 +27,8 @@ $link_classes = 'text-white text-sm hover:underline ';
 
             <a href="#" class="text-white text-sm hover:underline ">Open to the Public 7 Days per week</a>
 
-            <div class="wp-block-button is-style-fill has-color-style-secondary has-arrow has-force_hover__outline_secondary md:mx-auto is-small-on-md">
-                <a class="wp-block-button__link wp-element-button " href="">GET DIRECTIONS</a>
+            <div>
+                <a class="btn" href="">GET DIRECTIONS</a>
             </div>
         </div>
     </div>
