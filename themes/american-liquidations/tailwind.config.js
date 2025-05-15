@@ -1,7 +1,7 @@
 /* @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./**/*.{php,html,js}", // Scan all subdirectories correctly
+    "./**/*.{php,html,js}",
     "./template-parts/**/*.{php,html,js}",
     "./blocks/**/*.{php,html,js}",
     "./woocommerce/**/*.{php,html,js}",
