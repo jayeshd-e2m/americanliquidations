@@ -25,7 +25,7 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'american-liquidations' ); ?></a>
 
-	<header id="amliq-header" class="site-header relative z-30 pt-[200px]">
+	<header id="amliq-header" class="site-header relative z-30">
         <?php
         get_template_part( 'template-parts/partials/topbar' );
 
@@ -34,4 +34,4 @@
         get_template_part( 'template-parts/partials/header' );
         ?>
     </header><!-- #masthead -->
-
+	
