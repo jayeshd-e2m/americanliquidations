@@ -10,7 +10,8 @@ module.exports = {
   theme: {
     extend: { 
       fontFamily: {
-        Poppins: ['Poppins', 'sans-serif'],
+        Primary: ['Inter', 'sans-serif'],
+        Secondary: ['Barlow', 'sans-serif'],
       },
       colors: {
         'primary': '#FB0404',
