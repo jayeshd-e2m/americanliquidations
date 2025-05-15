@@ -6,7 +6,7 @@
     margin: 0 auto;
 } 
 body {
-@apply font-primary text-body-color;
+@apply font-inter text-body-color;
     background: #ffffff;
     line-height: 1.3;
     font-size: 16px;
@@ -15,7 +15,7 @@ h1,h2,h3,h4,h5,h6{
     @apply text-heading-color font-bold;
     line-height: 1.2;
     font-weight: 700;
-    font-family: "Barlow", sans-serif;
+    @apply font-barlow;
 }
 p:last-child{
     margin-bottom: 0;
