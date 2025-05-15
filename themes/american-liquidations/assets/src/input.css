@@ -6,11 +6,10 @@
     margin: 0 auto;
 } 
 body {
-@apply font-Poppins text-body-color;
+@apply font-primary text-body-color;
     background: #ffffff;
     line-height: 1.3;
     font-size: 16px;
-    font-family: "Inter", sans-serif;
 }
 h1,h2,h3,h4,h5,h6{
     @apply text-heading-color font-bold;

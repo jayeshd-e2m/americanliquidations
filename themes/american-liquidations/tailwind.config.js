@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     extend: { 
       fontFamily: {
-        Primary: ['Inter', 'sans-serif'],
-        Secondary: ['Barlow', 'sans-serif'],
+        primary: ['Inter', 'sans-serif'],
+        secondary: ['Barlow', 'sans-serif'],
       },
       colors: {
         'primary': '#FB0404',
