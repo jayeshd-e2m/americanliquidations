@@ -18,6 +18,7 @@ module.exports = {
         'black': '#080404',
         'body-color': '#080404',
         'heading-color': '#080404',
+        'gray': '#F5F5F5',
       },
       fontSize: {
         h1: '36px',

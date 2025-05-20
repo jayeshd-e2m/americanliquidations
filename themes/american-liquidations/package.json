@@ -3,10 +3,9 @@
     "autoprefixer": "^10.4.14",
     "concurrently": "^9.1.2",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.4.17"
   },
   "scripts": {
     "watch:css": "tailwindcss -i ./themes/american-liquidations/assets/src/input.css -o ./themes/american-liquidations/assets/dist/output.css --watch"
   }
-  
 }

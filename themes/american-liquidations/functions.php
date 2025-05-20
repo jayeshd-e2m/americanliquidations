@@ -178,6 +178,15 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 
 function cg_insight_scripts() {
+	wp_enqueue_style( 'slick-css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', array(), '1.8.1' );
+	
 	wp_enqueue_style( 'output-css', get_template_directory_uri() . '/assets/dist/output.css', array() );
+    
+    wp_enqueue_script( 'slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true );
+
 }
 add_action( 'wp_enqueue_scripts', 'cg_insight_scripts' ); 
+
+
+// Custom Gutenberg Block
+require_once get_template_directory() . '/acf-blocks.php';

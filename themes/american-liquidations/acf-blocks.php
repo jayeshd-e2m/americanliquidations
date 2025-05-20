@@ -1,0 +1,60 @@
+<?php
+function my_acf_register_block_types() {
+
+	acf_register_block_type(array(
+        'name'              => 'american-hero-block',
+        'title'             => __('Hero Section'),
+        'description'       => __('A custom Hero block with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/hero-block/hero-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('Hero','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-new-arrival-block',
+        'title'             => __('New Arrival Section'),
+        'description'       => __('A custom New Arrival block with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/new-arrival-block/new-arrival-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('Arrival','New','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-our-brand-block',
+        'title'             => __('Our Brand Section'),
+        'description'       => __('A custom Our Brand block with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/our-brand-block/our-brand-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('Brand','Our Brand','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-two-block',
+        'title'             => __('Two Block Section'),
+        'description'       => __('A custom Two Block with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/two-block/two-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('two','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-home-testimonial-block',
+        'title'             => __('Home Testimonial Section'),
+        'description'       => __('A custom Home Testimonial with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/home-testimonial-block/home-testimonial-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('Testimonial','Block'),
+        'mode'              => 'edit',
+    ));
+}
+add_action('acf/init', 'my_acf_register_block_types');
+?>

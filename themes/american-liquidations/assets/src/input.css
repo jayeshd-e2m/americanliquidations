@@ -3,19 +3,29 @@
 @tailwind utilities;
 
 .container {
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 } 
 body {
 @apply font-inter text-body-color;
     background: #ffffff;
     line-height: 1.3;
     font-size: 16px;
+    @apply text-black/60;
 }
 h1,h2,h3,h4,h5,h6{
     @apply text-heading-color font-bold;
-    line-height: 1.2;
+    line-height: 1.15;
     font-weight: 700;
     @apply font-barlow;
+}
+h1 span,h2 span,h3 span,h4 span,h5 span,h6 span{
+    @apply text-primary;
+}
+p{
+    line-height: 1.6;
+    
+    font-weight: 500;
 }
 p:last-child{
     margin-bottom: 0;
@@ -27,10 +37,10 @@ a{
     transition: 0.4s ease;
 }
 h1{
-    @apply text-[27px] sm:text-[28px] md:text-[30px] lg:text-[32px] xl:text-[36px];
+    @apply text-[27px] sm:text-[28px] md:text-[38px] lg:text-[48px] xl:text-[60px]; /* set */
 }
 h2{
-    @apply text-[22px] sm:text-[26px] md:text-[28px] lg:text-[32px] xl:text-[36px];
+    @apply text-[22px] sm:text-[26px] md:text-[28px] lg:text-[30px] xl:text-[32px]; /* set */
 }
 h3{
     @apply text-[22px] sm:text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px];
@@ -42,8 +52,128 @@ h5{
     @apply text-[16px] sm:text-[16px] md:text-[18px];
 }
 h6{
-    @apply text-[16px];
+    @apply text-[18px]; /* set */
 } 
 a:hover{
     @apply text-primary;
+}
+blockquote p {
+    margin-bottom: 20px;
+}
+blockquote {
+    position: relative;
+    padding-top: 20px;
+}
+
+blockquote:before {
+    content: "";
+    height: 8px;
+    width: 40px;
+    @apply bg-primary;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Button */
+.btn {
+    padding: 9px 25px;
+    background-color: #080404;
+    border: 1px solid #080404;
+    color: #fff;
+    border-radius: 5px;
+    font-family: 'Barlow';
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    line-height: 1.5;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: top;
+    text-transform: uppercase;
+}
+.btn-red{
+    @apply text-white;
+    @apply border-primary;
+    @apply bg-primary;
+}
+
+.btn-red:hover{
+    @apply text-white;
+    @apply border-black;
+    @apply bg-black;
+}
+
+
+.btn.btn-arrow {
+    background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
+    background-repeat: no-repeat;
+    background-position: right 25px center;
+    padding-right: 40px;
+    background-size: 11px;
+}
+.btn.btn-small{
+    font-size: 12px;
+    padding: 6px 20px;
+    padding-right: 34px;
+    background-position: right 21px center;
+    background-size: 9px;
+}
+/* .btn.btn-arrow:hover {
+    @apply text-white;
+    background-color: transparent;
+    @apply border-white;
+} */
+.cart-btn{
+    background-image: url(../../../../../wp-content/uploads/2025/05/cart-ic.svg);
+    background-repeat: no-repeat;
+    background-position: center left 20px;
+    padding-left: 40px;
+    background-color: transparent;
+    @apply text-primary;
+    @apply border-primary;
+}
+
+.cart-btn:hover{
+    @apply text-white;
+    @apply border-black;
+    @apply bg-black;
+    background-image: url(../../../../../wp-content/uploads/2025/05/cart-ic-white.svg);
+    color: #fff;
+}
+
+.sign-btn.btn {
+    background-image: url(http://localhost:8888/american/wp-content/uploads/2025/05/sign-in.svg);
+    background-repeat: no-repeat;
+    background-position: center left 20px;
+    padding-left: 40px;
+    @apply bg-primary;
+    @apply text-white;
+    @apply border-primary;
+}
+
+.sign-btn.btn:hover{
+    @apply bg-black;
+    @apply text-white;
+    @apply border-black;
+}
+
+#menu-header-menu > li:nth-child(4n+1) {
+    border-right: 1px solid #ffffff4d;
+    padding-right: 40px;
+}
+
+#menu-header-menu > li:nth-child(4n) {
+    border-right: 1px solid #ffffff4d;
+    padding-right: 40px;
+}
+
+.cta-block:before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: 0.63;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
