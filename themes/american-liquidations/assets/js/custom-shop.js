@@ -48,9 +48,9 @@ jQuery(document).ready(function($) {
     $("#price-range").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 1000,
-        from: 100,
-        to: 1000,
+        max: 8000,
+        from: 0,
+        to: 8000,
         prefix: "$",
         skin: "round",
         onStart: function (data) {
