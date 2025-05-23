@@ -28,7 +28,7 @@
 				</div>
 				<!-- Hidden inputs for form data -->
 				<input type="hidden" name="min_price" id="min-price" value="100">
-				<input type="hidden" name="max_price" id="max-price" value="1000">
+				<input type="hidden" name="max_price" id="max-price" value="8000">
 			</div>
 		</div>
 
