@@ -379,7 +379,7 @@ blockquote:before {
 .dropdown-arrow.active {
     transform: rotateX(180deg);
 }
-.page-id-176 .entry-content>.woocommerce {
+.woocommerce-shop .entry-content>.woocommerce {
     display: none;
 }
 
