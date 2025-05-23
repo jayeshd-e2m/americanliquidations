@@ -30,7 +30,6 @@ jQuery(document).ready(function($) {
     // Submit filters
     $('#custom-shop-filters').on('submit', function(e) {
         e.preventDefault();
-        console.log('is form work');
         fetchFilteredProducts(1);
     });
 
@@ -72,7 +71,8 @@ jQuery(document).ready(function($) {
         }
     });
 
-    $('#custom-shop-filters').on('change', 'select', function () {
+    $('#custom-shop-filters input').on('change', function () {
+        
         fetchFilteredProducts(1);
     });
     
