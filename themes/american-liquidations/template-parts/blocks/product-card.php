@@ -25,7 +25,7 @@ global $product;
 			<?php
 				$description = wp_strip_all_tags($product->get_short_description());
 				$words = explode(' ', $description);
-				$trimmed = implode(' ', array_slice($words, 0, 10));
+				$trimmed = implode(' ', array_slice($words, 0, 9));
 				echo esc_html($trimmed);
 			?>
 		</div>
