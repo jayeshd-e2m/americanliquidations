@@ -519,6 +519,10 @@ body ul.psfw-social-icons{
     margin-bottom: 0 !important;
 }
 
+.current-menu-item > a {
+    @apply text-primary;
+}
+
 /* Responsive CSS */
 @media (max-width: 1350px){
     .container{
