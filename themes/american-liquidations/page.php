@@ -17,6 +17,15 @@ get_header();
 
 	<main id="primary" class="site-main">
 
+		<?php if(get_field('display_section')){ ?>
+		<div class="page-description-header py-12">
+			<div class="container">
+				<?php if(get_field('pd_title')){ ?><h1 class="text-[36px] md:text-[48px]"><?php echo get_field('pd_title'); ?></h1><?php } ?>
+				<?php if(get_field('pd_description')){ ?><p><?php echo get_field('pd_description'); ?></p><?php } ?>
+			</div>
+		</div>
+		<?php } ?>
+
 		<?php
 		while ( have_posts() ) :
 			the_post();
@@ -34,5 +43,5 @@ get_header();
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();

@@ -7,11 +7,11 @@ $block_class = get_field('advanced') ? get_field('block_class') : '';
 $block_id = get_field('advanced') ? get_field('block_id') : '';
 ?>
 
-<section class="my-24 <?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
+<section class="my-16 lg:my-24 <?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
-		<div class="flex">
-			<div class="w-[55%]">
-				<h1 class="mb-4"><?php echo get_field('hero_title'); ?></h1>
+		<div class="flex items-center flex-wrap lg:flex-nowrap">
+			<div class="w-full lg:w-1/2 xl:w-[55%]">
+				<h1 class="mb-4 is-arrow"><?php echo get_field('hero_title'); ?></h1>
 				<?php echo get_field('hero_content'); ?>
 				<div class="flex items-center gap-10 mt-12">
 					<?php 
@@ -49,8 +49,23 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 					endif; ?>
 				</div>
 			</div>
-			<div class="w-[45%]">
-
+			<div class="w-full lg:w-1/2 xl:w-[45%] lg:pl-8 mt-10 lg:mt-0">
+				<div class="grid grid-cols-2 gap-3 small-product-card">
+					<?php
+					$hero_products = get_field('hero_products');
+					if( $hero_products ):
+						foreach( $hero_products as $post ):
+							setup_postdata( $post );
+							$product = wc_get_product( $post->ID );
+							if ( $product ) {
+								set_query_var( 'product', $product );
+								get_template_part( 'template-parts/blocks/product-card' );
+							}
+						endforeach;
+						wp_reset_postdata();
+					endif;
+					?>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,59 @@
+<div class="filter-wrapper">
+
+    <form id="custom-shop-filters">
+        <!-- Categories (radio) -->
+        <div class="filter-dropdown mb-10">
+            <h5 class="mb-4 filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold">Categories</span> <span class="dropdown-arrow"></span></h5>
+			<div class="filter-dropdown-content space-y-4">
+				<?php
+				$terms = get_terms('product_cat', ['hide_empty' => true]);
+				foreach ($terms as $term) {
+					echo '<div>';
+						echo '<label class="font-medium"><input type="radio" name="categories" value="' . esc_attr($term->slug) . '"> ' . esc_html($term->name) . '</label>';
+					echo '</div>';
+				}
+				?>
+			</div>
+        </div>
+
+        <!-- Price Filter -->
+        <div class="filter-dropdown mb-10">
+			<h5 class="filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold">Price</span> <span class="dropdown-arrow"></span></h5>
+
+			<div class="price-range-wrapper">
+				<input type="text" id="price-range" name="price_range" value="" />
+				<div class="flex justify-between text-[12px] mt-2 font-medium">
+					<span>$<span id="min-price-label">100</span></span>
+					<span>$<span id="max-price-label">1000</span></span>
+				</div>
+				<!-- Hidden inputs for form data -->
+				<input type="hidden" name="min_price" id="min-price" value="100">
+				<input type="hidden" name="max_price" id="max-price" value="1000">
+			</div>
+		</div>
+
+        <!-- Sort Options -->
+        <div class="filter-dropdown mb-10">
+			<h5 class="mb-4 filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold">Sort by</span> <span class="dropdown-arrow"></span></h5>
+			<div class="filter-dropdown-content">
+				<div class="space-y-4">
+					<?php
+					$sort_options = [
+						'relevance'  => 'Relevance',
+						'newest'     => 'New Arrivals',
+						'price_asc'  => 'Price: Low to High',
+						'price_desc' => 'Price: High to Low',
+						'name_asc'   => 'Name: A to Z',
+						'name_desc'  => 'Name: Z to A',
+					];
+					foreach ($sort_options as $key => $label) {
+						echo '<div>';
+						echo '<label><input type="radio" name="sort_by" value="' . esc_attr($key) . '"> ' . esc_html($label) . '</label>';
+						echo '</div>';
+					}
+					?>
+            	</div>
+			</div>
+        </div>
+    </form>
+</div>

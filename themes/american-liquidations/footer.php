@@ -10,6 +10,32 @@
  */
 
 ?>
+
+<section class="py-8 lg:py-14">
+	<div class="container">
+		<div class="grid mobile-grid-1 grid-cols-2 md:grid-cols-4 gap-4">
+			<?php 
+			if( have_rows('swp_blocks','option') ):
+				while( have_rows('swp_blocks','option') ) : the_row(); ?>
+					<div class="boxes-item bg-primary/5 rounded-[10px] px-4 py-6 w-full">
+						<?php 
+						$image = get_sub_field('swp_icon','option');
+						if( !empty( $image ) ): ?>
+							<img class="mb-3" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+						<?php endif; ?>
+						<h6 class="opacity-60 text-[12px] mb-1 font-bold font-inter"><?php echo get_sub_field('swp_title','option'); ?></h6>
+						<p class="font-medium text-black/60 text-[12px]">
+							<?php echo get_sub_field('swp_content','option'); ?>
+						</p>
+					</div>
+				<?php endwhile;
+			endif;
+			?>
+		</div>
+	</div>
+</section>
+
+
 <?php $cta_bg =  get_field('cta_bg','option')?>
 <div class="cta-block relative py-[50px] md:py-[90px]" style="background-image: url(<?php echo $cta_bg['url']; ?>); background-size: cover;">
 	<div class="container">
@@ -23,14 +49,14 @@
 	</div>
 </div>
 <footer id="amliq-footer" class="bg-black pt-12 pb-5" role="contentinfo" data-jptgbcomment="1">
-	<div class="container flex justify-between gap-12">
-		<div class="flex-1 space-y-7 w-1/2">
+	<div class="container flex justify-between gap-6 lg:gap-12 flex-wrap md:flex-nowrap">
+		<div class="lg:flex-1 space-y-7 w-full md:w-[30%] lg:w-[40%] xl:w-1/2">
 			<!-- Site Title / Logo -->
-			<a href="/" class="" aria-label="American Liquidations">
+			<a href="/" aria-label="American Liquidations">
 				<?php 
 				$image = get_field('footer_logo','option');
 				if( !empty( $image ) ): ?>
-					<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+					<img class="max-w-[160px] lg:max-w-[222px] xl:max-w-[252px]" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 				<?php endif; ?>
 			</a>
 
@@ -64,15 +90,15 @@
 				<?php endif; ?>
 			</div>
 		</div>
-		<div class="w-1/2 flex-1 flex justify-between gap-5 lg:mt-12">
-			<div class="space-y-12">
+		<div class="w-full md:w-[70%] lg:w-[60%] xl:w-1/2 flex-1 flex justify-between gap-2 lg:gap-5 lg:mt-12 flex-col md:flex-row !mt-8 md:!mt-0">
+			<div class="space-y-8 md:space-y-12">
 				<!-- Shop Now Menu -->
 				<div class="space-y-7">
 					<span class="text-white text-xs font-bold tracking-[0.15em]">SHOP NOW</span>
 					<?php
 					wp_nav_menu( array(
 						'menu'           => 'Footer: Shop Now',
-						'menu_class'     => 'space-y-7 text-white/60 text-sm font-normal',
+						'menu_class'     => 'space-y-3 lg:space-y-7 text-white/60 text-sm font-normal',
 						'container'      => false,
 					) );
 					?>
@@ -95,21 +121,21 @@
 					</div>
 				</div>
 			</div>
-			<div class="space-y-7 mt-12 md:mt-0">
+			<div class="space-y-7 mt-8 md:mt-0">
 				<span class="text-white text-xs font-bold tracking-[0.15em]">QUICK LINKS</span>
 				<?php
 				wp_nav_menu( array(
 					'menu'           => 'Footer: QUICK LINKS',
-					'menu_class'     => 'space-y-7 text-white/60 text-sm font-normal',
+					'menu_class'     => 'space-y-3 lg:space-y-7 text-white/60 text-sm font-normal',
 					'container'      => false,
 				) );
 				?>
 			</div>
 			<div class="max-w-[186px]">
-				<div class="space-y-7 mt-12 md:mt-0">
+				<div class="space-y-4 md:space-y-7 mt-8 md:mt-0">
 					<span class="text-white text-xs font-bold tracking-[0.15em]">CONTACT INFORMATION</span>
 					<nav>
-						<ul class="space-y-7">
+						<ul class="space-y-4 md:space-y-7">
 							<li>
 								<a class="text-white/60 text-sm font-normal hover:text-white" href="#">American Liquidations</a>
 							</li>
@@ -136,14 +162,14 @@
 	</div>
 	<div class="container mt-12">
 		<span class="block w-full border-t border-white/30"></span>
-		<div class="flex justify-between items-center pt-5">
-			<span class="block text-sm text-white/30">
+		<div class="flex md:justify-center lg:justify-between md:items-center pt-8 pb-3 md:pt-5 flex-col md:flex-row">
+			<span class="block text-[12px] lg:text-sm text-white/30 mb-5 md:mb-0">
 				© 2025&nbsp;American Liquidations
 			</span>
 			<?php
 				wp_nav_menu( array(
 					'menu'           => 'Footer: Bottom Menu',
-					'menu_class'     => 'flex items-center gap-5 items-start text-white/30 text-sm font-normal',
+					'menu_class'     => 'flex flex-col md:flex-row md:items-center gap-3 xl:gap-5 items-start text-white/30 text-[12px] lg:text-sm font-normal mt-3 lg:mt-0',
 					'container'      => false,
 				) );
 			?>

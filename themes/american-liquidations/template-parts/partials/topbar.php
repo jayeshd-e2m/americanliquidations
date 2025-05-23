@@ -16,16 +16,16 @@ $link_classes = 'text-white text-sm hover:underline ';
 
 <div aria-label="Top promotional links" class="bg-primary py-[10px]"> 
     <div class="container">
-        <div class="flex items-center justify-between"> 
-            <div class="text-white text-sm font-barlow font-bold"><?php echo get_field('heading_1','option'); ?></div>
+        <div class="flex items-center justify-center lg:justify-between"> 
+            <div class="text-white text-sm font-barlow font-bold hidden lg:block"><?php echo get_field('heading_1','option'); ?></div>
 
-            <span aria-hidden="true" class="mx-3 border-l border-white h-6 "></span>
+            <span aria-hidden="true" class="mx-3 border-l border-white h-6 hidden lg:block"></span>
 
-            <div class="text-white text-sm font-barlow font-bold"><?php echo get_field('heading_2','option'); ?></div>
+            <div class="text-white text-sm font-barlow font-bold hidden lg:block"><?php echo get_field('heading_2','option'); ?></div>
 
-            <span aria-hidden="true" class="mx-3 border-l border-white h-6 "></span>
+            <span aria-hidden="true" class="mx-3 border-l border-white h-6 hidden lg:block"></span>
 
-            <div class="text-white text-sm font-barlow font-bold"><?php echo get_field('heading_3','option'); ?></div>
+            <div class="text-white text-sm font-barlow font-bold hidden lg:block"><?php echo get_field('heading_3','option'); ?></div>
 
             <div>
                 <?php 

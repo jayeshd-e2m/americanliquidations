@@ -55,6 +55,41 @@ function my_acf_register_block_types() {
         'keywords'          => array('Testimonial','Block'),
         'mode'              => 'edit',
     ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-truck-load-block',
+        'title'             => __('Truck Load Section'),
+        'description'       => __('A custom Truck Load with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/truck-load-block/truck-load-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('Truck','Load','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-page-description-block',
+        'title'             => __('Page Title & Description Section'),
+        'description'       => __('A custom Page Title & Description with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/page-description-block/page-description-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('title','description','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-two-column-block-block',
+        'title'             => __('Two Column Section'),
+        'description'       => __('A Two Column with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/two-column-block/two-column-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('two','column','Block'),
+        'mode'              => 'edit',
+    ));
+
+    
 }
 add_action('acf/init', 'my_acf_register_block_types');
 ?>

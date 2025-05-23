@@ -34,7 +34,7 @@ module.exports = {
         center: true, // Keep the container centered
         padding: '50px', // Set left & right padding to 50px
         screens: {
-          DEFAULT: '1440px', // Force the container width to 124px
+          DEFAULT: '1420px', // Force the container width to 124px
         },
       },
 

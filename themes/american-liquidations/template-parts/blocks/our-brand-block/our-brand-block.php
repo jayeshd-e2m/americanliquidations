@@ -7,7 +7,7 @@ $block_class = get_field('advanced') ? get_field('block_class') : '';
 $block_id = get_field('advanced') ? get_field('block_id') : '';
 ?>
 
-<section class="my-24<?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
+<section class="my-16 lg:my-24<?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
 		<div class="section-heading max-w-[660px]">
 			<h2 class="mb-4"><?php echo get_field('our_brand_title'); ?></h2>

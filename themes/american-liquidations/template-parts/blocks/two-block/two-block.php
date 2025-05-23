@@ -9,7 +9,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 
 <section class="py-12<?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
-		<div class="flex gap-12">
+		<div class="flex gap-6 lg:gap-12">
 		<?php
 		if( have_rows('two_blocks') ):
 			while( have_rows('two_blocks') ) : the_row(); ?>

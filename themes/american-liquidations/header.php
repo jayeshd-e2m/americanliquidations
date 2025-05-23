@@ -24,9 +24,72 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<div id="page" class="site">
+<div id="page" class="site relative">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'american-liquidations' ); ?></a>
+	<div class="bg-black/70 w-screen absolute left-0 top-0 h-full z-[1000] mobile-header-overlay" aria-hidden="true"></div>
+	<nav aria-label="Primary navigation" class="mobile-header-nav bg-black shadow-md z-[1001] h-screen absolute left-0 top-0 w-11/12 overflow-y-auto">
+		<div class="block lg:hidden">
+			<div aria-label="Top promotional links" class="bg-primary space-y-6 p-6">
+				<a href="#" class="block text-white text-sm md:text-left font-bold">
+					Visit Our Pallet Outlet in Waterbury, CT!                    </a>
 
+				<a href="#" class="block text-white text-sm md:text-left font-bold">
+					Over 150 Pallets available                    </a>
+
+				<a href="#" class="block text-white text-sm md:text-left font-bold">
+					Open to the Public 7 Days per week</a>
+
+				<a href="#" class="btn w-full">Get Directions</a>
+			</div>
+			<div class="bg-white p-4 space-y-3.5">
+				<div class="flex justify-between items-center">
+					<?php the_custom_logo(); ?>
+					<button class="header-close-menu">
+						<img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/menu-close.svg" alt="">
+					</button>
+				</div>
+
+				<!-- Separator -->
+				<span aria-hidden="true" class="block border-t border-black/10 w-full"></span>
+
+				<!-- Search bar -->
+				<div class="relative flex items-center border border-[#1018280D] rounded-lg">
+					<!-- search icon -->
+					<svg class="absolute top-1/2 left-3 -translate-y-1/2" width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+						<path d="M10.8999 10.9167L8.98789 9.00468M10.3536 5.72685C10.3536 8.29143 8.27459 10.3704 5.71 10.3704C3.14541 10.3704 1.06641 8.29143 1.06641 5.72685C1.06641 3.16226 3.14541 1.08325 5.71 1.08325C8.27459 1.08325 10.3536 3.16226 10.3536 5.72685Z" stroke="#080404" stroke-opacity="0.3" stroke-width="1.09261" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+
+					<form class="w-full" role="search" method="get" action="https://wordpress-755960-5419304.cloudwaysapps.com/">
+						<label for="topbar-search" class="sr-only">
+							Search site</label>
+						<input id="topbar-search" type="search" name="s" placeholder="Search" autocomplete="off" class="bg-transparent  py-2 pl-9 pr-4 rounded-lg w-full">
+					</form>
+				</div>
+
+				<div class="flex justify-between items-center gap-3 mobile-phone-cart">
+					<!-- Phone Number -->
+					<a href="tel:2035874132" class="text-black hover:underline font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132" data-jptgbfonts="{&quot;fontFamily&quot;:&quot;Inter, sans-serif&quot;,&quot;fontWeight&quot;:&quot;500&quot;,&quot;fontStyle&quot;:&quot;normal&quot;}">203-587-4132</a>
+					<div class="flex items-center gap-2">
+					<div class="">
+						<a class="cart-btn btn" href="">CART</a>
+					</div>
+					<div class="">
+						<a class="sign-btn btn" href="" >SIGN IN</a>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="lg:bg-black">
+			<?php
+				wp_nav_menu( array(
+					'menu'           => 'Header Menu',
+					'menu_class'     => 'p-5 text-white text-base space-y-4',
+					'container'      => false,
+				) );
+			?>
+		</div>
+	</nav>
 	<header id="amliq-header" class="site-header relative z-30">
         <?php
         get_template_part( 'template-parts/partials/topbar' );

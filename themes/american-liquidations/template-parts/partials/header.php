@@ -1,6 +1,6 @@
 <div class="container flex justify-between py-4 gap-6 md:py-3">
     <div class="flex items-center gap-x-24">
-        <div class="block font-barlow font-bold text-secondary-700 text-md  md:text-xs  ">
+        <div class="block font-barlow font-bold text-black text-md  md:text-xs">
             <a 
                 class="block max-w-40 md:max-w-20"
                 href="<?php echo esc_url( home_url( '/' ) ); ?>" 
@@ -17,7 +17,7 @@
                 </svg>
                 <form class="w-full" role="search" method="get" action="/">
                     <label for="topbar-search" class="sr-only">Search site</label>
-                    <input id="topbar-search" type="search" name="s" placeholder="Search" autocomplete="off" class="bg-transparent py-2 pl-9 pr-4 focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-lg w-full text-sm min-w-[420px] max-w-[100%]">
+                    <input id="topbar-search" type="search" name="s" placeholder="Search" autocomplete="off" class="bg-transparent py-2 pl-9 pr-4 focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-lg w-full text-sm min-w-[320px] xl:min-w-[420px] max-w-[100%]">
                 </form>
             </div>
         </div>
@@ -25,7 +25,7 @@
 
     <div class="flex items-center gap-7">
         <!-- Phone Number -->
-        <a href="tel:2035874132" class="text-secondary-700 hover:underline" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
+        <a href="tel:2035874132" class="text-black hover:underline hidden lg:block" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
         <div class="flex items-center gap-2">
             <div class="has-cart">
                 <a class="cart-btn btn" href="">CART</a>
@@ -38,12 +38,18 @@
 </div>
 <div class="bg-black md:overflow-x-hidden ">
     <div class="container">
-        <?php
-            wp_nav_menu( array(
-                'menu'           => 'Header Menu',
-                'menu_class'     => 'flex justify-between items-center gap-x-4 py-5 text-white',
-                'container'      => false,
-            ) );
-        ?>
+        <div class="mobile-humberger text-white text-sm font-medium lg:hidden py-8 flex items-center justify-center gap-3">
+            <span>Menu</span>
+            <img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/humberger.svg" alt="">
+        </div>
+        <div class="lg:block hidden">
+            <?php
+                wp_nav_menu( array(
+                    'menu'           => 'Header Menu',
+                    'menu_class'     => 'flex justify-between items-center gap-x-4 py-5 text-white',
+                    'container'      => false,
+                ) );
+            ?>
+        </div>
     </div>
 </div>
