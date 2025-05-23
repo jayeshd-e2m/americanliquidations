@@ -30,6 +30,7 @@ jQuery(document).ready(function($) {
     // Submit filters
     $('#custom-shop-filters').on('submit', function(e) {
         e.preventDefault();
+        console.log('is form work');
         fetchFilteredProducts(1);
     });
 
