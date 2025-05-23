@@ -42,7 +42,7 @@
             <span>Menu</span>
             <img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/humberger.svg" alt="">
         </div>
-        <div class="lg:block hidden">
+        <div class="lg:block hidden font-medium">
             <?php
                 wp_nav_menu( array(
                     'menu'           => 'Header Menu',
