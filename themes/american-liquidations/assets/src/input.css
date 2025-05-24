@@ -188,7 +188,7 @@ blockquote:before {
 }
 
 .sign-btn.btn {
-    background-image: url(http://localhost:8888/american/wp-content/uploads/2025/05/sign-in.svg);
+    background-image: url(../../../../../american/wp-content/uploads/2025/05/sign-in.svg);
     background-repeat: no-repeat;
     background-position: center left 20px;
     padding-left: 40px;
