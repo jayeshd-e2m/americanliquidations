@@ -4320,11 +4320,11 @@ body ul.psfw-social-icons{
   margin-bottom: 5px;
 }
 
-label.gfield_label.gform-field-label .gfield_required {
+label.gfield_label .gfield_required {
   font-size: 0;
 }
 
-label.gfield_label.gform-field-label .gfield_required .gfield_required:after {
+label.gfield_label .gfield_required .gfield_required:after {
   content: "*";
   font-size: 16px;
   font-style: normal;
