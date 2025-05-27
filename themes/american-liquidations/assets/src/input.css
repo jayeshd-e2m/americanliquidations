@@ -823,6 +823,94 @@ body ul.psfw-social-icons{
     @apply bg-black;
 }
 
+/* Contact form */
+
+.contact-form-right label {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    @apply !text-black/60;
+}
+.gfield {
+    margin-bottom: 5px;
+}
+label.gfield_label.gform-field-label .gfield_required {
+    font-size: 0;
+}
+
+label.gfield_label.gform-field-label .gfield_required .gfield_required:after {
+    content: "*";
+    font-size: 16px;
+    font-style: normal;
+    @apply text-black/60;
+}
+
+.contact-form-right input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]), .contact-form-right textarea {
+    background: transparent;
+    border: 1px solid hsl(0deg 33% 2% / 5%);
+    border-radius: 8px;
+    font-size: 14px !important;
+    @apply !text-black/60;
+}
+
+.contact-form-right input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]){
+    padding: 11px 15px !important;
+}
+
+.contact-form-right textarea {
+    height: 130px !important;
+    resize: none;
+}
+.gfield_error input, .gfield_error textarea {
+    @apply !border-primary;
+}
+
+.gform_button {
+    height: auto !important;
+    @apply !bg-black;
+    @apply !text-white;
+    width: 100%;
+    margin-bottom: 0 !important;
+    cursor: pointer;
+    letter-spacing: 0.16em !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    font-family: 'Barlow';
+    padding: 10px 20px !important;
+}
+
+.gform_button:hover{
+    @apply !bg-primary;
+    @apply !text-white;
+}
+
+.gfield_validation_message {
+    font-size: 12px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    @apply !text-primary;
+}
+
+.gform_validation_errors {
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+div#gform_1_validation_container .gform-icon {
+    display: none;
+}
+
+.gform_validation_errors h2 {
+    @apply !text-primary;
+}
+
+.gform-footer {
+    padding-bottom: 0 !important;
+}
+
 /* Responsive CSS */
 @media (max-width: 1350px){
     .container{
