@@ -11,7 +11,7 @@
 
 ?>
 
-<section class="py-8 lg:py-14">
+<section class="py-14 footer-boxes-cover">
 	<div class="container">
 		<div class="grid mobile-grid-1 grid-cols-2 md:grid-cols-4 gap-4">
 			<?php 

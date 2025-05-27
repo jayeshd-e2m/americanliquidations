@@ -185,7 +185,11 @@ function cg_insight_scripts() {
 	
 	wp_enqueue_style( 'output-css', get_template_directory_uri() . '/assets/dist/output.css', array() );
     
-    wp_enqueue_script( 'rangeSlider-js', 'https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js', array('jquery'), '1.8.1', true );
+    wp_enqueue_script( 'cleave-js', 'https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js', array('jquery'), '1.8.1', true );
+	
+	wp_enqueue_script( 'cleave-phone-js', 'https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/addons/cleave-phone.us.js', array('jquery'), '1.8.1', true );
+	
+	wp_enqueue_script( 'rangeSlider-js', 'https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js', array('jquery'), '1.8.1', true );
 	
 	wp_enqueue_script( 'slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true );
 
@@ -203,3 +207,71 @@ require_once get_template_directory() . '/template-parts/shop/function-shop.php'
 
 // Shop single page function
 require_once get_template_directory() . '/function-shop-single.php';
+
+// Myaccount function
+require_once get_template_directory() . '/function-myaccount.php';
+
+// Taxonomy Proudct
+require_once get_template_directory() . '/function-product-category.php';
+
+
+function mytheme_woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+	add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
+}
+add_action( 'after_setup_theme', 'mytheme_woocommerce_support' );
+
+
+
+// Taxonomy of truckload
+
+// Add MSRP field only if product is in the "truckloads" category
+add_action('woocommerce_product_options_pricing', 'add_msrp_field_for_truckloads_category');
+function add_msrp_field_for_truckloads_category() {
+    global $post;
+
+    // Check if product belongs to 'truckloads' category
+    $terms = get_the_terms($post->ID, 'product_cat');
+    $show_msrp = false;
+
+    if ($terms && !is_wp_error($terms)) {
+        foreach ($terms as $term) {
+            if ($term->slug === 'truckloads') {
+                $show_msrp = true;
+                break;
+            }
+        }
+    }
+
+    if ($show_msrp) {
+        echo '<div class="options_group">';
+
+        woocommerce_wp_text_input([
+            'id'                => '_msrp_price',
+            'label'             => __('MSRP Price', 'woocommerce'),
+            'desc_tip'          => true,
+            'description'       => __('Enter the MSRP (Manufacturer\'s Suggested Retail Price).'),
+            'type'              => 'number',
+            'custom_attributes' => [
+                'step' => 'any',
+                'min'  => '0'
+            ]
+        ]);
+
+        echo '</div>';
+    }
+}
+
+// Save the MSRP price
+add_action('woocommerce_process_product_meta', 'save_msrp_field_for_truckloads');
+function save_msrp_field_for_truckloads($post_id) {
+    if (isset($_POST['_msrp_price'])) {
+        update_post_meta($post_id, '_msrp_price', wc_clean($_POST['_msrp_price']));
+    }
+}
+
+
+
+

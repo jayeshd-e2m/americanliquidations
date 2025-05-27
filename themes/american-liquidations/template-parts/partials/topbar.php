@@ -35,7 +35,7 @@ $link_classes = 'text-white text-sm hover:underline ';
                     $link_title = $link['title'];
                     $link_target = $link['target'] ? $link['target'] : '_self';
                     ?>
-                    <a class="btn btn-small btn-arrow hover:text-white hover:bg-transparent hover:border-white" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+                    <a class="btn btn-small btn-arrow hover:text-white hover:bg-transparent hover:border-white header-top-btn" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
                 <?php endif; ?>
             </div>
         </div>

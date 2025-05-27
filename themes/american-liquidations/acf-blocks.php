@@ -89,6 +89,39 @@ function my_acf_register_block_types() {
         'mode'              => 'edit',
     ));
 
+    acf_register_block_type(array(
+        'name'              => 'american-contact-top-block',
+        'title'             => __('Contact Top Section'),
+        'description'       => __('A Contact Top with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/contact-top-block/contact-top-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('contact','top','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-contact-form-block',
+        'title'             => __('Contact Form Section'),
+        'description'       => __('A Contact Form with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/contact-form-block/contact-form-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('contact','form','Block'),
+        'mode'              => 'edit',
+    ));
+
+    acf_register_block_type(array(
+        'name'              => 'american-faq--block',
+        'title'             => __('FAQs Section'),
+        'description'       => __('A FAQs with ACF fields.'),
+        'render_template'   => 'template-parts/blocks/faqs-block/faqs-block.php',
+        'category'          => 'formatting',
+        'icon'              => 'block-default',
+        'keywords'          => array('faqs','faq','Block'),
+        'mode'              => 'edit',
+    ));
+
     
 }
 add_action('acf/init', 'my_acf_register_block_types');

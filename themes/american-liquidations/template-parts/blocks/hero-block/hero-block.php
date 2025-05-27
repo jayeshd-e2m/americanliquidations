@@ -13,7 +13,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 			<div class="w-full lg:w-1/2 xl:w-[55%]">
 				<h1 class="mb-4 is-arrow"><?php echo get_field('hero_title'); ?></h1>
 				<?php echo get_field('hero_content'); ?>
-				<div class="flex items-center gap-4 md:gap-10 mt-12 flex-wrap md:flex-nowrap">
+				<div class="flex items-center gap-10 mt-12 flex-wrap md:flex-nowrap">
 					<?php 
 					$link = get_field('hero_button_1');
 					if( $link ): 

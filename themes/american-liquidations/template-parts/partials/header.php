@@ -1,12 +1,11 @@
 <div class="container flex justify-between py-4 gap-6 md:py-3">
     <div class="flex items-center gap-x-24">
         <div class="block font-barlow font-bold text-black text-md  md:text-xs">
-            <a 
-                class="block max-w-40 md:max-w-20"
-                href="<?php echo esc_url( home_url( '/' ) ); ?>" 
+            <div 
+                class="block max-w-20 md:max-w-32"
                 >
                 <?php the_custom_logo(); ?>
-            </a>
+            </div>
         </div>
 
         <!-- Search bar -->
@@ -28,17 +27,24 @@
         <a href="tel:2035874132" class="text-black hover:underline hidden lg:block" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
         <div class="flex items-center gap-2">
             <div class="has-cart">
-                <a class="cart-btn btn" href="">CART</a>
+                <a class="cart-btn btn" href="<?php echo site_url(); ?>/cart">CART</a>
             </div>
-            <div class="has-sign-in">
-                <a class="sign-btn btn" href="">SIGN IN</a>
-            </div>
+            <?php if ( is_user_logged_in() ) : ?>
+                <div class="has-sign-in">
+                    <a class="logout-btn btn" href="">Logout</a>
+                </div>
+            <?php else : ?>
+                <div class="has-sign-in">
+                    <a class="sign-btn btn" href="">SIGN IN</a>
+                </div>
+            <?php endif; ?>
+            
         </div>
     </div>
 </div>
 <div class="bg-black md:overflow-x-hidden ">
     <div class="container">
-        <div class="mobile-humberger text-white text-sm font-medium lg:hidden py-8 flex items-center justify-center gap-3">
+        <div class="mobile-humberger text-white text-sm font-medium lg:hidden py-5 md:py-8 flex items-center justify-center gap-3">
             <span>Menu</span>
             <img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/humberger.svg" alt="">
         </div>

@@ -10,13 +10,13 @@ jQuery(document).ready(function($) {
         const stockStatus = $('select[name="stock_status"]').val();
         data.push({ name: 'stock_status', value: stockStatus });
 
-        $('#custom-shop-results').hide();
+        $('#custom-shop-results').addClass('opacity-0');
         $('#custom-shop-loader').removeClass('hidden');
         $('#custom-shop-pagination').hide();
 
         $.post(customShopAjax.ajaxurl, data, function(response) {
             if (response.success) {
-                $('#custom-shop-results').html(response.data.products_html).fadeIn();
+                $('#custom-shop-results').html(response.data.products_html).removeClass('opacity-0');
                 $('#custom-shop-pagination').html(response.data.pagination_html).fadeIn();
                 $('.search-match-box').text(response.data.count);
             } else {
@@ -48,9 +48,9 @@ jQuery(document).ready(function($) {
     $("#price-range").ionRangeSlider({
         type: "double",
         min: 0,
-        max: 8000,
-        from: 0,
-        to: 8000,
+        max: 10000,
+        from: 100,
+        to: 10000,
         prefix: "$",
         skin: "round",
         onStart: function (data) {

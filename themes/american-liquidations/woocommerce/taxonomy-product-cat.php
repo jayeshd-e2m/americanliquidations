@@ -1,0 +1,77 @@
+<?php
+/**
+ * The Template for displaying products in a product category. Simply includes the archive template
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/taxonomy-product-cat.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see         https://woocommerce.com/document/template-structure/
+ * @package     WooCommerce\Templates
+ * @version     4.7.0
+ */
+get_header();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+$term = get_queried_object();
+?>
+<div class="page-description-header py-12">
+    <div class="container">
+        <div class="max-w-[710px]">
+            <h1 class="text-[36px] md:text-[48px] mb-6"><?php echo esc_html( $term->name ); ?></h1>
+            <?php if ( term_description() ) : ?>
+                <p><?php echo term_description(); ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<div class="shop-taxonomy-cover py-24 bg-gray">
+    <div class="container">
+        <h2 class="text-center mb-12">Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory</h2>
+        <?php 
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            echo do_shortcode('[shopitem cat="' . esc_attr( $term->slug ) . '"]');
+        }?>
+    </div>
+</div>
+<section class="py-12 md:py-24">
+	<div class="container">
+		<div class="flex flex-wrap md:flex-nowrap gap-6 lg:gap-12 items-center">
+			<div class="w-full md:w-1/2 mb-4 md:mb-0">
+				<?php 
+				$image = get_field('cta_image','product_cat_' . $term->term_id);
+				if( !empty( $image ) ): ?>
+					<img class="rounded-[15px]" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+				<?php endif; ?>
+			</div>
+			<div class="w-full md:w-1/2 space-y-5">
+				<span class="h-[7px] w-[40px] bg-primary block"></span>
+				<h2 class="text-[32px]"><?php echo get_field('cta_title','product_cat_' . $term->term_id); ?></h2>
+				<?php echo get_field('cta_content','product_cat_' . $term->term_id); ?>
+				<?php 
+				$link = get_field('cta_button','product_cat_' . $term->term_id);
+				if( $link ): 
+					$link_url = $link['url'];
+					$link_title = $link['title'];
+					$link_target = $link['target'] ? $link['target'] : '_self';
+					?>
+					<a class="btn btn-red btn-arrow" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="single-product-map-inner mb-4">
+    <div class="container">
+        <div class="rounded-[15px] overflow-hidden">
+            <?php echo get_field('map_iframe','product_cat_' . $term->term_id); ?>
+        </div>
+    </div>
+</section>
+<?php get_footer(); ?>
