@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
         data.push({ name: 'paged', value: paged });
 
         // Append stock status from outside the form
-        const stockStatus = $('select[name="stock_status"]').val();
+        const stockStatus = $('select[name="stock_status"]:visible').val() || $('select[name="stock_status"]').val();
         data.push({ name: 'stock_status', value: stockStatus });
 
         $('#custom-shop-results').addClass('opacity-0');
@@ -76,14 +76,14 @@ jQuery(document).ready(function($) {
         fetchFilteredProducts(1);
     });
     
-    $('#sort-price-dropdown').on('change', function () {
+    $('select[name="price_low_high"]').on('change', function () {
         const val = $(this).val();
         $('[name="sort_by"]').val([val]); // update hidden form input
         $('#custom-shop-filters').trigger('submit');
     });
 
     $('select[name="stock_status"]').on('change', function () {
-        fetchFilteredProducts(1);
+        $('#custom-shop-filters').submit(); // triggers AJAX
     });
 
     // Filter arrow

@@ -27,8 +27,18 @@
         <a href="tel:2035874132" class="text-black hover:underline hidden lg:block" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
         <div class="flex items-center gap-2">
             <div class="has-cart">
-                <a class="cart-btn btn" href="<?php echo site_url(); ?>/cart">CART</a>
+                <?php
+                    $cart_count = WC()->cart->get_cart_contents_count();
+                ?>
+                <a class="cart-btn btn relative" id="cart-button" href="javascript:;">CART
+                    <?php if($cart_count == 0){}else{ ?>
+                    <span id="cart-count" class="font-inter cart-count absolute top-[7px] left-[10px] bg-primary h-3 w-3 !flex items-center justify-center tracking-[0em] text-white text-[8px] rounded-full">
+                        <?= $cart_count; ?>
+                    </span>
+                    <?php } ?>
+                </a>
             </div>
+            
             <?php if ( is_user_logged_in() ) : ?>
                 <div class="has-sign-in">
                     <a class="logout-btn btn" href="">Logout</a>

@@ -27,7 +27,9 @@ global $product;
 				<?php }
 				?>
 			</p>
-			<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt="">Lorem Ipsum Dolor</span>
+			<?php if(get_field('location', $product->get_id())){ ?>
+				<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt=""><?php echo get_field('location', $product->get_id()); ?></span>
+			<?php } ?>
 		</div>
 		<div class="font-medium mt-5 is-description text-sm lg:text-md">
 			<?php

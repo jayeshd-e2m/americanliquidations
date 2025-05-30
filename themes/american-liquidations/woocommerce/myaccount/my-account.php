@@ -32,6 +32,8 @@ $account_sections = array(
     'orders'           => 'Orders',
     'downloads'        => 'Downloads',
     'edit-address'     => 'Addresses',
+	'business-profile' => 'Business Profile',
+	'address-book' => 'Address Book',
     'edit-account'     => 'Personal Settings',
     'customer-logout'  => 'Logout',
     // add more endpoints as needed
@@ -53,22 +55,22 @@ $section_title = $account_sections[ $current_endpoint ] ?? 'My Account';
 ?>
 <div class="page-description-header py-12">
 	<div class="container">
-		<p>My Account<?php if($section_title != 'Account') { echo ' > ' . esc_html($section_title); } ?></p>
-		<div class="flex justify-between items-center">
+		<p class="mb-5 md:mb-0"><a href="<?php echo site_url();?>/my-account">My Account</a><?php if($section_title != 'Account') { echo ' > ' . esc_html($section_title); } ?></p>
+		<div class="flex justify-between items-center flex-wrap md:flex-nowrap gap-6 md:gap-10">
 			<h1 class="text-[36px] md:text-[48px]"><?php echo esc_html($section_title); ?></h1>
 			<?php
 				$current_user = wp_get_current_user();
 				$username     = $current_user->user_login;
 				$email        = $current_user->user_email;
 			?>
-			<div class="pd-header-user text-sm flex items-center gap-6">
+			<div class="pd-header-user text-sm flex items-center gap-6 justify-between md:justify-normal w-full md:w-auto flex-wrap md:flex-nowrap">
 				<span class="capitalize"><?php echo esc_html( $username ); ?></span>
-				<span><a href="mailto:<?php echo esc_html( $email ); ?>" class="text-primary underline"><?php echo esc_html( $email ); ?></a></span>
+				<span><a href="mailto:<?php echo esc_html( $email ); ?>" class="text-primary hover:text-primary/60 underline"><?php echo esc_html( $email ); ?></a></span>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="woocommerce-custom-account bg-gray py-24">
+<div class="woocommerce-custom-account bg-gray py-14">
 	<div class="container">
 		<?php
 			/**

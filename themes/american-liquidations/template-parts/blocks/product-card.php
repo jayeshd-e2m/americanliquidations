@@ -19,7 +19,9 @@ global $product;
         <h5 class="mb-4 is-title"><?php echo esc_html( get_the_title( $product->get_id() ) ); ?></h5>
 		<div class="flex justify-between gap-2 flex-wrap">
 			<p class="text-[18px] text-black font-medium font-barlow flex items-center gap-2 is-price"><?php echo $product->get_price_html(); ?></p>
-			<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt="">Lorem Ipsum Dolor</span>
+			<?php if(get_field('location', $product->get_id())){ ?>
+				<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt=""><?php echo get_field('location', $product->get_id()); ?></span>
+			<?php } ?>
 		</div>
 		<div class="font-medium mt-5 is-description text-sm lg:text-base">
 			<?php
@@ -29,14 +31,15 @@ global $product;
 				echo esc_html($trimmed);
 			?>
 		</div>
-		<div class="flex items-center gap-5 mt-6 is-buttons flex-wrap">
+		<div class="flex items-center gap-5 mt-6 is-buttons flex-wrap ">
 			<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
-               class="add_to_cart_button ajax_add_to_cart"
+               class="add_to_cart_button custom-add-to-cart ajax_add_to_cart relative"
                data-quantity="1"
                data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
                data-product_sku="<?php echo esc_attr( $product->get_sku() ); ?>"
                rel="nofollow">
-               Add to cart
+               <span class="button-text">Add to cart</span>
+			   <span class="spinner hidden" aria-hidden="true"></span>
             </a>
 			<a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="text-[12px] uppercase tracking-[0.14em] font-bold text-black">
 			View details

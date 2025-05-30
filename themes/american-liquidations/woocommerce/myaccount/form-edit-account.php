@@ -31,17 +31,17 @@ $current_user = wp_get_current_user();
 ?>
 
 <div class="myaccount-tabs-wrapper">
-    <div class="myaccount-tabs flex gap-5 mb-5">
-        <button class="tab-link active bg-white text-black/60 px-[30px] py-[10px] rounded-[15px] font-bold text-sm hover:bg-primary hover:text-white" data-tab="tab-general-info">General Information</button>
-        <button class="tab-link bg-white text-black/60 px-[30px] py-[10px] rounded-[15px] font-bold text-sm hover:bg-primary hover:text-white" data-tab="tab-login-security">Login & Security</button>
+    <div class="myaccount-tabs flex gap-1 md:gap-5 mb-5 justify-center md:justify-start">
+        <button class="tab-link active bg-white text-black/60 px-[15px] md:px-[30px] py-[10px] rounded-[15px] font-bold text-sm hover:bg-primary hover:text-white" data-tab="tab-general-info">General Information</button>
+        <button class="tab-link bg-white text-black/60 px-[15px] md:px-[30px] py-[10px] rounded-[15px] font-bold text-sm hover:bg-primary hover:text-white" data-tab="tab-login-security">Login & Security</button>
     </div>
 
     <!-- General Information Tab -->
     <div class="tab-content active" id="tab-general-info">
-		<div class="info-section bg-white p-12 rounded-[15px]">
+		<div class="info-section bg-white p-7 md:p-12 rounded-[15px]">
 			<div class="info-item-inner relative pr-10">
-				<div class="section-label text-[20px] font-bold mb-10">Legal Name</div>
-				<div class="flex gap-24">
+				<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Legal Name</div>
+				<div class="flex gap-4 md:gap-24 mobile-wrap">
 					<div class="text-sm">
 						<span class="font-semibold block mb-2">First Name</span>
 						<?php echo !empty($current_user->first_name) ? esc_html($current_user->first_name) : '---'; ?>
@@ -61,10 +61,10 @@ $current_user = wp_get_current_user();
 				<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-legal-name">Edit</button>
 			</div>
 		</div>
-		<div class="flex mt-5 gap-5">
-			<div class="info-section bg-white p-12 rounded-[15px] w-full md:w-1/2">
+		<div class="flex mt-5 gap-5 flex-wrap md:flex-nowrap">
+			<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full md:w-1/2">
 				<div class="info-item-inner relative pr-10">
-					<div class="section-label text-[20px] font-bold mb-10">Email Address</div>
+					<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Email Address</div>
 					<div class="flex gap-24">
 						<div class="text-sm">
 							<?php echo !empty($current_user->user_email) ? esc_html($current_user->user_email) : '---'; ?>
@@ -73,9 +73,9 @@ $current_user = wp_get_current_user();
 					<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-email">Edit</button>
 				</div>
 			</div>
-			<div class="info-section bg-white p-12 rounded-[15px] w-full md:w-1/2">
+			<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full md:w-1/2">
 				<div class="info-item-inner relative pr-10">
-					<div class="section-label text-[20px] font-bold mb-10">Phone Number</div>
+					<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Phone Number</div>
 					<div class="flex gap-24">
 						<div class="text-sm">
 						<?php
@@ -93,14 +93,39 @@ $current_user = wp_get_current_user();
 
     <!-- Login & Security Tab (can keep empty initially or add content as needed) -->
 	<div class="tab-content" id="tab-login-security">
-		<div class="info-section bg-white p-12 rounded-[15px] w-full md:w-1/2">
+		<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full">
 			<div class="info-item-inner relative pr-10">
-				<div class="section-label text-[20px] font-bold mb-10">Password</div>
+				<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Password</div>
 				<div class="flex gap-24">
-					<div class="text-sm">******************** <button class="edit-section text-primary/60 text-sm font-semibold ml-4" data-modal="modal-password">Change Password</button></div>
+					<div class="text-sm">********************</div>
+					<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-password">Edit</button>
 				</div>
 			</div>
 		</div>
+		
+		<!-- 2FA Section -->
+		<?php
+		$user_has_2fa = get_user_meta($current_user->ID, 'user_2fa_enabled', true) === 'yes';
+		?>
+		<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full mt-5">
+			<div class="info-item-inner flex items-center pr-10">
+				<div class="section-label text-[20px] font-bold">
+					Two Factor Authentication
+				</div>
+				<div>
+					<button 
+						id="toggle-2fa-btn"
+						class="toggle-2fa-btn text-[20px] font-bold pl-1"
+						style="color: <?php echo $user_has_2fa ? '#FB0404' : '#FB0404'; ?>"
+						data-on="<?php echo $user_has_2fa ? 'yes':'no'; ?>"
+					>
+						<?php echo $user_has_2fa ? 'ON' : 'OFF'; ?>
+					</button>
+				</div>
+			</div>
+			<p class="mt-5 md:mt-10">We’ll send you a code at your registered phone number everytime you log in.</p>
+		</div>
+
 	</div>
 </div>
 
@@ -311,6 +336,39 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 	});
+
+	// 2FA
+
+
+	const btn = document.getElementById('toggle-2fa-btn');
+    btn.addEventListener('click', function(e){
+        e.preventDefault();
+        const nowOn = btn.getAttribute('data-on') === 'yes';
+        // Toggle value
+        const newVal = nowOn ? 'no' : 'yes';
+
+        // Immediately show UI feedback
+        btn.textContent = newVal === 'yes' ? 'ON' : 'OFF';
+        btn.setAttribute('data-on', newVal);
+
+        // Save to server
+        const data = new FormData();
+        data.append('action', 'toggle_2fa_setting');
+        data.append('enable_2fa', newVal);
+        fetch('<?php echo admin_url("admin-ajax.php"); ?>', {
+            method: 'POST',
+            body: data,
+        }).then(resp=>resp.json())
+          .then(res=>{
+            if(!res.success){
+                alert("Error: " + res.data);
+                // revert toggle on error
+                btn.textContent = nowOn ? 'ON' : 'OFF';
+                // btn.style.background = nowOn ? '#39ba5b' : '#f5425d';
+                btn.setAttribute('data-on', nowOn ? 'yes' : 'no');
+            }
+        });
+    });
 
 
 

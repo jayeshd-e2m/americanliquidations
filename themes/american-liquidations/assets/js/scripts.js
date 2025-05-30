@@ -48,6 +48,19 @@ jQuery(document).ready(function($){
 		jQuery('body').removeClass('menu-active');
 	})
 
+
+	// product add to cart button
+
+	$(document).on('click', '.custom-add-to-cart', function(e) {
+        var $btn = $(this);
+        $btn.addClass('loading');
+    });
+
+    // WooCommerce event after item added to cart via AJAX
+    $(document.body).on('added_to_cart', function(event, fragments, cart_hash, $button) {
+        $button.removeClass('loading');
+    });
+
 })
 
 jQuery(window).scroll(function(){

@@ -21,7 +21,7 @@ get_header();
 		<div class="page-description-header py-12">
 			<div class="container">
 				<?php if(get_field('pd_title',$blog_page_id )){ ?><h1 class="text-[36px] md:text-[48px]"><?php echo get_field('pd_title',$blog_page_id ); ?></h1><?php } ?>
-				<?php if(get_field('pd_description',$blog_page_id )){ ?><p><?php echo get_field('pd_description',$blog_page_id ); ?></p><?php } ?>
+				<?php if(get_field('pd_description',$blog_page_id )){ ?><?php echo get_field('pd_description',$blog_page_id ); ?><?php } ?>
 			</div>
 		</div>
 		<?php } ?>

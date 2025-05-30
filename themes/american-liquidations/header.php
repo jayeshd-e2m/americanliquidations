@@ -24,6 +24,28 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+
+<!-- Floating cart -->
+<div id="cart-dropdown" class="fixed top-0 right-[-500px] w-full max-w-[500px] bg-white shadow-lg z-[9999] h-full overflow-y-auto overflow-x-hidden flex flex-wrap content-between">
+    <div>
+        <div class="cart-header flex justify-between items-center p-6">
+            <h6 class="text-[21px]">Cart</h6>
+            <a href="javascript:;" id="header-cart-close" class="header-cart-close w-4 h-4"><img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/close-primary.svg" alt=""></a>
+        </div>
+        <div class="bg-black p-6 block text-white text-lg mb-10">
+            <p>Lorem ipsum dolor sit amet consectetur. Justo cursus tortor id aliquam dapibus.</p>
+        </div>
+        <div id="cart-items" class="p-6">
+            <!-- Do not remove this div: Cart items will be inserted here via AJAX -->
+        </div>
+    </div>
+    <div class="flex gap-2 flex-wrap p-6 w-full">
+        <a href="<?php echo wc_get_cart_url(); ?>" class="block font-barlow font-bold uppercase rounded-[5px] border-2 border-black bg-transparent text-black py-4 px-10 text-center mt-2 width-full hover:bg-black hover:text-white tracking-[0.2em]">View Cart</a>
+        <a href="<?php echo wc_get_checkout_url(); ?>" class="block is-arrow-white font-barlow font-bold uppercase rounded-[5px] border-2 border-primary bg-primary text-white py-4 px-10 text-center mt-2 width-full hover:bg-black hover:text-white hover:border-black tracking-[0.2em]">Checkout</a>
+    </div>
+</div>
+
+
 <div id="page" class="site relative">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'american-liquidations' ); ?></a>
 	<div class="bg-black/70 w-screen absolute left-0 top-0 h-full z-[1000] mobile-header-overlay" aria-hidden="true"></div>

@@ -138,13 +138,16 @@ $is_truckload = has_term( 'truckloads', 'product_cat', $product->get_id() );
 				?>
 				<button
 					type="button"
-					class="custom-add-to-cart btn-black btn btn-arrow"
+					class="custom-add-to-cart btn-black btn btn-arrow relative"
 					data-product_id="<?php echo esc_attr($product->get_id()); ?>"
 					data-product_sku="<?php echo esc_attr($product->get_sku()); ?>"
 					data-quantity="1"
 					data-is_truckload="<?php echo $is_truckload ? '1' : '0'; ?>"
 				>
-					<?php echo $is_truckload ? 'Buy Now' : 'Add to Cart'; ?>
+					<span class="button-text">
+						<?php echo $is_truckload ? 'Buy Now' : 'Add to Cart'; ?>
+					</span>
+					<span class="spinner hidden" aria-hidden="true"></span>
 				</button>
 
 					<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
@@ -248,7 +251,7 @@ jQuery(document).ready(function($) {
 		var productId = $button.data('product_id');
 		var quantity = $button.data('quantity');
 		var isTruckload = $button.data('is_truckload');
-		$button.prop('disabled', true).text('Adding...');
+		// $button.prop('disabled', true).text('Adding...');
 
 		var ajaxUrl = '';
 		if (typeof wc_add_to_cart_params !== 'undefined' && wc_add_to_cart_params.ajax_url) {
@@ -288,7 +291,8 @@ jQuery(document).ready(function($) {
 						default:
 							alert('An unexpected error occurred.');
 					}
-					resetButton($button, isTruckload);
+					// resetButton($button, isTruckload);
+					$('.custom-add-to-cart').removeClass('loading');
 				}
 			},
 			error: function(xhr, status, error) {

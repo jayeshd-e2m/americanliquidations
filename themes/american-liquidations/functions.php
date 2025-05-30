@@ -214,6 +214,9 @@ require_once get_template_directory() . '/function-myaccount.php';
 // Taxonomy Proudct
 require_once get_template_directory() . '/function-product-category.php';
 
+// Floating cart
+require_once get_template_directory() . '/function-floating-cart.php';
+
 
 function mytheme_woocommerce_support() {
 	add_theme_support( 'woocommerce' );

@@ -30,16 +30,16 @@ $allowed_html = array(
 <div class="account-tabs-header mb-7">
 	<?php echo get_field('myacc_content'); ?>
 </div>
-<div class="account-tabs-cover grid grid-cols-2 gap-5">
+<div class="account-tabs-cover grid grid-cols-1 md:grid-cols-2 gap-5">
 	<?php 
 	if( have_rows('myacc_tabs') ):
 	while( have_rows('myacc_tabs') ) : the_row(); 
 	$url = get_sub_field('url');
 	?>
 		<?php if($url){ ?>
-			<a href="<?php echo $url['url']; ?>" class="account-tab-item p-12 bg-white rounded-[10px]">
+			<a href="<?php echo $url['url']; ?>" class="account-tab-item p-7 md:p-12 bg-white rounded-[10px]">
 		<?php }else{ ?>
-			<div class="account-tab-item bg-white rounded-[10px] p-12">
+			<div class="account-tab-item bg-white rounded-[10px] p-7 md:p-12">
 		<?php } ?>
 			<div class="account-tab-img mb-7">
 				<?php 

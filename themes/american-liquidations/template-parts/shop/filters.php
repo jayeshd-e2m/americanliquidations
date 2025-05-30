@@ -6,10 +6,17 @@
             <h5 class="mb-4 filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold">Categories</span> <span class="dropdown-arrow"></span></h5>
 			<div class="filter-dropdown-content space-y-4">
 				<?php
+				$preselected_cat = get_query_var('preselected_cat');
 				$terms = get_terms('product_cat', ['hide_empty' => true]);
+				
+				$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
+				?>
+				<input type="hidden" name="initial_category" id="initial_category" value="<?php echo esc_attr($selected_category); ?>">
+				<?php 
 				foreach ($terms as $term) {
+					$checked = ($term->slug === $selected_category) ? 'checked' : '';
 					echo '<div>';
-						echo '<label class="font-medium"><input type="radio" name="categories" value="' . esc_attr($term->slug) . '"> ' . esc_html($term->name) . '</label>';
+					echo '<label class="font-medium"><input type="radio" name="categories" value="' . esc_attr($term->slug) . '" ' . $checked . '> ' . esc_html($term->name) . '</label>';
 					echo '</div>';
 				}
 				?>
