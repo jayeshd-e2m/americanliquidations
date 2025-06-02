@@ -17,14 +17,32 @@
 
 defined( 'ABSPATH' ) || exit;
 
-/**
- * My Account navigation.
- *
- * @since 2.6.0
- */
-//do_action( 'woocommerce_account_navigation' ); ?>
+global $wp;
+if ( isset( $wp->query_vars['login'] ) ) {
+    if ( is_user_logged_in() ) {
+        wp_redirect( wc_get_page_permalink( 'myaccount' ) );
+        exit;
+    }
+    wc_get_template( 'myaccount/form-login.php' );
+    return;
+}
 
-<?php
+// Check for register endpoint
+if ( isset( $wp->query_vars['register'] ) ) {
+    if ( is_user_logged_in() ) {
+        wp_redirect( wc_get_page_permalink( 'myaccount' ) );
+        exit;
+    }
+    wc_get_template( 'myaccount/form-register.php' );
+    return;
+}
+
+// If user is not logged in and not on login/register pages, redirect to login
+if ( ! is_user_logged_in() ) {
+    wp_redirect( site_url( '/my-account/login/' ) );
+    exit;
+}
+
 // Map WooCommerce My Account endpoints to custom labels
 $account_sections = array(
     ''                 => 'Account',
@@ -32,12 +50,13 @@ $account_sections = array(
     'orders'           => 'Orders',
     'downloads'        => 'Downloads',
     'edit-address'     => 'Addresses',
-	'business-profile' => 'Business Profile',
-	'address-book' => 'Address Book',
+    'business-profile' => 'Business Profile',
+    'address-book'     => 'Address Book',
     'edit-account'     => 'Personal Settings',
     'customer-logout'  => 'Logout',
     // add more endpoints as needed
 );
+
 global $wp;
 
 $current_endpoint = '';
@@ -49,6 +68,7 @@ if ( ! empty( $wp->query_vars ) ) {
         }
     }
 }
+
 
 // Fallback to dashboard if none found
 $section_title = $account_sections[ $current_endpoint ] ?? 'My Account';

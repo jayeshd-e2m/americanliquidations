@@ -17,8 +17,8 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 			</div>
 			<div class="w-full md:w-1/2">
 				<h2 class="mb-4"><?php echo get_field('testimonial_title'); ?></h2>
-				<p><?php echo get_field('testimonial_content'); ?></p>
-				<div class="flex items-center gap-2 xl:gap-10 mt-12 flex-col md:flex-row">
+				<?php echo get_field('testimonial_content'); ?>
+				<div class="flex items-center gap-2 xl:gap-10 mt-6 flex-col md:flex-row">
 					<?php 
 					$link = get_field('testimonial_button_1');
 					if( $link ): 
@@ -26,7 +26,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 						$link_title = $link['title'];
 						$link_target = $link['target'] ? $link['target'] : '_self';
 						?>
-						<a class="btn btn-arrow btn-red" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+						<a class="btn btn-arrow btn-red md:w-auto" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
 					<?php endif; ?>
 					<?php 
 					$link = get_field('testimonial_button_2');
@@ -39,7 +39,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 					<?php endif; ?>
 				</div>
 				<div class="testimonial-blocks mt-12 xl:mt-24">
-					<div class="testimonial-items grid grid-cols-2 xl:grid-cols-4 gap-4">
+					<div class="testimonial-items grid mobile-grid-1 grid-cols-2 xl:grid-cols-4 gap-4">
 					<?php
 					if( have_rows('testimonial_blocks') ):
 						while( have_rows('testimonial_blocks') ) : the_row(); ?>

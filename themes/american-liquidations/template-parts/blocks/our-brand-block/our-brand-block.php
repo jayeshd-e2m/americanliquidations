@@ -26,7 +26,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 									<img style="max-width: 90%; max-height: 90%;" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 								<?php endif; ?>
 							</div>
-							<h6><?php echo get_sub_field('brand_title'); ?></h6>
+							<h6 class="text-black/60"><?php echo get_sub_field('brand_title'); ?></h6>
 							<p class="mt-5 leading-[1.2em]"><?php echo get_sub_field('brand_content'); ?></p>
 						</div>
 					<?php endwhile;

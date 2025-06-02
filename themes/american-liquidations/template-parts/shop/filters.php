@@ -3,7 +3,7 @@
     <form id="custom-shop-filters">
         <!-- Categories (radio) -->
         <div class="filter-dropdown mb-10">
-            <h5 class="mb-4 filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold">Categories</span> <span class="dropdown-arrow"></span></h5>
+            <h5 class="mb-4 filter-dropdown-heading relative text-[18px]"><span class="opacity-60 text-black font-bold">Categories</span> <span class="dropdown-arrow"></span></h5>
 			<div class="filter-dropdown-content space-y-4">
 				<?php
 				$preselected_cat = get_query_var('preselected_cat');
@@ -16,7 +16,7 @@
 				foreach ($terms as $term) {
 					$checked = ($term->slug === $selected_category) ? 'checked' : '';
 					echo '<div>';
-					echo '<label class="font-medium"><input type="radio" name="categories" value="' . esc_attr($term->slug) . '" ' . $checked . '> ' . esc_html($term->name) . '</label>';
+					echo '<label class="font-medium custom-radio-box"><input type="radio" name="categories" value="' . esc_attr($term->slug) . '" ' . $checked . '><span class="input-radio-custom"></span>' . esc_html($term->name) . '</label>';
 					echo '</div>';
 				}
 				?>
@@ -25,7 +25,7 @@
 
         <!-- Price Filter -->
         <div class="filter-dropdown mb-10">
-			<h5 class="filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold">Price</span> <span class="dropdown-arrow"></span></h5>
+			<h5 class="filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold text-[18px]">Price</span> <span class="dropdown-arrow"></span></h5>
 
 			<div class="price-range-wrapper">
 				<input type="text" id="price-range" name="price_range" value="" />
@@ -41,7 +41,7 @@
 
         <!-- Sort Options -->
         <div class="filter-dropdown mb-10">
-			<h5 class="mb-4 filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold">Sort by</span> <span class="dropdown-arrow"></span></h5>
+			<h5 class="mb-4 filter-dropdown-heading relative text-[18px]"><span class="opacity-60 text-black font-bold">Sort by</span> <span class="dropdown-arrow"></span></h5>
 			<div class="filter-dropdown-content">
 				<div class="space-y-4">
 					<?php
@@ -55,7 +55,7 @@
 					];
 					foreach ($sort_options as $key => $label) {
 						echo '<div>';
-						echo '<label><input type="radio" name="sort_by" value="' . esc_attr($key) . '"> ' . esc_html($label) . '</label>';
+						echo '<label class="custom-radio-box"><input type="radio" name="sort_by" value="' . esc_attr($key) . '"><span class="input-radio-custom"></span>' . esc_html($label) . '</label>';
 						echo '</div>';
 					}
 					?>

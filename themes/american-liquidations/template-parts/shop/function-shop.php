@@ -16,10 +16,10 @@ function custom_shop_shortcode($atts) {
     ob_start();
     ?>
     <div class="shop-wrapper py-12 lg:py-24">
-        <div class="container text-center mb-12 lg:mb-24 featured-product-heading">
+        <div class="container text-center mb-7 lg:mb-24 featured-product-heading">
             <h2>Featured Products</h2>
         </div>
-        <div class="flex gap-3 justify-center mb-8 md:hidden">
+        <div class="flex gap-3 justify-center mb-8 md:hidden flex-wrap md:flex-nowrap px-7 md:px-0">
             <div class="flex justify-end">
                 <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px]">
                     <span class="text-[14px] font-semibold flex items-center">
@@ -51,7 +51,7 @@ function custom_shop_shortcode($atts) {
             <div class="shop-sidebar w-full md:w-[275px] 2xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px]">
                 <div class="filter-wrapper">
                     <div class="filter-search mb-10">
-                        <h4 class="mb-3">Search Products</h4>
+                        <h4 class="mb-3 text-black/60 text-[24px]">Search Products</h4>
                         <p class="font-medium opacity-[40%]">
                             Store / Search : <span class="search-match-box"><?php echo esc_html($count); ?></span> Matches
                         </p>

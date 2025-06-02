@@ -217,6 +217,9 @@ require_once get_template_directory() . '/function-product-category.php';
 // Floating cart
 require_once get_template_directory() . '/function-floating-cart.php';
 
+// Register
+require_once get_template_directory() . '/function-register.php';
+
 
 function mytheme_woocommerce_support() {
 	add_theme_support( 'woocommerce' );
@@ -277,4 +280,31 @@ function save_msrp_field_for_truckloads($post_id) {
 
 
 
+// Display the user_phone field after Nickname
+add_action('show_user_profile', 'add_user_phone_profile_field');
+add_action('edit_user_profile', 'add_user_phone_profile_field');
+function add_user_phone_profile_field($user) {
+    ?>
+    <h3>Contact Information</h3>
+    <table class="form-table">
+        <tr>
+            <th><label for="user_phone"><?php esc_html_e('Phone Number', 'textdomain'); ?></label></th>
+            <td>
+                <input type="text" name="user_phone" id="user_phone" value="<?php echo esc_attr(get_user_meta($user->ID, 'user_phone', true)); ?>" class="regular-text" /><br />
+                <span class="description"><?php esc_html_e('Please enter the user\'s phone number.'); ?></span>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
 
+// Save the user_phone field
+add_action('personal_options_update', 'save_user_phone_profile_field');
+add_action('edit_user_profile_update', 'save_user_phone_profile_field');
+function save_user_phone_profile_field($user_id) {
+    if (!current_user_can('edit_user', $user_id))
+        return false;
+    if (isset($_POST['user_phone'])) {
+        update_user_meta($user_id, 'user_phone', sanitize_text_field($_POST['user_phone']));
+    }
+}

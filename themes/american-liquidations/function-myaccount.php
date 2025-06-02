@@ -412,5 +412,44 @@ function add_custom_address() {
 	wp_send_json_success();
 }
 
+add_action('template_redirect', function () {
+    if (
+        is_user_logged_in() &&
+        is_wc_endpoint_url('business-profile') &&
+        $_SERVER['REQUEST_METHOD'] === 'POST' &&
+        isset($_POST['submit_business_profile']) &&
+        check_admin_referer('save_business_profile', 'business_profile_nonce')
+    ) {
+        $user_id = get_current_user_id();
+
+        update_user_meta($user_id, 'business_name', sanitize_text_field($_POST['business_name']));
+        update_user_meta($user_id, 'business_ein', sanitize_text_field($_POST['business_ein']));
+        update_user_meta($user_id, 'business_phone', sanitize_text_field($_POST['business_phone']));
+        update_user_meta($user_id, 'business_address', sanitize_textarea_field($_POST['business_address']));
+        update_user_meta($user_id, 'business_type', sanitize_text_field($_POST['business_type']));
+
+        // Handle tax document upload
+        if (!empty($_FILES['tax_document']['name'])) {
+            $allowed_types = ['application/pdf', 'image/jpeg', 'image/png'];
+            $file = $_FILES['tax_document'];
+
+            if (in_array($file['type'], $allowed_types)) {
+                require_once ABSPATH . 'wp-admin/includes/file.php';
+                require_once ABSPATH . 'wp-admin/includes/media.php';
+                require_once ABSPATH . 'wp-admin/includes/image.php';
+
+                $attachment_id = media_handle_upload('tax_document', 0);
+                if (!is_wp_error($attachment_id)) {
+                    update_user_meta($user_id, 'tax_document_id', $attachment_id);
+                }
+            }
+        }
+
+        // Redirect to show saved state
+        wp_redirect(add_query_arg('profile-updated', '1', wc_get_account_endpoint_url('business-profile')));
+        exit;
+    }
+});
+
 
 ?>

@@ -8,7 +8,7 @@ global $product;
 
 <div class="product-card rounded-[15px] bg-white relative overflow-hidden">
 
-    <div class="product-card-img pt-[72%] bg-[#6988730D] rounded-[15px] relative overflow-hidden">
+    <div class="product-card-img pt-[72%] bg-[#6988730D] rounded-[8px] md:rounded-[15px] relative overflow-hidden">
 		<?php if (!$product->is_in_stock()) {
 			echo '<span class="is-tag z-10 absolute top-2 left-2 out-of-stock bg-primary font-bold tracking-[0.06em] py-0.5 px-2 md:px-3 rounded-full md:text-[12px] text-[12px] !text-white uppercase inline-block align-top font-barlow">Out of Stock</span>';
 		}
@@ -23,7 +23,7 @@ global $product;
 				<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt=""><?php echo get_field('location', $product->get_id()); ?></span>
 			<?php } ?>
 		</div>
-		<div class="font-medium mt-5 is-description text-sm lg:text-base">
+		<div class="font-medium mt-5 is-description text-sm lg:text-base !leading-[1.2em]">
 			<?php
 				$description = wp_strip_all_tags($product->get_short_description());
 				$words = explode(' ', $description);

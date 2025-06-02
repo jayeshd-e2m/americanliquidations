@@ -24,7 +24,7 @@
 
     <div class="flex items-center gap-7">
         <!-- Phone Number -->
-        <a href="tel:2035874132" class="text-black hover:underline hidden lg:block" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
+        <a href="tel:2035874132" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
         <div class="flex items-center gap-2">
             <div class="has-cart">
                 <?php
@@ -41,11 +41,11 @@
             
             <?php if ( is_user_logged_in() ) : ?>
                 <div class="has-sign-in">
-                    <a class="logout-btn btn" href="">Logout</a>
+                    <a class="logout-btn btn" href="<?php echo wp_logout_url(home_url('/my-account/')); ?>">Logout</a>
                 </div>
             <?php else : ?>
                 <div class="has-sign-in">
-                    <a class="sign-btn btn" href="">SIGN IN</a>
+                    <a class="sign-btn btn" href="<?php echo site_url(); ?>/my-account/" >SIGN IN</a>
                 </div>
             <?php endif; ?>
             

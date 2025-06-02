@@ -53,7 +53,7 @@ $tax_document_url  = $tax_document_id ? wp_get_attachment_url($tax_document_id) 
 $tax_document_file = $tax_document_id ? get_post($tax_document_id)->post_title : '';
 
 // Helper: Is there any business profile?
-$is_business_profile = $business_name || $ein || $business_phone || $business_address || $business_type || $tax_document_id;
+$is_business_profile = $business_name || $ein || $business_phone || $business_address || $business_type;
 
 // If form submitted, process as before (keep your existing form submission logic above...)
 // ...
@@ -270,38 +270,43 @@ $is_business_profile = $business_name || $ein || $business_phone || $business_ad
 	<?php else: ?>
 
 		<!-- FORM MODE (no data yet, show fields to fill in) -->
-		<form enctype="multipart/form-data" method="POST" style="max-width: 600px;">
-			<div class="form-group mb-3">
-				<label>Business Name</label>
-				<input class="form-control w-full" type="text" name="business_name"
-					value="<?php echo esc_attr($business_name); ?>" required>
-			</div>
-			<div class="form-group mb-3">
-				<label>Employer Identification Number (EIN)</label>
-				<input class="form-control w-full" type="text" name="business_ein"
-					value="<?php echo esc_attr($ein); ?>">
-			</div>
-			<div class="form-group mb-3">
-				<label>Business Phone Number</label>
-				<input class="form-control w-full" type="text" name="business_phone"
-					value="<?php echo esc_attr($business_phone); ?>">
-			</div>
-			<div class="form-group mb-3">
-				<label>Business Address</label>
-				<textarea class="form-control w-full" name="business_address"><?php echo esc_textarea($business_address); ?></textarea>
-			</div>
-			<div class="form-group mb-3">
-				<label>Business Type</label>
-				<input class="form-control w-full" type="text" name="business_type"
-					value="<?php echo esc_attr($business_type); ?>">
-			</div>
-			<div class="form-group mb-3">
-				<label>Tax Exempt Document (PDF or image)</label>
-				<input type="file" name="tax_document" accept="application/pdf,image/*">
-			</div>
-			<?php wp_nonce_field('save_business_profile', 'business_profile_nonce'); ?>
-			<button type="submit" name="submit_business_profile" class="button btn-primary">Save</button>
-		</form>
+		 <div class="bg-white p-7 md:p-12 rounded-[15px] w-full custom-modal mx-auto">
+			<form enctype="multipart/form-data" method="POST" id="initial-business-data">
+				<?php wp_nonce_field('save_business_profile', 'business_profile_nonce'); ?>
+				<input type="hidden" name="submit_business_profile" value="1">
+				<div class="form-group mb-3">
+					<label>Business Name</label>
+					<input class="form-control w-full" type="text" name="business_name"
+						value="<?php echo esc_attr($business_name); ?>" required>
+				</div>
+				<div class="form-group mb-3">
+					<label>Employer Identification Number (EIN)</label>
+					<input class="form-control w-full" type="text" name="business_ein"
+						value="<?php echo esc_attr($ein); ?>">
+				</div>
+				<div class="form-group mb-3">
+					<label>Business Phone Number</label>
+					<input class="form-control w-full" type="text" name="business_phone"
+						value="<?php echo esc_attr($business_phone); ?>">
+				</div>
+				<div class="form-group mb-3">
+					<label>Business Address</label>
+					<input class="form-control w-full" type="text" name="business_address"
+						value="<?php echo esc_attr($business_address); ?>">
+				</div>
+				<div class="form-group mb-3">
+					<label>Business Type</label>
+					<input class="form-control w-full" type="text" name="business_type"
+						value="<?php echo esc_attr($business_type); ?>">
+				</div>
+				<div class="form-group mb-3">
+					<label>Tax Exempt Document (PDF or image)</label>
+					<input type="file" name="tax_document" accept="application/pdf,image/*">
+				</div>
+				<?php wp_nonce_field('save_business_profile', 'business_profile_nonce'); ?>
+				<button type="submit" name="submit_business_profile" class="button btn-primary">Save</button>
+			</form>
+		</div>
 	<?php endif; ?>
 </div>
 

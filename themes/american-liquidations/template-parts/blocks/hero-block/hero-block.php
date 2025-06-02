@@ -43,7 +43,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 								if( !empty( $image ) ): ?>
 									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 								<?php endif; ?>
-								<p class="text-sm font-medium mt-3 text-black/60"><?php echo get_sub_field('box_title'); ?></p>
+								<p class="text-sm font-medium mt-3 text-black/60 remove-br-mobile"><?php echo get_sub_field('box_title'); ?></p>
 							</div>
 						<?php endwhile;
 					endif; ?>
