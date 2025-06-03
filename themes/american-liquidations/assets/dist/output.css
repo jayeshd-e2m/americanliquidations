@@ -1572,10 +1572,6 @@ video {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
 .flex-row {
   flex-direction: row;
 }
@@ -4019,7 +4015,7 @@ blockquote:before {
 }
 
 .sign-btn.btn {
-  background-image: url(../../../../../american/wp-content/uploads/2025/05/sign-in.svg);
+  background-image: url(../../../../../american/wp-content/uploads/2025/06/sign-in.svg);
   background-repeat: no-repeat;
   background-position: center left 20px;
   padding-left: 40px;
@@ -5916,6 +5912,10 @@ div#gform_1_validation_container .gform-icon {
     font-size: 24px;
   }
 
+  .md\:text-\[32px\] {
+    font-size: 32px;
+  }
+
   .md\:text-\[42px\] {
     font-size: 42px;
   }
@@ -5927,10 +5927,6 @@ div#gform_1_validation_container .gform-icon {
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
-  }
-
-  .md\:text-\[32px\] {
-    font-size: 32px;
   }
 
   .md\:text-black\/60 {
@@ -6144,10 +6140,6 @@ div#gform_1_validation_container .gform-icon {
 
   .xl\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .xl\:items-center {
-    align-items: center;
   }
 
   .xl\:gap-10 {
