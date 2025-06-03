@@ -5977,6 +5977,10 @@ div#gform_1_validation_container .gform-icon {
     padding-top: 6rem;
   }
 
+  .md\:pt-12 {
+    padding-top: 3rem;
+  }
+
   .md\:text-left {
     text-align: left;
   }

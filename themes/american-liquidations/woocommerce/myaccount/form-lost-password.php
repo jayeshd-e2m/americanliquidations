@@ -43,13 +43,13 @@ defined( 'ABSPATH' ) || exit;
 
 				<?php do_action( 'woocommerce_lostpassword_form' ); ?>
 
-				<div class="flex justify-between items-center pt-12">
-					<p class="woocommerce-form-row form-row">
+				<div class="flex justify-between items-center pt-8 md:pt-12 flex-wrap lg:flex-nowrap">
+					<p class="woocommerce-form-row form-row w-full md:w-auto">
 						<input type="hidden" name="wc_reset_password" value="true" />
-						<button type="submit" class="btn btn-red btn-arrow<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" value="<?php esc_attr_e( 'Send confirmation Code', 'woocommerce' ); ?>"><?php esc_html_e( 'Send confirmation Code', 'woocommerce' ); ?></button>
+						<button type="submit" class="btn btn-red btn-arrow width-full md:w-auto<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" value="<?php esc_attr_e( 'Send confirmation Code', 'woocommerce' ); ?>"><?php esc_html_e( 'Send confirmation Code', 'woocommerce' ); ?></button>
 					</p>
 
-					<div class="text-sm"><a href="<?php echo site_url(); ?>/my-account/">Go back and <strong>Sign in</strong></a></div>
+					<div class="text-sm mt-3 md:mt-0"><a href="<?php echo site_url(); ?>/my-account/">Go back and <strong>Sign in</strong></a></div>
 				</div>
 
 				<?php wp_nonce_field( 'lost_password', 'woocommerce-lost-password-nonce' ); ?>
