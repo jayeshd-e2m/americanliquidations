@@ -9,12 +9,12 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 
 <section class="py-12 md:py-24<?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
-		<div class="flex gap-7">
+		<div class="flex gap-7 flex-wrap md:flex-nowrap">
 			<div class="contact-form-left w-full md:w-1/2 relative">
 				<?php 
 				$image = get_field('contact_form_image');
 				if( !empty( $image ) ): ?>
-					<img class="w-full absolute top-0 left-0 h-full object-cover" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+					<img class="w-full md:absolute top-0 left-0 h-full object-cover rounded-[10px]" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 				<?php endif; ?>
 			</div>
 			<div class="contact-form-right w-full md:w-1/2">

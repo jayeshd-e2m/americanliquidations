@@ -43,17 +43,18 @@ function get_paginated_array($array, $per_page = 5, $page = 1) {
 function myaccount_orders_custom_table($orders, $wp_button_class = '') {
     if ( empty( $orders ) ) { return; }
     ?>
-    <table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
+    <div class="order-table-responsive">
+    <table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table my_account_orders account-orders-table">
         <thead>
             <tr>
-                <th>Order Info</th>
-                <th># Tracking</th>
-                <th>Status</th>
-                <th># Order ID</th>
-                <th>Date</th>
-                <th>Shipping</th>
-                <th>Total</th>
-                <th></th>
+                <th class="min-w-[150px]">Order Info</th>
+                <th class="text-center whitespace-nowrap"># Tracking</th>
+                <th class="text-center">Status</th>
+                <th class="min-w-[100px] whitespace-nowrap"># Order ID</th>
+                <th class="min-w-[100px]">Date</th>
+                <th class="min-w-[100px]">Shipping</th>
+                <th class="min-w-[100px]">Total</th>
+                <th class="min-w-[220px]"></th>
             </tr>
         </thead>
         <tbody>
@@ -74,7 +75,7 @@ function myaccount_orders_custom_table($orders, $wp_button_class = '') {
                         </ul>
                     </td>
                     <!-- # Tracking -->
-                    <td>
+                    <td class="text-center">
                         <?php
                         // Replace '_tracking_number' with your tracking plugin meta key, or use plugin APIs if necessary.
                         $tracking = $order->get_meta('_tracking_number');
@@ -91,7 +92,7 @@ function myaccount_orders_custom_table($orders, $wp_button_class = '') {
                         </span>
                     </td>
                     <!-- # Order ID -->
-                    <td>#<?php echo esc_html( $order->get_order_number() ); ?></td>
+                    <td class="text-center lg:text-left">#<?php echo esc_html( $order->get_order_number() ); ?></td>
                     <!-- Date -->
                     <td>
                         <?php
@@ -113,22 +114,24 @@ function myaccount_orders_custom_table($orders, $wp_button_class = '') {
                     <!-- Actions -->
                     <td>
                         <?php
+
+                        echo '<div class="flex items-center gap-2">';
                         // Receipt button (change to your PDF/receipt url if needed)
-                        echo '<div class="flex items-center gap-1.5">';
-                        $access_key = get_post_meta( $order->get_id(), '_wcpdf_invoice_access_key', true );
+                        $order_id = $order->get_id();
+                        $access_key = 'bae469a797';
 
                         if ( $access_key ) {
-                            $pdf_url = add_query_arg( [
-                                'action'        => 'generate_wpo_wcpdf',
-                                'document_type' => 'invoice',
-                                'order_ids'     => $order->get_id(),
-                                'access_key'    => $access_key,
-                            ], admin_url( 'admin-ajax.php' ) );
+                            $pdf_url = add_query_arg( array(
+                                'action'       => 'generate_wpo_wcpdf',
+                                'document_type'=> 'invoice',
+                                'order_ids'    => $order_id,
+                                'access_key'   => $access_key,
+                            ), admin_url( 'admin-ajax.php' ) );
 
-                            echo '<a href="' . esc_url( $pdf_url ) . '" class="btn btn-red btn-small !capitalize !tracking-[0px] !font-semibold" target="_blank">Receipt</a> ';
+                            echo '<a href="' . esc_url( $pdf_url ) . '" class="btn btn-red btn-small !capitalize !tracking-[0px] !font-semibold receipt-download whitespace-nowrap" target="_blank"><img src="'.site_url().'/wp-content/uploads/2025/06/receipt-icon.svg" /><span>Receipt</span></a>';
                         }
                         // View Details
-                        echo '<a href="' . esc_url( $order->get_view_order_url() ) . '" class="btn btn-small !capitalize !tracking-[0px] !font-semibold">View details</a>';
+                        echo '<a href="' . esc_url( $order->get_view_order_url() ) . '" class="btn btn-small !capitalize !tracking-[0px] !font-semibold whitespace-nowrap">View details</a>';
                         echo '</div>';
                         ?>
                     </td>
@@ -136,6 +139,7 @@ function myaccount_orders_custom_table($orders, $wp_button_class = '') {
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
     <?php
 }
 
@@ -144,19 +148,19 @@ $products_page   = isset( $_GET['products_page'] )   ? max( 1, intval( $_GET['pr
 $truckloads_page = isset( $_GET['truckloads_page'] ) ? max( 1, intval( $_GET['truckloads_page'] ) ) : 1;
 
 // Paginate both arrays
-$products_paginated   = get_paginated_array( $products_orders, 5, $products_page );
-$truckloads_paginated = get_paginated_array( $truckloads_orders, 5, $truckloads_page );
+$products_paginated   = get_paginated_array( $products_orders, 10, $products_page );
+$truckloads_paginated = get_paginated_array( $truckloads_orders, 10, $truckloads_page );
 
 // Helper to output pagination links
 function woocommerce_custom_orders_pagination($current, $pages, $base_url, $param_name) {
     if ( $pages < 2 ) return;
     echo '<nav class="woocommerce-pagination flex my-3 gap-3 items-center justify-center text-sm">';
     if ( $current > 1 ) {
-        echo '<a class="btn btn-small btn-red" href="' . esc_url( add_query_arg( $param_name, $current - 1, $base_url ) ) . '">&laquo; ' . esc_html__('Prev','woocommerce') . '</a> ';
+        echo '<a class="btn btn-small btn-red btn-prev" href="' . esc_url( add_query_arg( $param_name, $current - 1, $base_url ) ) . '">' . esc_html__('Prev','woocommerce') . '</a> ';
     }
     echo '<span style="padding:0 6px;">' . sprintf( __( 'Page %d of %d', 'woocommerce' ), $current, $pages ) . '</span>';
     if ( $current < $pages ) {
-        echo '<a class="btn btn-small btn-red" href="' . esc_url( add_query_arg( $param_name, $current + 1, $base_url ) ) . '">' . esc_html__('Next','woocommerce') . ' &raquo;</a>';
+        echo '<a class="btn btn-small btn-red btn-next" href="' . esc_url( add_query_arg( $param_name, $current + 1, $base_url ) ) . '">' . esc_html__('Next','woocommerce') . '</a>';
     }
     echo '</nav>';
 }
@@ -172,15 +176,18 @@ $base_url = esc_url( add_query_arg( $_GET, $base_url ) ); // Restore current que
     <?php if ( ! empty( $products_orders ) ) : ?>
         <h4 class="mb-5"><?php echo esc_html_x( 'Products', 'my account', 'woocommerce' ); ?></h4>
         <?php myaccount_orders_custom_table( $products_paginated['orders'], $wp_button_class ); ?>
-        <?php
-        woocommerce_custom_orders_pagination(
-            $products_paginated['current'],
-            $products_paginated['pages'],
-            remove_query_arg('products_page'),
-            'products_page'
-        );
-        ?>
+            <?php
+            woocommerce_custom_orders_pagination(
+                $products_paginated['current'],
+                $products_paginated['pages'],
+                remove_query_arg('products_page'),
+                'products_page'
+            );
+            ?>
     <?php endif; ?>
+
+
+    <div class="h-10 md:h-20"></div>
 
     <?php if ( ! empty( $truckloads_orders ) ) : ?>
         <h4 class="mb-5"><?php echo esc_html_x( 'Truckloads', 'my account', 'woocommerce' ); ?></h4>

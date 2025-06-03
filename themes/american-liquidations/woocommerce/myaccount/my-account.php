@@ -75,7 +75,10 @@ $section_title = $account_sections[ $current_endpoint ] ?? 'My Account';
 ?>
 <div class="page-description-header py-12">
 	<div class="container">
-		<p class="mb-5 md:mb-0"><a href="<?php echo site_url();?>/my-account">My Account</a><?php if($section_title != 'Account') { echo ' > ' . esc_html($section_title); } ?></p>
+		<p class="mb-5 md:mb-0">
+            <a href="<?php echo site_url();?>/my-account">My Account</a>
+            <?php if($section_title != 'Account') { echo ' > <strong>' . esc_html($section_title).'</strong>'; } ?>
+        </p>
 		<div class="flex justify-between items-center flex-wrap md:flex-nowrap gap-6 md:gap-10">
 			<h1 class="text-[36px] md:text-[48px]"><?php echo esc_html($section_title); ?></h1>
 			<?php
