@@ -1332,7 +1332,7 @@ div#gform_1_validation_container .gform-icon {
     display: block;
 }
 
-.site-header .menu-item-has-children > .sub-menu a:hover {
+.site-header .menu-item-has-children > .sub-menu:hover > a {
     @apply bg-primary;
     color: #fff;
 }
@@ -1387,6 +1387,18 @@ div#gform_1_validation_container .gform-icon {
     background-position: center;
 }
 
+.site-header .sub-menu .sub-menu {
+    left: 100% !important;
+    transform: none !important;
+    top: 0 !important;
+}
+
+.sub-menu .menu-item-has-children> a:after {
+    transform: rotate(-90deg);
+    top: -1px;
+    position: relative;
+}
+
 .mobile-header-nav .sub-menu {
     display: none;
 }
@@ -1410,6 +1422,7 @@ div#gform_1_validation_container .gform-icon {
     padding: 5px 0;
     display: block;
 }
+
 
 /* Responsive CSS */
 @media (max-width: 1350px){

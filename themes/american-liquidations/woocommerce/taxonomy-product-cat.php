@@ -46,9 +46,9 @@ if ($term && $term->slug === 'truckloads') {
 <?php 
 $term = get_queried_object();
 if ($term && $term->slug === 'truckloads') { ?>
-	<div class="shop-taxonomy-cover py-24 bg-gray">
+	<div class="shop-taxonomy-cover py-12 md:py-24 bg-gray">
 		<div class="container">
-			<h2 class="text-center mb-12">Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory</h2>
+			<h2 class="text-center mb-12 text-[24px]">Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory</h2>
 			<?php 
 			$term = get_queried_object();
 			if ( $term && ! is_wp_error( $term ) ) {
@@ -68,7 +68,7 @@ if ($term && $term->slug === 'truckloads') { ?>
 <?php if(get_field('cta_title','product_cat_' . $term->term_id) || get_field('cta_content','product_cat_' . $term->term_id)){ ?>
 	<section class="py-12 md:py-24">
 		<div class="container">
-			<div class="flex flex-wrap md:flex-nowrap gap-6 lg:gap-12 items-center">
+			<div class="flex flex-wrap md:flex-nowrap gap-6 lg:gap-12 lg:items-center">
 				<div class="w-full md:w-1/2 mb-4 md:mb-0">
 					<?php 
 					$image = get_field('cta_image','product_cat_' . $term->term_id);
@@ -78,7 +78,7 @@ if ($term && $term->slug === 'truckloads') { ?>
 				</div>
 				<div class="w-full md:w-1/2 space-y-5">
 					<span class="h-[7px] w-[40px] bg-primary block"></span>
-					<h2 class="text-[32px]"><?php echo get_field('cta_title','product_cat_' . $term->term_id); ?></h2>
+					<h2 class="text-[24px] md:text-[32px]"><?php echo get_field('cta_title','product_cat_' . $term->term_id); ?></h2>
 					<?php echo get_field('cta_content','product_cat_' . $term->term_id); ?>
 					<?php 
 					$link = get_field('cta_button','product_cat_' . $term->term_id);

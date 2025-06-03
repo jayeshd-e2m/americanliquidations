@@ -5241,7 +5241,7 @@ div#gform_1_validation_container .gform-icon {
   display: block;
 }
 
-.site-header .menu-item-has-children > .sub-menu a:hover {
+.site-header .menu-item-has-children > .sub-menu:hover > a {
   --tw-bg-opacity: 1;
   background-color: rgb(251 4 4 / var(--tw-bg-opacity, 1));
   color: #fff;
@@ -5296,6 +5296,18 @@ div#gform_1_validation_container .gform-icon {
   background: url(../../../../../wp-content/uploads/2025/06/menu-arrow-red.svg);
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.site-header .sub-menu .sub-menu {
+  left: 100% !important;
+  transform: none !important;
+  top: 0 !important;
+}
+
+.sub-menu .menu-item-has-children> a:after {
+  transform: rotate(-90deg);
+  top: -1px;
+  position: relative;
 }
 
 .mobile-header-nav .sub-menu {
@@ -5917,6 +5929,10 @@ div#gform_1_validation_container .gform-icon {
     line-height: 1rem;
   }
 
+  .md\:text-\[32px\] {
+    font-size: 32px;
+  }
+
   .md\:text-black\/60 {
     color: rgb(8 4 4 / 0.6);
   }
@@ -6128,6 +6144,10 @@ div#gform_1_validation_container .gform-icon {
 
   .xl\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .xl\:items-center {
+    align-items: center;
   }
 
   .xl\:gap-10 {
