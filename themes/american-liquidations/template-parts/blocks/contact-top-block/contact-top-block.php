@@ -34,7 +34,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 				<?php 
 				$image = get_field('cnt_image');
 				if( !empty( $image ) ): ?>
-					<img class="w-full" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+					<img class="w-full h-full object-cover" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 				<?php endif; ?>
 			</div>
 			<div class="contact-content-map w-full md:w-full xl:w-1/3 rounded-[15px] overflow-hidden">
