@@ -14,9 +14,12 @@
                 <svg class="absolute top-1/2 left-3 -translate-y-1/2" width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
                     <path d="M10.8999 10.9167L8.98789 9.00468M10.3536 5.72685C10.3536 8.29143 8.27459 10.3704 5.71 10.3704C3.14541 10.3704 1.06641 8.29143 1.06641 5.72685C1.06641 3.16226 3.14541 1.08325 5.71 1.08325C8.27459 1.08325 10.3536 3.16226 10.3536 5.72685Z" stroke="#080404" stroke-opacity="0.3" stroke-width="1.09261" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
-                <form class="w-full" role="search" method="get" action="/">
+                <form class="w-full relative header-form-cover" role="search" method="get" action="/">
                     <label for="topbar-search" class="sr-only">Search site</label>
-                    <input id="topbar-search" type="search" name="s" placeholder="Search" autocomplete="off" class="bg-transparent border-[#D0D5DD] py-2 pl-9 pr-4 focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-lg w-full text-sm min-w-[320px] xl:min-w-[420px] max-w-[100%]">
+                    <input id="topbar-search" type="search" name="s" placeholder="Search" autocomplete="off" class="header-search-input bg-transparent border-[#D0D5DD] py-2 pl-9 pr-4 focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-lg w-full text-sm min-w-[320px] xl:min-w-[420px] max-w-[100%]">
+                    <div class="header-result-cover absolute z-50 bg-white w-full top-[100%] mt-2 hidden shadow rounded-lg max-h-96 overflow-auto">
+                        <ul class="header-result-list"></ul>
+                    </div>
                 </form>
             </div>
         </div>

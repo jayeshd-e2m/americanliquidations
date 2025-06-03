@@ -193,6 +193,8 @@ function cg_insight_scripts() {
 	
 	wp_enqueue_script( 'slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true );
 
+	wp_enqueue_script( 'header-search-js', get_template_directory_uri() . '/assets/js/header-search-product.js', array('jquery'), null, true );
+
 	wp_enqueue_script( 'script-js', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), '1.0.1', true );
 
 }
@@ -314,3 +316,59 @@ function save_user_phone_profile_field($user_id) {
 
 
 
+// Header Search
+
+add_action('wp_ajax_custom_product_search', 'custom_product_search');
+add_action('wp_ajax_nopriv_custom_product_search', 'custom_product_search');
+
+function custom_product_search() {
+	$keyword = sanitize_text_field($_POST['keyword']);
+
+	$args = array(
+		'post_type' => 'product',
+		's' => $keyword,
+		'posts_per_page' => 20,
+		'post_status' => 'publish',
+	);
+
+	$query = new WP_Query($args);
+	$html = '';
+	if ($query->have_posts()) {
+		while ($query->have_posts()) {
+			$query->the_post();
+			$product = wc_get_product(get_the_ID());
+			$image_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') ?: wc_placeholder_img_src();
+			$product_link = get_permalink(get_the_ID());
+
+			$search_term = sanitize_text_field($_POST['keyword']);
+			$title = get_the_title();
+
+			if (!empty($search_term) && strlen($search_term) >= 3) {
+				$highlighted_title = preg_replace(
+					'/' . preg_quote($search_term, '/') . '/i',
+					'<strong class="font-bold">$0</strong>',
+					$title
+				);
+			} else {
+				$highlighted_title = esc_html($title);
+			}
+
+			$html .= '<li class="flex items-center gap-4 border-b hover:bg-gray-100">';
+			$html .= '<a href="' . esc_url($product_link) . '" class="flex items-center gap-4 w-full p-2 block">';
+			$html .= '<div class="w-12 h-12 flex-shrink-0">';
+			$html .= '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($title) . '" class="object-cover w-full h-full rounded">';
+			$html .= '</div>';
+			$html .= '<div>';
+			$html .= '<h6 class="text-sm font-medium">' . $highlighted_title . '</h6>';
+			$html .= '<span class="text-xs text-gray-500">' . $product->get_price_html() . '</span>';
+			$html .= '</div>';
+			$html .= '</a>';
+			$html .= '</li>';
+		}
+		wp_reset_postdata();
+	}else {
+		$html = '<li class="p-4 text-center text-gray-500">No products found.</li>';
+	}
+
+	wp_send_json_success($html);
+}
