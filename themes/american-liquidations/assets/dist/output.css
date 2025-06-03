@@ -643,8 +643,8 @@ video {
   inset: 0px;
 }
 
-.bottom-\[-40px\] {
-  bottom: -40px;
+.bottom-\[-20px\] {
+  bottom: -20px;
 }
 
 .end-1 {
@@ -693,10 +693,6 @@ video {
 
 .top-\[7px\] {
   top: 7px;
-}
-
-.bottom-\[-20px\] {
-  bottom: -20px;
 }
 
 .isolate {
@@ -798,6 +794,10 @@ video {
 
 .\!mb-4 {
   margin-bottom: 1rem !important;
+}
+
+.\!mb-5 {
+  margin-bottom: 1.25rem !important;
 }
 
 .\!mt-8 {
@@ -918,10 +918,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.\!mb-5 {
-  margin-bottom: 1.25rem !important;
 }
 
 .box-border {
@@ -3057,10 +3053,6 @@ video {
   line-height: 1rem;
 }
 
-.text-\[16px\] {
-  font-size: 16px;
-}
-
 .\!font-bold {
   font-weight: 700 !important;
 }
@@ -3958,13 +3950,14 @@ blockquote:before {
 
 .btn.w-full:after {
   content: "";
-  height: 20px;
-  width: 20px;
+  height: 10px;
+  width: 10px;
   background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
   background-repeat: no-repeat;
-  background-position: right 25px center;
-  padding-right: 40px;
+  background-position: center;
+  padding-right: 0;
   background-size: 11px;
+  margin-left: 5px;
 }
 
 .btn.btn-small{
@@ -6008,14 +6001,14 @@ div#gform_1_validation_container .gform-icon {
     font-size: 48px;
   }
 
-  .md\:text-xs {
-    font-size: 0.75rem;
-    line-height: 1rem;
-  }
-
   .md\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .md\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 
   .md\:text-black\/60 {

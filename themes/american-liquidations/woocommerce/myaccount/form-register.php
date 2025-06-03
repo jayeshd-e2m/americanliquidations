@@ -69,10 +69,7 @@ defined( 'ABSPATH' ) || exit;
                     </div>
 
                     <div class="flex items-center justify-between pt-14 flex-wrap md:flex-nowrap">
-                        <button type="button" id="nextBtn" 
-                            class="btn btn-red btn-arrow hover:bg-black w-full md:w-auto">
-                            NEXT
-                        </button>
+                        <button type="button" id="nextBtn" class="btn btn-red btn-arrow hover:bg-black w-full md:w-auto">NEXT</button>
                         <p class="text-sm text-black/60 mt-5 md:mt-0">
                             Already have an account? 
                             <a href="<?php echo site_url(); ?>/my-account/" class="hover:text-primary font-bold">Sign in</a>
