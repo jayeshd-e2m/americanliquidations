@@ -85,7 +85,7 @@ if(is_wc_endpoint_url( 'register' )){
                                         class="btn btn-red btn-arrow width-full md:w-auto"
                                         name="login"
                                         value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'Sign in', 'woocommerce' ); ?></button>
-                                    <span class="text-sm text-center md:text-left w-full md:w-auto">Don’t have an account? <a href="<?php echo site_url(); ?>/my-account/register/" class="font-bold">Sign Up</a></span>
+                                    <span class="text-sm text-center md:text-left w-full md:w-auto mt-3 md:mt-0">Don’t have an account? <a href="<?php echo site_url(); ?>/my-account/register/" class="font-bold">Sign Up</a></span>
                                 </div>
                                 <div class="text-black/60 font-bold text-sm text-center md:text-left w-full md:w-auto mt-3 md:m-0">
                                     <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>">

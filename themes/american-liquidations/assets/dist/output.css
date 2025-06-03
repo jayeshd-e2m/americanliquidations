@@ -695,6 +695,10 @@ video {
   top: 7px;
 }
 
+.bottom-\[-20px\] {
+  bottom: -20px;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -914,6 +918,10 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.\!mb-5 {
+  margin-bottom: 1.25rem !important;
 }
 
 .box-border {
@@ -3047,6 +3055,10 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[16px\] {
+  font-size: 16px;
 }
 
 .\!font-bold {
@@ -5758,6 +5770,10 @@ div#gform_1_validation_container .gform-icon {
     position: absolute;
   }
 
+  .md\:bottom-\[-40px\] {
+    bottom: -40px;
+  }
+
   .md\:m-0 {
     margin: 0px;
   }
@@ -5995,6 +6011,11 @@ div#gform_1_validation_container .gform-icon {
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .md\:text-black\/60 {
