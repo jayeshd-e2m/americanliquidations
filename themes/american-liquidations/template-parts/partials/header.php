@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-<div class="bg-black md:overflow-x-hidden ">
+<div class="bg-black">
     <div class="container">
         <div class="mobile-humberger text-white text-sm font-medium lg:hidden py-5 md:py-8 flex items-center justify-center gap-3">
             <span>Menu</span>
@@ -62,8 +62,9 @@
             <?php
                 wp_nav_menu( array(
                     'menu'           => 'Header Menu',
-                    'menu_class'     => 'flex justify-between items-center gap-x-4 py-5 text-white',
+                    'menu_class'     => 'flex justify-between items-center gap-x-4 py-5 text-white text-sm',
                     'container'      => false,
+                    'menu_id' => 'menu-header-menu',
                 ) );
             ?>
         </div>

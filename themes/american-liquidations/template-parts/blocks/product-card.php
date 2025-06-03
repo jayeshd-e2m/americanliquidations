@@ -32,10 +32,12 @@ global $product;
 			?>
 		</div>
 		<div class="flex items-center gap-5 mt-6 is-buttons flex-wrap ">
+			<?php $is_truckload = has_term( 'truckloads', 'product_cat', $product->get_id() ); ?>
 			<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
-               class="add_to_cart_button custom-add-to-cart ajax_add_to_cart relative"
+               class="add_to_cart_button custom-add-to-cart  relative"
                data-quantity="1"
                data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
+			   data-is_truckload="<?php echo $is_truckload ? '1' : '0';?>"
                data-product_sku="<?php echo esc_attr( $product->get_sku() ); ?>"
                rel="nofollow">
                <span class="button-text">Add to cart</span>

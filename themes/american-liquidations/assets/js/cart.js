@@ -1,24 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const cartButton = document.getElementById("cart-button");
+    const cartButtons = document.querySelectorAll(".cart-btn");
     const cartDropdown = document.getElementById("cart-dropdown");
+
     loadCartItems();
-    // Toggle cart on button click
-    cartButton.addEventListener("click", function (event) {
-        event.stopPropagation();
-        jQuery('#cart-dropdown').addClass('is-active');
-        jQuery('body').addClass('is-blur-bg');
-        //loadCartItems();
+
+    // Add click event to all cart buttons
+    cartButtons.forEach((cartButton) => {
+        cartButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            jQuery('#cart-dropdown').addClass('is-active');
+            jQuery('body').addClass('is-blur-bg');
+            // loadCartItems();
+        });
     });
 
-
-    jQuery('.header-cart-close').on('click',function(){
+    // Close cart on close button click
+    jQuery('.header-cart-close').on('click', function () {
         jQuery('#cart-dropdown').removeClass('is-active');
         jQuery('body').removeClass('is-blur-bg');
-    })
+    });
 
     // Close cart when clicking outside
     document.addEventListener("click", function (event) {
-        if (!cartDropdown.contains(event.target) && event.target !== cartButton) {
+        const isClickInsideDropdown = cartDropdown.contains(event.target);
+        const isClickOnAnyCartBtn = event.target.closest(".cart-btn") !== null;
+
+        if (!isClickInsideDropdown && !isClickOnAnyCartBtn) {
             jQuery('#cart-dropdown').removeClass('is-active');
             jQuery('body').removeClass('is-blur-bg');
         }

@@ -2,6 +2,37 @@ var $ = jQuery.noConflict();
 
 jQuery(document).ready(function($){
 
+
+	var clickable = $( '.menu-state' ).attr( 'data-clickable' );
+	$( '.mobile-header-nav li:has(ul)' ).addClass( 'has-sub' );
+	$( '.mobile-header-nav .has-sub>a' ).after( '<em class="caret">' );
+	$( '.mobile-header-nav .has-sub>.caret' ).addClass( 'trigger-caret' );
+	
+
+	/* menu open and close on single click */
+	$( '.mobile-header-nav .has-sub>.trigger-caret' ).click( function() {
+		var element = $( this ).parent( 'li' );
+		if ( element.hasClass( 'is-open' ) ) {
+			element.removeClass( 'is-open' );
+			element.find( 'li' ).removeClass( 'is-open' );
+			element.find( 'ul' ).slideUp( 200 );
+		}
+		else {
+			element.addClass( 'is-open' );
+			element.children( 'ul' ).slideDown( 200 ) ;
+			element.siblings( 'li' ).children( 'ul' ).slideUp( 200 );
+			element.siblings( 'li' ).removeClass( 'is-open' );
+			element.siblings( 'li' ).find( 'li' ).removeClass( 'is-open' );
+			element.siblings( 'li' ).find( 'ul' ).slideUp( 200 );
+		}
+	} );
+
+
+
+
+
+
+
 	if($('.brand-slider').length){
 		$('.brand-slider').slick({
 			dots: false,

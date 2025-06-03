@@ -58,6 +58,14 @@ function custom_ajax_add_to_cart() {
         return;
     }
 
+    if (!$product->is_in_stock()) {
+        wp_send_json_error([
+            'message'    => 'Out of stock',
+            'error_type' => 'out_of_stock'
+        ]);
+        return;
+    }
+
     if (!is_user_logged_in() && has_term('truckloads', 'product_cat', $product_id)) {
         wp_send_json_error(array(
             'message'     => 'Login required to purchase truckloads',
@@ -99,12 +107,23 @@ function check_cart_compatibility() {
     $product_id = intval($_POST['product_id']);
     $is_truckload = intval($_POST['is_truckload']);
 
+    $product = wc_get_product($product_id);
+
+    
+    if (!$product->is_in_stock()) {
+        wp_send_json_error(array(
+            'message'    => 'Out of stock',
+            'error_type' => 'out_of_stock'
+        ));
+        return;
+    }
+    
     $cart = WC()->cart->get_cart();
     if (empty($cart)) {
         wp_send_json_success();
         return;
     }
-
+    
     $cart_has_truckload = false;
     $cart_has_other = false;
     foreach ($cart as $cart_item_key => $cart_item) {
@@ -123,6 +142,9 @@ function check_cart_compatibility() {
         wp_send_json_error(array('error_type' => 'truckload_in_cart'));
         return;
     }
+    
+
+    
     wp_send_json_success();
 }
 

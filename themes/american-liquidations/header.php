@@ -93,7 +93,16 @@
 					<a href="tel:2035874132" class="text-black hover:underline font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132" data-jptgbfonts="{&quot;fontFamily&quot;:&quot;Inter, sans-serif&quot;,&quot;fontWeight&quot;:&quot;500&quot;,&quot;fontStyle&quot;:&quot;normal&quot;}">203-587-4132</a>
 					<div class="flex items-center gap-2">
 					<div class="">
-						<a class="cart-btn btn" href="">CART</a>
+						<?php
+							$cart_count = WC()->cart->get_cart_contents_count();
+						?>
+						<a class="cart-btn btn relative" id="cart-button" href="javascript:;">CART
+						<?php if($cart_count == 0){}else{ ?>
+						<span id="cart-count" class="font-inter cart-count absolute top-[7px] left-[10px] bg-primary h-3 w-3 !flex items-center justify-center tracking-[0em] text-white text-[8px] rounded-full">
+							<?= $cart_count; ?>
+						</span>
+						<?php } ?>
+						</a>
 					</div>
 					<div class="">
 						<a class="sign-btn btn" href="<?php echo site_url(); ?>/my-account/" >SIGN IN</a>

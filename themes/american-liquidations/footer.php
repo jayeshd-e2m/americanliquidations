@@ -179,6 +179,194 @@
 </footer>
 </div><!-- #page -->
 
+<!-- Popup: Trying to add a truckload, but non-truckload already in cart -->
+<div id="cart-conflict-popup" class="cart-popup-overlay fixed bg-black/60 top-0 left-0 w-full h-full z-[9999] flex items-center justify-center" style="display: none;">
+	<div class="cart-popup-content p-12 bg-white max-w-[835px] mx-auto rounded-[20px]">
+		<div class="cart-popup-header flex justify-between mb-10">
+			<h4>Sorry, we cannot add that to your cart.</h4>
+			<button class="cart-popup-close"><img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/menu-close.svg" alt=""></button>
+		</div>
+		<div class="cart-popup-body font-medium text-black/40">
+			<p>We don't allow the purchase of a truckload and other products at the same time. If you would like to purchase this truckload, please pay for your existing items or remove them from your cart.</p>
+		</div>
+	</div>
+</div>
+
+<!-- Popup: Trying to add a non-truckload, but truckload already in cart -->
+<div id="cart-truckload-conflict-popup" class="cart-popup-overlay fixed bg-black/60 top-0 left-0 w-full h-full z-[9999] flex items-center justify-center" style="display: none;">
+	<div class="cart-popup-content p-12 bg-white max-w-[835px] mx-auto rounded-[20px]">
+		<div class="cart-popup-header flex justify-between mb-10">
+			<h4>Sorry, we cannot add that to your cart.</h4>
+			<button class="cart-popup-close"><img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/menu-close.svg" alt=""></button>
+		</div>
+		<div class="cart-popup-body font-medium text-black/40">
+			<p>We don't allow the purchase of other products when you have a truckload in your cart. If you would like to purchase other products, please pay for your existing item or remove it from your cart.</p>
+		</div>
+	</div>
+</div>
+
+<!-- Popup: in truckload if user not logged in -->
+<div id="cart-truckload-login-popup" class="cart-popup-overlay fixed bg-black/60 top-0 left-0 w-full h-full z-[9999] flex items-center justify-center" style="display: none;">
+	<div class="cart-popup-content p-12 bg-white max-w-[835px] mx-auto rounded-[20px]">
+		<div class="cart-popup-header flex justify-between mb-10">
+			<h4>Sorry, you cannot purchase this.</h4>
+			<button class="cart-popup-close"><img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/menu-close.svg" alt=""></button>
+		</div>
+		<div class="cart-popup-body font-medium text-black/40">
+			<p>You must have a registered account to purchase a truckload. Please click the link below to register.</p>
+		</div>
+		<div class="flex justify-between mt-12">
+			<a href="/login" class="btn btn-red">Sign Up</a>
+			<p class="text-sm">Already have an account? <a href="" class="font-bold">Sign in</a></p>
+		</div>
+	</div>
+</div>
+
+<div id="cart-out-of-stock-popup" class="cart-popup-overlay fixed bg-black/60 top-0 left-0 w-full h-full z-[9999] flex items-center justify-center" style="display: none;">
+	<div class="cart-popup-content p-12 bg-white max-w-[835px] mx-auto rounded-[20px]">
+		<div class="cart-popup-header flex justify-between gap-10">
+			<h4>Sorry, This product is out of stock.</h4>
+			<button class="cart-popup-close"><img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/menu-close.svg" alt=""></button>
+		</div>
+	</div>
+</div>
+
+<script>
+jQuery(document).ready(function($) {
+	$('.custom-add-to-cart').on('click', function(e) {
+		e.preventDefault();
+
+		var $button = $(this);
+		var productId = $button.data('product_id');
+		var quantity = $button.data('quantity');
+		var isTruckload = $button.data('is_truckload');
+		// $button.prop('disabled', true).text('Adding...');
+
+		var ajaxUrl = '';
+		if (typeof wc_add_to_cart_params !== 'undefined' && wc_add_to_cart_params.ajax_url) {
+			ajaxUrl = wc_add_to_cart_params.ajax_url;
+		} else if (typeof ajaxurl !== 'undefined') {
+			ajaxUrl = ajaxurl;
+		} else {
+			ajaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
+		}
+
+		// Check cart compatibility
+		$.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				action: 'check_cart_compatibility',
+				product_id: productId,
+				is_truckload: isTruckload
+			},
+			success: function(response) {
+				const errorType = response.data?.error_type;
+				console.log(response.data);
+				if (response.success) {
+					addToCart(productId, quantity, $button, ajaxUrl);
+				} else {
+					console.log('Error:', errorType);
+					switch (errorType) {
+						case 'not_logged_in':
+							showTruckloadLoginPopup();
+							break;
+						case 'other_in_cart':
+							showCartConflictPopup();
+							break;
+						case 'truckload_in_cart':
+							showTruckloadConflictPopup();
+							break;
+						case 'out_of_stock':
+							showOutOfStockPopup();
+							break;
+						default:
+							alert('An unexpected error occurred.');
+					}
+					// resetButton($button, isTruckload);
+					$('.custom-add-to-cart').removeClass('loading');
+				}
+			},
+			error: function(xhr, status, error) {
+				console.log('Compatibility check error:', xhr.responseText);
+				addToCart(productId, quantity, $button, ajaxUrl);
+			}
+		});
+	});
+
+	function addToCart(productId, quantity, $button, ajaxUrl) {
+		$.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				action: 'custom_ajax_add_to_cart',
+				product_id: productId,
+				quantity: quantity
+			},
+			success: function(response) {
+				if (response.success) {
+					if (response.data.fragments) {
+						$.each(response.data.fragments, function(key, value) {
+							$(key).replaceWith(value);
+						});
+					}
+					$(document.body).trigger('added_to_cart', [response.data.fragments, response.data.cart_hash, $button]);
+				} else {
+					if (response.data && response.data.message) {
+						showTruckloadLoginPopup();
+					} else {
+						alert('Error adding product to cart');
+					}
+				}
+				resetButton($button, $button.data('is_truckload'));
+			},
+			error: function(xhr, status, error) {
+				alert('Error: ' + error);
+				resetButton($button, $button.data('is_truckload'));
+			}
+		});
+	}
+
+	function resetButton($button, isTruckload) {
+		$button.prop('disabled', false);
+		if (isTruckload == 1) {
+			$button.text('Buy Now');
+		} else {
+			$button.text('Add to Cart');
+		}
+	}
+
+	function showCartConflictPopup() {
+		$('#cart-conflict-popup').fadeIn(300);
+	}
+
+	function showTruckloadConflictPopup() {
+		$('#cart-truckload-conflict-popup').fadeIn(300);
+	}
+
+	function showTruckloadLoginPopup() {
+		$('#cart-truckload-login-popup').fadeIn(300);
+	}
+
+	function showOutOfStockPopup() {
+		$('#cart-out-of-stock-popup').fadeIn(300);
+	}
+
+	$('.cart-popup-close').on('click', function() {
+		$('.cart-popup-overlay').fadeOut(300);
+	});
+
+	$('.cart-popup-overlay').on('click', function(e) {
+		if (e.target === this) {
+			$(this).fadeOut(300);
+		}
+	});
+});
+
+</script>
+
 <?php wp_footer(); ?>
 
 </body>

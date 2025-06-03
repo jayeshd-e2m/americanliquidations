@@ -220,6 +220,9 @@ require_once get_template_directory() . '/function-floating-cart.php';
 // Register
 require_once get_template_directory() . '/function-register.php';
 
+// checkout
+require_once get_template_directory() . '/function-checkout.php';
+
 
 function mytheme_woocommerce_support() {
 	add_theme_support( 'woocommerce' );
@@ -308,3 +311,6 @@ function save_user_phone_profile_field($user_id) {
         update_user_meta($user_id, 'user_phone', sanitize_text_field($_POST['user_phone']));
     }
 }
+
+
+

@@ -19,10 +19,10 @@ if(is_wc_endpoint_url( 'register' )){
         <div class="custom-login-wrapper bg-gray py-12 md:py-24">
             <div class="container">
                 <?php do_action( 'woocommerce_before_customer_login_form' ); ?>
-                <div class="login-flex-layout flex flex-row gap-12">
+                <div class="login-flex-layout flex flex-row gap-6 lg:gap-12 flex-wrap md:flex-nowrap">
 
                     <!-- LEFT SIDE: Info Panels ("Tabs") -->
-                    <aside class="login-page-info-tabs w-[300px] p-7 bg-white rounded-[15px]">
+                    <aside class="login-page-info-tabs w-full md:w-[30%] lg:w-[300px] p-7 bg-white rounded-[15px]">
                         <ul class="space-y-10">
                             <li class="my-account-top text-sm">
                                 <strong class="font-semibold mb-[5px] block">Guest Account</strong>
@@ -53,7 +53,7 @@ if(is_wc_endpoint_url( 'register' )){
                     </aside>
 
                     <!-- RIGHT SIDE: WooCommerce Login Form -->
-                    <main class="login-form-section w-[calc(100%_-_300px)] custom-login-form-cover p-12 bg-white rounded-[15px]">
+                    <main class="login-form-section w-full md:w-[70%] lg:w-[calc(100%_-_300px)] custom-login-form-cover p-6 lg:p-12 bg-white rounded-[15px]">
                         <form class="woocommerce-form woocommerce-form-login" method="post">
 
                             <?php do_action( 'woocommerce_login_form_start' ); ?>
@@ -78,16 +78,16 @@ if(is_wc_endpoint_url( 'register' )){
                                         type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'woocommerce' ); ?></span>
                                 </label>
                             </div>
-                            <div class="flex items-center justify-between pt-10">
-                                <div class="flex items-center gap-6">
+                            <div class="flex items-center justify-between pt-10 flex-wrap lg:flex-nowrap gap-4 lg:gap-0">
+                                <div class="flex items-center gap-2 lg:gap-6 flex-wrap lg:flex-nowrap w-full md:w-auto">
                                     <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
                                     <button type="submit"
-                                        class="btn btn-red btn-arrow"
+                                        class="btn btn-red btn-arrow width-full md:w-auto"
                                         name="login"
                                         value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'Sign in', 'woocommerce' ); ?></button>
-                                    <span class="text-sm">Don’t have an account? <a href="<?php echo site_url(); ?>/my-account/register/" class="font-bold">Sign Up</a></span>
+                                    <span class="text-sm text-center md:text-left w-full md:w-auto">Don’t have an account? <a href="<?php echo site_url(); ?>/my-account/register/" class="font-bold">Sign Up</a></span>
                                 </div>
-                                <div class="text-black/60 font-bold text-sm">
+                                <div class="text-black/60 font-bold text-sm text-center md:text-left w-full md:w-auto mt-3 md:m-0">
                                     <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>">
                                         <?php esc_html_e( 'Forgot Password?', 'woocommerce' ); ?>
                                     </a>
