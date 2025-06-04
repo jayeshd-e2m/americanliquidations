@@ -691,12 +691,12 @@ video {
   top: 0.5rem;
 }
 
-.top-\[7px\] {
-  top: 7px;
-}
-
 .top-\[100\%\] {
   top: 100%;
+}
+
+.top-\[7px\] {
+  top: 7px;
 }
 
 .isolate {
@@ -715,6 +715,10 @@ video {
   z-index: 30;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .z-\[1000\] {
   z-index: 1000;
 }
@@ -725,10 +729,6 @@ video {
 
 .z-\[9999\] {
   z-index: 9999;
-}
-
-.z-50 {
-  z-index: 50;
 }
 
 .float-start {
@@ -1039,6 +1039,10 @@ video {
   height: 2.5rem;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .h-14 {
   height: 3.5rem;
 }
@@ -1083,20 +1087,20 @@ video {
   height: 100vh;
 }
 
-.h-12 {
-  height: 3rem;
+.max-h-96 {
+  max-height: 24rem;
 }
 
 .max-h-\[500px\] {
   max-height: 500px;
 }
 
-.max-h-96 {
-  max-height: 24rem;
-}
-
 .\!w-4 {
   width: 1rem !important;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .w-14 {
@@ -1153,10 +1157,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-12 {
-  width: 3rem;
 }
 
 .min-w-\[100px\] {
@@ -2665,6 +2665,10 @@ video {
   padding: 3rem;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .p-3 {
   padding: 0.75rem;
 }
@@ -2687,10 +2691,6 @@ video {
 
 .p-8 {
   padding: 2rem;
-}
-
-.p-2 {
-  padding: 0.5rem;
 }
 
 .\!px-4 {
@@ -4794,6 +4794,10 @@ label.gfield_label .gfield_required .gfield_required:after {
   color: rgb(8 4 4 / 0.6) !important;
 }
 
+.contact-form-right textarea {
+  padding: 15px !important;
+}
+
 .contact-form-right input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]){
   padding: 11px 15px !important;
 }
@@ -5408,6 +5412,52 @@ div#gform_1_validation_container .gform-icon {
   margin-left: 4px;
 }
 
+#gform_fields_2 input, 
+#gform_fields_2 select, 
+#gform_fields_2 textarea {
+  background: #fff !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+}
+
+#gform_fields_2 select {
+  height: 40px !important;
+}
+
+.gfield--type-fileupload .ginput_container_fileupload {
+  position: relative;
+}
+
+.gfield--type-fileupload input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.gfield--type-fileupload .upload-box {
+  display: block;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 11px 15px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.gform_fileupload_rules {
+  margin-top: 0 !important;
+  padding-top: 4px !important;
+  font-size: 12px !important;
+}
+
 /* Responsive CSS */
 
 @media (max-width: 1350px){
@@ -5565,6 +5615,15 @@ div#gform_1_validation_container .gform-icon {
   .mobile-phone-cart #cart-count{
     top: 6px;
     left: 12px;
+  }
+
+  .contact-form-right input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]) {
+    padding: 5px 15px !important;
+    height: 40px;
+  }
+
+  .gform_button{
+    padding: 6px 20px !important;
   }
 }
 
@@ -5791,10 +5850,6 @@ div#gform_1_validation_container .gform-icon {
     bottom: -40px;
   }
 
-  .md\:m-0 {
-    margin: 0px;
-  }
-
   .md\:\!mt-0 {
     margin-top: 0px !important;
   }
@@ -5997,12 +6052,12 @@ div#gform_1_validation_container .gform-icon {
     padding-right: 1.25rem;
   }
 
-  .md\:pt-24 {
-    padding-top: 6rem;
-  }
-
   .md\:pt-12 {
     padding-top: 3rem;
+  }
+
+  .md\:pt-24 {
+    padding-top: 6rem;
   }
 
   .md\:text-left {

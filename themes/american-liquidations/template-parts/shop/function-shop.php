@@ -10,7 +10,7 @@ function custom_shop_shortcode($atts) {
     $preselected_cat = sanitize_text_field($atts['cat']);
 
     // Pass $preselected_cat to AJAX product function
-    $result = custom_ajax_shop_products(['category' => $preselected_cat]);
+    $result = custom_ajax_shop_products(['category' => $preselected_cat,'search' => isset($_GET['search']) ? sanitize_text_field($_GET['search']) : '',]);
 
     $count = $result['count'];
     ob_start();
@@ -217,6 +217,10 @@ function custom_ajax_shop_products($filters = []) {
         }
     }
 
+    if (!empty($filters['search'])) {
+        $args['s'] = $filters['search'];
+    }
+
     // Query products
     $query = new WP_Query($args);
 
@@ -265,6 +269,7 @@ function handle_ajax_shop_filter() {
         'sort_by'    => sanitize_text_field($_POST['sort_by']),
         'paged'      => isset($_POST['paged']) ? intval($_POST['paged']) : 1,
 		'stock_status' => isset($_POST['stock_status']) ? sanitize_text_field($_POST['stock_status']) : '',
+        'search' => isset($_POST['initial_search']) ? sanitize_text_field($_POST['initial_search']) : '',
     ];
 
     $output = custom_ajax_shop_products($filters);

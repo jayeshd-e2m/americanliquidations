@@ -27,12 +27,6 @@ jQuery(document).ready(function($){
 		}
 	} );
 
-
-
-
-
-
-
 	if($('.brand-slider').length){
 		$('.brand-slider').slick({
 			dots: false,
@@ -91,6 +85,29 @@ jQuery(document).ready(function($){
     $(document.body).on('added_to_cart', function(event, fragments, cart_hash, $button) {
         $button.removeClass('loading');
     });
+
+	// Gravity form
+	const fileInput = document.querySelector("#input_2_8");
+
+	if (fileInput) {
+		// Create a visible label box
+		const uploadBox = document.createElement("div");
+		uploadBox.className = "upload-box";
+		uploadBox.textContent = "+ Upload a File";
+
+		// Insert it before the file input
+		const container = fileInput.parentNode;
+		container.insertBefore(uploadBox, fileInput);
+
+		// Update label on file selection
+		fileInput.addEventListener("change", function () {
+		if (fileInput.files.length > 0) {
+			uploadBox.textContent = fileInput.files[0].name;
+		} else {
+			uploadBox.textContent = "+ Upload a File";
+		}
+		});
+	}
 
 })
 
