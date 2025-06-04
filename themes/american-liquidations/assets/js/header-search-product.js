@@ -29,7 +29,7 @@ jQuery(document).ready(function ($) {
 		if (!query) return;
 
 		$.ajax({
-			url: '/american/wp-admin/admin-ajax.php',
+			url: '/wp-admin/admin-ajax.php',
 			type: 'POST',
 			data: {
 				action: 'custom_product_search',
