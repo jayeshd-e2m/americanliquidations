@@ -25,7 +25,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 		$new_arrival_query = new WP_Query($args);
 
 		if ($new_arrival_query->have_posts()) {
-			echo '<div class="product-has-slider grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-12 mt-12">';
+			echo '<div class="product-has-slider grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-5 md:gap-y-12 mt-12">';
 			while ($new_arrival_query->have_posts()) {
 				$new_arrival_query->the_post();
 				global $product;

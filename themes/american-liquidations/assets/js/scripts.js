@@ -30,7 +30,7 @@ jQuery(document).ready(function($){
 	if($('.brand-slider').length){
 		$('.brand-slider').slick({
 			dots: false,
-			infinite: false,
+			infinite: true,
 			speed: 300,
 			slidesToShow: 6,
 			slidesToScroll: 1,
@@ -89,25 +89,42 @@ jQuery(document).ready(function($){
 	// Gravity form
 	const fileInput = document.querySelector("#input_2_8");
 
-	if (fileInput) {
-		// Create a visible label box
-		const uploadBox = document.createElement("div");
-		uploadBox.className = "upload-box";
-		uploadBox.textContent = "+ Upload a File";
+	if (!fileInput) return;
 
-		// Insert it before the file input
-		const container = fileInput.parentNode;
-		container.insertBefore(uploadBox, fileInput);
+	const container = fileInput.parentNode;
 
-		// Update label on file selection
-		fileInput.addEventListener("change", function () {
+	// Create and insert custom styled upload box
+	const uploadBox = document.createElement("div");
+	uploadBox.className = "upload-box";
+	uploadBox.textContent = "+ Upload a File";
+	container.insertBefore(uploadBox, fileInput);
+
+	// Update box when file is selected
+	fileInput.addEventListener("change", function () {
 		if (fileInput.files.length > 0) {
-			uploadBox.textContent = fileInput.files[0].name;
+		uploadBox.textContent = fileInput.files[0].name;
 		} else {
-			uploadBox.textContent = "+ Upload a File";
+		uploadBox.textContent = "+ Upload a File";
 		}
-		});
-	}
+	});
+
+	// Observe preview container AND file input changes
+	const observerTarget = container;
+
+	const observer = new MutationObserver(() => {
+		const hasPreview = container.querySelector(".ginput_preview");
+		const fileValue = fileInput.value;
+
+		if (!hasPreview && !fileValue) {
+		uploadBox.textContent = "+ Upload a File";
+		}
+	});
+
+	observer.observe(observerTarget, {
+		childList: true,
+		subtree: true,
+	});
+
 
 })
 

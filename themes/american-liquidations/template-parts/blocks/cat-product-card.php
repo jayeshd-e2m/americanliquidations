@@ -12,11 +12,14 @@ global $product;
 		<?php if (!$product->is_in_stock()) {
 			echo '<span class="is-tag z-10 absolute top-2 left-2 out-of-stock bg-primary font-bold tracking-[0.06em] py-0.5 px-2 md:px-3 rounded-full md:text-[12px] text-[12px] !text-white uppercase inline-block align-top font-barlow">Out of Stock</span>';
 		}
-        echo get_the_post_thumbnail($product->get_id(), 'medium'); ?>
+		echo '<a href="'.esc_url(get_permalink($product->get_id())).'">';
+        echo get_the_post_thumbnail($product->get_id(), 'medium'); 
+		echo '</a>';
+		?>
     </div>
 
     <div class="product-card-content pt-10 px-5 pb-7">
-        <h5 class="mb-4 is-title"><?php echo esc_html( get_the_title( $product->get_id() ) ); ?></h5>
+        <h5 class="mb-4 is-title"><a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"><?php echo esc_html( get_the_title( $product->get_id() ) ); ?></a></h5>
 		<div class="flex justify-between gap-2 flex-wrap">
 			<p class="text-[18px] text-black font-medium font-barlow is-price">
 				<?php echo $product->get_price_html(); ?>

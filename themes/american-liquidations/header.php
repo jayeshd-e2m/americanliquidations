@@ -61,7 +61,7 @@
 				<a href="#" class="block text-white text-sm md:text-left font-bold">
 					Open to the Public 7 Days per week</a>
 
-				<a href="#" class="btn w-full">Get Directions</a>
+				<a href="#" class="btn w-full !text-[12px]">Get Directions</a>
 			</div>
 			<div class="bg-white p-4 space-y-3.5">
 				<div class="flex justify-between items-center">

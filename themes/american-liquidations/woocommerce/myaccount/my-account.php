@@ -72,27 +72,48 @@ if ( ! empty( $wp->query_vars ) ) {
 
 // Fallback to dashboard if none found
 $section_title = $account_sections[ $current_endpoint ] ?? 'My Account';
+$endpoint = isset( $_GET['view-order'] ) || ( isset( $wp->query_vars['view-order'] ) );
+$order_id = absint( get_query_var('view-order') );
+
+// Is it the view order page?
+if ( is_wc_endpoint_url( 'view-order' ) && $order_id ) {
+    // Do NOT display the default description header
+    // Output your custom banner:
 ?>
 <div class="page-description-header py-12">
 	<div class="container">
 		<p class="mb-5 md:mb-0">
             <a href="<?php echo site_url();?>/my-account">My Account</a>
-            <?php if($section_title != 'Account') { echo ' > <strong>' . esc_html($section_title).'</strong>'; } ?>
+            <?php echo ' > <a href="'.site_url().'/my-account/orders/">Orders</a> > <strong> Order#'.esc_html( $order_id ).'</strong>'; ?>
         </p>
 		<div class="flex justify-between items-center flex-wrap md:flex-nowrap gap-6 md:gap-10">
-			<h1 class="text-[36px] md:text-[48px]"><?php echo esc_html($section_title); ?></h1>
-			<?php
-				$current_user = wp_get_current_user();
-				$username     = $current_user->user_login;
-				$email        = $current_user->user_email;
-			?>
-			<div class="pd-header-user text-sm flex items-center gap-6 justify-between md:justify-normal w-full md:w-auto flex-wrap md:flex-nowrap">
-				<span class="capitalize"><?php echo esc_html( $username ); ?></span>
-				<span><a href="mailto:<?php echo esc_html( $email ); ?>" class="text-primary hover:text-primary/60 underline"><?php echo esc_html( $email ); ?></a></span>
-			</div>
+			<h1 class="text-[36px] md:text-[48px]">Order#<?php echo esc_html( $order_id ); ?></h1>
 		</div>
 	</div>
 </div>
+
+<?php }else{ ?>
+    <div class="page-description-header py-12">
+        <div class="container">
+            <p class="mb-5 md:mb-0">
+                <a href="<?php echo site_url();?>/my-account">My Account</a>
+                <?php if($section_title != 'Account') { echo ' > <strong>' . esc_html($section_title).'</strong>'; } ?>
+            </p>
+            <div class="flex justify-between items-center flex-wrap md:flex-nowrap gap-6 md:gap-10">
+                <h1 class="text-[36px] md:text-[48px]"><?php echo esc_html($section_title); ?></h1>
+                <?php
+                    $current_user = wp_get_current_user();
+                    $username     = $current_user->user_login;
+                    $email        = $current_user->user_email;
+                ?>
+                <div class="pd-header-user text-sm flex items-center gap-6 justify-between md:justify-normal w-full md:w-auto flex-wrap md:flex-nowrap">
+                    <span class="capitalize"><?php echo esc_html( $username ); ?></span>
+                    <span><a href="mailto:<?php echo esc_html( $email ); ?>" class="text-primary hover:text-primary/60 underline"><?php echo esc_html( $email ); ?></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 <div class="woocommerce-custom-account bg-gray py-14">
 	<div class="container">
 		<?php

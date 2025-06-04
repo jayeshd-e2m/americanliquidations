@@ -2,7 +2,7 @@
 
     <form id="custom-shop-filters">
         <!-- Categories (radio) -->
-		 <input type="search" name="initial_search" id="initial_search" val="<?php echo $search_keyword = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : ''; ?>">
+		 <input type="search" name="initial_search" id="initial_search" style="display:none;" val="<?php echo $search_keyword = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : ''; ?>">
         <div class="filter-dropdown mb-10">
             <h5 class="mb-4 filter-dropdown-heading relative text-[18px]"><span class="opacity-60 text-black font-bold">Categories</span> <span class="dropdown-arrow"></span></h5>
 			<div class="filter-dropdown-content space-y-4">

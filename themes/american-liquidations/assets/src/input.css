@@ -40,7 +40,7 @@ h1{
     @apply text-[40px] sm:text-[40px] lg:text-[48px] xl:text-[60px]; /* set */
 }
 h2{
-    @apply text-[22px] sm:text-[26px] md:text-[28px] lg:text-[30px] xl:text-[32px]; /* set */
+    @apply text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px] xl:text-[32px]; /* set */
 }
 h3{
     @apply text-[22px] sm:text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px];
@@ -49,10 +49,10 @@ h4{
     @apply text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px]; /* Set */
 }
 h5{
-    @apply text-[16px] sm:text-[16px] md:text-[18px];
+    @apply text-[18px];
 }
 h6{
-    @apply text-[18px]; /* set */
+    @apply text-[16px] md:text-[18px]; /* set */
 } 
 a:hover{
     @apply text-primary;
@@ -131,6 +131,10 @@ blockquote:before {
     margin-left: 5px;
 }
 
+
+.btn-link{
+    @apply font-inter;
+}
 .btn.w-full {
     text-align: center;
 }
@@ -145,6 +149,7 @@ blockquote:before {
     padding-right: 0;
     background-size: 11px;
     margin-left: 5px;
+    display: inline-block;
 }
 .btn.btn-small{
     font-size: 12px;
@@ -1473,13 +1478,13 @@ div#gform_1_validation_container .gform-icon {
 
 
 
- 
-  
-  .gfield--type-fileupload .ginput_container_fileupload {
+
+
+.gfield--type-fileupload .ginput_container_fileupload {
     position: relative;
-  }
-  
-  .gfield--type-fileupload input[type="file"] {
+}
+
+.gfield--type-fileupload input[type="file"] {
     opacity: 0;
     position: absolute;
     left: 0;
@@ -1488,9 +1493,9 @@ div#gform_1_validation_container .gform-icon {
     width: 100%;
     cursor: pointer;
     z-index: 2;
-  }
-  
-  .gfield--type-fileupload .upload-box {
+}
+
+.gfield--type-fileupload .upload-box {
     display: block;
     width: 100%;
     background-color: #fff;
@@ -1501,19 +1506,49 @@ div#gform_1_validation_container .gform-icon {
     position: relative;
     z-index: 1;
     font-size: 14px;
-  }
-  
-  .gform_fileupload_rules {
-        margin-top: 0 !important;
-        padding-top: 4px !important;
-        font-size: 12px !important;
-    }
+}
 
+.gform_fileupload_rules {
+    margin-top: 0 !important;
+    padding-top: 4px !important;
+    font-size: 12px !important;
+}
 
+.ginput_preview_list:not(:empty) {
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 15px;
+    line-height: 1;
+}
 
+.ginput_preview_list .ginput_preview {
+    margin: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
 
+.gfield_fileupload_percent {
+    margin: 0 10px;
+}
 
-  
+.gform-icon--circle-error {
+    display: none !important;
+}
+
+.gfield_fileupload_filename {
+    line-height: 1.2;
+}
+
+.woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.woocommerce-order-details .order-again {
+    display: none;
+}
 
 /* Responsive CSS */
 @media (max-width: 1350px){
@@ -1561,6 +1596,7 @@ div#gform_1_validation_container .gform-icon {
     }
     #menu-header-menu li a{
         font-size: 16px;
+        font-weight: 500;
     }
     .mobile-header-nav.active{
         transition-delay: 0.2s !important;
@@ -1657,6 +1693,9 @@ div#gform_1_validation_container .gform-icon {
     }
     .gform_button{
         padding: 6px 20px !important;
+    }
+    .woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td{
+        padding-left: 0 !important;
     }
 }
 

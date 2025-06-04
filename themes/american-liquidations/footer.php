@@ -164,7 +164,7 @@
 	<div class="container mt-12">
 		<span class="block w-full border-t border-white/30"></span>
 		<div class="flex md:justify-center lg:justify-between lg:items-center pt-8 pb-3 lg:pt-5 flex-col lg:flex-row">
-			<span class="block text-[12px] lg:text-sm text-white/30 mb-5 md:mb-0">
+			<span class="block text-sm text-white/30 mb-5 md:mb-0">
 				© 2025&nbsp;American Liquidations
 			</span>
 			<?php

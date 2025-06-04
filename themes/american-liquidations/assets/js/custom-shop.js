@@ -1,6 +1,13 @@
 jQuery(document).ready(function($) {
+    let priceScrollTimeout = null;
+    let isFetching = false;
 
-    function fetchFilteredProducts(paged = 1) {
+    function fetchFilteredProducts(paged = 1 ,fetch) {
+        // if (isFetching) return; // prevent multiple calls
+        // isFetching = true;\
+        console.log(fetch);
+        if (!fetch) return;
+        
         const form = $('#custom-shop-filters');
         const data = form.serializeArray();
         data.push({ name: 'action', value: 'filter_shop_products' });
@@ -19,27 +26,40 @@ jQuery(document).ready(function($) {
                 $('#custom-shop-results').html(response.data.products_html).removeClass('opacity-0');
                 $('#custom-shop-pagination').html(response.data.pagination_html).fadeIn();
                 $('.search-match-box').text(response.data.count);
+
+                if (priceScrollTimeout) {
+                    clearTimeout(priceScrollTimeout);
+                }
+                
+                priceScrollTimeout = setTimeout(() => {
+                    $('html,body').animate({
+                        scrollTop: $('.shop-items-cover').offset().top
+                    });
+                }, 50);
+
             } else {
                 $('#custom-shop-results').html('<p>Error loading products.</p>').fadeIn();
                 $('#custom-shop-pagination').html('');
             }
             $('#custom-shop-loader').addClass('hidden');
         });
+        
     }
 
     // Submit filters
     $('#custom-shop-filters').on('submit', function(e) {
         e.preventDefault();
-        fetchFilteredProducts(1);
+        fetchFilteredProducts(1,true);
     });
 
     // Delegate pagination button clicks (because pagination is dynamic)
-    $(document).on('click', '.pagination-button', function() {
-        jQuery('html,body').animate({
-            scrollTop: jQuery('.shop-items-cover').offset().top
-        })
+    $(document).on('click', '.pagination-button:not(.noclick)', function(e) {
+        // jQuery('html,body').animate({
+        //     scrollTop: jQuery('.shop-items-cover').offset().top
+        // })
+        e.preventDefault();
         const page = $(this).data('page');
-        fetchFilteredProducts(page);
+        fetchFilteredProducts(page,true);
     });
 
     // Optionally trigger initial load on page ready (if needed)
@@ -54,26 +74,30 @@ jQuery(document).ready(function($) {
         prefix: "$",
         skin: "round",
         onStart: function (data) {
-            $('#min-price-label').text(data.from);
-            $('#max-price-label').text(data.to);
+            $('#min-price-label').text(data.from.toLocaleString());
+            $('#max-price-label').text(data.to.toLocaleString());
             $('#min-price').val(data.from);
             $('#max-price').val(data.to);
+            fetchFilteredProducts(1,false);
         },
         onChange: function (data) {
-            $('#min-price-label').text(data.from);
-            $('#max-price-label').text(data.to);
+            $('#min-price-label').text(data.from.toLocaleString());
+            $('#max-price-label').text(data.to.toLocaleString());
             $('#min-price').val(data.from);
             $('#max-price').val(data.to);
+            fetchFilteredProducts(1,false);
         },
         onFinish: function () {
+            console.log('sdfsdf');
             $('#custom-shop-filters').submit();
+            fetchFilteredProducts(1,true);
             // $('#custom-shop-filters').trigger('change');
         }
     });
 
-    $('#custom-shop-filters input').on('change', function () {
+    $('#custom-shop-filters input[type="radio"]').on('change', function () {
         
-        fetchFilteredProducts(1);
+        fetchFilteredProducts(1,true);
     });
     
     $('select[name="price_low_high"]').on('change', function () {

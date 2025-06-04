@@ -21,12 +21,12 @@ function custom_shop_shortcode($atts) {
         </div>
         <div class="flex gap-3 justify-center mb-8 md:hidden flex-wrap md:flex-nowrap px-7 md:px-0">
             <div class="flex justify-end">
-                <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px]">
+                <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[10px] md:px-[20px]">
                     <span class="text-[14px] font-semibold flex items-center">
-                        <img class="mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
+                        <img class="mr-1 md:mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
                         <span class="w-[80px] text-black/30">Filter by: </span>
                     </span>
-                    <select name="stock_status" id="stock-status-mobile" class="w-full border-none outline-none text-black font-semibold">
+                    <select name="stock_status" id="stock-status-mobile" class="w-full border-none outline-none text-sm text-black font-semibold">
                         <option value="">Stock</option>
                         <option value="instock">In</option>
                         <option value="outofstock">Out</option>
@@ -34,12 +34,12 @@ function custom_shop_shortcode($atts) {
                 </div>
             </div>
             <div class="flex justify-end">
-                <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px]">
+                <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[10px] md:px-[20px]">
                     <span class="text-[14px] font-semibold flex items-center">
-                        <img class="mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/sort-by-price.svg" alt="">
+                        <img class="mr-1 md:mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/sort-by-price.svg" alt="">
                         <span class="w-[80px] text-black/30">Sort by: </span>
                     </span>
-                    <select  name="price_low_high" id="sort-price-dropdown-mobile" class="w-full border-none outline-none text-black font-semibold">
+                    <select  name="price_low_high" id="sort-price-dropdown-mobile" class="w-full border-none outline-none text-sm text-black font-semibold">
                         <option value="">Price</option>
                         <option value="price_asc">Low</option>
                         <option value="price_desc">High</option>
@@ -48,7 +48,7 @@ function custom_shop_shortcode($atts) {
             </div>
         </div>
         <div class="flex gap-8 2xl:gap-12 flex-wrap md:flex-nowrap px-[30px] md:px-0">
-            <div class="shop-sidebar w-full md:w-[275px] 2xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px]">
+            <div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px]">
                 <div class="filter-wrapper">
                     <div class="filter-search mb-10">
                         <h4 class="mb-3 text-black/60 text-[24px]">Search Products</h4>
@@ -62,7 +62,7 @@ function custom_shop_shortcode($atts) {
                     ?>
                 </div>
             </div>
-            <div class="shop-items-cover w-full md:w-[calc(100%_-_275px)] 2xl:w-[calc(100%_-_355px)] pr-0 md:pr-5 xl:pr-12">
+            <div class="shop-items-cover w-full md:w-[calc(100%_-_275px)] xl:w-[calc(100%_-_355px)] pr-0 md:pr-5 xl:pr-12">
 				<div class="shop-items-header hidden md:flex items-end justify-end gap-5  mb-10">
 					<div class="flex justify-end">
 						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px]">
@@ -127,7 +127,7 @@ function custom_ajax_shop_products($filters = []) {
 
     $args = [
         'post_type'      => 'product',
-        'posts_per_page' => 12,
+        'posts_per_page' => 15,
         'paged'          => $paged,
         'post_status'    => 'publish',
     ];
@@ -244,7 +244,7 @@ function custom_ajax_shop_products($filters = []) {
     if ($query->max_num_pages > 1) {
         echo '<div class="custom-pagination mt-10 flex justify-center gap-2">';
         for ($i = 1; $i <= $query->max_num_pages; $i++) {
-            echo '<button class="pagination-button px-4 py-2 border rounded ' . ($i == $paged ? 'bg-black text-white' : 'bg-white') . '" data-page="' . $i . '">' . $i . '</button>';
+            echo '<button class="pagination-button px-4 py-2 border rounded hover:bg-black hover:text-white ' . ($i == $paged ? 'bg-black text-white noclick' : 'bg-white') . '" data-page="' . $i . '">' . $i . '</button>';
         }
         echo '</div>';
     }

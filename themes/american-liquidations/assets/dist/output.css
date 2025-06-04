@@ -812,6 +812,10 @@ video {
   margin-top: 2rem !important;
 }
 
+.mb-0 {
+  margin-bottom: 0px;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -926,6 +930,10 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
 }
 
 .box-border {
@@ -1097,6 +1105,10 @@ video {
 
 .\!w-4 {
   width: 1rem !important;
+}
+
+.\!w-auto {
+  width: auto !important;
 }
 
 .w-12 {
@@ -1861,6 +1873,10 @@ video {
 
 .gap-y-12 {
   row-gap: 3rem;
+}
+
+.gap-y-5 {
+  row-gap: 1.25rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -2995,6 +3011,10 @@ video {
   font-family: Inter, sans-serif;
 }
 
+.\!text-\[12px\] {
+  font-size: 12px !important;
+}
+
 .\!text-\[48px\] {
   font-size: 48px !important;
 }
@@ -3002,6 +3022,10 @@ video {
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
 }
 
 .text-\[11px\] {
@@ -3183,6 +3207,10 @@ video {
 
 .leading-\[1\.3em\] {
   line-height: 1.3em;
+}
+
+.leading-\[1\.8em\] {
+  line-height: 1.8em;
 }
 
 .\!tracking-\[0px\] {
@@ -3770,7 +3798,7 @@ h1{
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 24px;
 }
 
 @media (min-width: 640px) {
@@ -3856,23 +3884,20 @@ h4{
 }
 
 h5 {
+  font-size: 18px;
+}
+
+h6 {
   font-size: 16px;
 }
 
-@media (min-width: 640px) {
-  h5 {
-    font-size: 16px;
-  }
-}
-
 @media (min-width: 768px) {
-  h5 {
+  h6 {
     font-size: 18px;
   }
 }
 
-h6 {
-  font-size: 18px;
+h6{
   /* set */
 }
 
@@ -3968,6 +3993,10 @@ blockquote:before {
   margin-left: 5px;
 }
 
+.btn-link {
+  font-family: Inter, sans-serif;
+}
+
 .btn.w-full {
   text-align: center;
 }
@@ -3982,6 +4011,7 @@ blockquote:before {
   padding-right: 0;
   background-size: 11px;
   margin-left: 5px;
+  display: inline-block;
 }
 
 .btn.btn-small{
@@ -5458,6 +5488,42 @@ div#gform_1_validation_container .gform-icon {
   font-size: 12px !important;
 }
 
+.ginput_preview_list:not(:empty) {
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 15px;
+  line-height: 1;
+}
+
+.ginput_preview_list .ginput_preview {
+  margin: 0 !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.gfield_fileupload_percent {
+  margin: 0 10px;
+}
+
+.gform-icon--circle-error {
+  display: none !important;
+}
+
+.gfield_fileupload_filename {
+  line-height: 1.2;
+}
+
+.woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.woocommerce-order-details .order-again {
+  display: none;
+}
+
 /* Responsive CSS */
 
 @media (max-width: 1350px){
@@ -5513,6 +5579,7 @@ div#gform_1_validation_container .gform-icon {
 
   #menu-header-menu li a{
     font-size: 16px;
+    font-weight: 500;
   }
 
   .mobile-header-nav.active{
@@ -5624,6 +5691,10 @@ div#gform_1_validation_container .gform-icon {
 
   .gform_button{
     padding: 6px 20px !important;
+  }
+
+  .woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td{
+    padding-left: 0 !important;
   }
 }
 
@@ -5886,6 +5957,10 @@ div#gform_1_validation_container .gform-icon {
     margin-top: 2rem;
   }
 
+  .md\:mr-2 {
+    margin-right: 0.5rem;
+  }
+
   .md\:flex {
     display: flex;
   }
@@ -5994,6 +6069,14 @@ div#gform_1_validation_container .gform-icon {
     gap: 1.75rem;
   }
 
+  .md\:gap-6 {
+    gap: 1.5rem;
+  }
+
+  .md\:gap-y-12 {
+    row-gap: 3rem;
+  }
+
   .md\:space-y-10 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -6042,6 +6125,11 @@ div#gform_1_validation_container .gform-icon {
   .md\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+
+  .md\:px-\[20px\] {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .md\:pb-24 {
@@ -6293,6 +6381,14 @@ div#gform_1_validation_container .gform-icon {
 
   .xl\:w-\[calc\(100\%_-_545px\)\] {
     width: calc(100% - 545px);
+  }
+
+  .xl\:w-\[355px\] {
+    width: 355px;
+  }
+
+  .xl\:w-\[calc\(100\%_-_355px\)\] {
+    width: calc(100% - 355px);
   }
 
   .xl\:min-w-\[420px\] {

@@ -9,7 +9,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 
 <section class="py-16 lg:py-24 bg-gray <?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
-		<div class="flex gap-6 xl:gap-8 flex-col md:flex-row"> 
+		<div class="flex gap-12 md:gap-6 xl:gap-8 flex-col md:flex-row"> 
 			<div class="w-full md:w-1/2 bg-white border-r-8 border-primary p-10 inline-flex items-center rounded-l-[15px]">
 				<blockquote>
 					<?php echo get_field('blockquote'); ?>
@@ -26,7 +26,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 						$link_title = $link['title'];
 						$link_target = $link['target'] ? $link['target'] : '_self';
 						?>
-						<a class="btn btn-arrow btn-red md:w-auto" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+						<a class="btn btn-arrow btn-red w-full md:w-auto" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
 					<?php endif; ?>
 					<?php 
 					$link = get_field('testimonial_button_2');
