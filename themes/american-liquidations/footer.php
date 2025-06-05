@@ -38,7 +38,7 @@
 <?php } ?>
 
 <?php $cta_bg =  get_field('cta_bg','option')?>
-<div class="cta-block relative py-[90px]" style="background-image: url(<?php echo $cta_bg['url']; ?>); background-size: cover;">
+<div class="cta-block relative py-[90px]" style="background-image: url(<?php echo $cta_bg['url']; ?>); background-size: cover;background-position: center;">
 	<div class="container">
 		<div class="cta-inner relative max-w-[820px] mx-auto text-center">
 			<h2 class="text-white mb-5"><?php echo get_field('cta_title','option'); ?></h2>
@@ -132,7 +132,7 @@
 				) );
 				?>
 			</div>
-			<div class="max-w-[186px]">
+			<div class="max-w-full md:max-w-[186px]">
 				<div class="space-y-4 md:space-y-5 mt-8 md:mt-0">
 					<span class="text-white text-xs font-bold tracking-[0.15em] font-barlow">CONTACT INFORMATION</span>
 					<nav>
