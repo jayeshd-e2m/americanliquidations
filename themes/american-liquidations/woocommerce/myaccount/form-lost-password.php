@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
         </div>
     </div>
 </div>
-<div class="bg-gray py-14">
+<div class="bg-gray py-14 lost-password-cover">
 	<div class="container">
 		<div class="max-w-[830px] mx-auto p-8 md:p-12 bg-white rounded-[15px]">
 			<?php do_action( 'woocommerce_before_lost_password_form' ); ?>

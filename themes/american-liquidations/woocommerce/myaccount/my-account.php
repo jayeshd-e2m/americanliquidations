@@ -96,7 +96,11 @@ if ( is_wc_endpoint_url( 'view-order' ) && $order_id ) {
     <div class="page-description-header py-12">
         <div class="container">
             <p class="mb-5 md:mb-0">
-                <a href="<?php echo site_url();?>/my-account">My Account</a>
+                <?php if($section_title == 'Account') { ?>
+                    <div class="mb-2">My Account</div>
+                <?php }else{ ?>
+                    <a href="<?php echo site_url();?>/my-account">My Account</a>
+                <?php } ?>
                 <?php if($section_title != 'Account') { echo ' > <strong>' . esc_html($section_title).'</strong>'; } ?>
             </p>
             <div class="flex justify-between items-center flex-wrap md:flex-nowrap gap-6 md:gap-10">

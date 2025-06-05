@@ -3940,6 +3940,7 @@ select {
   background-repeat: no-repeat;
   background-position: center right;
   background-size: 10px;
+  background-color: transparent;
 }
 
 /* Button */
@@ -5594,6 +5595,14 @@ div#gform_1_validation_container .gform-icon {
   justify-content: center;
 }
 
+.woocommerce-product-gallery__trigger {
+  display: none;
+}
+
+.lost-password-cover .woocommerce-notices-wrapper {
+  margin: 0;
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
@@ -6006,6 +6015,10 @@ div#gform_1_validation_container .gform-icon {
     bottom: -40px;
   }
 
+  .md\:bottom-\[-35px\] {
+    bottom: -35px;
+  }
+
   .md\:\!mt-0 {
     margin-top: 0px !important;
   }
@@ -6044,6 +6057,10 @@ div#gform_1_validation_container .gform-icon {
 
   .md\:mt-8 {
     margin-top: 2rem;
+  }
+
+  .md\:\!mb-0 {
+    margin-bottom: 0px !important;
   }
 
   .md\:flex {

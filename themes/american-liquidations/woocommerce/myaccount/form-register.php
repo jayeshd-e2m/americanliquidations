@@ -135,7 +135,7 @@ defined( 'ABSPATH' ) || exit;
                                 <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.13932 10.7941C1.75994 10.7941 1.43529 10.6591 1.16536 10.3892C0.895422 10.1193 0.760225 9.79437 0.759766 9.41454V8.03498C0.759766 7.83954 0.825984 7.67583 0.958422 7.54386C1.09086 7.41188 1.25457 7.34566 1.44954 7.3452C1.64452 7.34474 1.80846 7.41096 1.94136 7.54386C2.07425 7.67675 2.14024 7.84046 2.13932 8.03498V9.41454H10.4167V8.03498C10.4167 7.83954 10.4829 7.67583 10.6153 7.54386C10.7478 7.41188 10.9115 7.34566 11.1064 7.3452C11.3014 7.34474 11.4654 7.41096 11.5983 7.54386C11.7312 7.67675 11.7971 7.84046 11.7962 8.03498V9.41454C11.7962 9.79391 11.6613 10.1188 11.3913 10.3892C11.1214 10.6596 10.7965 10.7946 10.4167 10.7941H2.13932ZM5.58822 2.41328L4.29488 3.70662C4.15693 3.84457 3.99322 3.91079 3.80376 3.90527C3.6143 3.89976 3.45036 3.82779 3.31195 3.68937C3.18549 3.55142 3.11927 3.39047 3.11329 3.20653C3.10731 3.02259 3.17353 2.86164 3.31195 2.72368L5.79515 0.240481C5.86413 0.171503 5.93885 0.122759 6.01933 0.0942477C6.0998 0.0657369 6.18602 0.0512517 6.27799 0.0507919C6.36997 0.050332 6.45619 0.0648172 6.53666 0.0942477C6.61714 0.123678 6.69186 0.172423 6.76084 0.240481L9.24404 2.72368C9.382 2.86164 9.44822 3.02259 9.4427 3.20653C9.43718 3.39047 9.37096 3.55142 9.24404 3.68937C9.10609 3.82733 8.94238 3.8993 8.75292 3.90527C8.56346 3.91125 8.39952 3.84503 8.26111 3.70662L6.96777 2.41328V7.3452C6.96777 7.54064 6.90155 7.70458 6.76912 7.83701C6.63668 7.96945 6.47297 8.03544 6.27799 8.03498C6.08302 8.03452 5.91931 7.9683 5.78687 7.83632C5.65443 7.70435 5.58822 7.54064 5.58822 7.3452V2.41328Z" fill="#FB0404"/>
                                 </svg>
-                                <label id="fileLabel" for="taxDocument" class="text-black/60 pl-4 cursor-pointer text-base">Upload Form</label>
+                                <label id="fileLabel" for="taxDocument" class="text-black/60 pl-4 cursor-pointer text-sm">Upload Form</label>
                                 <input type="file" id="taxDocument" name="tax_document" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                                 class="absolute inset-0 opacity-0 cursor-pointer">
                             </div>
@@ -149,14 +149,14 @@ defined( 'ABSPATH' ) || exit;
 
                     <div class="flex items-center justify-between pt-14 relative flex-wrap md:flex-nowrap">
                         <button type="button" id="backBtn" 
-                            class="absolute max-w-[120px] left-0 right-0 mx-auto bottom-[-20px] md:bottom-[-40px] text-black/60 text-xs">
+                            class="absolute max-w-[120px] left-0 right-0 mx-auto bottom-[-20px] md:bottom-[-35px] text-black/60 text-xs">
                             ← BACK
                         </button>
                         <button type="submit" id="submitBtn" 
                             class="btn btn-red btn-arrow hover:bg-black w-full md:w-auto">
                             Sign up
                         </button>
-                        <p class="text-sm text-black/60 mt-5 md:mt-0 !mb-5 md:mb-0">
+                        <p class="text-sm text-black/60 mt-5 md:mt-0 !mb-5 md:!mb-0">
                             Already have an account? 
                             <a href="<?php echo site_url(); ?>/my-account/" class="hover:text-primary font-bold">Sign in</a>
                         </p>

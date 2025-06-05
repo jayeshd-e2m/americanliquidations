@@ -81,6 +81,7 @@ select {
     background-repeat: no-repeat;
     background-position: center right;
     background-size: 10px;
+    background-color: transparent;
 }
 
 /* Button */
@@ -1608,6 +1609,13 @@ div#gform_1_validation_container .gform-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.woocommerce-product-gallery__trigger {
+    display: none;
+}
+
+.lost-password-cover .woocommerce-notices-wrapper {
+    margin: 0;
 }
 /* Responsive CSS */
 
