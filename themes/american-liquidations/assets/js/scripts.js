@@ -2,9 +2,11 @@ var $ = jQuery.noConflict();
 
 jQuery(document).ready(function($){
 
-	document.querySelector('input[type="tel"]').addEventListener('input', function (e) {
-		this.value = this.value.replace(/[^\d]/g, '');
-	  });
+	if(jQuery('input[type="tel"]').length){
+		document.querySelector('input[type="tel"]').addEventListener('input', function (e) {
+			this.value = this.value.replace(/[^\d]/g, '');
+		});
+	}
 
 	  
 	var clickable = $( '.menu-state' ).attr( 'data-clickable' );
