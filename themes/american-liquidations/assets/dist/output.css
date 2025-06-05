@@ -2677,6 +2677,10 @@ video {
      object-fit: scale-down;
 }
 
+.p-0 {
+  padding: 0px;
+}
+
 .p-1 {
   padding: 0.25rem;
 }
@@ -5603,6 +5607,10 @@ div#gform_1_validation_container .gform-icon {
   margin: 0;
 }
 
+.woocommerce-custom-account .woocommerce-notices-wrapper .woocommerce-message:before{
+  top: 17px;
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
@@ -6011,12 +6019,12 @@ div#gform_1_validation_container .gform-icon {
     position: absolute;
   }
 
-  .md\:bottom-\[-40px\] {
-    bottom: -40px;
-  }
-
   .md\:bottom-\[-35px\] {
     bottom: -35px;
+  }
+
+  .md\:\!mb-0 {
+    margin-bottom: 0px !important;
   }
 
   .md\:\!mt-0 {
@@ -6057,10 +6065,6 @@ div#gform_1_validation_container .gform-icon {
 
   .md\:mt-8 {
     margin-top: 2rem;
-  }
-
-  .md\:\!mb-0 {
-    margin-bottom: 0px !important;
   }
 
   .md\:flex {

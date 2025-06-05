@@ -1617,6 +1617,10 @@ div#gform_1_validation_container .gform-icon {
 .lost-password-cover .woocommerce-notices-wrapper {
     margin: 0;
 }
+
+.woocommerce-custom-account .woocommerce-notices-wrapper .woocommerce-message:before{
+    top: 17px;
+}
 /* Responsive CSS */
 
 @media (min-width: 2000px){
