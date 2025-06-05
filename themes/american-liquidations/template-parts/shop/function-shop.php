@@ -37,7 +37,7 @@ function custom_shop_shortcode($atts) {
                 <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[10px] md:px-[20px]">
                     <span class="text-[14px] font-semibold flex items-center">
                         <img class="mr-1 md:mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/sort-by-price.svg" alt="">
-                        <span class="w-[80px] text-black/30">Sort by: </span>
+                        <span class="w-[75px] text-black/30">Sort by:</span>
                     </span>
                     <select  name="price_low_high" id="sort-price-dropdown-mobile" class="w-full border-none outline-none text-sm text-black font-semibold">
                         <option value="">Price</option>
@@ -65,7 +65,7 @@ function custom_shop_shortcode($atts) {
             <div class="shop-items-cover w-full md:w-[calc(100%_-_275px)] xl:w-[calc(100%_-_355px)] pr-0 md:pr-5 xl:pr-12">
 				<div class="shop-items-header hidden md:flex items-end justify-end gap-5  mb-10">
 					<div class="flex justify-end">
-						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px]">
+						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px] gap-2">
 							<span class="text-[14px] font-semibold flex items-center">
 								<img class="mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
                                 <span class="w-[80px] text-black/30">Filter by: </span>
@@ -78,10 +78,10 @@ function custom_shop_shortcode($atts) {
 						</div>
 					</div>
 					<div class="flex justify-end">
-						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px]">
+						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px] gap-2">
 							<span class="text-[14px] font-semibold flex items-center">
 								<img class="mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/sort-by-price.svg" alt="">
-                                <span class="w-[80px] text-black/30">Sort by: </span>
+                                <span class="w-[75px] text-black/30">Sort by:</span>
 							</span>
 							<select name="price_low_high" id="sort-price-dropdown-desktop" class="w-full border-none outline-none text-black font-semibold">
 								<option value="">Price</option>

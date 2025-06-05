@@ -116,7 +116,8 @@ blockquote:before {
 .shop-detail-content .added_to_cart {
 }
 
-.btn.btn-arrow:after{
+.btn.btn-arrow:after,
+.single-page-cart-btn .added_to_cart.wc-forward:after{
     content: "";
     height: 14px;
     background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
@@ -183,9 +184,6 @@ blockquote:before {
     @apply text-white;
     @apply border-black;
     @apply bg-black;
-}
-.shop-detail-content .added_to_cart.wc-forward {
-    padding-right: 40px !important;
 }
 /* .btn.btn-arrow:hover {
     @apply text-white;
@@ -597,7 +595,8 @@ body ul.psfw-social-icons{
     margin-bottom: 0 !important;
 }
 
-.current-menu-item > a {
+.current-menu-item > a,
+.current-menu-ancestor > a {
     @apply text-primary;
 }
 
@@ -874,6 +873,10 @@ label.gfield_label .gfield_required .gfield_required:after {
     font-size: 14px !important;
     @apply !text-black/60;
 }
+.contact-form-right input:focus,
+.contact-form-right textarea:focus{
+    outline: 1px solid #080404;
+}
 
 .contact-form-right textarea {
     padding: 15px !important;
@@ -902,7 +905,7 @@ label.gfield_label .gfield_required .gfield_required:after {
     font-size: 14px !important;
     font-weight: 700 !important;
     font-family: 'Barlow';
-    padding: 10px 20px !important;
+    padding: 11px 20px !important;
 }
 
 .gform_button:hover{
@@ -1392,7 +1395,8 @@ div#gform_1_validation_container .gform-icon {
     margin-left: 3px;
 }
 
-.site-header .menu-item-has-children:hover> a:after {
+.site-header .menu-item-has-children:hover> a:after,
+.site-header .menu-item-has-children.current-menu-ancestor> a:after{
     background: url(../../../../../wp-content/uploads/2025/06/menu-arrow-red.svg);
     background-repeat: no-repeat;
     background-position: center;

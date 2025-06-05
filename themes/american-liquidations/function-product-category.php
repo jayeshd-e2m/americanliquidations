@@ -30,7 +30,7 @@ function custom_shopitem_shortcode( $atts ) {
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) {
-        echo '<div class="grid mobile-grid-1 grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-12">';
+        echo '<div class="grid mobile-grid-1 grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-5 md:gap-y-12">';
         while ( $query->have_posts() ) {
             $query->the_post();
             $product = wc_get_product( get_the_ID() );

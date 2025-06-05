@@ -10,51 +10,28 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="primary" class="site-main">
+		<div class="page-description-header py-12">
+			<div class="container">
+				<h1 class="text-[36px] md:text-[48px]">404 Page</h1>
+			</div>
+		</div>
+		<div class="py-16 bg-gray">
+			<div class="container">
+			<h2 class="mb-3">Page Not Found</h2>
+			<p><strong>The page you requested cannot be found. The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</strong> </p>
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'american-liquidations' ); ?></h1>
-			</header><!-- .page-header -->
-
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'american-liquidations' ); ?></p>
-
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'american-liquidations' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$american_liquidations_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'american-liquidations' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$american_liquidations_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
-	</main><!-- #main -->
+			<h4 class="mt-6">Please try the following:</h4>
+			<ul class="mt-4" style="list-style: disc;margin-left: 20px;">
+				<li>If you typed the page address in the Address bar, make sure that it is spelled correctly.</li>
+				<li>Open the home page and look for links to the information you want.</li>
+				<li>Use the navigation bar on the left or top to find the link you are looking for.</li>
+				<li>Click the back button to try another link.</li>
+			</ul> 
+			<a href="<?php echo site_url(); ?>" class="btn btn-red btn-small mt-5">Go to Home</a>
+		</div>
+		</div>
+	</main>
 
 <?php
 get_footer();

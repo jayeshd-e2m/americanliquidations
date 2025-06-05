@@ -17,13 +17,16 @@ get_header();
 
 	<main id="primary" class="site-main">
 		<?php $blog_page_id = get_option('page_for_posts'); ?>
-		<?php if(get_field('display_section',$blog_page_id )){ ?>
-		<div class="page-description-header py-12">
-			<div class="container">
-				<?php if(get_field('pd_title',$blog_page_id )){ ?><h1 class="text-[36px] md:text-[48px]"><?php echo get_field('pd_title',$blog_page_id ); ?></h1><?php } ?>
-				<?php if(get_field('pd_description',$blog_page_id )){ ?><?php echo get_field('pd_description',$blog_page_id ); ?><?php } ?>
-			</div>
-		</div>
+
+		<?php if(get_field('display_section')){ ?>
+			<?php if(get_field('pd_title',$blog_page_id ) || get_field('pd_description',$blog_page_id )){ ?>
+				<div class="page-description-header py-12">
+					<div class="container">
+						<?php if(get_field('pd_title',$blog_page_id )){ ?><h1 class="text-[36px] md:text-[48px]"><?php echo get_field('pd_title',$blog_page_id ); ?></h1><?php } ?>
+						<?php if(get_field('pd_description',$blog_page_id )){ ?><?php echo get_field('pd_description',$blog_page_id ); ?><?php } ?>
+					</div>
+				</div>
+			<?php } ?>
 		<?php } ?>
 		<div class="bg-gray py-16 md:py-24">
 			<div class="container">

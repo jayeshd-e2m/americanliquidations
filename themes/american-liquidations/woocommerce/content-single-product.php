@@ -74,7 +74,7 @@ $is_truckload = has_term( 'truckloads', 'product_cat', $product->get_id() );
 					</div>
 					<?php endif; ?>
 					
-					<?php if (!$is_truckload && $product->get_meta('_msrp_price') ) { ?>
+					<?php if (!$is_truckload) { ?>
 						<?php if ( $zip_code ) : ?>
 						<div class="shop-detail-item flex">
 							<div class="item-lable font-medium text-black">Zip Code: </div>
@@ -89,14 +89,20 @@ $is_truckload = has_term( 'truckloads', 'product_cat', $product->get_id() );
 					<?php } ?>
 				</div>
 
-				<form class="cart" method="post" enctype='multipart/form-data'>
+				<form class="cart single-page-cart-btn" method="post" enctype='multipart/form-data'>
 					<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 					<?php
 				$is_truckload = has_term( 'truckloads', 'product_cat', $product->get_id() );
 				?>
+
+				<?php if ($is_truckload) {
+					$btn_class = 'btn-black btn-arrow';
+				}else{
+					$btn_class= 'btn-red';
+				} ?>
 				<button
 					type="button"
-					class="custom-add-to-cart btn-black btn btn-arrow relative"
+					class="custom-add-to-cart btn relative width-full md:w-auto <?php echo $btn_class; ?>"
 					data-product_id="<?php echo esc_attr($product->get_id()); ?>"
 					data-product_sku="<?php echo esc_attr($product->get_sku()); ?>"
 					data-quantity="1"

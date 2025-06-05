@@ -9,7 +9,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 
 <section class="bg-gray py-14 lg:py-24 <?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
-		<div class="faqs-items bg-white p-7 md:p-12 rounded-[15px] space-y-14">
+		<div class="faqs-items bg-white px-7 md:px-12 py-12 rounded-[15px] space-y-14">
 			<?php
 			if( have_rows('faqs_repeater') ):
 				while( have_rows('faqs_repeater') ) : the_row(); ?>
@@ -28,40 +28,43 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 	</div>
 
 	<script>
-		document.addEventListener('DOMContentLoaded', function () {
+	document.addEventListener('DOMContentLoaded', function () {
 		const faqItems = document.querySelectorAll('.faq-item');
 
-		faqItems.forEach(item => {
+		faqItems.forEach((item, index) => {
 			const question = item.querySelector('h6');
 			const answer = item.querySelector('.faq-answer');
 
-			// Set initial styles
 			answer.style.overflow = 'hidden';
-			answer.style.maxHeight = '0';
 			answer.style.transition = 'max-height 0.4s ease';
 
-			question.addEventListener('click', () => {
-			faqItems.forEach(otherItem => {
-				const otherAnswer = otherItem.querySelector('.faq-answer');
-				if (otherItem !== item) {
-				otherItem.classList.remove('open');
-				otherAnswer.style.maxHeight = '0';
-				}
-			});
-
-			const isOpen = item.classList.contains('open');
-
-			if (isOpen) {
-				item.classList.remove('open');
-				answer.style.maxHeight = '0';
-			} else {
+			// Open first FAQ
+			if (index === 0) {
 				item.classList.add('open');
 				answer.style.maxHeight = answer.scrollHeight + 'px';
+			} else {
+				answer.style.maxHeight = '0';
 			}
+
+			question.addEventListener('click', () => {
+				const isOpen = item.classList.contains('open');
+
+				// If it's already open, do nothing (prevents closing it)
+				if (isOpen) return;
+
+				// Close all and open the clicked one
+				faqItems.forEach(otherItem => {
+					const otherAnswer = otherItem.querySelector('.faq-answer');
+					otherItem.classList.remove('open');
+					otherAnswer.style.maxHeight = '0';
+				});
+
+				item.classList.add('open');
+				answer.style.maxHeight = answer.scrollHeight + 'px';
 			});
 		});
-		});
-
+	});
 	</script>
+
 
 </section>

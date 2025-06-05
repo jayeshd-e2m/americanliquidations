@@ -11,7 +11,7 @@
 
 ?>
 
-<?php if(!is_front_page()){ ?>
+<?php if(!is_front_page() && ! is_product()){ ?>
 	<section class="py-14 footer-boxes-cover">
 		<div class="container">
 			<div class="grid mobile-grid-1 grid-cols-2 md:grid-cols-4 gap-4">
@@ -215,9 +215,9 @@
 		<div class="cart-popup-body font-medium text-black/40">
 			<p>You must have a registered account to purchase a truckload. Please click the link below to register.</p>
 		</div>
-		<div class="flex justify-between mt-12">
-			<a href="/login" class="btn btn-red">Sign Up</a>
-			<p class="text-sm">Already have an account? <a href="" class="font-bold">Sign in</a></p>
+		<div class="flex justify-between mt-12 items-center">
+			<a href="<?php echo site_url(); ?>/my-account/register/" class="btn btn-red">Sign Up</a>
+			<p class="text-sm">Already have an account? <a href="<?php echo site_url(); ?>/my-account" class="font-bold">Sign in</a></p>
 		</div>
 	</div>
 </div>

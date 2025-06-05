@@ -876,6 +876,10 @@ video {
   margin-left: 1.25rem;
 }
 
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -930,10 +934,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
 }
 
 .box-border {
@@ -1141,6 +1141,10 @@ video {
 
 .w-\[60px\] {
   width: 60px;
+}
+
+.w-\[75px\] {
+  width: 75px;
 }
 
 .w-\[80px\] {
@@ -1854,6 +1858,10 @@ video {
 
 .gap-\[20px\] {
   gap: 20px;
+}
+
+.gap-\[30px\] {
+  gap: 30px;
 }
 
 .gap-x-24 {
@@ -3978,7 +3986,8 @@ blockquote:before {
 .shop-detail-content .added_to_cart {
 }
 
-.btn.btn-arrow:after{
+.btn.btn-arrow:after,
+.single-page-cart-btn .added_to_cart.wc-forward:after{
   content: "";
   height: 14px;
   background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
@@ -4054,10 +4063,6 @@ blockquote:before {
   border-color: rgb(8 4 4 / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
   background-color: rgb(8 4 4 / var(--tw-bg-opacity, 1));
-}
-
-.shop-detail-content .added_to_cart.wc-forward {
-  padding-right: 40px !important;
 }
 
 /* .btn.btn-arrow:hover {
@@ -4523,7 +4528,8 @@ body ul.psfw-social-icons{
   margin-bottom: 0 !important;
 }
 
-.current-menu-item > a {
+.current-menu-item > a,
+.current-menu-ancestor > a {
   --tw-text-opacity: 1;
   color: rgb(251 4 4 / var(--tw-text-opacity, 1));
 }
@@ -4824,6 +4830,11 @@ label.gfield_label .gfield_required .gfield_required:after {
   color: rgb(8 4 4 / 0.6) !important;
 }
 
+.contact-form-right input:focus,
+.contact-form-right textarea:focus{
+  outline: 1px solid #080404;
+}
+
 .contact-form-right textarea {
   padding: 15px !important;
 }
@@ -4855,7 +4866,7 @@ label.gfield_label .gfield_required .gfield_required:after {
   font-size: 14px !important;
   font-weight: 700 !important;
   font-family: 'Barlow';
-  padding: 10px 20px !important;
+  padding: 11px 20px !important;
 }
 
 .gform_button:hover {
@@ -5368,7 +5379,8 @@ div#gform_1_validation_container .gform-icon {
   margin-left: 3px;
 }
 
-.site-header .menu-item-has-children:hover> a:after {
+.site-header .menu-item-has-children:hover> a:after,
+.site-header .menu-item-has-children.current-menu-ancestor> a:after{
   background: url(../../../../../wp-content/uploads/2025/06/menu-arrow-red.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -5937,6 +5949,10 @@ div#gform_1_validation_container .gform-icon {
     margin-bottom: 4rem;
   }
 
+  .md\:mr-2 {
+    margin-right: 0.5rem;
+  }
+
   .md\:mt-0 {
     margin-top: 0px;
   }
@@ -5955,10 +5971,6 @@ div#gform_1_validation_container .gform-icon {
 
   .md\:mt-8 {
     margin-top: 2rem;
-  }
-
-  .md\:mr-2 {
-    margin-right: 0.5rem;
   }
 
   .md\:flex {
@@ -6065,12 +6077,16 @@ div#gform_1_validation_container .gform-icon {
     gap: 1.25rem;
   }
 
+  .md\:gap-6 {
+    gap: 1.5rem;
+  }
+
   .md\:gap-7 {
     gap: 1.75rem;
   }
 
-  .md\:gap-6 {
-    gap: 1.5rem;
+  .md\:gap-\[20px\] {
+    gap: 20px;
   }
 
   .md\:gap-y-12 {
@@ -6102,9 +6118,19 @@ div#gform_1_validation_container .gform-icon {
     padding-right: 0px;
   }
 
+  .md\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
   .md\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+  }
+
+  .md\:px-\[20px\] {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .md\:px-\[30px\] {
@@ -6125,11 +6151,6 @@ div#gform_1_validation_container .gform-icon {
   .md\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
-  }
-
-  .md\:px-\[20px\] {
-    padding-left: 20px;
-    padding-right: 20px;
   }
 
   .md\:pb-24 {
@@ -6367,6 +6388,10 @@ div#gform_1_validation_container .gform-icon {
     width: 33.333333%;
   }
 
+  .xl\:w-\[355px\] {
+    width: 355px;
+  }
+
   .xl\:w-\[45\%\] {
     width: 45%;
   }
@@ -6379,16 +6404,12 @@ div#gform_1_validation_container .gform-icon {
     width: 55%;
   }
 
-  .xl\:w-\[calc\(100\%_-_545px\)\] {
-    width: calc(100% - 545px);
-  }
-
-  .xl\:w-\[355px\] {
-    width: 355px;
-  }
-
   .xl\:w-\[calc\(100\%_-_355px\)\] {
     width: calc(100% - 355px);
+  }
+
+  .xl\:w-\[calc\(100\%_-_545px\)\] {
+    width: calc(100% - 545px);
   }
 
   .xl\:min-w-\[420px\] {
@@ -6429,14 +6450,6 @@ div#gform_1_validation_container .gform-icon {
 }
 
 @media (min-width: 1536px) {
-  .\32xl\:w-\[355px\] {
-    width: 355px;
-  }
-
-  .\32xl\:w-\[calc\(100\%_-_355px\)\] {
-    width: calc(100% - 355px);
-  }
-
   .\32xl\:gap-12 {
     gap: 3rem;
   }
