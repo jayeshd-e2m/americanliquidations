@@ -44,7 +44,7 @@
 			<h2 class="text-white mb-5"><?php echo get_field('cta_title','option'); ?></h2>
 			<div class="max-w-[720px] mx-auto text-white/60"><?php echo get_field('cta_content','option'); ?></div>
 			<div class="subscribe-cover text-white/60 mt-5">
-				Subscribe form goes here
+				<iframe src="https://api.leadseverywhere.net/widget/form/xcXKOlWtC4WdIoLC1QB9" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen></iframe>
 			</div>
 		</div>
 	</div>
