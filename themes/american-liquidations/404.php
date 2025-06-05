@@ -31,7 +31,7 @@ get_header();
 			<a href="<?php echo site_url(); ?>" class="btn btn-red btn-small mt-5">Go to Home</a>
 		</div>
 		</div>
-	</main>
+	</main> 
 
 <?php
 get_footer();
