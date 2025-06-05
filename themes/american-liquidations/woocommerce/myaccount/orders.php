@@ -206,7 +206,7 @@ $base_url = esc_url( add_query_arg( $_GET, $base_url ) ); // Restore current que
 
     <?php wc_print_notice(
         esc_html__( 'No order has been made yet.', 'woocommerce' ) .
-        ' <a class="woocommerce-Button wc-forward button' . esc_attr( $wp_button_class ) .
+        ' <a style="display: initial;" class="btn btn-red btn-small' . esc_attr( $wp_button_class ) .
         '" href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '">' .
         esc_html__( 'Browse products', 'woocommerce' ) . '</a>',
         'notice'

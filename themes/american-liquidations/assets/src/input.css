@@ -1621,6 +1621,14 @@ div#gform_1_validation_container .gform-icon {
 .woocommerce-custom-account .woocommerce-notices-wrapper .woocommerce-message:before{
     top: 17px;
 }
+
+.woocommerce-info {
+    border: 0;
+}
+
+.woocommerce-info:before {
+    @apply text-primary;
+}
 /* Responsive CSS */
 
 @media (min-width: 2000px){

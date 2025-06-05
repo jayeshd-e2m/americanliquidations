@@ -18,12 +18,19 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
+<?php
+$my_account_page_id = get_option( 'woocommerce_myaccount_page_id' );
+$title = get_field( 'forgot_title', $my_account_page_id );
+$description = get_field( 'forgot_description', $my_account_page_id );
+?>
 <div class="page-description-header py-12">
     <div class="container">
-        <h1 class="text-[36px] md:text-[48px]">Forgot Password</h1>
-        <div class="mt-6">
-            <p>Track your orders, checkout faster, and sync your favorites. Just enter your email and we’ll send you a special link that will sign you in instantly.</p>
-        </div>
+        <h1 class="text-[36px] md:text-[48px]"><?php echo $title ? $title : 'Forgot Password'; ?></h1>
+        <?php if($description){ ?>
+            <div class="mt-6">
+                <p><?php echo $description; ?></p>
+            </div>
+        <?php } ?>
     </div>
 </div>
 <div class="bg-gray py-14">

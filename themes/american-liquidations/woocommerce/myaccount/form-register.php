@@ -2,12 +2,19 @@
 defined( 'ABSPATH' ) || exit;
 // do_action( 'woocommerce_before_customer_login_form' );
 ?>
+<?php
+$my_account_page_id = get_option( 'woocommerce_myaccount_page_id' );
+$title = get_field( 'signup_title', $my_account_page_id );
+$description = get_field( 'signup_description', $my_account_page_id );
+?>
 <div class="page-description-header py-12">
     <div class="container">
-        <h1 class="text-[36px] md:text-[48px]">Sign Up</h1>
-        <div class="mt-6">
-            <p>Track your orders, checkout faster, and sync your favorites. Just enter your email and we’ll send you a special link that will sign you in instantly.</p>
-        </div>
+        <h1 class="text-[36px] md:text-[48px]"><?php echo $title ? $title : 'Sign Up'; ?></h1>
+        <?php if($description){ ?>
+            <div class="mt-6">
+                <p><?php echo $description; ?></p>
+            </div>
+        <?php } ?>
     </div>
 </div>
 <div class="bg-gray py-14">

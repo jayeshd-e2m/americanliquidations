@@ -6,12 +6,20 @@ if(is_wc_endpoint_url( 'register' )){
     wc_get_template( 'myaccount/form-register.php' );
 }else{
     ?>
+
+        <?php
+        $my_account_page_id = get_option( 'woocommerce_myaccount_page_id' );
+        $title = get_field( 'signin_title', $my_account_page_id );
+        $description = get_field( 'signin_description', $my_account_page_id );
+        ?>
         <div class="page-description-header py-12">
             <div class="container">
-                <h1 class="text-[36px] md:text-[48px]">Sign in</h1>
-                <div class="mt-6">
-                    <p>Track your orders, checkout faster, and sync your favorites. Just enter your email and we’ll send you a special link that will sign you in instantly.</p>
-                </div>
+                <h1 class="text-[36px] md:text-[48px]"><?php echo $title ? $title : 'Sign in'; ?></h1>
+                <?php if($description){ ?>
+                    <div class="mt-6">
+                        <p><?php echo $description; ?></p>
+                    </div>
+                <?php } ?>
             </div>
         </div>
 

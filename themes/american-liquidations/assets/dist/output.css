@@ -5611,6 +5611,15 @@ div#gform_1_validation_container .gform-icon {
   top: 17px;
 }
 
+.woocommerce-info {
+  border: 0;
+}
+
+.woocommerce-info:before {
+  --tw-text-opacity: 1;
+  color: rgb(251 4 4 / var(--tw-text-opacity, 1));
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
