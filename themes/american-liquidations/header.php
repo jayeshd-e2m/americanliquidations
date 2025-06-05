@@ -52,14 +52,15 @@
 	<nav aria-label="Primary navigation" class="mobile-header-nav bg-black shadow-md z-[1001] h-screen absolute left-0 top-0 w-[95%] max-w-[450px] overflow-y-auto">
 		<div class="block lg:hidden">
 			<div aria-label="Top promotional links" class="bg-primary space-y-6 p-6">
-				<a href="#" class="block text-white text-sm md:text-left font-bold">
-					Visit Our Pallet Outlet in Waterbury, CT!                    </a>
-
-				<a href="#" class="block text-white text-sm md:text-left font-bold">
-					Over 150 Pallets available                    </a>
-
-				<a href="#" class="block text-white text-sm md:text-left font-bold">
-					Open to the Public 7 Days per week</a>
+				<?php if(get_field('heading_1','option')){ ?>
+					<div class="block text-white text-sm md:text-left font-bold"><?php echo get_field('heading_1','option'); ?></div>
+				<?php } ?>
+				<?php if(get_field('heading_2','option')){ ?>
+					<div class="block text-white text-sm md:text-left font-bold"><?php echo get_field('heading_2','option'); ?></div>
+				<?php } ?>
+				<?php if(get_field('heading_3','option')){ ?>
+					<div class="block text-white text-sm md:text-left font-bold"><?php echo get_field('heading_3','option'); ?></div>
+				<?php } ?>
 
 				<a href="#" class="btn w-full !text-[12px]">Get Directions</a>
 			</div>
