@@ -1856,10 +1856,6 @@ video {
   gap: 2rem;
 }
 
-.gap-\[20px\] {
-  gap: 20px;
-}
-
 .gap-\[30px\] {
   gap: 30px;
 }
@@ -5536,6 +5532,42 @@ div#gform_1_validation_container .gform-icon {
   display: none;
 }
 
+.subscribe-cover input {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(208, 213, 221, 0.13);
+  -webkit-backdrop-filter: blur(3.1px);
+          backdrop-filter: blur(3.1px);
+  padding: 0 14px !important;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 14px !important;
+}
+
+.subscribe-cover .gform-footer .gform_button {
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
+  padding: 10px 40px 10px 25px !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(251 4 4 / var(--tw-bg-opacity, 1)) !important;
+  background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
+  background-repeat: no-repeat;
+  background-position: right 24px center;
+  background-size: 11px;
+  letter-spacing: 0.18em !important;
+}
+
+.subscribe-cover .gform-footer .gform_button:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 4 4 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.subscribe-cover .gform-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Responsive CSS */
 
 @media (max-width: 1350px){
@@ -5707,6 +5739,11 @@ div#gform_1_validation_container .gform-icon {
 
   .woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td{
     padding-left: 0 !important;
+  }
+
+  .subscribe-cover .gform-footer .gform_button{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
   }
 }
 
@@ -6362,16 +6399,6 @@ div#gform_1_validation_container .gform-icon {
 
   .lg\:text-\[48px\] {
     font-size: 48px;
-  }
-
-  .lg\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  .lg\:text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
   }
 }
 
