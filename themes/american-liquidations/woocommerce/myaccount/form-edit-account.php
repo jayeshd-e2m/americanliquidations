@@ -382,6 +382,12 @@ document.addEventListener('DOMContentLoaded', function () {
         blocks: [0, 3, 3, 4],
         numericOnly: true
     });
+
+	new Cleave('#phone', {
+        delimiters: ['(', ') ', '-'],
+        blocks: [0, 3, 3, 4],
+        numericOnly: true
+    });
 });
 
 </script>

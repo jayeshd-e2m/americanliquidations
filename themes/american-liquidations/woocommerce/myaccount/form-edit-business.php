@@ -223,7 +223,7 @@ $is_business_profile = $business_name || $ein || $business_phone || $business_ad
 				<h5 class="mb-4">Edit Business Phone Number</h5>
 				<form method="post" autocomplete="off">
 					<label>Phone Number</label>
-					<input type="text" name="business_edit_value" value="<?php echo esc_attr($business_phone); ?>" required>
+					<input type="tel" name="business_edit_value" value="<?php echo esc_attr($business_phone); ?>" required>
 					<input type="hidden" name="business_edit_field" value="business_phone">
 					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
 					<button type="submit">Save</button>
@@ -267,8 +267,43 @@ $is_business_profile = $business_name || $ein || $business_phone || $business_ad
 
 		<!-- Handle update, in PHP: After post, update that field and reload page -->
 
-	<?php else: ?>
+	<?php else:
 
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_business_profile']) && check_admin_referer('save_business_profile', 'business_profile_nonce')) {
+			// Sanitize and save text fields
+			$business_name     = sanitize_text_field($_POST['business_name']);
+			$business_ein      = sanitize_text_field($_POST['business_ein']);
+			$business_phone    = sanitize_text_field($_POST['business_phone']);
+			$business_address  = sanitize_text_field($_POST['business_address']);
+			$business_type     = sanitize_text_field($_POST['business_type']);
+
+			update_user_meta($user_id, 'business_name', $business_name);
+			update_user_meta($user_id, 'business_ein', $business_ein);
+			update_user_meta($user_id, 'business_phone', $business_phone);
+			update_user_meta($user_id, 'business_address', $business_address);
+			update_user_meta($user_id, 'business_type', $business_type);
+
+			// Handle optional file upload
+			if (isset($_FILES['tax_document']) && !empty($_FILES['tax_document']['name'])) {
+				$file = $_FILES['tax_document'];
+				$allowed_types = ['application/pdf', 'image/jpeg', 'image/png'];
+				if (in_array($file['type'], $allowed_types)) {
+					require_once(ABSPATH . "wp-admin/includes/file.php");
+					require_once(ABSPATH . "wp-admin/includes/media.php");
+					require_once(ABSPATH . "wp-admin/includes/image.php");
+
+					$attachment_id = media_handle_upload('tax_document', 0);
+					if (!is_wp_error($attachment_id)) {
+						update_user_meta($user_id, 'tax_document_id', $attachment_id);
+					}
+				}
+			}
+
+			// Redirect to profile section
+			wp_redirect( esc_url( add_query_arg('profile-updated','1', wc_get_account_endpoint_url('business-profile') ) ) );
+			exit;
+		}
+		?>
 		<!-- FORM MODE (no data yet, show fields to fill in) -->
 		 <div class="bg-white p-7 md:p-12 rounded-[15px] w-full custom-modal mx-auto">
 			<form enctype="multipart/form-data" method="POST" id="initial-business-data">
@@ -286,7 +321,7 @@ $is_business_profile = $business_name || $ein || $business_phone || $business_ad
 				</div>
 				<div class="form-group mb-3">
 					<label>Business Phone Number</label>
-					<input class="form-control w-full" type="text" name="business_phone"
+					<input class="form-control w-full" type="tel" name="business_phone"
 						value="<?php echo esc_attr($business_phone); ?>">
 				</div>
 				<div class="form-group mb-3">
