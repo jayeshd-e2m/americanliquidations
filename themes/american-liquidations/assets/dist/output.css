@@ -4132,6 +4132,20 @@ footer .btn-red:hover {
   color: black;
 }
 
+.footer-address {
+  padding-left: 28px;
+  background-image: url(../../../../../wp-content/uploads/2025/05/contact-location.svg);
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+.footer-phonenumber {
+  padding-left: 28px;
+  background-image: url(../../../../../wp-content/uploads/2025/05/contact-phone.svg);
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
 .acccount-tab-heading h5 {
   background: url(../../../../../wp-content/uploads/2025/05/account-arrow.svg);
   background-repeat: no-repeat;
