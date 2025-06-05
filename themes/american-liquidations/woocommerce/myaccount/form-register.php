@@ -25,43 +25,43 @@ defined( 'ABSPATH' ) || exit;
                         <div>
                             <label for="fullName" class="block text-sm font-semibold text-black/60 mb-1">Full Name</label>
                             <input type="text" id="fullName" name="full_name" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div>
                             <label for="email" class="block text-sm font-semibold text-black/60 mb-1">Email Address</label>
                             <input type="email" id="email" name="email" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div>
                             <label for="phone" class="block text-sm font-semibold text-black/60 mb-1">Phone Number</label>
                             <input type="tel" id="phone" name="phone" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div>
                             <label for="password" class="block text-sm font-semibold text-black/60 mb-1">Password</label>
                             <input type="password" id="password" name="password" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div>
                             <label for="confirmPassword" class="block text-sm font-semibold text-black/60 mb-1">Confirm Password</label>
                             <input type="password" id="confirmPassword" name="confirm_password" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div class="custom_radio">
                             <label class="block text-sm font-semibold text-black/60 mb-1">Are you a Business?</label>
                             <div class="flex gap-3 flex-wrap md:flex-nowrap">
                                 <label class="w-full flex items-center p-3 border border-[#080404]/5 rounded-lg cursor-pointer hover:border-primary transition duration-200" id="businessYesLabel">
-                                    <input type="radio" id="businessYes" name="is_business" value="yes" class="w-4 h-4 text-primary focus:ring-primary active:border-primary">
+                                    <input type="radio" id="businessYes" name="is_business" value="yes" class="w-4 h-4 text-primary focus:ring-black active:border-primary">
                                     <span class="text-sm text-black/60">Yes, we are a Business</span>
                                 </label>
                                 
                                 <label class="w-full flex items-center p-3 border border-[#080404]/5 rounded-lg cursor-pointer hover:border-primary transition duration-200" id="businessNoLabel">
-                                    <input type="radio" id="businessNo" name="is_business" value="no" class="w-4 h-4 text-primary focus:ring-primary border-[#080404]/5">
+                                    <input type="radio" id="businessNo" name="is_business" value="no" class="w-4 h-4 text-primary focus:ring-black border-[#080404]/5">
                                     <span class="text-sm text-black/60">No, I'm an Individual</span>
                                 </label>
                             </div>
@@ -88,31 +88,31 @@ defined( 'ABSPATH' ) || exit;
                         <div>
                             <label for="businessName" class="block text-sm font-semibold text-black/60 mb-1">Business Name</label>
                             <input type="text" id="businessName" name="business_name" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div>
                             <label for="businessEin" class="block text-sm font-semibold text-black/60 mb-1">Business Registration ID (BRID)</label>
                             <input type="text" id="businessEin" name="business_ein" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div>
                             <label for="businessPhone" class="block text-sm font-semibold text-black/60 mb-1">Business Phone Number</label>
                             <input type="tel" id="businessPhone" name="business_phone" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                         </div>
 
                         <div>
                             <label for="businessAddress" class="block text-sm font-semibold text-black/60 mb-1">Business Address</label>
                             <textarea id="businessAddress" name="business_address" rows="1" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200 resize-none"></textarea>
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200 resize-none"></textarea>
                         </div>
 
                         <div>
                             <label for="businessType" class="block text-sm font-semibold text-black/60 mb-1">Business Type</label>
                             <select id="businessType" name="business_type" required
-                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition duration-200">
+                                class="w-full px-3 py-2 border border-[#080404]/5 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-transparent transition duration-200">
                                 <option value="">Select Business Type</option>
                                 <option value="sole_proprietorship">Sole Proprietorship</option>
                                 <option value="partnership">Partnership</option>
@@ -164,7 +164,7 @@ defined( 'ABSPATH' ) || exit;
                 </div>
 
                 <!-- Submit button for individuals (hidden by default) -->
-                <button type="submit" id="submitIndividualBtn" class="hidden w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-2">
+                <button type="submit" id="submitIndividualBtn" class="hidden w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-1 focus:ring-black focus:ring-offset-2">
                     CREATE ACCOUNT
                 </button>
             </div>

@@ -30,10 +30,8 @@ function custom_single_product_add_to_cart_text( $text ) {
 }
 
 
-remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
-remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
-
-add_filter( 'woocommerce_show_page_title', '__return_false' );
-
-
+add_action( 'init', function() {
+	remove_action( 'woocommerce_shop_loop_header', 'woocommerce_product_taxonomy_archive_header', 10 );
+	remove_action( 'woocommerce_shop_loop_header', 'woocommerce_product_archive_description', 10 );
+});
 ?>

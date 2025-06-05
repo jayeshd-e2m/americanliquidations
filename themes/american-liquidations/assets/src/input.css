@@ -75,6 +75,14 @@ blockquote:before {
     left: 0;
 }
 
+select {
+    -webkit-appearance: none;
+    background-image: url(../../../../../wp-content/uploads/2025/05/filter-dropdown.svg);
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 10px;
+}
+
 /* Button */
 .btn,
 .shop-detail-content .added_to_cart {
@@ -887,8 +895,8 @@ label.gfield_label .gfield_required .gfield_required:after {
     font-size: 14px !important;
     @apply !text-black/60;
 }
-.contact-form-right input:focus,
-.contact-form-right textarea:focus{
+input:focus,
+textarea:focus{
     outline: 1px solid #080404;
 }
 
@@ -1602,6 +1610,15 @@ div#gform_1_validation_container .gform-icon {
     justify-content: center;
 }
 /* Responsive CSS */
+
+@media (min-width: 2000px){
+    .shop-sidebar{
+        width: 23% !important;
+    }
+    .shop-items-cover{
+        width: 77% !important;
+    }
+}
 @media (max-width: 1350px){
     .container{
         padding-right: 30px;
