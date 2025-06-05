@@ -44,7 +44,7 @@
 			<h2 class="text-white mb-5"><?php echo get_field('cta_title','option'); ?></h2>
 			<div class="max-w-[720px] mx-auto text-white/60"><?php echo get_field('cta_content','option'); ?></div>
 			<div class="subscribe-cover text-white/60 mt-5">
-				Subscribe form goes here
+				<?php echo do_shortcode('[gravityform id="3" title="false"]'); ?>
 			</div>
 		</div>
 	</div>
@@ -170,7 +170,7 @@
 			<?php
 				wp_nav_menu( array(
 					'menu'           => 'Footer: Bottom Menu',
-					'menu_class'     => 'flex flex-col md:flex-row md:items-center gap-5 items-start text-white/30 text-[12px] lg:text-sm font-normal mt-3 lg:mt-0',
+					'menu_class'     => 'flex flex-col md:flex-row md:items-center gap-5 items-start text-white/30 text-sm font-normal mt-3 lg:mt-0',
 					'container'      => false,
 				) );
 			?>

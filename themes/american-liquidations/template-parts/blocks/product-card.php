@@ -26,7 +26,7 @@ global $product;
 				<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt=""><?php echo get_field('location', $product->get_id()); ?></span>
 			<?php } ?>
 		</div>
-		<div class="font-medium mt-5 is-description text-sm lg:text-base !leading-[1.2em]">
+		<div class="font-medium mt-5 is-description text-base !leading-[1.2em]">
 			<?php
 				$description = wp_strip_all_tags($product->get_short_description());
 				$words = explode(' ', $description);
@@ -46,7 +46,7 @@ global $product;
                <span class="button-text">Add to cart</span>
 			   <span class="spinner hidden" aria-hidden="true"></span>
             </a>
-			<a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="text-[12px] uppercase tracking-[0.14em] font-bold text-black">
+			<a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="text-[12px] uppercase tracking-[0.14em] font-bold text-black font-barlow">
 			View details
 			</a>
 		</div>
