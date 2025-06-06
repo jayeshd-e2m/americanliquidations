@@ -15,8 +15,13 @@ $addresses = is_array($addresses) ? $addresses : [];
 					<div class="info-item-inner relative pr-[210px]">
 						<div class="flex items-center gap-6 mb-4">
 							<h4 class="text-[20px] text-primary/60 font-inter"><?= esc_html($address['address'] ?? '---') ?></h4>
-							<p class="text-sm font-bold">Business (Default)</p>
-							<p class="text-sm font-bold">Delivery (Default)</p>
+							<?php if (!empty($address['is_business_default'])): ?>
+								<p class="text-sm font-bold">Business (Default)</p>
+							<?php endif; ?>
+
+							<?php if (!empty($address['is_delivery_default'])): ?>
+								<p class="text-sm font-bold">Delivery (Default)</p>
+							<?php endif; ?>
 						</div>
 						<div class="flex gap-24 text-xs uppercase mb-8">
 							<p><?= esc_html($address['address'] ?? '---') ?>, <?= esc_html($address['city'] ?? '---') ?> <?= esc_html($address['zipcode'] ?? '---') ?> <?= esc_html($address['country'] ?? '---') ?></p>
@@ -49,6 +54,7 @@ $addresses = is_array($addresses) ? $addresses : [];
 		<h5 class="mb-4">Address Book</h5>
 		<form id="add-address-form">
 			<input type="hidden" name="index" value="">
+			<input type="hidden" name="action" value="">
 			<div class="mb-3">
 				<label class="text-xs">Address</label>
 				<input name="address" required><br>
@@ -90,6 +96,16 @@ $addresses = is_array($addresses) ? $addresses : [];
 					<option value="Yes">Yes</option>
 				</select>
 			</div>
+			<div class="mb-3 flex gap-6">
+				<label class="text-xs flex items-center gap-2">
+					<input type="checkbox" name="is_business_default" value="1">
+					Business (Default)
+				</label>
+				<label class="text-xs flex items-center gap-2">
+					<input type="checkbox" name="is_delivery_default" value="1">
+					Delivery (Default)
+				</label>
+			</div>
 			<button type="button" class="custom-modal-close">Cancel</button>
 			<button type="submit">Save Address</button>
 		</form>
@@ -99,7 +115,18 @@ $addresses = is_array($addresses) ? $addresses : [];
 <script>
 	document.querySelectorAll('.edit-section').forEach(function(btn){
 		btn.addEventListener('click', function() {
-			document.getElementById(btn.dataset.modal).style.display = 'flex';
+			const modalId = btn.dataset.modal;
+			const modal = document.getElementById(modalId);
+			const form = modal.querySelector('form');
+
+			// Clear all form fields
+			form.reset();
+
+			// Clear hidden index (in case editing was previously triggered)
+			form.index.value = '';
+
+			// Show modal
+			modal.style.display = 'flex';
 		});
 	});
 
@@ -155,6 +182,10 @@ $addresses = is_array($addresses) ? $addresses : [];
 			form.can_receive_truck.value = data.can_receive_truck || 'No';
 			form.index.value = btn.dataset.index;
 
+			form.is_business_default.checked = data.is_business_default === true || data.is_business_default === '1';
+			form.is_delivery_default.checked = data.is_delivery_default === true || data.is_delivery_default === '1';
+
+
 			document.getElementById('modal-address-book').style.display = 'flex';
 		});
 	});
@@ -186,5 +217,54 @@ $addresses = is_array($addresses) ? $addresses : [];
 			});
 		});
 	});
+
+
+	jQuery('#address-book-form').on('submit', function (e) {
+        e.preventDefault();
+
+        // Collect form data - adjust selectors to your inputs
+        var index = jQuery('#address-index').val() || '';
+        var address = jQuery('#address').val();
+        var city = jQuery('#city').val();
+        var zipcode = jQuery('#zipcode').val();
+        var country = jQuery('#country').val();
+        var zone = jQuery('#zone').val();
+        var storage_facility = jQuery('#storage_facility').val();
+        var liftgate = jQuery('#liftgate').val();
+        var can_receive_truck = jQuery('#can_receive_truck').val();
+        var isBusinessDefault = jQuery('#is_business_default').is(':checked');
+        var isDeliveryDefault = jQuery('#is_delivery_default').is(':checked');
+
+        jQuery.ajax({
+            url: ajax_object.ajax_url,
+            method: 'POST',
+            data: {
+                action: 'add_custom_address',
+                index: index,
+                address: address,
+                city: city,
+                zipcode: zipcode,
+                country: country,
+                zone: zone,
+                storage_facility: storage_facility,
+                liftgate: liftgate,
+                can_receive_truck: can_receive_truck,
+                is_business_default: isBusinessDefault ? 1 : 0,
+                is_delivery_default: isDeliveryDefault ? 1 : 0,
+                _ajax_nonce: ajax_object.nonce
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert('Address saved!');
+                    // Optionally reload or update your address list here
+                } else {
+                    alert('Error saving address.');
+                }
+            },
+            error: function () {
+                alert('AJAX error');
+            }
+        });
+    });
 
 </script>

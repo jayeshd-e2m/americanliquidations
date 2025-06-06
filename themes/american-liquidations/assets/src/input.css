@@ -660,11 +660,11 @@ body ul.psfw-social-icons{
     font-size: 14px;
 }
 
-.custom-modal form label input {
+.custom-modal form label input:not([type="checkbox"]) {
     height: 40px;
 }
 
-.custom-modal form input,
+.custom-modal form input:not([type="checkbox"]),
 .custom-modal form select {
     height: 40px;
     border: 1px solid hsl(0deg 33% 2% / 5%);
@@ -1594,13 +1594,14 @@ div#gform_1_validation_container .gform-icon {
     display: inline-block;
     vertical-align: top;
     width: auto;
-    padding: 10px 40px 10px 25px !important;
+    padding: 5px 40px 5px 25px !important;
     @apply !bg-primary;
     background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
     background-repeat: no-repeat;
     background-position: right 24px center;
     background-size: 11px;
     letter-spacing: 0.18em !important;
+    height: 40px !important;
 }
 
 .subscribe-cover .gform-footer .gform_button:hover{

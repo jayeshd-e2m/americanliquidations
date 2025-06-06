@@ -47,16 +47,22 @@ $business_name     = get_user_meta($user_id, 'business_name', true);
 $ein               = get_user_meta($user_id, 'business_ein', true);
 $business_phone    = get_user_meta($user_id, 'business_phone', true);
 $business_address  = get_user_meta($user_id, 'business_address', true);
+$business_city  = get_user_meta($user_id, 'business_city', true);
+$business_zipcode  = get_user_meta($user_id, 'business_zipcode', true);
+$business_country  = get_user_meta($user_id, 'business_country', true);
 $business_type     = get_user_meta($user_id, 'business_type', true);
 $tax_document_id   = get_user_meta($user_id, 'tax_document_id', true);
 $tax_document_url  = $tax_document_id ? wp_get_attachment_url($tax_document_id) : '';
 $tax_document_file = $tax_document_id ? get_post($tax_document_id)->post_title : '';
 
-// Helper: Is there any business profile?
 $is_business_profile = $business_name || $ein || $business_phone || $business_address || $business_type;
 
-// If form submitted, process as before (keep your existing form submission logic above...)
-// ...
+
+$address = get_user_meta($user_id, 'default_address', true);
+$city = get_user_meta($user_id, 'default_city', true);
+$zipcode = get_user_meta($user_id, 'default_zipcode', true);
+$country = get_user_meta($user_id, 'default_country', true);
+
 
 ?>
 
@@ -69,7 +75,8 @@ $is_business_profile = $business_name || $ein || $business_phone || $business_ad
             <div class="flex lg:items-center justify-between gap-5 flex-col lg:flex-row">
                 <!-- Replace with some dynamic business address or phone if you want -->
 				 <span class="text-black/60 text-xs max-w-[220px]">
-                	<?php echo $business_address ? esc_html($business_address) : "Address not provided yet."; ?><br>
+					<?php $display_address = trim("{$business_address}, {$business_city} {$business_zipcode} {$business_country}");?>
+                	<?php echo $business_address ? esc_html($display_address) : "Address not provided yet."; ?><br>
 				</span>
 				<button id="open-business-info-modal" class="text-primary/60 font-semibold text-sm hover:text-primary text-left">View or Update</button>
             </div>
@@ -80,7 +87,16 @@ $is_business_profile = $business_name || $ein || $business_phone || $business_ad
         <div>
             <div class="font-semibold text-xl mb-2">Address Book</div>
             <div class="flex lg:items-center justify-between gap-5 flex-col lg:flex-row">
-                <span class="text-black/60 text-xs max-w-[220px]">Lorem ipsum dolor sit amet consectetur. Justo cursus tortor id aliquam dapibus.</span>
+                <span class="text-black/60 text-xs max-w-[220px]">
+					<?php
+					if ($address || $city || $zipcode || $country) {
+						$full_address = trim("{$address}, {$city} {$zipcode} {$country}");
+						echo '<span class="text-black/60 text-xs max-w-[220px]">' . esc_html($full_address) . '</span>';
+					} else {
+						echo '<span class="text-black/60 text-xs max-w-[220px]">Address not provided yet.</span>';
+					}
+					?>
+				</span>
 				<a href="<?php echo site_url(); ?>/my-account/address-book/" class="text-primary/60 text-sm font-semibold hover:text-primary text-left">View or Update</a>
             </div>
         </div>
@@ -394,5 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modal-upload-tax-doc').style.display = 'flex';
     });
 })
+
+
 
 </script>
