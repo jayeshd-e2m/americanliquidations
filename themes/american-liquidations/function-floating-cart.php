@@ -14,7 +14,7 @@ function fetch_cart_items() {
     WC()->cart->calculate_totals(); // ✅ Ensure totals are recalculated
     $cart_items = WC()->cart->get_cart();
     ob_start();
-    echo "<div class='cart-item-cover max-h-[500px] overflow-y-auto'>";
+    echo "<div class='cart-item-cover'>";
     if (!empty($cart_items)) {
         $total_discount = 0;
         foreach ($cart_items as $key => $item) {

@@ -1674,6 +1674,11 @@ div#gform_1_validation_container .gform-icon {
 #backBtn:hover:before{
     opacity: 1;
 }
+
+
+.is-blur-bg {
+    overflow: hidden;
+}
 /* Responsive CSS */
 
 @media (min-width: 2000px){

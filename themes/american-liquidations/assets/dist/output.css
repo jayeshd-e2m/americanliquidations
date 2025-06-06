@@ -1103,10 +1103,6 @@ video {
   max-height: 24rem;
 }
 
-.max-h-\[500px\] {
-  max-height: 500px;
-}
-
 .\!w-4 {
   width: 1rem !important;
 }
@@ -1864,6 +1860,11 @@ video {
   gap: 30px;
 }
 
+.gap-x-10 {
+  -moz-column-gap: 2.5rem;
+       column-gap: 2.5rem;
+}
+
 .gap-x-24 {
   -moz-column-gap: 6rem;
        column-gap: 6rem;
@@ -1881,6 +1882,10 @@ video {
 
 .gap-y-12 {
   row-gap: 3rem;
+}
+
+.gap-y-4 {
+  row-gap: 1rem;
 }
 
 .gap-y-5 {
@@ -2921,10 +2926,6 @@ video {
 
 .pr-5 {
   padding-right: 1.25rem;
-}
-
-.pr-\[210px\] {
-  padding-right: 210px;
 }
 
 .pt-10 {
@@ -5667,6 +5668,10 @@ div#gform_1_validation_container .gform-icon {
   opacity: 1;
 }
 
+.is-blur-bg {
+  overflow: hidden;
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
@@ -6105,6 +6110,10 @@ div#gform_1_validation_container .gform-icon {
     margin-bottom: 4rem;
   }
 
+  .md\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
   .md\:mr-2 {
     margin-right: 0.5rem;
   }
@@ -6319,6 +6328,10 @@ div#gform_1_validation_container .gform-icon {
 
   .md\:pr-5 {
     padding-right: 1.25rem;
+  }
+
+  .md\:pr-\[210px\] {
+    padding-right: 210px;
   }
 
   .md\:pt-12 {
