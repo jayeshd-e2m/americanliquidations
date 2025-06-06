@@ -12,8 +12,8 @@ $addresses = is_array($addresses) ? $addresses : [];
 			<?php foreach ($addresses as $index => $address) : ?>
 
 				<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full mb-5" data-index="<?= $index ?>">
-					<div class="info-item-inner relative pr-[210px]">
-						<div class="flex items-center gap-6 mb-4">
+					<div class="info-item-inner relative md:pr-[210px]">
+						<div class="flex items-center gap-4 md:gap-6 mb-8 md:mb-4 flex-wrap lg:flex-nowrap">
 							<h4 class="text-[20px] text-primary/60 font-inter"><?= esc_html($address['address'] ?? '---') ?></h4>
 							<?php if (!empty($address['is_business_default'])): ?>
 								<p class="text-sm font-bold">Business (Default)</p>
@@ -23,20 +23,20 @@ $addresses = is_array($addresses) ? $addresses : [];
 								<p class="text-sm font-bold">Delivery (Default)</p>
 							<?php endif; ?>
 						</div>
-						<div class="flex gap-24 text-xs uppercase mb-8">
-							<p><?= esc_html($address['address'] ?? '---') ?>, <?= esc_html($address['city'] ?? '---') ?> <?= esc_html($address['zipcode'] ?? '---') ?> <?= esc_html($address['country'] ?? '---') ?></p>
-						</div>
-						<div class="flex text-xs gap-10">
-							<p><span class="text-black/40 mr-3">Zone: </span><?= esc_html($address['zone'] ?? '---') ?></p>
-							<p><span class="text-black/40 mr-3">Is a storage unit facility? </span><?= esc_html($address['storage_facility'] ?? '---') ?></p>
-							<p><span class="text-black/40 mr-3">Requires a liftgate? </span><?= esc_html($address['liftgate'] ?? '---') ?></p>
-							<p><span class="text-black/40 mr-3">Can receive 53 foot trucks? </span><?= esc_html($address['can_receive_truck'] ?? '---') ?></p>
-						</div>
-						<div class="flex items-center absolute top-0 right-0 gap-6">
+						<div class="flex items-center md:absolute top-0 right-0 gap-6 mb-8 md:mb-0">
 							<button class="edit-address text-black/60 hover:text-black text-sm font-bold" 
 							data-index="<?= $index ?>"
 							data-address='<?= json_encode($address) ?>'>Edit</button>
 							<button class="delete-address text-primary/60 hover:text-primary text-sm font-bold" data-index="<?= $index ?>">Delete this Address</button>
+						</div>
+						<div class="flex gap-24 text-xs uppercase mb-8">
+							<p><?= esc_html($address['address'] ?? '---') ?>, <?= esc_html($address['city'] ?? '---') ?> <?= esc_html($address['zipcode'] ?? '---') ?> <?= esc_html($address['country'] ?? '---') ?></p>
+						</div>
+						<div class="flex text-xs gap-y-4 gap-x-10 flex-wrap md:flex-nowrap">
+							<p><span class="text-black/40 mr-3">Zone: </span><?= esc_html($address['zone'] ?? '---') ?></p>
+							<p><span class="text-black/40 mr-3">Is a storage unit facility? </span><?= esc_html($address['storage_facility'] ?? '---') ?></p>
+							<p><span class="text-black/40 mr-3">Requires a liftgate? </span><?= esc_html($address['liftgate'] ?? '---') ?></p>
+							<p><span class="text-black/40 mr-3">Can receive 53 foot trucks? </span><?= esc_html($address['can_receive_truck'] ?? '---') ?></p>
 						</div>
 					</div>
 				</div>
