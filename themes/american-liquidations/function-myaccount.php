@@ -432,6 +432,13 @@ function add_custom_address() {
 		update_user_meta($user_id, 'business_ein', '');
 	}
 
+    if ($is_delivery_default) {
+            update_user_meta($user_id, 'default_address', $new_address['address']);
+            update_user_meta($user_id, 'default_city', $new_address['city']);
+            update_user_meta($user_id, 'default_zipcode', $new_address['zipcode']);
+            update_user_meta($user_id, 'default_country', $new_address['country']);
+	}
+
 	wp_send_json_success(['addresses' => $addresses]);
 }
 
@@ -515,25 +522,25 @@ function show_default_address_fields($user) {
     <?php
 }
 
-add_action('personal_options_update', 'save_default_address_fields');
-add_action('edit_user_profile_update', 'save_default_address_fields');
+// add_action('personal_options_update', 'save_default_address_fields');
+// add_action('edit_user_profile_update', 'save_default_address_fields');
 
-function save_default_address_fields($user_id) {
-    if (!current_user_can('edit_user', $user_id)) return false;
+// function save_default_address_fields($user_id) {
+//     if (!current_user_can('edit_user', $user_id)) return false;
 
-    if (isset($_POST['default_address'])) {
-        update_user_meta($user_id, 'default_address', sanitize_textarea_field($_POST['default_address']));
-    }
-    if (isset($_POST['default_city'])) {
-        update_user_meta($user_id, 'default_city', sanitize_text_field($_POST['default_city']));
-    }
-    if (isset($_POST['default_zipcode'])) {
-        update_user_meta($user_id, 'default_zipcode', sanitize_text_field($_POST['default_zipcode']));
-    }
-    if (isset($_POST['default_country'])) {
-        update_user_meta($user_id, 'default_country', sanitize_text_field($_POST['default_country']));
-    }
-}
+//     if (isset($_POST['default_address'])) {
+//         update_user_meta($user_id, 'default_address', sanitize_textarea_field($_POST['default_address']));
+//     }
+//     if (isset($_POST['default_city'])) {
+//         update_user_meta($user_id, 'default_city', sanitize_text_field($_POST['default_city']));
+//     }
+//     if (isset($_POST['default_zipcode'])) {
+//         update_user_meta($user_id, 'default_zipcode', sanitize_text_field($_POST['default_zipcode']));
+//     }
+//     if (isset($_POST['default_country'])) {
+//         update_user_meta($user_id, 'default_country', sanitize_text_field($_POST['default_country']));
+//     }
+// }
 
 
 

@@ -218,25 +218,25 @@ $addresses = is_array($addresses) ? $addresses : [];
 		});
 	});
 
+</script>
 
-	jQuery('#address-book-form').on('submit', function (e) {
+<script>
+jQuery(document).ready(function($) {
+    $('#your-submit-button-id').on('click', function(e) {
         e.preventDefault();
 
-        // Collect form data - adjust selectors to your inputs
-        var index = jQuery('#address-index').val() || '';
-        var address = jQuery('#address').val();
-        var city = jQuery('#city').val();
-        var zipcode = jQuery('#zipcode').val();
-        var country = jQuery('#country').val();
-        var zone = jQuery('#zone').val();
-        var storage_facility = jQuery('#storage_facility').val();
-        var liftgate = jQuery('#liftgate').val();
-        var can_receive_truck = jQuery('#can_receive_truck').val();
-        var isBusinessDefault = jQuery('#is_business_default').is(':checked');
-        var isDeliveryDefault = jQuery('#is_delivery_default').is(':checked');
+        var index = $('#hidden-index-field').val(); // If editing
+        var address = $('#input-address').val();
+        var city = $('#input-city').val();
+        var zipcode = $('#input-zipcode').val();
+        var country = $('#input-country').val();
+        var zone = $('#input-zone').val();
+        var storage_facility = $('#input-storage_facility').val();
+        var liftgate = $('#input-liftgate').val();
+        var can_receive_truck = $('#input-can_receive_truck').val();
 
-        jQuery.ajax({
-            url: ajax_object.ajax_url,
+        $.ajax({
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
             method: 'POST',
             data: {
                 action: 'add_custom_address',
@@ -249,22 +249,19 @@ $addresses = is_array($addresses) ? $addresses : [];
                 storage_facility: storage_facility,
                 liftgate: liftgate,
                 can_receive_truck: can_receive_truck,
-                is_business_default: isBusinessDefault ? 1 : 0,
-                is_delivery_default: isDeliveryDefault ? 1 : 0,
-                _ajax_nonce: ajax_object.nonce
+                is_business_default: $('#is_business_default').is(':checked'),
+                is_delivery_default: $('#is_delivery_default').is(':checked')
             },
-            success: function (response) {
+            success: function(response) {
                 if (response.success) {
-                    alert('Address saved!');
-                    // Optionally reload or update your address list here
+                    // Reload or update address list dynamically
+                    alert('Address saved successfully!');
+                    location.reload(); // or call your re-render logic
                 } else {
-                    alert('Error saving address.');
+                    alert('Something went wrong.');
                 }
-            },
-            error: function () {
-                alert('AJAX error');
             }
         });
     });
-
+});
 </script>
