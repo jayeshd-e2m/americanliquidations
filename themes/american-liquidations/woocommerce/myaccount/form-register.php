@@ -155,10 +155,7 @@ $description = get_field( 'signup_description', $my_account_page_id );
                     </div>
 
                     <div class="flex items-center justify-between pt-14 relative flex-wrap md:flex-nowrap">
-                        <button type="button" id="backBtn" 
-                            class="absolute max-w-[120px] left-0 right-0 mx-auto bottom-[-20px] md:bottom-[-35px] text-black/60 text-xs">
-                            ← BACK
-                        </button>
+                        <button type="button" id="backBtn" class="absolute max-w-[120px] left-0 right-0 mx-auto bottom-[-20px] md:bottom-[-35px] text-black/60 hover:text-black text-xs">Back to Step 1</button>
                         <button type="submit" id="submitBtn" 
                             class="btn btn-red btn-arrow hover:bg-black w-full md:w-auto">
                             Sign up

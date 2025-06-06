@@ -355,7 +355,7 @@ $country = get_user_meta($user_id, 'default_country', true);
 					<input type="file" name="tax_document" accept="application/pdf,image/*">
 				</div>
 				<?php wp_nonce_field('save_business_profile', 'business_profile_nonce'); ?>
-				<button type="submit" name="submit_business_profile" class="button btn-primary">Save</button>
+				<button type="submit" name="submit_business_profile" class="btn btn-primary !border-none">Save</button>
 			</form>
 		</div>
 	<?php endif; ?>

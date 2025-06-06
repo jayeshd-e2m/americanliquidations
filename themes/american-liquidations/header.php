@@ -32,9 +32,11 @@
             <h6 class="text-[21px]">Cart</h6>
             <a href="javascript:;" id="header-cart-close" class="header-cart-close w-4 h-4"><img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/close-primary.svg" alt=""></a>
         </div>
-        <div class="bg-black p-6 block text-white text-lg mb-10">
-            <p>Lorem ipsum dolor sit amet consectetur. Justo cursus tortor id aliquam dapibus.</p>
-        </div>
+		<?php if(get_field('floating_cart_content','option')){ ?>
+			<div class="bg-black p-6 block text-white text-lg mb-10">
+				<p><?php echo get_field('floating_cart_content','option'); ?></p>
+			</div>
+		<?php } ?>
         <div id="cart-items" class="p-6">
             <!-- Do not remove this div: Cart items will be inserted here via AJAX -->
         </div>

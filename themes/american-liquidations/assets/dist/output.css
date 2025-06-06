@@ -4654,6 +4654,13 @@ body ul.psfw-social-icons{
   margin-top: 20px;
 }
 
+.custom-modal button[type="submit"]:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 4 4 / var(--tw-bg-opacity, 1)) !important;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
 .contact-top-address {
   background-image: url(../../../../../wp-content/uploads/2025/05/contact-location.svg);
   background-repeat: no-repeat;
@@ -5067,6 +5074,12 @@ div#gform_1_validation_container .gform-icon {
   border-radius: 10px !important;
   background: #f5f5f5;
   font-size: 14px;
+  outline: none;
+}
+
+.woocommerce-notices-wrapper:focus,
+.woocommerce-error:focus{
+  outline: none;
 }
 
 .my-account-top {
@@ -5623,6 +5636,24 @@ div#gform_1_validation_container .gform-icon {
   color: rgb(251 4 4 / var(--tw-text-opacity, 1));
 }
 
+#backBtn:before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  background: url(../../../../../wp-content/uploads/2025/05/filter-dropdown.svg);
+  position: absolute;
+  top: 4px;
+  left: 0;
+  background-size: 8px;
+  background-repeat: no-repeat;
+  transform: rotate(90deg);
+  opacity: 0.6;
+}
+
+#backBtn:hover:before{
+  opacity: 1;
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
@@ -5809,6 +5840,11 @@ div#gform_1_validation_container .gform-icon {
   .subscribe-cover .gform-footer .gform_button{
     padding-top: 5px !important;
     padding-bottom: 5px !important;
+  }
+
+  .cta-inner h2 span {
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 
