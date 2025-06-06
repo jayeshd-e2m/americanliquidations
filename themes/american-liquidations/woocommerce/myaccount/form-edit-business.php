@@ -19,7 +19,7 @@ if (
         $attachment_id = media_handle_upload('tax_document', 0);
         if (!is_wp_error($attachment_id)) {
             update_user_meta($user_id, 'tax_document_id', $attachment_id);
-            wp_redirect( esc_url( add_query_arg('profile-updated','1', wc_get_account_endpoint_url('profile-updated') ) ) );
+            wp_redirect( esc_url( add_query_arg('profile-updated','1', wc_get_account_endpoint_url('business-profile') ) ) );
             exit;
         }
     }
