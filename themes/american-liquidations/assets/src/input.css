@@ -675,6 +675,11 @@ body ul.psfw-social-icons{
     width: 100%;
 }
 
+.custom-modal form input[type="file"]{
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
 .custom-modal-close {
     position: absolute;
     top: 0;
@@ -1337,7 +1342,7 @@ div#gform_1_validation_container .gform-icon {
 .status-completed span {
     padding: 6px 20px;
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 600;
     width: 145px;
     border-radius: 30px;
     @apply text-black/60;
@@ -1816,6 +1821,7 @@ div#gform_1_validation_container .gform-icon {
     }
     .woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td{
         padding-left: 0 !important;
+        padding-right: 20px !important;
     }
     .subscribe-cover .gform-footer .gform_button{
         padding-top: 5px !important;

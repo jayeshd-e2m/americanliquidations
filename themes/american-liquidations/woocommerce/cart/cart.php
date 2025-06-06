@@ -23,7 +23,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 <div class="page-description-header py-12">
     <div class="container">
-        <h1 class="text-[36px] md:text-[48px]">Cart</h1>
+        <h1 class="text-[36px] md:text-[44px] lg:text-[48px]">Cart</h1>
         <div class="mt-6">
             <p>Lorem ipsum dolor sit amet consectetur. Justo cursus tortor id aliquam dapibus ipsum fermentum massa sit. Faucibus venenatis etiam elit eleifend. Vitae imperdiet.</p>
         </div>

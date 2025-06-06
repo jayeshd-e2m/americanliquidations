@@ -30,9 +30,9 @@ if ($term && $term->slug === 'truckloads') {
     <div class="container">
         <div class="max-w-[710px]">
 			<?php if(get_field('category_title','product_cat_' . $term->term_id)){ ?>
-            	<h1 class="text-[36px] md:text-[48px]"><?php echo get_field('category_title','product_cat_' . $term->term_id); ?></h1>
+            	<h1 class="text-[36px] md:text-[44px] lg:text-[48px]"><?php echo get_field('category_title','product_cat_' . $term->term_id); ?></h1>
 			<?php }else{ ?>
-				<h1 class="text-[36px] md:text-[48px]"><?php echo esc_html( $term->name ); ?></h1>
+				<h1 class="text-[36px] md:text-[44px] lg:text-[48px]"><?php echo esc_html( $term->name ); ?></h1>
 			<?php } ?>
             <?php if ( term_description() ) : ?>
 				<div class="mt-6">

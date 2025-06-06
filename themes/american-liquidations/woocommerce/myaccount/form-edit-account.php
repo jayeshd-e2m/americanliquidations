@@ -109,7 +109,7 @@ $current_user = wp_get_current_user();
 		?>
 		<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full mt-5">
 			<div class="info-item-inner flex items-center pr-10">
-				<div class="section-label text-[20px] font-bold">
+				<div class="section-label text-[18px] md:text-[20px] font-bold">
 					Two Factor Authentication
 				</div>
 				<div>
@@ -123,7 +123,7 @@ $current_user = wp_get_current_user();
 					</button>
 				</div>
 			</div>
-			<p class="mt-5 md:mt-10">We’ll send you a code at your registered phone number everytime you log in.</p>
+			<p class="mt-5 md:mt-10 text-sm font-normal">We’ll send you a code at your registered phone number everytime you log in.</p>
 		</div>
 
 	</div>

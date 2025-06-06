@@ -47,7 +47,7 @@ function myaccount_orders_custom_table($orders, $wp_button_class = '') {
     <table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table my_account_orders account-orders-table">
         <thead>
             <tr>
-                <th class="min-w-[150px]">Order Info</th>
+                <th class="min-w-[240px]">Order Info</th>
                 <th class="text-center whitespace-nowrap"># Tracking</th>
                 <th class="text-center">Status</th>
                 <th class="min-w-[100px] whitespace-nowrap"># Order ID</th>
@@ -94,7 +94,7 @@ function myaccount_orders_custom_table($orders, $wp_button_class = '') {
                     <!-- # Order ID -->
                     <td class="text-center lg:text-left">#<?php echo esc_html( $order->get_order_number() ); ?></td>
                     <!-- Date -->
-                    <td>
+                    <td class="uppercase whitespace-nowrap">
                         <?php
                         echo esc_html( wc_format_datetime( $order->get_date_created() ) );
                         ?>

@@ -71,7 +71,7 @@ $country = get_user_meta($user_id, 'default_country', true);
     <!-- General/Business Address Info Card -->
     <div class="w-full bg-white rounded-[20px] p-10 flex flex-col justify-between flex-wrap md:flex-nowrap">
         <div>
-            <div class="font-semibold text-xl mb-2">General Business Info</div>
+            <div class="font-bold text-xl mb-2">General Business Info</div>
             <div class="flex lg:items-center justify-between gap-5 flex-col lg:flex-row">
                 <!-- Replace with some dynamic business address or phone if you want -->
 				 <span class="text-black/60 text-xs max-w-[220px]">
@@ -85,7 +85,7 @@ $country = get_user_meta($user_id, 'default_country', true);
     <!-- Address Book Card -->
     <div class="w-full bg-white rounded-[20px] p-10 flex flex-col justify-between flex-wrap md:flex-nowrap">
         <div>
-            <div class="font-semibold text-xl mb-2">Address Book</div>
+            <div class="font-bold text-xl mb-2">Address Book</div>
             <div class="flex lg:items-center justify-between gap-5 flex-col lg:flex-row">
                 <span class="text-black/60 text-xs max-w-[220px]">
 					<?php

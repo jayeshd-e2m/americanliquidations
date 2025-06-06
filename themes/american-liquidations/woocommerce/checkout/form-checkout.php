@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="page-description-header py-12 bg-gray">
     <div class="container">
-        <h1 class="text-[36px] md:text-[48px]">Checkout</h1>
+        <h1 class="text-[36px] md:text-[44px] lg:text-[48px]">Checkout</h1>
     </div>
 </div>
 <div class="pt-14 md:pt-24 pb-0 md:pb-24">

@@ -87,7 +87,7 @@ if ( is_wc_endpoint_url( 'view-order' ) && $order_id ) {
             <?php echo ' > <a href="'.site_url().'/my-account/orders/">Orders</a> > <strong> Order#'.esc_html( $order_id ).'</strong>'; ?>
         </p>
 		<div class="flex justify-between items-center flex-wrap md:flex-nowrap gap-6 md:gap-10">
-			<h1 class="text-[36px] md:text-[48px]">Order#<?php echo esc_html( $order_id ); ?></h1>
+			<h1 class="text-[36px] md:text-[44px] lg:text-[48px]">Order#<?php echo esc_html( $order_id ); ?></h1>
 		</div>
 	</div>
 </div>
@@ -104,7 +104,7 @@ if ( is_wc_endpoint_url( 'view-order' ) && $order_id ) {
                 <?php if($section_title != 'Account') { echo ' > <strong>' . esc_html($section_title).'</strong>'; } ?>
             </p>
             <div class="flex justify-between items-center flex-wrap md:flex-nowrap gap-6 md:gap-10">
-                <h1 class="text-[36px] md:text-[48px]"><?php echo esc_html($section_title); ?></h1>
+                <h1 class="text-[36px] md:text-[44px] lg:text-[48px]"><?php echo esc_html($section_title); ?></h1>
                 <?php
                     $current_user = wp_get_current_user();
                     $username     = $current_user->user_login;

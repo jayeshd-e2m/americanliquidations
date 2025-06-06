@@ -1183,16 +1183,16 @@ video {
   min-width: 100px;
 }
 
-.min-w-\[150px\] {
-  min-width: 150px;
-}
-
 .min-w-\[180px\] {
   min-width: 180px;
 }
 
 .min-w-\[220px\] {
   min-width: 220px;
+}
+
+.min-w-\[240px\] {
+  min-width: 240px;
 }
 
 .min-w-\[320px\] {
@@ -4624,6 +4624,11 @@ body ul.psfw-social-icons{
   width: 100%;
 }
 
+.custom-modal form input[type="file"]{
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
 .custom-modal-close {
   position: absolute;
   top: 0;
@@ -5323,7 +5328,7 @@ div#gform_1_validation_container .gform-icon {
 .status-completed span {
   padding: 6px 20px;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   width: 145px;
   border-radius: 30px;
   color: rgb(8 4 4 / 0.6);
@@ -5835,6 +5840,7 @@ div#gform_1_validation_container .gform-icon {
 
   .woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td{
     padding-left: 0 !important;
+    padding-right: 20px !important;
   }
 
   .subscribe-cover .gform-footer .gform_button{
@@ -6347,6 +6353,14 @@ div#gform_1_validation_container .gform-icon {
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .md\:text-\[20px\] {
+    font-size: 20px;
+  }
+
+  .md\:text-\[44px\] {
+    font-size: 44px;
   }
 
   .md\:text-black\/60 {

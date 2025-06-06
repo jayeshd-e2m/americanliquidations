@@ -13,7 +13,7 @@ get_header();
 <main id="primary" class="site-main">
 		<div class="page-description-header py-12">
 			<div class="container">
-				<h1 class="text-[36px] md:text-[48px]">404 Page</h1>
+				<h1 class="text-[36px] md:text-[44px] lg:text-[48px]">404 Page</h1>
 			</div>
 		</div>
 		<div class="py-16 bg-gray">

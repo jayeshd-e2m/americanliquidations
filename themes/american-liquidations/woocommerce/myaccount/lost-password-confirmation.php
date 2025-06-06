@@ -25,7 +25,7 @@ $description = get_field( 'forgot_description', $my_account_page_id );
 ?>
 <div class="page-description-header py-12">
     <div class="container">
-        <h1 class="text-[36px] md:text-[48px]"><?php echo $title ? $title : 'Forgot Password'; ?></h1>
+        <h1 class="text-[36px] md:text-[44px] lg:text-[48px]"><?php echo $title ? $title : 'Forgot Password'; ?></h1>
         <?php if($description){ ?>
             <div class="mt-6">
                 <p><?php echo $description; ?></p>

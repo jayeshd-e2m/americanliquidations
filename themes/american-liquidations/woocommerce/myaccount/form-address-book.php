@@ -33,10 +33,10 @@ $addresses = is_array($addresses) ? $addresses : [];
 							<p><span class="text-black/40 mr-3">Can receive 53 foot trucks? </span><?= esc_html($address['can_receive_truck'] ?? '---') ?></p>
 						</div>
 						<div class="flex items-center absolute top-0 right-0 gap-6">
-							<button class="edit-address text-black/60 hover:text-black text-sm font-semibold" 
+							<button class="edit-address text-black/60 hover:text-black text-sm font-bold" 
 							data-index="<?= $index ?>"
 							data-address='<?= json_encode($address) ?>'>Edit</button>
-							<button class="delete-address text-primary/60 hover:text-primary text-sm font-semibold" data-index="<?= $index ?>">Delete this Address</button>
+							<button class="delete-address text-primary/60 hover:text-primary text-sm font-bold" data-index="<?= $index ?>">Delete this Address</button>
 						</div>
 					</div>
 				</div>
