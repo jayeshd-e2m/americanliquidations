@@ -5325,7 +5325,11 @@ div#gform_1_validation_container .gform-icon {
 
 .status-processing span,
 .status-pending span,
-.status-completed span {
+.status-completed span,
+.status-cancelled span,
+.status-failed span,
+.status-refunded span,
+.status-on-hold span{
   padding: 6px 20px;
   font-size: 10px;
   font-weight: 600;
@@ -5337,12 +5341,16 @@ div#gform_1_validation_container .gform-icon {
   text-align: center;
 }
 
-.status-pending span {
+.status-pending span,
+.status-cancelled span,
+.status-failed span,
+.status-on-hold span {
   color: rgb(251 4 4 / 0.6);
   background-color: rgb(251 4 4 / 0.08);
 }
 
-.status-completed span {
+.status-completed span,
+.status-refunded span {
   color: rgb(0 135 22 / 0.6);
   background-color: rgb(0 135 22 / 0.08);
 }
@@ -6329,6 +6337,10 @@ div#gform_1_validation_container .gform-icon {
     font-size: 12px;
   }
 
+  .md\:text-\[20px\] {
+    font-size: 20px;
+  }
+
   .md\:text-\[24px\] {
     font-size: 24px;
   }
@@ -6341,8 +6353,8 @@ div#gform_1_validation_container .gform-icon {
     font-size: 42px;
   }
 
-  .md\:text-\[48px\] {
-    font-size: 48px;
+  .md\:text-\[44px\] {
+    font-size: 44px;
   }
 
   .md\:text-base {
@@ -6353,14 +6365,6 @@ div#gform_1_validation_container .gform-icon {
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
-  }
-
-  .md\:text-\[20px\] {
-    font-size: 20px;
-  }
-
-  .md\:text-\[44px\] {
-    font-size: 44px;
   }
 
   .md\:text-black\/60 {

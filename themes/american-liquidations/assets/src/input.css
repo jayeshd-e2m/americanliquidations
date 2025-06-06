@@ -1339,7 +1339,11 @@ div#gform_1_validation_container .gform-icon {
 
 .status-processing span,
 .status-pending span,
-.status-completed span {
+.status-completed span,
+.status-cancelled span,
+.status-failed span,
+.status-refunded span,
+.status-on-hold span{
     padding: 6px 20px;
     font-size: 10px;
     font-weight: 600;
@@ -1351,12 +1355,16 @@ div#gform_1_validation_container .gform-icon {
     text-align: center;
 }
 
-.status-pending span{
+.status-pending span,
+.status-cancelled span,
+.status-failed span,
+.status-on-hold span{
     @apply text-primary/60;
     @apply bg-primary/[0.08];
 }
 
-.status-completed span{
+.status-completed span,
+.status-refunded span{
     @apply text-[#008716]/60;
     @apply bg-[#008716]/[0.08];
 }
