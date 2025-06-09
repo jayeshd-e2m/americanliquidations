@@ -165,6 +165,7 @@ function my_show_business_profile_fields($user) {
     $business_ein     = get_user_meta($user->ID, 'business_ein', true);
     $business_phone   = get_user_meta($user->ID, 'business_phone', true);
     $business_address = get_user_meta($user->ID, 'business_address', true);
+    $business_address_2 = get_user_meta($user->ID, 'business_address_2', true);
     $business_city     = get_user_meta($user->ID, 'business_city', true);
     $business_zipcode  = get_user_meta($user->ID, 'business_zipcode', true);
     $business_country  = get_user_meta($user->ID, 'business_country', true);
@@ -193,9 +194,15 @@ function my_show_business_profile_fields($user) {
             </td>
         </tr>
         <tr>
-            <th><label for="business_address">Business Address</label></th>
+            <th><label for="business_address">Business Address Line 1</label></th>
             <td>
-                <textarea name="business_address" id="business_address" class="regular-text" rows="3"><?php echo esc_textarea($business_address); ?></textarea><br />
+                <input name="business_address" id="business_address" class="regular-text" rows="3" value="<?php echo esc_textarea($business_address); ?>" /><br />
+            </td>
+        </tr>
+        <tr>
+            <th><label for="business_address">Business Address Line 2</label></th>
+            <td>
+                <input name="business_address" id="business_address_2" class="regular-text" rows="3" value="<?php echo esc_textarea($business_address_2); ?>" /><br />
             </td>
         </tr>
         <tr>
@@ -287,6 +294,7 @@ function my_save_business_profile_fields($user_id) {
     update_user_meta($user_id, 'business_ein', sanitize_text_field($_POST['business_ein']));
     update_user_meta($user_id, 'business_phone', sanitize_text_field($_POST['business_phone']));
     update_user_meta($user_id, 'business_address', sanitize_textarea_field($_POST['business_address']));
+    update_user_meta($user_id, 'business_address_2', sanitize_textarea_field($_POST['business_address_2']));
     update_user_meta($user_id, 'business_city', sanitize_text_field($_POST['business_city']));
     update_user_meta($user_id, 'business_zipcode', sanitize_text_field($_POST['business_zipcode']));
     update_user_meta($user_id, 'business_country', sanitize_text_field($_POST['business_country']));
@@ -456,6 +464,7 @@ function add_custom_address() {
         // print_r($new_address);
 		update_user_meta($user_id, 'business_name', $new_address['address']);
 		update_user_meta($user_id, 'business_address', $new_address['address']);
+        update_user_meta($user_id, 'business_address_2', $new_address['address_2']);
         update_user_meta($user_id, 'business_city', $new_address['city']);
         update_user_meta($user_id, 'business_zipcode', $new_address['zipcode']);
         update_user_meta($user_id, 'business_country', $new_address['country']);

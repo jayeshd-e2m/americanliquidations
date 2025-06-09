@@ -47,9 +47,11 @@ $business_name     = get_user_meta($user_id, 'business_name', true);
 $ein               = get_user_meta($user_id, 'business_ein', true);
 $business_phone    = get_user_meta($user_id, 'business_phone', true);
 $business_address  = get_user_meta($user_id, 'business_address', true);
+$business_address_2  = get_user_meta($user_id, 'business_address_2', true);
 $business_city  = get_user_meta($user_id, 'business_city', true);
 $business_zipcode  = get_user_meta($user_id, 'business_zipcode', true);
 $business_country  = get_user_meta($user_id, 'business_country', true);
+$business_state  = get_user_meta($user_id, 'business_state', true);
 $business_type     = get_user_meta($user_id, 'business_type', true);
 $tax_document_id   = get_user_meta($user_id, 'tax_document_id', true);
 $tax_document_url  = $tax_document_id ? wp_get_attachment_url($tax_document_id) : '';
@@ -87,7 +89,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
             <div class="flex lg:items-center justify-between gap-5 flex-col lg:flex-row">
                 <!-- Replace with some dynamic business address or phone if you want -->
 				 <span class="text-black/60 text-xs max-w-[220px]">
-					<?php $display_address = trim("{$business_address}, {$business_city} {$business_zipcode} {$full_country}");?>
+					<?php $display_address = trim("{$business_address}, {$business_address_2}, {$business_city} {$business_zipcode} {$full_country}");?>
                 	<?php echo $business_address ? esc_html($display_address) : "Address not provided yet."; ?><br>
 				</span>
 				<button id="open-business-info-modal" class="text-primary/60 font-semibold text-sm hover:text-primary text-left">View or Update</button>
@@ -163,7 +165,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 					<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Business Address</div>
 					<div class="flex gap-24">
 						<div class="text-sm">
-							<?php echo esc_html($business_address); ?>
+							<?php echo esc_html($business_address); ?> <?php echo esc_html($business_city); ?> <?php echo esc_html($business_zipcode); ?> <?php echo esc_html($business_state); ?> <?php echo esc_html($business_country); ?>
 						</div>
 					</div>
 					<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-address">Edit</button>
@@ -262,13 +264,55 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 
 	
 		<!-- Address Modal -->
+		<?php
+		$wc_countries = new WC_Countries();
+		$countries = $wc_countries->get_countries();
+		$states    = $wc_countries->get_states();
+		?>
 		<div id="modal-business-address" class="custom-modal-overlay" style="display:none;">
 			<div class="custom-modal">
 				<h5 class="mb-4">Edit Business Address</h5>
 				<form method="post" autocomplete="off">
-					<label>Address</label>
-					<input type="text" name="business_edit_value" value="<?php echo esc_attr($business_address); ?>" required>
-					<input type="hidden" name="business_edit_field" value="business_address">
+					<div class="form-group mb-3">
+						<label>Address</label>
+						<input type="text" name="business_edit_value" value="<?php echo esc_attr($business_address); ?>" required>
+						<input type="hidden" name="business_edit_field" value="business_address">
+					</div>
+					<div class="form-group mb-3">
+						<label>City</label>
+						<input type="text" name="business_city" value="<?php echo esc_attr($business_city); ?>" required>
+					</div>
+
+					<div class="form-group mb-3">
+						<label>Zip Code</label>
+						<input type="text" name="business_zipcode" value="<?php echo esc_attr($business_zipcode); ?>" required>
+					</div>
+
+					<div class="form-group mb-3">
+						<label>Country</label>
+						<select name="business_country" id="business_country_select" required>
+							<option value="">Select Country</option>
+							<?php foreach ($countries as $code => $label): ?>
+								<option value="<?php echo esc_attr($code); ?>" <?php selected($business_country, $code); ?>>
+									<?php echo esc_html($label); ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+
+					<div class="form-group mb-3">
+						<label>State</label>
+						<select name="business_state" id="business_state_select" required>
+							<option value="">Select State</option>
+							<?php
+							if (!empty($business_country) && isset($states[$business_country])) {
+								foreach ($states[$business_country] as $code => $label) {
+									echo '<option value="' . esc_attr($code) . '" ' . selected($business_state, $code, false) . '>' . esc_html($label) . '</option>';
+								}
+							}
+							?>
+						</select>
+					</div>
 					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
 					<button type="submit">Save</button>
 					<button type="button" class="custom-modal-close">Cancel</button>
