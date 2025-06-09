@@ -108,7 +108,7 @@ $current_user = wp_get_current_user();
 		$user_has_2fa = get_user_meta($current_user->ID, 'user_2fa_enabled', true) === 'yes';
 		?>
 		<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full mt-5">
-			<div class="info-item-inner flex items-center pr-10">
+			<div class="info-item-inner flex items-center">
 				<div class="section-label text-[18px] md:text-[20px] font-bold">
 					Two Factor Authentication
 				</div>
