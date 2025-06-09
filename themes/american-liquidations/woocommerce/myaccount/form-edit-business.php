@@ -62,6 +62,18 @@ $address = get_user_meta($user_id, 'default_address', true);
 $city = get_user_meta($user_id, 'default_city', true);
 $zipcode = get_user_meta($user_id, 'default_zipcode', true);
 $country = get_user_meta($user_id, 'default_country', true);
+$state   = get_user_meta($user_id, 'default_state', true);
+
+$wc_countries = new WC_Countries();
+$countries = $wc_countries->get_countries();
+$states    = $wc_countries->get_states();
+
+// Resolve full country name
+$full_country = isset($countries[$country]) ? $countries[$country] : $country;
+
+// Resolve full state name based on country
+$full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $states[$country][$state] : $state;
+
 
 
 ?>
@@ -75,7 +87,7 @@ $country = get_user_meta($user_id, 'default_country', true);
             <div class="flex lg:items-center justify-between gap-5 flex-col lg:flex-row">
                 <!-- Replace with some dynamic business address or phone if you want -->
 				 <span class="text-black/60 text-xs max-w-[220px]">
-					<?php $display_address = trim("{$business_address}, {$business_city} {$business_zipcode} {$business_country}");?>
+					<?php $display_address = trim("{$business_address}, {$business_city} {$business_zipcode} {$full_country}");?>
                 	<?php echo $business_address ? esc_html($display_address) : "Address not provided yet."; ?><br>
 				</span>
 				<button id="open-business-info-modal" class="text-primary/60 font-semibold text-sm hover:text-primary text-left">View or Update</button>
@@ -90,7 +102,7 @@ $country = get_user_meta($user_id, 'default_country', true);
                 <span class="text-black/60 text-xs max-w-[220px]">
 					<?php
 					if ($address || $city || $zipcode || $country) {
-						$full_address = trim("{$address}, {$city} {$zipcode} {$country}");
+						$full_address = trim("{$address}, {$city} {$zipcode} {$full_state} {$full_country}");
 						echo '<span class="text-black/60 text-xs max-w-[220px]">' . esc_html($full_address) . '</span>';
 					} else {
 						echo '<span class="text-black/60 text-xs max-w-[220px]">Address not provided yet.</span>';

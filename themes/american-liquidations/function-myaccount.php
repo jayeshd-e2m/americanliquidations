@@ -210,10 +210,38 @@ function my_show_business_profile_fields($user) {
                 <input type="text" name="business_zipcode" id="business_zipcode" value="<?php echo esc_attr($business_zipcode); ?>" class="regular-text" /><br />
             </td>
         </tr>
+        <?php
+        $countries = WC()->countries->get_countries();
+        $states    = WC()->countries->get_states();
+        $business_state = get_user_meta($user->ID, 'business_state', true);
+        ?>
         <tr>
             <th><label for="business_country">Business Country</label></th>
             <td>
-                <input type="text" name="business_country" id="business_country" value="<?php echo esc_attr($business_country); ?>" class="regular-text" /><br />
+                <select name="business_country" id="business_country" class="wc-enhanced-select">
+                    <option value="">Select Country</option>
+                    <?php foreach ($countries as $code => $label): ?>
+                        <option value="<?php echo esc_attr($code); ?>" <?php selected($business_country, $code); ?>>
+                            <?php echo esc_html($label); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="business_state">Business State</label></th>
+            <td>
+                <select name="business_state" id="business_state">
+                    <option value="">Select State</option>
+                    <?php
+                    if (!empty($business_country) && isset($states[$business_country])) {
+                        foreach ($states[$business_country] as $state_code => $state_name) {
+                            echo '<option value="' . esc_attr($state_code) . '" ' . selected($business_state, $state_code, false) . '>' . esc_html($state_name) . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+                <p class="description">States will only load after saving the country.</p>
             </td>
         </tr>
         <tr>
@@ -262,6 +290,7 @@ function my_save_business_profile_fields($user_id) {
     update_user_meta($user_id, 'business_city', sanitize_text_field($_POST['business_city']));
     update_user_meta($user_id, 'business_zipcode', sanitize_text_field($_POST['business_zipcode']));
     update_user_meta($user_id, 'business_country', sanitize_text_field($_POST['business_country']));
+    update_user_meta($user_id, 'business_state', sanitize_text_field($_POST['business_state']));
     update_user_meta($user_id, 'business_type', sanitize_text_field($_POST['business_type']));
 
     // Handle file upload for admin
@@ -380,8 +409,10 @@ function add_custom_address() {
 	// Sanitize and prepare new address
 	$new_address = [
 		'address'             => sanitize_text_field($_POST['address'] ?? ''),
+        'address_2'             => sanitize_text_field($_POST['address_2'] ?? ''),
 		'city'                => sanitize_text_field($_POST['city'] ?? ''),
 		'zipcode'             => sanitize_text_field($_POST['zipcode'] ?? ''),
+        'state' => sanitize_text_field($_POST['zone'] ?? ''),
 		'country'             => sanitize_text_field($_POST['country'] ?? ''),
 		'zone'                => sanitize_text_field($_POST['zone'] ?? ''),
 		'storage_facility'    => sanitize_text_field($_POST['storage_facility'] ?? 'No'),
@@ -422,21 +453,37 @@ function add_custom_address() {
 
 	// ✅ If marked as default business address, also update business profile fields
 	if ($is_business_default) {
+        // print_r($new_address);
 		update_user_meta($user_id, 'business_name', $new_address['address']);
 		update_user_meta($user_id, 'business_address', $new_address['address']);
         update_user_meta($user_id, 'business_city', $new_address['city']);
         update_user_meta($user_id, 'business_zipcode', $new_address['zipcode']);
         update_user_meta($user_id, 'business_country', $new_address['country']);
-		update_user_meta($user_id, 'business_type', $new_address['zone']);
+        update_user_meta($user_id, 'business_state', $new_address['state']);
+		// update_user_meta($user_id, 'business_type', $new_address['type']);
 		update_user_meta($user_id, 'business_phone', '');
 		update_user_meta($user_id, 'business_ein', '');
 	}
 
     if ($is_delivery_default) {
             update_user_meta($user_id, 'default_address', $new_address['address']);
+            update_user_meta($user_id, 'default_address_2', $new_address['address_2']);
             update_user_meta($user_id, 'default_city', $new_address['city']);
             update_user_meta($user_id, 'default_zipcode', $new_address['zipcode']);
+            // update_user_meta($user_id, 'default_country', $new_address['country']);
             update_user_meta($user_id, 'default_country', $new_address['country']);
+            update_user_meta($user_id, 'default_state', $new_address['state']);
+
+
+
+            update_user_meta($user_id, 'billing_address_1', $new_address['address']);
+            update_user_meta($user_id, 'billing_address_2', $new_address['address_2']);
+            update_user_meta($user_id, 'billing_city', $new_address['city']);
+            update_user_meta($user_id, 'billing_postcode', $new_address['zipcode']);
+            update_user_meta($user_id, 'billing_country', $new_address['country']);
+
+            update_user_meta($user_id, 'billing_state', $new_address['state']);
+
 	}
 
 	wp_send_json_success(['addresses' => $addresses]);
@@ -496,15 +543,24 @@ add_action('edit_user_profile', 'show_default_address_fields');
 function show_default_address_fields($user) {
     // Get existing saved data
     $address = get_user_meta($user->ID, 'default_address', true);
+    $address_2 = get_user_meta($user->ID, 'default_address_2', true);
     $city = get_user_meta($user->ID, 'default_city', true);
     $zipcode = get_user_meta($user->ID, 'default_zipcode', true);
     $country = get_user_meta($user->ID, 'default_country', true);
+    $state = get_user_meta($user->ID, 'default_state', true);
+
+    $countries = WC()->countries->get_countries();
+    $states = WC()->countries->get_states();
     ?>
     <h3>Default Address book</h3>
     <table class="form-table">
         <tr>
-            <th><label for="default_address">Address</label></th>
+            <th><label for="default_address">Address Line 1</label></th>
             <td><textarea name="default_address" id="default_address" rows="3" cols="30"><?php echo esc_textarea($address); ?></textarea></td>
+        </tr>
+        <tr>
+            <th><label for="default_address">Address Line 2</label></th>
+            <td><textarea name="default_address_2" id="default_address" rows="3" cols="30"><?php echo esc_textarea($address_2); ?></textarea></td>
         </tr>
         <tr>
             <th><label for="default_city">City</label></th>
@@ -514,13 +570,59 @@ function show_default_address_fields($user) {
             <th><label for="default_zipcode">Zip Code</label></th>
             <td><input type="text" name="default_zipcode" id="default_zipcode" value="<?php echo esc_attr($zipcode); ?>" class="regular-text"></td>
         </tr>
+        <!-- <tr>
+            <th><label for="default_country">Country</label></th>
+            <td><input type="text" name="default_country" id="default_country" value="<?php //echo esc_attr($country); ?>" class="regular-text"></td>
+        </tr> -->
         <tr>
             <th><label for="default_country">Country</label></th>
-            <td><input type="text" name="default_country" id="default_country" value="<?php echo esc_attr($country); ?>" class="regular-text"></td>
+            <td>
+                <select name="default_country" id="default_country" class="wc-enhanced-select">
+                    <option value="">Select Country</option>
+                    <?php foreach ($countries as $code => $label): ?>
+                        <option value="<?php echo esc_attr($code); ?>" <?php selected($country, $code); ?>>
+                            <?php echo esc_html($label); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="default_state">State</label></th>
+            <td>
+                <select name="default_state" id="default_state">
+                    <option value="">Select State</option>
+                    <?php
+                    if (!empty($country) && isset($states[$country])) {
+                        foreach ($states[$country] as $code => $label) {
+                            echo '<option value="' . esc_attr($code) . '" ' . selected($state, $code, false) . '>' . esc_html($label) . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+                <p class="description">Change the country above to repopulate states after save.</p>
+            </td>
         </tr>
     </table>
     <?php
 }
+
+
+add_action('admin_footer-user-edit.php', 'init_select2_for_custom_country');
+add_action('admin_footer-profile.php', 'init_select2_for_custom_country');
+
+function init_select2_for_custom_country() {
+    ?>
+    <script>
+    jQuery(function($) {
+        if (typeof $.fn.select2 !== 'undefined') {
+            $('#default_country, #business_country').select2();
+        }
+    });
+    </script>
+    <?php
+}
+
 
 // add_action('personal_options_update', 'save_default_address_fields');
 // add_action('edit_user_profile_update', 'save_default_address_fields');

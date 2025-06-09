@@ -30,10 +30,21 @@ $addresses = is_array($addresses) ? $addresses : [];
 							<button class="delete-address text-primary/60 hover:text-primary text-sm font-bold" data-index="<?= $index ?>">Delete this Address</button>
 						</div>
 						<div class="flex gap-24 text-xs uppercase mb-8">
-							<p><?= esc_html($address['address'] ?? '---') ?>, <?= esc_html($address['city'] ?? '---') ?> <?= esc_html($address['zipcode'] ?? '---') ?> <?= esc_html($address['country'] ?? '---') ?></p>
+						<?php
+						$countries = WC()->countries->get_countries();
+						$country_code = $address['country'] ?? '';
+						$country_name = $countries[$country_code] ?? $country_code ?: '---';
+						?>
+							<p><?= esc_html($address['address'] ?? '---') ?> <?= esc_html($address['address_2'] ?? '---') ?>, <?= esc_html($address['city'] ?? '---') ?> <?= esc_html($address['zipcode'] ?? '---') ?> <?= esc_html($country_name ?? '---') ?></p>
 						</div>
 						<div class="flex text-xs gap-y-4 gap-x-10 flex-wrap md:flex-nowrap">
-							<p><span class="text-black/40 mr-3">Zone: </span><?= esc_html($address['zone'] ?? '---') ?></p>
+							<?php
+							$zone_code = $address['zone'] ?? '';
+							$country_code = $address['country'] ?? '';
+							$states = WC()->countries->get_states();
+							$zone_name = $states[$country_code][$zone_code] ?? $zone_code ?: '---';
+							?>
+							<p><span class="text-black/40 mr-3">Zone: </span><?= esc_html($zone_name) ?></p>
 							<p><span class="text-black/40 mr-3">Is a storage unit facility? </span><?= esc_html($address['storage_facility'] ?? '---') ?></p>
 							<p><span class="text-black/40 mr-3">Requires a liftgate? </span><?= esc_html($address['liftgate'] ?? '---') ?></p>
 							<p><span class="text-black/40 mr-3">Can receive 53 foot trucks? </span><?= esc_html($address['can_receive_truck'] ?? '---') ?></p>
@@ -56,8 +67,12 @@ $addresses = is_array($addresses) ? $addresses : [];
 			<input type="hidden" name="index" value="">
 			<input type="hidden" name="action" value="">
 			<div class="mb-3">
-				<label class="text-xs">Address</label>
+				<label class="text-xs">Address Line 1</label>
 				<input name="address" required><br>
+			</div>
+			<div class="mb-3">
+				<label class="text-xs">Address Line 2</label>
+				<input name="address_2" ><br>
 			</div>
 			<div class="mb-3">
 				<label class="text-xs">City</label>
@@ -69,11 +84,45 @@ $addresses = is_array($addresses) ? $addresses : [];
 			</div>
 			<div class="mb-3">
 				<label class="text-xs">Country</label>
-				<input name="country" required><br>
+				<select name="country" id="country-select" class="p-1 border border-[#0703030d] w-full text-xs rounded-[4px]" required></select>
+				<script>
+					const wc_countries = <?php echo json_encode(WC()->countries->get_countries()); ?>;
+
+					document.addEventListener('DOMContentLoaded', function () {
+						const countrySelect = document.getElementById('country-select');
+						if (countrySelect && typeof wc_countries === 'object') {
+							for (const [code, name] of Object.entries(wc_countries)) {
+								const option = document.createElement('option');
+								option.value = code;
+								option.textContent = name;
+								countrySelect.appendChild(option);
+							}
+						}
+					});
+
+				</script>
 			</div>
 			<div class="mb-3">
-				<label class="text-xs">Zone</label>
-				<input name="zone" required><br>
+				<label class="text-xs">State</label>
+				<select name="zone" id="state-select" class="p-1 border border-[#0703030d] w-full text-xs rounded-[4px]" required>
+					<option value="">Select a state</option>
+				</select>
+				<script>
+					const wc_states = <?php echo json_encode(WC()->countries->get_states()); ?>;
+					document.addEventListener('DOMContentLoaded', function () {
+					const countrySelect = document.getElementById('country-select');
+					const stateSelect = document.getElementById('state-select');
+
+					// On country change
+					if (countrySelect) {
+						populateStates(countrySelect.value, stateSelect);
+						countrySelect.addEventListener('change', function () {
+							populateStates(this.value, stateSelect);
+						});
+					}
+				});
+
+				</script>
 			</div>
 			<div class="mb-3">
 				<label class="text-xs">Is a storage unit facility?</label>
@@ -172,11 +221,24 @@ $addresses = is_array($addresses) ? $addresses : [];
 			const data = JSON.parse(btn.dataset.address);
 			const form = document.getElementById('add-address-form');
 
+			// Fill form fields
 			form.address.value = data.address || '';
+			form.address_2.value = data.address_2 || '';
 			form.city.value = data.city || '';
 			form.zipcode.value = data.zipcode || '';
-			form.country.value = data.country || '';
-			form.zone.value = data.zone || '';
+			form.querySelector('select[name="country"]').value = data.country || '';
+
+			// Populate states dynamically before setting zone
+			populateStates(data.country || '', form.zone);
+			setTimeout(() => {
+				form.zone.value = data.zone || '';
+			}, 50);
+
+			// Use small delay to ensure options are populated
+			setTimeout(() => {
+				form.querySelector('select[name="zone"]').value = data.zone || '';
+			}, 200); // 50ms is usually enough
+
 			form.storage_facility.value = data.storage_facility || 'No';
 			form.liftgate.value = data.liftgate || 'No';
 			form.can_receive_truck.value = data.can_receive_truck || 'No';
@@ -185,10 +247,12 @@ $addresses = is_array($addresses) ? $addresses : [];
 			form.is_business_default.checked = data.is_business_default === true || data.is_business_default === '1';
 			form.is_delivery_default.checked = data.is_delivery_default === true || data.is_delivery_default === '1';
 
-
 			document.getElementById('modal-address-book').style.display = 'flex';
 		});
+
+		
 	});
+
 
 
 
@@ -221,47 +285,70 @@ $addresses = is_array($addresses) ? $addresses : [];
 </script>
 
 <script>
-jQuery(document).ready(function($) {
-    $('#your-submit-button-id').on('click', function(e) {
-        e.preventDefault();
+// jQuery(document).ready(function($) {
+//     $('#your-submit-button-id').on('click', function(e) {
+//         e.preventDefault();
 
-        var index = $('#hidden-index-field').val(); // If editing
-        var address = $('#input-address').val();
-        var city = $('#input-city').val();
-        var zipcode = $('#input-zipcode').val();
-        var country = $('#input-country').val();
-        var zone = $('#input-zone').val();
-        var storage_facility = $('#input-storage_facility').val();
-        var liftgate = $('#input-liftgate').val();
-        var can_receive_truck = $('#input-can_receive_truck').val();
+//         var index = $('#hidden-index-field').val(); // If editing
+//         var address = $('#input-address').val();
+//         var city = $('#input-city').val();
+//         var zipcode = $('#input-zipcode').val();
+//         var country = $('#input-country').val();
+//         var zone = $('#input-zone').val();
+//         var storage_facility = $('#input-storage_facility').val();
+//         var liftgate = $('#input-liftgate').val();
+//         var can_receive_truck = $('#input-can_receive_truck').val();
 
-        $.ajax({
-            url: '<?php echo admin_url('admin-ajax.php'); ?>',
-            method: 'POST',
-            data: {
-                action: 'add_custom_address',
-                index: index,
-                address: address,
-                city: city,
-                zipcode: zipcode,
-                country: country,
-                zone: zone,
-                storage_facility: storage_facility,
-                liftgate: liftgate,
-                can_receive_truck: can_receive_truck,
-                is_business_default: $('#is_business_default').is(':checked'),
-                is_delivery_default: $('#is_delivery_default').is(':checked')
-            },
-            success: function(response) {
-                if (response.success) {
-                    // Reload or update address list dynamically
-                    alert('Address saved successfully!');
-                    location.reload(); // or call your re-render logic
-                } else {
-                    alert('Something went wrong.');
-                }
-            }
-        });
-    });
-});
+//         $.ajax({
+//             url: '<?php echo admin_url('admin-ajax.php'); ?>',
+//             method: 'POST',
+//             data: {
+//                 action: 'add_custom_address',
+//                 index: index,
+//                 address: address,
+//                 city: city,
+//                 zipcode: zipcode,
+//                 country: country,
+//                 zone: zone,
+//                 storage_facility: storage_facility,
+//                 liftgate: liftgate,
+//                 can_receive_truck: can_receive_truck,
+//                 is_business_default: $('#is_business_default').is(':checked'),
+//                 is_delivery_default: $('#is_delivery_default').is(':checked')
+//             },
+//             success: function(response) {
+//                 if (response.success) {
+//                     // Reload or update address list dynamically
+//                     alert('Address saved successfully!');
+//                     location.reload(); // or call your re-render logic
+//                 } else {
+//                     alert('Something went wrong.');
+//                 }
+//             }
+//         });
+//     });
+// });
+
+function populateStates(countryCode, stateSelect) {
+	stateSelect.innerHTML = '';
+
+	const states = wc_states[countryCode] || {};
+	const hasStates = Object.keys(states).length > 0;
+
+	if (!hasStates) {
+		stateSelect.innerHTML = '<option value="">N/A</option>';
+		stateSelect.disabled = true;
+		return;
+	}
+
+	stateSelect.disabled = false;
+	stateSelect.innerHTML = '<option value="">Select a state</option>';
+
+	Object.entries(states).forEach(([code, name]) => {
+		const option = document.createElement('option');
+		option.value = code;
+		option.textContent = name;
+		stateSelect.appendChild(option);
+	});
+}
 </script>
