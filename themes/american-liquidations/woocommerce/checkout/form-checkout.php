@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 				<!-- Left: Order Review -->
 				<div class="checkout-left w-full md:w-[45%] xl:w-[545px]">
 					<div class="checkout-left-items">
-						<h3 class="checkout-title mb-10 text-primary/60"><?php esc_html_e( 'Your Order', 'woocommerce' ); ?></h3>
+						<h3 class="checkout-title mb-10 text-primary/60 text-[24px] md:text-[32px]"><?php esc_html_e( 'Your Order', 'woocommerce' ); ?></h3>
 						<div class="custom-order-items">
 							<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
 							<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>

@@ -18,12 +18,14 @@ get_header();
 	<main id="primary" class="site-main">
 		<?php $blog_page_id = get_option('page_for_posts'); ?>
 
-		<?php if(get_field('display_section')){ ?>
+		<?php if(get_field('display_section',$blog_page_id)){ ?>
 			<?php if(get_field('pd_title',$blog_page_id ) || get_field('pd_description',$blog_page_id )){ ?>
 				<div class="page-description-header py-12">
 					<div class="container">
 						<?php if(get_field('pd_title',$blog_page_id )){ ?><h1 class="text-[36px] md:text-[44px] lg:text-[48px]"><?php echo get_field('pd_title',$blog_page_id ); ?></h1><?php } ?>
-						<?php if(get_field('pd_description',$blog_page_id )){ ?><?php echo get_field('pd_description',$blog_page_id ); ?><?php } ?>
+						<div class="mt-6">
+							<?php if(get_field('pd_description',$blog_page_id )){ ?><?php echo get_field('pd_description',$blog_page_id ); ?><?php } ?>
+						</div>
 					</div>
 				</div>
 			<?php } ?>
@@ -32,7 +34,7 @@ get_header();
 			<div class="container">
 			<?php
 				if ( have_posts() ) :
-					echo '<div class="grid grid-cols-2 lg:grid-cols-4 gap-5">';
+					echo '<div class="grid mobile-grid-1 grid-cols-2 lg:grid-cols-4 gap-5">';
 					/* Start the Loop */
 					while ( have_posts() ) :
 						the_post(); ?>
@@ -54,7 +56,7 @@ get_header();
 								$trimmed_content = wp_trim_words($content, 9, '...');
 								echo '<p class="text-base leading-[1.2em]">' . $trimmed_content . '</p>';
 								?>
-								<a href="<?php echo get_the_permalink(); ?>" class="btn" style="width: 100%;">Learn More</a>
+								<a href="<?php echo get_the_permalink(); ?>" class="btn !text-[12px]" style="width: 100%;">Learn More</a>
 							</div>
 						</div>
 

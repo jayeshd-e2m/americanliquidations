@@ -65,6 +65,9 @@ add_filter( 'woocommerce_checkout_fields', function ( $fields ) {
 
     $fields['billing']['billing_postcode']['label'] = '';
     $fields['billing']['billing_postcode']['placeholder'] = 'Zip Code';
+
+    $fields['billing']['billing_phone']['label'] = 'Phone Number';
+    $fields['billing']['billing_phone']['required'] = true;
     
 
     return $fields;
@@ -150,5 +153,22 @@ add_action( 'wp_footer', function() {
         <?php
     }
 });
+
+
+
+
+add_action('template_redirect', 'redirect_order_received_to_view_order');
+
+function redirect_order_received_to_view_order() {
+    if (is_order_received_page() && isset($_GET['key'])) {
+        $order_id = wc_get_order_id_by_order_key(sanitize_text_field($_GET['key']));
+        if ($order_id) {
+            wp_redirect(wc_get_endpoint_url('view-order', $order_id, wc_get_page_permalink('myaccount')));
+            exit;
+        }
+    }
+}
+
+
 
 ?>

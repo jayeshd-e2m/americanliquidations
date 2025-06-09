@@ -20,6 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
+<div class="container">
 <div class="woocommerce-order">
 
 	<?php
@@ -88,3 +89,5 @@ defined( 'ABSPATH' ) || exit;
 	<?php endif; ?>
 
 </div>
+</div>
+ 

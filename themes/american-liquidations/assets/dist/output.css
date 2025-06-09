@@ -2876,6 +2876,11 @@ video {
   padding-bottom: 90px;
 }
 
+.py-\[60px\] {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
 .pb-0 {
   padding-bottom: 0px;
 }
@@ -3112,6 +3117,10 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.\!text-\[36px\] {
+  font-size: 36px !important;
 }
 
 .\!font-bold {
@@ -5249,7 +5258,7 @@ div#gform_1_validation_container .gform-icon {
 }
 
 .checkout-card label {
-  color: #07030399;
+  color: rgb(8 4 4 / 0.6);
   font-weight: 600;
   font-size: 14px;
 }
@@ -5300,6 +5309,7 @@ div#gform_1_validation_container .gform-icon {
 
 .custom-checkout-columns .confirm-payment-btn {
   width: 100%;
+  font-size: 14px !important;
 }
 
 .woocommerce-checkout form .form-row-first, 
@@ -5528,7 +5538,7 @@ div#gform_1_validation_container .gform-icon {
 #gform_fields_2 input, 
 #gform_fields_2 select, 
 #gform_fields_2 textarea {
-  background: #fff !important;
+  background-color: #fff !important;
   border-radius: 8px !important;
   font-size: 14px !important;
 }
@@ -5693,6 +5703,93 @@ div#gform_1_validation_container .gform-icon {
   border-color: #0ca30c;
   color: #fff;
   background: #0ca30c;
+}
+
+.validate-phone .required {
+  --tw-text-opacity: 1 !important;
+  color: rgb(251 4 4 / var(--tw-text-opacity, 1)) !important;
+}
+
+.page-id-166 .page-description-header p {
+  max-width: 710px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.nav-links a {
+  --tw-bg-opacity: 1;
+  background-color: rgb(8 4 4 / var(--tw-bg-opacity, 1));
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-family: Barlow, sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+}
+
+.nav-next a:after{
+  content: "";
+  height: 14px;
+  background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
+  background-repeat: no-repeat;
+  background-size: 11px;
+  background-position: center;
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+  position: relative;
+  top: -1px;
+  margin-left: 5px;
+}
+
+.nav-previous a:before{
+  content: "";
+  height: 14px;
+  background-image: url(../../../../../wp-content/uploads/2025/05/arrow-r.svg);
+  background-repeat: no-repeat;
+  background-size: 11px;
+  background-position: center;
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+  position: relative;
+  top: -1px;
+  margin-right: 5px;
+  transform: rotate(180deg);
+}
+
+.nav-links a:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 4 4 / var(--tw-bg-opacity, 1));
+}
+
+.body-content .wp-block-heading {
+  font-weight: 600;
+}
+
+.body-content ul.wp-block-list li {
+  font-size: 18px;
+  display: list-item;
+  list-style: disc;
+  margin-bottom: 5px;
+}
+
+.body-content ul.wp-block-list, 
+.body-content ol.wp-block-list {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.body-content ol.wp-block-list li {
+  font-size: 18px;
+  list-style: auto;
+  margin-bottom: 5px;
 }
 
 /* Responsive CSS */
@@ -5872,6 +5969,7 @@ div#gform_1_validation_container .gform-icon {
 
   .gform_button{
     padding: 6px 20px !important;
+    height: 40px !important;
   }
 
   .woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td{
@@ -5923,6 +6021,10 @@ div#gform_1_validation_container .gform-icon {
   .cart-update-button {
     text-align: center;
     margin-top: 30px;
+  }
+
+  .nav-links a{
+    font-size: 11px;
   }
 }
 
@@ -6351,6 +6453,11 @@ div#gform_1_validation_container .gform-icon {
     padding-bottom: 2rem;
   }
 
+  .md\:py-\[110px\] {
+    padding-top: 110px;
+    padding-bottom: 110px;
+  }
+
   .md\:pb-24 {
     padding-bottom: 6rem;
   }
@@ -6407,6 +6514,10 @@ div#gform_1_validation_container .gform-icon {
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .md\:\!text-\[48px\] {
+    font-size: 48px !important;
   }
 
   .md\:text-black\/60 {

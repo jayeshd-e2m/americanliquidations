@@ -115,21 +115,52 @@ jQuery(document).ready(function($){
 	});
 
 	// Observe preview container AND file input changes
-	const observerTarget = container;
+	// const observerTarget = container;
 
-	const observer = new MutationObserver(() => {
-		const hasPreview = container.querySelector(".ginput_preview");
-		const fileValue = fileInput.value;
+	// const observer = new MutationObserver(() => {
+	// 	const hasPreview = container.querySelector(".ginput_preview");
+	// 	const fileValue = fileInput.value;
 
-		if (!hasPreview && !fileValue) {
-		uploadBox.textContent = "+ Upload a File";
-		}
-	});
+	// 	if (!hasPreview && !fileValue) {
+	// 	uploadBox.textContent = "+ Upload a File";
+	// 	}
+	// });
 
-	observer.observe(observerTarget, {
-		childList: true,
-		subtree: true,
-	});
+	// observer.observe(observerTarget, {
+	// 	childList: true,
+	// 	subtree: true,
+	// });
+
+	
+	
+	// setInterval(function(){
+	// 	jQuery('.ginput_container').each(function(){
+	// 		if(jQuery(this).find('.upload-box').length < 2){
+	// 			console.log('in');
+	// 			const fileInput = document.querySelector("#input_2_8");
+
+	// 			// if (!fileInput) return;
+
+	// 			const container = fileInput.parentNode;
+
+	// 			// Create and insert custom styled upload box
+	// 			const uploadBox = document.createElement("div");
+	// 			uploadBox.className = "upload-box";
+	// 			uploadBox.textContent = "+ Upload a File";
+	// 			container.insertBefore(uploadBox, fileInput);
+
+	// 			// Update box when file is selected
+	// 			fileInput.addEventListener("change", function () {
+	// 				if (fileInput.files.length > 0) {
+	// 				uploadBox.textContent = fileInput.files[0].name;
+	// 				} else {
+	// 				uploadBox.textContent = "+ Upload a File";
+	// 				}
+	// 			});
+	// 		}
+	// 	})
+	// },1000)
+	
 
 
 })
