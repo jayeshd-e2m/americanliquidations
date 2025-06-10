@@ -17,8 +17,8 @@ get_header();
 
 	<main id="primary" class="site-main">
 
-		<?php if(get_field('display_section')){ ?>
-		<div class="page-description-header py-12">
+		<?php if(get_field('display_section') && !is_cart()){ ?>
+		<div class="page-description-header py-12 zzz">
 			<div class="container">
 				<?php if(get_field('pd_title')){ ?><h1 class="text-[36px] md:text-[44px] lg:text-[48px]"><?php echo get_field('pd_title'); ?></h1><?php } ?>
 				<?php if(get_field('pd_description')){ ?>

@@ -167,7 +167,7 @@ select {
 }
 
 .btn-arrow.btn-small{
-    padding-right: 34px;
+    /* padding-right: 34px; */
     background-position: right 21px center;
     background-size: 9px;
 }
@@ -1665,7 +1665,7 @@ div#gform_1_validation_container .gform-icon {
     margin: 0;
 }
 
-.woocommerce-custom-account .woocommerce-notices-wrapper .woocommerce-message:before{
+.woocommerce-cart .woocommerce-notices-wrapper .woocommerce-message:before{
     top: 17px;
 }
 
@@ -1802,6 +1802,15 @@ div#gform_1_validation_container .gform-icon {
 .ginput_container_select select {
     padding-right: 25px !important;
     background-position: right 15px center;
+}
+
+.woocommerce-cart .product-remove a:hover {
+    background: transparent !important;
+}
+
+.wc-empty-cart-message .cart-empty.woocommerce-info {
+    background: #fff;
+    border-radius: 8px;
 }
 
 /* Responsive CSS */

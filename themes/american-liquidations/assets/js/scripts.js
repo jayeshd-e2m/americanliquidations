@@ -94,8 +94,9 @@ jQuery(document).ready(function($){
 
 	// Gravity form
 	function customFileUploadDesign(formId) {
+		console.log('inside');
 		const fileInput = document.querySelector("#input_2_8");
-		if (!fileInput) return;
+		// if (!fileInput) return;
 	
 		const container = fileInput.parentNode;
 	
@@ -108,24 +109,25 @@ jQuery(document).ready(function($){
 	
 		// Watch for deletion of the preview list (GF's delete button)
 		if (previewList) {
-			// If a preview list exists, set up a MutationObserver to watch for its removal
-			const observer = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					// If the previewList is removed, re-run the design
-					if (mutation.removedNodes) {
-						mutation.removedNodes.forEach(function(node){
-							if (node === previewList) {
-								// Call our UI function again
-								customFileUploadDesign(formId);
-							}
-						});
+			const observer = new MutationObserver(function (mutations) {
+				mutations.forEach(function (mutation) {
+					// If any children were removed (file preview was deleted)
+					if (mutation.type === "childList") {
+						// Check if the previewList is now empty
+						if (previewList.children.length === 0) {
+							// Remove previewList from DOM so it doesn't block rendering
+							previewList.remove();
+							// Re-render custom UI
+							customFileUploadDesign(formId);
+						}
 					}
 				});
 			});
-			observer.observe(container, { childList: true });
-	
-			// Hide file input (optional)
-			fileInput.style.display = 'none';
+		
+			observer.observe(previewList, { childList: true, subtree: false });
+		
+			// Hide file input while native preview exists
+			fileInput.style.display = "none";
 			return;
 		}
 	
@@ -155,8 +157,8 @@ jQuery(document).ready(function($){
 			fileBox.textContent = file.name;
 	
 			const deleteBtn = document.createElement('span');
-			deleteBtn.className = 'delete-file-btn';
-			deleteBtn.innerHTML = '🗑️';
+			deleteBtn.className = 'dashicons dashicons-trash';
+			deleteBtn.innerHTML = '';
 			deleteBtn.title = "Delete File";
 			deleteBtn.style.cursor = "pointer";
 			deleteBtn.style.marginLeft = "12px";
@@ -189,25 +191,14 @@ jQuery(document).ready(function($){
 	jQuery(document).on('gform_post_render', function(event, formId){
 		customFileUploadDesign(formId);
 	});
-	jQuery(document).on('click', '.gform_delete_file', function() {
-		// Get a reference to the specific field or container
-		var fieldContainer = jQuery(this).closest('.gfield'); // Adjust selector if needed
-	
-		// Poll until .ginput_preview_list no longer exists in this field
-		function waitForRemovePreview(listenTries) {
-			listenTries = listenTries || 0; // Prevent infinite loops
-			if (fieldContainer.find('.ginput_preview_list').length === 0) {
-				// Now trigger the custom upload UI restoration
-				customFileUploadDesign();
-			} else if (listenTries < 50) { // Give up after roughly 2.5 seconds
-				setTimeout(function() {
-					waitForRemovePreview(listenTries + 1);
-				}, 50);
-			}
-		}
-		waitForRemovePreview();
-	});
-	customFileUploadDesign();
+	// jQuery(document).on('click', '.gform_delete_file', function() {
+	// 	// jQuery(document).on('gform_post_render', function(event, formId){
+	// 	setTimeout(function(){
+	// 		customFileUploadDesign();
+	// 	},1000)
+	// 	// });
+	// });
+	//customFileUploadDesign();
 
 	// Observe preview container AND file input changes
 	// const observerTarget = container;

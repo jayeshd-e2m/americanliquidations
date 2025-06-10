@@ -17,20 +17,25 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
+<?php if(get_field('display_section')){ ?>
+<div class="page-description-header py-12">
+	<div class="container">
+		<?php if(get_field('pd_title')){ ?><h1 class="text-[36px] md:text-[44px] lg:text-[48px]"><?php echo get_field('pd_title'); ?></h1><?php } ?>
+		<?php if(get_field('pd_description')){ ?>
+			<div class="mt-6">
+				<p><?php if(get_field('pd_description')){ ?><?php echo get_field('pd_description'); ?><?php } ?></p>
+			</div>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>
 
 <?php
-do_action( 'woocommerce_before_cart' ); ?>
+ ?>
 
-<div class="page-description-header py-12">
-    <div class="container">
-        <h1 class="text-[36px] md:text-[44px] lg:text-[48px]">Cart</h1>
-        <div class="mt-6">
-            <p>Lorem ipsum dolor sit amet consectetur. Justo cursus tortor id aliquam dapibus ipsum fermentum massa sit. Faucibus venenatis etiam elit eleifend. Vitae imperdiet.</p>
-        </div>
-    </div>
-</div>
 <div class="bg-gray py-14">
 	<div class="container">
+		<?php do_action( 'woocommerce_before_cart' ); ?>
 		<form class="woocommerce-cart-form bg-white rounded-[15px]" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 			<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
