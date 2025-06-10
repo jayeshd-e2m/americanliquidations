@@ -24,7 +24,7 @@ get_header();
 			<div class="container relative">
 				<div class="max-w-[850px] space-y-5">
 					<h1 class="!text-[36px] md:!text-[48px] text-white"><?php the_title(); ?></h1>
-					<div class="flex gap-12 items-center text-lg text-primary font-barlow">
+					<div class="flex gap-12 items-center text-lg text-primary font-barlow font-medium">
 						<?php echo get_the_date(); ?>
 						<?php if(get_field('read_time',get_the_ID())){ ?>
 							<span class="font-barlow font-semibold text-lg text-primary"><?php echo get_field('read_time',get_the_ID()); ?>min read</span>
