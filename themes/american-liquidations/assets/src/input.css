@@ -1781,6 +1781,10 @@ div#gform_1_validation_container .gform-icon {
     font-weight: 400;
 }
 
+.body-content h4{
+    font-size: 24px;
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
@@ -1948,6 +1952,8 @@ div#gform_1_validation_container .gform-icon {
         display: inline-block;
         vertical-align: middle;
     }
+
+   
 }
 
 @media (max-width: 480px){
