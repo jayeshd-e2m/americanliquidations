@@ -25,7 +25,11 @@ $description = get_field( 'signup_description', $my_account_page_id );
                 <div id="step1" class="">
                     <div class="mb-12">
                         <div class="text-[18px] md:text-[24px] font-bold text-black mb-5 flex justify-between items-center font-barlow">Personal Information <span class="text-sm md:text-base font-medium text-black/40 font-inter">Step 1/2</span></div>
-                        <p class="text-gray-600 text-base">Lorem ipsum dolor sit amet consectetur. Justo cursus tortor id aliquam dapibus ipsum fermentum massa sit. Faucibus venenatis etiam elit eleifend. Vitae imperdiet..</p>
+                        <?php if(get_field('personal_information','option')){ ?>
+                            <p class="text-gray-600 text-base">
+                                <?php echo get_field('personal_information','option'); ?>
+                            </p>
+                        <?php } ?>
                     </div>
 
                     <div class="space-y-6">
@@ -88,7 +92,9 @@ $description = get_field( 'signup_description', $my_account_page_id );
                 <div id="step2" class="hidden">
                     <div class="mb-12">
                         <div class="text-[18px] md:text-[24px] font-bold text-black mb-3 flex justify-between items-center font-barlow">Business Information <span class="text-sm md:text-base font-medium text-black/40 font-inter">Step 2/2</span></div>
-                        <p class="text-gray-600 text-base">Lorem ipsum dolor sit amet consectetur. Justo cursus tortor id aliquam dapibus ipsum fermentum massa sit. Faucibus venenatis etiam elit eleifend. Vitae imperdiet..</p>
+                        <?php if(get_field('business_information','option')){ ?>
+                            <p class="text-gray-600 text-base"><?php echo get_field('business_information','option'); ?></p>
+                        <?php } ?>
                     </div>
 
                     <div class="space-y-6">
