@@ -93,8 +93,12 @@ $is_completed = $order->has_status( 'completed' );
 		</div>
 		<div class="mb-10">
 			<h5 class="text-[20px] text-black/60 mb-4 font-inter">Have question your order? </h5>
-			<p class="text-sm leading-[1.8em] font-normal">Contact us here: <br><strong><a href="mailto:email@domain.com"><u>email@domain.com</u></a>
-			<br><a href="tel:203-587-4132">203-587-4132</a></strong></p>
+			<?php if(get_field('order_email_address','option')){ ?>
+				<p class="text-sm leading-[1.8em] font-normal">Contact us here: <br><strong><a href="mailto:<?php echo get_field('order_email_address','option'); ?>"><u><?php echo get_field('order_email_address','option'); ?></u></a>
+			<?php } ?>
+			<?php if(get_field('order_phone_number','option')){ ?>
+				<br><a href="tel:<?php echo get_field('order_phone_number','option'); ?>"><?php echo get_field('order_phone_number','option'); ?></a></strong></p>
+			<?php } ?>
 		</div>
 		<div class="mb-0">
 			<h5 class="text-[20px] text-black/60 mb-4 font-inter">Payment method</h5>
