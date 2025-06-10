@@ -43,9 +43,9 @@ get_header();
 							<div class="blog-img pt-[70%] relative rounded-[15px] overflow-hidden">
 								<a href="<?php echo get_the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
 							</div>
-							<div class="blog-content px-5 pt-10 pb-7 space-y-7">
-								<h5><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></h5>
-								<div class="flex gap-4 items-center text-[#C8C8C8] text-sm justify-between">
+							<div class="blog-content px-5 pt-10 pb-7">
+								<h5 class="mb-3"><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></h5>
+								<div class="flex gap-4 items-center text-[#C8C8C8] text-sm justify-between mb-6">
 									<?php echo get_the_date(); ?>
 									<?php if(get_field('read_time')){ ?>
 										<span class="font-barlow font-semibold text-[12px]"><?php echo get_field('read_time'); ?>min read</span>
@@ -54,7 +54,7 @@ get_header();
 								<?php 
 								$content = get_the_content();
 								$trimmed_content = wp_trim_words($content, 9, '...');
-								echo '<p class="text-base leading-[1.2em]">' . $trimmed_content . '</p>';
+								echo '<p class="text-base leading-[1.2em] mb-6">' . $trimmed_content . '</p>';
 								?>
 								<a href="<?php echo get_the_permalink(); ?>" class="btn !text-[12px]" style="width: 100%;">Learn More</a>
 							</div>

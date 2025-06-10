@@ -2831,11 +2831,6 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-24 {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -2866,19 +2861,14 @@ video {
   padding-bottom: 10px;
 }
 
-.py-\[110px\] {
-  padding-top: 110px;
-  padding-bottom: 110px;
+.py-\[60px\] {
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .py-\[90px\] {
   padding-top: 90px;
   padding-bottom: 90px;
-}
-
-.py-\[60px\] {
-  padding-top: 60px;
-  padding-bottom: 60px;
 }
 
 .pb-0 {
@@ -3033,8 +3023,8 @@ video {
   font-size: 12px !important;
 }
 
-.\!text-\[48px\] {
-  font-size: 48px !important;
+.\!text-\[36px\] {
+  font-size: 36px !important;
 }
 
 .text-2xl {
@@ -3117,10 +3107,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.\!text-\[36px\] {
-  font-size: 36px !important;
 }
 
 .\!font-bold {
@@ -5792,6 +5778,10 @@ div#gform_1_validation_container .gform-icon {
   margin-bottom: 5px;
 }
 
+.body-content p {
+  font-weight: 400;
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
@@ -6482,6 +6472,10 @@ div#gform_1_validation_container .gform-icon {
     text-align: left;
   }
 
+  .md\:\!text-\[48px\] {
+    font-size: 48px !important;
+  }
+
   .md\:text-\[12px\] {
     font-size: 12px;
   }
@@ -6514,10 +6508,6 @@ div#gform_1_validation_container .gform-icon {
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
-  }
-
-  .md\:\!text-\[48px\] {
-    font-size: 48px !important;
   }
 
   .md\:text-black\/60 {

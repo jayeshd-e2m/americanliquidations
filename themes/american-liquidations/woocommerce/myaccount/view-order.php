@@ -94,7 +94,7 @@ $is_completed = $order->has_status( 'completed' );
 		<div class="mb-10">
 			<h5 class="text-[20px] text-black/60 mb-4 font-inter">Have question your order? </h5>
 			<p class="text-sm leading-[1.8em] font-normal">Contact us here: <br><strong><a href="mailto:email@domain.com"><u>email@domain.com</u></a>
-			<br>203-587-4132</strong></p>
+			<br><a href="tel:203-587-4132">203-587-4132</a></strong></p>
 		</div>
 		<div class="mb-0">
 			<h5 class="text-[20px] text-black/60 mb-4 font-inter">Payment method</h5>
