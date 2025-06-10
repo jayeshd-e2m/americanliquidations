@@ -1785,6 +1785,11 @@ div#gform_1_validation_container .gform-icon {
     font-size: 24px;
 }
 
+.ginput_container_select select {
+    padding-right: 25px !important;
+    background-position: right 15px center;
+}
+
 /* Responsive CSS */
 
 @media (min-width: 2000px){
