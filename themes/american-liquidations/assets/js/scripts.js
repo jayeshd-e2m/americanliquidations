@@ -93,26 +93,121 @@ jQuery(document).ready(function($){
     });
 
 	// Gravity form
-	const fileInput = document.querySelector("#input_2_8");
-
-	if (!fileInput) return;
-
-	const container = fileInput.parentNode;
-
-	// Create and insert custom styled upload box
-	const uploadBox = document.createElement("div");
-	uploadBox.className = "upload-box";
-	uploadBox.textContent = "+ Upload a File";
-	container.insertBefore(uploadBox, fileInput);
-
-	// Update box when file is selected
-	fileInput.addEventListener("change", function () {
-		if (fileInput.files.length > 0) {
-		uploadBox.textContent = fileInput.files[0].name;
-		} else {
-		uploadBox.textContent = "+ Upload a File";
+	function customFileUploadDesign(formId) {
+		const fileInput = document.querySelector("#input_2_8");
+		if (!fileInput) return;
+	
+		const container = fileInput.parentNode;
+	
+		// Remove any previous custom UI to avoid duplicates
+		const existingCustomBox = container.querySelector('.custom-upload-wrapper');
+		if (existingCustomBox) existingCustomBox.remove();
+	
+		// Check if GF's server-side preview for this field is present
+		const previewList = container.querySelector('.ginput_preview_list');
+	
+		// Watch for deletion of the preview list (GF's delete button)
+		if (previewList) {
+			// If a preview list exists, set up a MutationObserver to watch for its removal
+			const observer = new MutationObserver(function(mutations) {
+				mutations.forEach(function(mutation) {
+					// If the previewList is removed, re-run the design
+					if (mutation.removedNodes) {
+						mutation.removedNodes.forEach(function(node){
+							if (node === previewList) {
+								// Call our UI function again
+								customFileUploadDesign(formId);
+							}
+						});
+					}
+				});
+			});
+			observer.observe(container, { childList: true });
+	
+			// Hide file input (optional)
+			fileInput.style.display = 'none';
+			return;
 		}
+	
+		// Otherwise, render our custom UI
+		const wrapper = document.createElement('div');
+		wrapper.className = 'custom-upload-wrapper';
+		container.insertBefore(wrapper, fileInput);
+	
+		// Hide the actual file input for styling
+		fileInput.style.display = 'none';
+	
+		function renderUploadBox() {
+			wrapper.innerHTML = '';
+			const uploadBox = document.createElement('div');
+			uploadBox.className = 'upload-box';
+			uploadBox.textContent = "+ Upload a File";
+			uploadBox.addEventListener("click", function () {
+				fileInput.click();
+			});
+			wrapper.appendChild(uploadBox);
+		}
+	
+		function renderFileBox(file) {
+			wrapper.innerHTML = '';
+			const fileBox = document.createElement('div');
+			fileBox.className = 'file-box';
+			fileBox.textContent = file.name;
+	
+			const deleteBtn = document.createElement('span');
+			deleteBtn.className = 'delete-file-btn';
+			deleteBtn.innerHTML = '🗑️';
+			deleteBtn.title = "Delete File";
+			deleteBtn.style.cursor = "pointer";
+			deleteBtn.style.marginLeft = "12px";
+			deleteBtn.addEventListener('click', function() {
+				fileInput.value = '';
+				renderUploadBox();
+			});
+			fileBox.appendChild(deleteBtn);
+			wrapper.appendChild(fileBox);
+		}
+	
+		// Initial render
+		if (fileInput.files && fileInput.files.length > 0) {
+			renderFileBox(fileInput.files[0]);
+		} else {
+			renderUploadBox();
+		}
+	
+		// Keep in sync as user interacts
+		fileInput.addEventListener("change", function () {
+			if (fileInput.files && fileInput.files.length > 0) {
+				renderFileBox(fileInput.files[0]);
+			} else {
+				renderUploadBox();
+			}
+		});
+	}
+	
+	// Listen for GF render events and initial load
+	jQuery(document).on('gform_post_render', function(event, formId){
+		customFileUploadDesign(formId);
 	});
+	jQuery(document).on('click', '.gform_delete_file', function() {
+		// Get a reference to the specific field or container
+		var fieldContainer = jQuery(this).closest('.gfield'); // Adjust selector if needed
+	
+		// Poll until .ginput_preview_list no longer exists in this field
+		function waitForRemovePreview(listenTries) {
+			listenTries = listenTries || 0; // Prevent infinite loops
+			if (fieldContainer.find('.ginput_preview_list').length === 0) {
+				// Now trigger the custom upload UI restoration
+				customFileUploadDesign();
+			} else if (listenTries < 50) { // Give up after roughly 2.5 seconds
+				setTimeout(function() {
+					waitForRemovePreview(listenTries + 1);
+				}, 50);
+			}
+		}
+		waitForRemovePreview();
+	});
+	customFileUploadDesign();
 
 	// Observe preview container AND file input changes
 	// const observerTarget = container;

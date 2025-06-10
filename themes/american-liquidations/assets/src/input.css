@@ -1600,6 +1600,20 @@ div#gform_1_validation_container .gform-icon {
     line-height: 1.2;
 }
 
+.upload-box, .file-box {
+    padding: 9px;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+.file-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: default;
+} 
+
 .woocommerce-custom-account table.shop_table th, .woocommerce-custom-account table.shop_table td {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
