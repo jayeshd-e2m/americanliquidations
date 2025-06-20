@@ -82,7 +82,7 @@ if ( is_wc_endpoint_url( 'view-order' ) && $order_id ) {
 ?>
 <div class="page-description-header py-12">
 	<div class="container">
-		<p class="mb-5 md:mb-0">
+		<p class="mb-5 md:mb-2">
             <a href="<?php echo site_url();?>/my-account">My Account</a>
             <?php echo ' > <a href="'.site_url().'/my-account/orders/">Orders</a> > <strong> Order#'.esc_html( $order_id ).'</strong>'; ?>
         </p>
@@ -95,7 +95,7 @@ if ( is_wc_endpoint_url( 'view-order' ) && $order_id ) {
 <?php }else{ ?>
     <div class="page-description-header py-12">
         <div class="container">
-            <p class="mb-5 md:mb-0">
+            <p class="mb-5 md:mb-2">
                 <?php if($section_title == 'Account') { ?>
                     <div class="mb-2">My Account</div>
                 <?php }else{ ?>
