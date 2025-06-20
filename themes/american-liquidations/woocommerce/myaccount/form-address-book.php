@@ -53,7 +53,7 @@ $addresses = is_array($addresses) ? $addresses : [];
 				</div>
 			<?php endforeach; ?>
     <?php else : ?>
-        <p>No addresses found.</p>
+        <p class="mb-5">No addresses found.</p>
     <?php endif; ?>
 </div>
 
