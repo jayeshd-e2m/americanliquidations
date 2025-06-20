@@ -123,7 +123,7 @@ $current_user = wp_get_current_user();
 					</button>
 				</div>
 			</div>
-			<p class="mt-5 md:mt-10 text-sm font-normal">We’ll send you a code at your registered phone number everytime you log in.</p>
+			<p class="mt-5 md:mt-10 text-sm font-normal">We’ll send you a code at your registered email address everytime you log in.</p>
 		</div>
 
 	</div>
