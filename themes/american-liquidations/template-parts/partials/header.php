@@ -45,9 +45,6 @@
             <?php if ( is_user_logged_in() ) : ?>
                 <div class="has-sign-in">
                     <a class="myaccount-btn btn btn-red" href="<?php echo site_url(); ?>/my-account/">My Account</a>
-                    <ul class="myaccount-drp-menu">
-                        <li><a class="logout-btn btn" href="<?php echo wp_logout_url(home_url('/my-account/')); ?>">Logout</a></li>
-                    </ul>
                 </div>
             <?php else : ?>
                 <div class="has-sign-in">
