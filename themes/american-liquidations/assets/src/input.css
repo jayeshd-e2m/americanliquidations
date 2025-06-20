@@ -1944,6 +1944,7 @@ div#gform_1_validation_container .gform-icon {
         padding: 5px 16px;
         padding-right: 36px;
         background-position: right 12px center;
+        background-size: 8px;
     }
     .site-header .container {
         padding-left: 20px;
