@@ -262,7 +262,7 @@ jQuery(document).ready(function($) {
 					addToCart(productId, quantity, $button, ajaxUrl, function() {
 						setTimeout(() => {
 							document.getElementById('cart-button')?.click();
-						}, 100);
+						}, 1000);
 					});
 				} else {
 					console.log('Error:', errorType);
