@@ -310,6 +310,16 @@ footer .btn-red:hover {
     object-fit: cover;
 }
 
+.woocommerce-info .btn{
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.woocommerce-info:before{
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 @media (min-width: 1024px){
     #menu-header-menu > li:nth-child(4n+1) {
         border-right: 1px solid #ffffff4d;
