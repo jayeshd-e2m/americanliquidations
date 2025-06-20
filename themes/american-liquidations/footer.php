@@ -261,7 +261,9 @@ jQuery(document).ready(function($) {
 				if (response.success) {
 					addToCart(productId, quantity, $button, ajaxUrl);
 					addToCart(productId, quantity, $button, ajaxUrl, function() {
-						document.getElementById('cart-button')?.click();
+						setTimeout(() => {
+							document.getElementById('cart-button')?.click();
+						}, 100);
 					});
 				} else {
 					console.log('Error:', errorType);
