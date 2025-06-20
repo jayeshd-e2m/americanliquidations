@@ -1846,6 +1846,7 @@ div#gform_1_validation_container .gform-icon {
     }
     .shop-items-cover{
         width: 77% !important;
+        max-width: 1530px;
     }
 }
 @media (max-width: 1350px){
