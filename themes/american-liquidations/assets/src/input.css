@@ -378,7 +378,7 @@ footer .btn-red:hover {
     padding: 13px;
 }
 .small-product-card h5{
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 10px;
 }
 .small-product-card .product-card {
@@ -387,13 +387,13 @@ footer .btn-red:hover {
     box-shadow: 3.50099px 3.50099px 17.5049px rgba(8, 4, 4, 0.04);
 }
 .small-product-card .is-price {
-    font-size: 12px;
+    font-size: 14px;
 }
 .small-product-card .product-card-content del .amount {
-    font-size: 8px;
+    font-size: 10px;
 }
 .small-product-card .is-description {
-    font-size: 7px;
+    font-size: 10px;
     margin-top: 10px;
 }
 
