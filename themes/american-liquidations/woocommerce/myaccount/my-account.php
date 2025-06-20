@@ -113,7 +113,7 @@ if ( is_wc_endpoint_url( 'view-order' ) && $order_id ) {
                 ?>
                 <div class="pd-header-user text-sm flex items-center gap-6 justify-between md:justify-normal w-full md:w-auto flex-wrap md:flex-nowrap">
                     <span class="capitalize"><?php echo esc_html( $username ); ?></span>
-                    <span><a href="mailto:<?php echo esc_html( $email ); ?>" class="text-primary hover:text-primary/60 underline"><?php echo esc_html( $email ); ?></a></span>
+                    <span><a href="mailto:<?php echo esc_html( $email ); ?>" class="text-primary hover:text-primary/60 underline lowercase"><?php echo esc_html( $email ); ?></a></span>
                 </div>
             </div>
         </div>
