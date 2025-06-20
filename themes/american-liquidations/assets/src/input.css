@@ -367,7 +367,7 @@ footer .btn-red:hover {
 .add_to_cart_button.added {
     display: none;
 }
-.small-product-card a {
+.small-product-card .is-buttons a {
     font-size: 9px;
 }
 .small-product-card .add_to_cart_button,
