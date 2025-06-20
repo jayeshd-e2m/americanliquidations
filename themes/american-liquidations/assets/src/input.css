@@ -1981,6 +1981,9 @@ div#gform_1_validation_container .gform-icon {
         vertical-align: middle;
     }
 
+    .small-product-card .add_to_cart_button, .small-product-card .added_to_cart{
+        padding: 6px 15px !important;
+    }
    
 }
 
