@@ -54,6 +54,7 @@ $account_sections = array(
     'address-book'     => 'Address Book',
     'edit-account'     => 'Personal Settings',
     'customer-logout'  => 'Logout',
+    'payment-methods' => 'Payment Methods'
     // add more endpoints as needed
 );
 
