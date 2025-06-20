@@ -1930,13 +1930,20 @@ div#gform_1_validation_container .gform-icon {
         padding-right: 25px;
     }
     .site-header .cart-btn.btn,
-    .site-header .sign-btn.btn,
-    .site-header .myaccount-btn {
+    .site-header .sign-btn.btn
+     {
         font-size: 10px;
         background-size: 10px;
         padding: 5px 16px;
         padding-left: 29px;
         background-position: left 12px center;
+    }
+    .site-header .myaccount-btn{
+        font-size: 10px;
+        background-size: 10px;
+        padding: 5px 16px;
+        padding-right: 29px;
+        background-position: right 12px center;
     }
     .site-header .container {
         padding-left: 20px;
