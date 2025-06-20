@@ -293,7 +293,7 @@ jQuery(document).ready(function($) {
 		});
 	});
 
-	function addToCart(productId, quantity, $button, ajaxUrl) {
+	function addToCart(productId, quantity, $button, ajaxUrl, callback) {
 		$.ajax({
 			url: ajaxUrl,
 			type: 'POST',
