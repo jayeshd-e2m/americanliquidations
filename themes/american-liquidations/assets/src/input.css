@@ -2058,10 +2058,15 @@ div#gform_1_validation_container .gform-icon {
     .small-product-card h5{
         font-size: 12px;
     }
-    .woocommerce-info .btn {
-        margin-left: 0;
-        margin-top: 10px;
-    }
+    .woocommerce-info {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+      .woocommerce-info .btn {
+        margin: 10px 0 0 0;
+      }
 }
 
 @media (max-width: 370px){
