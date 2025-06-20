@@ -200,7 +200,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 				<div class="flex items-center justify-between mb-10 flex-wrap md:flex-nowrap">
 					<div class="section-label text-[20px] font-bold">Tax Exempt Document</div>
 					<div class="flex gap-4 flex-wrap md:flex-nowrap mt-3 md:mt-0 mobile-wrap w-full md:w-auto">
-						<a href="<?php echo esc_url( get_template_directory_uri() . '/assets/tax-exempt-template.pdf' ); ?>" download class="hover:text-white hover:bg-black text-black/60 bg-gray py-5 px-[10px] lg:px-10 rounded-[17px] text-sm font-semibold text-center">Download Form Template</a>
+						<a href="<?php echo esc_url( get_template_directory_uri() . '/assets/Unif-Resale-Cert-revised-10-14-22.pdf' ); ?>" download class="hover:text-white hover:bg-black text-black/60 bg-gray py-5 px-[10px] lg:px-10 rounded-[17px] text-sm font-semibold text-center">Download Form Template</a>
 						<a href="#" class="text-primary border border-primary py-5 px-[10px] lg:px-10 rounded-[17px] text-sm hover:text-white hover:bg-primary font-semibold text-center" id="show-upload-tax-doc">+ Upload New Document</a>
 					</div>
 				</div>
