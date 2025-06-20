@@ -1843,6 +1843,7 @@ div#gform_1_validation_container .gform-icon {
 @media (min-width: 2000px){
     .shop-wrapper{
         max-width: 2000px;
+        margin: 0 auto;
     }
 }
 @media (max-width: 1350px){
