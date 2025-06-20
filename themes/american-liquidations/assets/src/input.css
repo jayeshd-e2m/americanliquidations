@@ -2046,6 +2046,9 @@ div#gform_1_validation_container .gform-icon {
     .nav-links a{
         font-size: 11px;
     }
+    .small-product-card h5{
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 370px){
