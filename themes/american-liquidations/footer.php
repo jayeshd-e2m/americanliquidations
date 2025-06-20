@@ -260,9 +260,9 @@ jQuery(document).ready(function($) {
 				console.log(response.data);
 				if (response.success) {
 					addToCart(productId, quantity, $button, ajaxUrl);
-					setTimeout(function(){
+					addToCart(productId, quantity, $button, ajaxUrl, function() {
 						document.getElementById('cart-button')?.click();
-					},1000)
+					});
 				} else {
 					console.log('Error:', errorType);
 					switch (errorType) {
