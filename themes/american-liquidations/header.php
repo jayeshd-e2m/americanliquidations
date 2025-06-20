@@ -109,7 +109,15 @@
 						</a>
 					</div>
 					<div class="">
-						<a class="sign-btn btn" href="<?php echo site_url(); ?>/my-account/" >SIGN IN</a>
+						<?php if ( is_user_logged_in() ) : ?>
+							<div class="has-sign-in">
+								<a class="myaccount-btn btn btn-red" href="<?php echo site_url(); ?>/my-account/">My Account</a>
+							</div>
+						<?php else : ?>
+							<div class="has-sign-in">
+								<a class="sign-btn btn" href="<?php echo site_url(); ?>/my-account/" >SIGN IN</a>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 				</div>
