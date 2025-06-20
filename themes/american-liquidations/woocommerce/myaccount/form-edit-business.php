@@ -209,7 +209,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 				</div>
 				<div class="mt-3 mb-3 text-[14px]"><?php echo esc_html($tax_document_file) ?> (Preview of Previous Doc)</div>
 				<div class="flex gap-24 mb-4">
-					<div class="text-sm w-full h-[350px] overflow-y-auto">
+					<div class="text-sm w-full max-h-[350px] overflow-y-auto">
 						<?php if ($tax_document_url): ?>
 							<?php
 							$mime_type = get_post_mime_type($tax_document_id);
