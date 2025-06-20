@@ -311,6 +311,7 @@ jQuery(document).ready(function($) {
 						});
 					}
 					$(document.body).trigger('added_to_cart', [response.data.fragments, response.data.cart_hash, $button]);
+					if (typeof callback === 'function') callback();
 				} else {
 					if (response.data && response.data.message) {
 						showTruckloadLoginPopup();
