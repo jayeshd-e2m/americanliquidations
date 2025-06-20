@@ -259,7 +259,6 @@ jQuery(document).ready(function($) {
 				const errorType = response.data?.error_type;
 				console.log(response.data);
 				if (response.success) {
-					addToCart(productId, quantity, $button, ajaxUrl);
 					addToCart(productId, quantity, $button, ajaxUrl, function() {
 						setTimeout(() => {
 							document.getElementById('cart-button')?.click();
