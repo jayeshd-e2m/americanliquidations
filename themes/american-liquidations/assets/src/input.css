@@ -1693,7 +1693,7 @@ div#gform_1_validation_container .gform-icon {
 }
 
 .woocommerce-info {
-    border: 0;
+    border: 1px solid #fb0404;
 }
 
 .woocommerce-info:before {
