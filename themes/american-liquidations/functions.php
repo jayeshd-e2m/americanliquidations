@@ -399,7 +399,7 @@ function send_2fa_code_to_email($user_id) {
     // Prepare mail headers
     $headers = [
         'Content-Type: text/html; charset=UTF-8',
-        'From: American	Liquidations <no-reply@americanliquidations.com>'
+        'From: American	Liquidations <no-reply@alkalidesigns.com>'
     ];
 
     // Prepare and send mail
@@ -459,7 +459,7 @@ add_action('init', function() {
 		$email = $user->user_email;
 		$headers = [
 			'Content-Type: text/html; charset=UTF-8',
-			'From: American Liquidations <no-reply@americanliquidaitons.com>'
+			'From: Alkalidesigns <no-reply@alkalidesigns.com>'
 		];
 		wp_mail(
 			$email,
