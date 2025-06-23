@@ -1856,6 +1856,11 @@ div#gform_1_validation_container .gform-icon {
     font-size: 14px;
     border: 0;
 }
+
+.wc_payment_method label {
+    display: flex;
+    flex-wrap: wrap;
+}
 /* Responsive CSS */
 
 @media (min-width: 2000px){
