@@ -443,42 +443,45 @@ function custom_2fa_show_code_form() {
 
 // 2. Process 2FA code and resend, in 'init'
 add_action('init', function() {
-    // Only process if we have a pending 2FA user (same session key as display)
-    if (!empty($_SESSION['pending_2fa_user'])) {
 
-        $user_id = $_SESSION['pending_2fa_user'];
+    // RESEND CODE logic
+    if(isset($_POST['resend_2fa_code']) && isset($_SESSION['pending_2fa_user'])) {
+        $user_id = intval($_SESSION['pending_2fa_user']);
+        // Generate new code
+        $code = rand(100000, 999999);
+        update_user_meta($user_id, 'user_2fa_code', $code);
+        update_user_meta($user_id, 'user_2fa_expires', time() + 300);
 
-        // Handle resend button
-        if (isset($_POST['resend_2fa_code'])) {
-            send_2fa_code_to_email($user_id);
-            wc_add_notice(__('A new verification code has been sent to your email.'), 'success');
-        }
-        // Handle verify button
-        elseif (isset($_POST['submit_2fa_code'])) {
-            $submitted_code = sanitize_text_field($_POST['2fa_code']); // must match input name
-            $saved_code = get_user_meta($user_id, 'my_2fa_otp_code', true);
-            $saved_time = get_user_meta($user_id, 'my_2fa_otp_time', true);
+        $user = get_userdata($user_id);
+        $email = $user->user_email;
+        wp_mail($email, "Your 2FA Verification Code", "Your 2FA code is: $code
+This code is valid for 5 minutes.");
 
-            if ($saved_code && $submitted_code == $saved_code) {
-                if (time() - (int)$saved_time <= 300) { // 5 min expiry
-                    // Success! Log user in:
-                    delete_user_meta($user_id, 'my_2fa_otp_code');
-                    delete_user_meta($user_id, 'my_2fa_otp_time');
-                    wc_set_customer_auth_cookie($user_id);
-                    unset($_SESSION['pending_2fa_user']);
-                    wp_safe_redirect( wc_get_page_permalink('myaccount') );
-                    exit;
-                } else {
-                    wc_add_notice(__('Your verification code has expired. Please login again.'), 'error');
-                    delete_user_meta($user_id, 'my_2fa_otp_code');
-                    delete_user_meta($user_id, 'my_2fa_otp_time');
-                    unset($_SESSION['pending_2fa_user']);
-                }
-            } else {
-                wc_add_notice(__('Invalid verification code.'), 'error');
-            }
+        wc_add_notice(__('A new 2FA code has been sent to your email.'), 'success'); // Shows Woo notice
+
+        // DO NOT exit or redirect, just show form again
+    }
+
+    // VERIFY CODE logic
+    if(isset($_POST['submit_2fa_code']) && isset($_SESSION['pending_2fa_user'])) {
+        $user_id = intval($_SESSION['pending_2fa_user']);
+        $code = sanitize_text_field($_POST['code']);
+        $real_code = get_user_meta($user_id, 'user_2fa_code', true);
+        $expires = get_user_meta($user_id, 'user_2fa_expires', true);
+
+        if($code == $real_code && time() < $expires) {
+            wp_set_auth_cookie($user_id);
+            wp_set_current_user($user_id);
+            delete_user_meta($user_id, 'user_2fa_code');
+            delete_user_meta($user_id, 'user_2fa_expires');
+            unset($_SESSION['pending_2fa_user']);
+            wp_redirect(wc_get_page_permalink('myaccount'));
+            exit;
+        } else {
+            wc_add_notice(__('Invalid or expired 2FA code.'), 'error');
         }
     }
+
 });
 
 
