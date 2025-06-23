@@ -385,6 +385,7 @@ add_action('init', function(){
 
 
 function send_2fa_code_to_email($user_id) {
+	error_log('2FA email send function called');
     // Generate a 6-digit code
     $code = rand(100000, 999999);
 
@@ -400,7 +401,10 @@ function send_2fa_code_to_email($user_id) {
     $subject = 'Your 2FA Verification Code';
     $message = "Your 2FA code is: $code
 This code is valid for 5 minutes.";
-    wp_mail($user_email, $subject, $message);
+	$sent = wp_mail($user_email, $subject, $message);
+	wp_mail("jayeshd.patel@e2m.solutions", "Test Email", "Test message");
+
+	error_log('2FA mail sent? ' . ($sent ? 'YES' : 'NO') . ' to ' . $user_email);
 }
 
 
@@ -408,12 +412,8 @@ add_filter('wp_authenticate_user', function($user, $password) {
     if (!$user || is_wp_error($user)) return $user;
     $has2FA = get_user_meta($user->ID, 'user_2fa_enabled', true) === 'yes';
     if ($has2FA) {
-        // Send 2FA code
-        send_2fa_code_to_email($user->ID);
-        
-        // Set temporary session flag or cookie for 2FA required
-        $_SESSION['2fa_user_id'] = $user->ID; // Make sure sessions are enabled
-        // Prevent normal login, force redirect to 2FA page
+        $_SESSION['pending_2fa_user'] = $user->ID;
+        send_2fa_code_to_email($user->ID); // Make sure this function uses user_2fa_code
         return new WP_Error('2fa_required', 'Two-Factor Authentication is required. Check your email for the code.');
     }
     return $user;

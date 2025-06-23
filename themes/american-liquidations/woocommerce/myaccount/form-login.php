@@ -105,18 +105,20 @@ if(is_wc_endpoint_url( 'register' )){
                             <?php do_action( 'woocommerce_login_form_end' ); ?>
 
                         </form>
-
-                        <?php if(isset($_SESSION['pending_2fa_user'])) {
+                        <?php wc_print_notices(); ?>
+                        <?php
+                        if (isset($_SESSION['pending_2fa_user'])) {
+                            wc_print_notices();
                             ?>
                             <form method="post" class="woocommerce-form woocommerce-form-2fa">
                                 <label>Enter the 2FA code sent to your email:</label>
                                 <input type="text" name="code" maxlength="6" required />
-                                <button type="submit" name="submit_2fa_code"><?php _e('Verify Code'); ?></button>
+                                <button type="submit" name="submit_2fa_code"><?= __('Verify Code') ?></button>
                             </form>
+                            <script>document.querySelector('.woocommerce-form-login').style.display='none';</script>
                             <?php
-                            // Hide the login form
-                            echo "<script>document.querySelector('.woocommerce-form-login').style.display='none';</script>";
-                        } ?>
+                        }
+                        ?>
                     </main>
 
                 </div>
