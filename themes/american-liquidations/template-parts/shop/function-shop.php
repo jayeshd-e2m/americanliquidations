@@ -242,9 +242,24 @@ function custom_ajax_shop_products($filters = []) {
     // Pagination HTML
     ob_start();
     if ($query->max_num_pages > 1) {
+        $visible = 2; // how many pages visible at ends
+        $adjacents = 2; // adjacents to current page
+
         echo '<div class="custom-pagination mt-10 flex justify-center gap-2">';
         for ($i = 1; $i <= $query->max_num_pages; $i++) {
-            echo '<button class="pagination-button px-4 py-2 border rounded hover:bg-black hover:text-white ' . ($i == $paged ? 'bg-black text-white noclick' : 'bg-white') . '" data-page="' . $i . '">' . $i . '</button>';
+            // Show first pages, last, and range around current page
+            if (
+                $i <= $visible || // start
+                $i > $query->max_num_pages - $visible || // end
+                abs($i - $paged) <= $adjacents // around current page
+            ) {
+                echo '<button class="pagination-button px-4 py-2 border rounded hover:bg-black hover:text-white ' . ($i == $paged ? 'bg-black text-white noclick' : 'bg-white') . '" data-page="' . $i . '">' . $i . '</button>';
+                $dots = true;
+            } elseif ($dots) {
+                // only output ... once
+                echo '<span class="pagination-ellipsis px-2 py-2">...</span>';
+                $dots = false;
+            }
         }
         echo '</div>';
     }
