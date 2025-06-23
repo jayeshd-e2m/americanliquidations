@@ -386,8 +386,8 @@ add_action('init', function(){
 
 function send_2fa_code_to_email($user_id) {
     // Generate a 6-digit code
-    $otp_code = wp_rand(100000, 999999); // or whatever you use
-    $otp_timestamp = time(); // current Unix timestamp
+    $otp_code = wp_rand(100000, 999999);
+    $otp_timestamp = time();
 
     update_user_meta($user_id, 'my_2fa_otp_code', $otp_code);
     update_user_meta($user_id, 'my_2fa_otp_time', $otp_timestamp);
@@ -396,14 +396,20 @@ function send_2fa_code_to_email($user_id) {
     $user_info = get_userdata($user_id);
     $user_email = $user_info->user_email;
 
+    // Prepare mail headers
+    $headers = [
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Alkalidesigns <no-reply@alkalidesigns.com>'
+    ];
+
     // Prepare and send mail
     $subject = 'Your 2FA Verification Code';
-    $message = "Your 2FA code is: $otp_code
-This code is valid for 5 minutes.";
-    $sent = wp_mail($user_email, $subject, $message);
-	wp_mail("development@alkalidesigns.com", "Test Email", "Test message");
+    $message = "Your 2FA code is: <strong>$otp_code</strong><br>This code is valid for 5 minutes.";
+    $sent = wp_mail($user_email, $subject, $message, $headers);
 
-    // Optionally: log, return $sent for diagnostics
+    // Optional: Developer test mail for debugging
+    //wp_mail("development@alkalidesigns.com", "Test Email", "Test message", $headers);
+
     return $sent;
 }
 
