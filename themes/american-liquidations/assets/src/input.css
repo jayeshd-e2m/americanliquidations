@@ -1848,10 +1848,11 @@ div#gform_1_validation_container .gform-icon {
 
 .woocommerce-form-2fa [name="submit_2fa_code"]{
     @apply bg-primary;
-  padding: 10px 20px;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    border: 0;
 }
 /* Responsive CSS */
 
@@ -2078,10 +2079,14 @@ div#gform_1_validation_container .gform-icon {
         align-items: flex-start;
         flex-direction: column;
         justify-content: flex-start;
-      }
-      .woocommerce-info .btn {
+    }
+    .woocommerce-info .btn {
         margin: 10px 0 0 0;
-      }
+    }
+    .woocommerce-form-2fa [name="submit_2fa_code"],
+    .woocommerce-form-2fa .btn{
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 370px){

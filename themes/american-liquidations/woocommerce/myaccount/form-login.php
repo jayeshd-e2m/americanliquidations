@@ -86,7 +86,7 @@ if(is_wc_endpoint_url( 'register' )){
                                 placeholder="<?php esc_attr_e('6-digit code', 'woocommerce'); ?>"
                             />
 
-                            <div class="flex gap-4 mt-4">
+                            <div class="flex gap-4 mt-4 flex-wrap md:flex-nowrap">
                                 <button type="submit" name="submit_2fa_code" class="btn btn-red btn-arrow">
                                     <?php esc_html_e('Verify Code', 'woocommerce'); ?>
                                 </button>
