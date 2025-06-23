@@ -864,6 +864,7 @@ body ul.psfw-social-icons{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    outline: none;
 }
 
 .woocommerce-notices-wrapper .woocommerce-message:before {
