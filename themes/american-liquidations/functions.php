@@ -487,8 +487,8 @@ This code is valid for 5 minutes.");
 
 
 function send_test_email() {
-    $to = 'development@alkalidesigns.com'; // Replace with your email address
-    $subject = 'Test Email from WordPress';
+    $to = 'development@alkalidesigns.com, wordpress@devser.net'; // Replace with your email address
+    $subject = 'American Test mail';
     $message = 'This is a test email sent using the wp_mail() function.';
     $headers = ['Content-Type: text/html; charset=UTF-8'];
     if (wp_mail($to, $subject, $message, $headers)) {
@@ -497,6 +497,8 @@ function send_test_email() {
         echo ':x: Failed to send test email.';
     }
 }
+
+
 add_action('init', function() {
     if (isset($_GET['send_test_email'])) {
         send_test_email();
