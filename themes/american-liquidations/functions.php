@@ -487,19 +487,17 @@ This code is valid for 5 minutes.");
 
 
 function send_test_email() {
-    $to = 'development@alkalidesigns.com,wordpress@devser.net';
-    $subject = 'American Test mail';
+    $to = 'development@alkalidesigns.com';
+    $subject = 'Test Email from WordPress';
     $message = 'This is a test email sent using the wp_mail() function.';
-
     $headers = [
         'Content-Type: text/html; charset=UTF-8',
-        'From: Test Sender <wordpress@yourdomain.com>', // Change to a valid domain email!
+        'From: Alkalidesigns <no-reply@alkalidesigns.com>'
     ];
-
     if (wp_mail($to, $subject, $message, $headers)) {
-        echo "✅ Test email sent successfully.";
+        echo ':white_tick: Test email sent successfully.';
     } else {
-        echo "❌ Failed to send test email. Check SMTP or mail log.";
+        echo ':x: Failed to send test email.';
     }
 }
 
