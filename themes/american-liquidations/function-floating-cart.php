@@ -43,8 +43,9 @@ function fetch_cart_items() {
         
             // Render HTML
             echo "<div class='cart-item flex gap-6 mb-12 relative' data-cart-key='$key'>";
+            $thumb_url = !empty($thumb) ? $thumb : get_template_directory_uri() . '/images/no-image.jpg';
             echo "<div class='flex h-full'>
-                <img class='rounded-[5px] h-[60px] w-[60px] object-cover' src='$thumb' />
+                <img class='rounded-[5px] h-[60px] w-[60px] object-cover' src='esc_url($thumb_url)' />
             </div>";
             echo "<div class='flex-1 pr-3'>
                 <a href='$url' class='text-lg font-semibold text-[#444] hover:text-primary block mb-2 leading-[1.3em] font-barlow'>{$product->get_name()}</a>";
