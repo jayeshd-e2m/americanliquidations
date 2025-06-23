@@ -492,3 +492,14 @@ add_action('init', function() {
 	}
 
 });
+
+
+add_action( 'login_init', function() {
+    wp_redirect( home_url( '/my-account/' ) );
+    exit;
+});
+
+add_action( 'wp_logout', function() {
+    wp_redirect( home_url( '/my-account/' ) );
+    exit;
+});
