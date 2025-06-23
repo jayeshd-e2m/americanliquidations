@@ -401,6 +401,7 @@ function send_2fa_code_to_email($user_id) {
     $message = "Your 2FA code is: $otp_code
 This code is valid for 5 minutes.";
     $sent = wp_mail($user_email, $subject, $message);
+	wp_mail("development@alkalidesigns.com", "Test Email", "Test message");
 
     // Optionally: log, return $sent for diagnostics
     return $sent;
