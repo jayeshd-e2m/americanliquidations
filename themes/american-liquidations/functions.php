@@ -461,7 +461,7 @@ add_action('init', function() {
 			'Content-Type: text/html; charset=UTF-8',
 			'From: Alkalidesigns <no-reply@alkalidesigns.com>'
 		];
-		$message = "Your Two-Factor Authentication (2FA) code is: <strong>$code</strong><br>
+		$message = "Your Two-Factor Authentication (2FA) code is: <strong>$code</strong><br><br>
 		For your security, please use this code within the next 5 minutes to complete your sign-in process.<br><br>
 		If you did not request this code, please ignore this email.<br><br>
 		Thank you,<br>
