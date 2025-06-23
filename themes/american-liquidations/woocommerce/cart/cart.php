@@ -89,16 +89,22 @@ defined( 'ABSPATH' ) || exit;
 									?>
 								</td>
 
+								<td class="product-thumbnail">
 								<?php
-								// Get product thumbnail
-								if ( $_product->get_image_id() ) {
-									// Product has a thumbnail
-									$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
-								} else {
-									// No thumbnail: use fallback image
-									$no_image_url = get_template_directory_uri() . '/wp-content/uploads/2025/06/noimg-AL.jpg';
-									$thumbnail = '<img src="' . esc_url($no_image_url) . '" alt="' . esc_attr($_product->get_name()) . '" class="woocommerce-placeholder wp-post-image" style="object-fit:cover; width:100px; height:100px;">';
-								}
+								/**
+								 * Filter the product thumbnail displayed in the WooCommerce cart.
+								 *
+								 * This filter allows developers to customize the HTML output of the product
+								 * thumbnail. It passes the product image along with cart item data
+								 * for potential modifications before being displayed in the cart.
+								 *
+								 * @param string $thumbnail     The HTML for the product image.
+								 * @param array  $cart_item     The cart item data.
+								 * @param string $cart_item_key Unique key for the cart item.
+								 *
+								 * @since 2.1.0
+								 */
+								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
 								if ( ! $product_permalink ) {
 									echo $thumbnail; // PHPCS: XSS ok.
