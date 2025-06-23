@@ -385,13 +385,12 @@ add_action('init', function(){
 
 
 function send_2fa_code_to_email($user_id) {
-	error_log('2FA email send function called');
     // Generate a 6-digit code
-    $code = rand(100000, 999999);
+    $otp_code = wp_rand(100000, 999999); // or whatever you use
+    $otp_timestamp = time(); // current Unix timestamp
 
-    // Store code and expiration (5 min) in user meta
-    update_user_meta($user_id, 'pending_2fa_code', $code);
-    update_user_meta($user_id, 'pending_2fa_expiry', time() + 300); // 5 min expiry
+    update_user_meta($user_id, 'my_2fa_otp_code', $otp_code);
+    update_user_meta($user_id, 'my_2fa_otp_time', $otp_timestamp);
 
     // Get user email
     $user_info = get_userdata($user_id);
@@ -399,12 +398,12 @@ function send_2fa_code_to_email($user_id) {
 
     // Prepare and send mail
     $subject = 'Your 2FA Verification Code';
-    $message = "Your 2FA code is: $code
+    $message = "Your 2FA code is: $otp_code
 This code is valid for 5 minutes.";
-	$sent = wp_mail($user_email, $subject, $message);
-	wp_mail("jayeshd.patel@e2m.solutions", "Test Email", "Test message");
+    $sent = wp_mail($user_email, $subject, $message);
 
-	error_log('2FA mail sent? ' . ($sent ? 'YES' : 'NO') . ' to ' . $user_email);
+    // Optionally: log, return $sent for diagnostics
+    return $sent;
 }
 
 
