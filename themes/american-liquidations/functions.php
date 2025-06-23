@@ -459,7 +459,7 @@ add_action('init', function() {
 		$email = $user->user_email;
 		$headers = [
 			'Content-Type: text/html; charset=UTF-8',
-			'From: Alkalidesigns <no-reply@alkalidesigns.com>'
+			'From: American Liquidations <no-reply@americanliquidaitons.com>'
 		];
 		wp_mail(
 			$email,
@@ -491,28 +491,4 @@ add_action('init', function() {
 		}
 	}
 
-});
-
-
-
-function send_test_email() {
-    $to = 'development@alkalidesigns.com';
-    $subject = 'Test Email from WordPress';
-    $message = 'This is a test email sent using the wp_mail() function.';
-    $headers = [
-        'Content-Type: text/html; charset=UTF-8',
-        'From: Alkalidesigns <no-reply@alkalidesigns.com>'
-    ];
-    if (wp_mail($to, $subject, $message, $headers)) {
-        echo ':white_tick: Test email sent successfully.';
-    } else {
-        echo ':x: Failed to send test email.';
-    }
-}
-
-add_action('init', function() {
-    if (isset($_GET['send_test_email'])) {
-        send_test_email();
-        exit;
-    }
 });
