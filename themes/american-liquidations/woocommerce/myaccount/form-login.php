@@ -65,7 +65,9 @@ if(is_wc_endpoint_url( 'register' )){
                     <?php if ( isset($_SESSION['pending_2fa_user']) ) : ?>
 
                         <form class="woocommerce-form woocommerce-form-2fa" method="post">
-                            <?php wc_print_notices(); ?>
+                            <div class="2fa-notice">
+                                <?php wc_print_notices(); ?>
+                            </div>
 
                             <div class="mb-6">
                                 <label for="code" class="text-sm font-semibold">
