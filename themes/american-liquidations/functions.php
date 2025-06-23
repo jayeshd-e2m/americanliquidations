@@ -387,10 +387,10 @@ add_action('init', function(){
 function send_2fa_code_to_email($user_id) {
     // Generate a 6-digit code
     $otp_code = wp_rand(100000, 999999);
-    $otp_timestamp = time();
+    $otp_timestamp = time() + 300; // 5 minutes from now
 
-    update_user_meta($user_id, 'my_2fa_otp_code', $otp_code);
-    update_user_meta($user_id, 'my_2fa_otp_time', $otp_timestamp);
+    update_user_meta($user_id, 'user_2fa_code', $otp_code);
+    update_user_meta($user_id, 'user_2fa_expires', $otp_timestamp);
 
     // Get user email
     $user_info = get_userdata($user_id);
@@ -406,9 +406,6 @@ function send_2fa_code_to_email($user_id) {
     $subject = 'Your 2FA Verification Code';
     $message = "Your 2FA code is: <strong>$otp_code</strong><br>This code is valid for 5 minutes.";
     $sent = wp_mail($user_email, $subject, $message, $headers);
-
-    // Optional: Developer test mail for debugging
-    //wp_mail("development@alkalidesigns.com", "Test Email", "Test message", $headers);
 
     return $sent;
 }
@@ -452,41 +449,47 @@ add_action('init', function() {
 
     // RESEND CODE logic
     if(isset($_POST['resend_2fa_code']) && isset($_SESSION['pending_2fa_user'])) {
-        $user_id = intval($_SESSION['pending_2fa_user']);
-        // Generate new code
-        $code = rand(100000, 999999);
-        update_user_meta($user_id, 'user_2fa_code', $code);
-        update_user_meta($user_id, 'user_2fa_expires', time() + 300);
-
-        $user = get_userdata($user_id);
-        $email = $user->user_email;
-        wp_mail($email, "Your 2FA Verification Code", "Your 2FA code is: $code
-This code is valid for 5 minutes.");
-
-        wc_add_notice(__('A new 2FA code has been sent to your email.'), 'success'); // Shows Woo notice
-
-        // DO NOT exit or redirect, just show form again
-    }
+		$user_id = intval($_SESSION['pending_2fa_user']);
+		// Generate new code
+		$code = wp_rand(100000, 999999);
+		update_user_meta($user_id, 'user_2fa_code', $code);
+		update_user_meta($user_id, 'user_2fa_expires', time() + 300);
+	
+		$user = get_userdata($user_id);
+		$email = $user->user_email;
+		$headers = [
+			'Content-Type: text/html; charset=UTF-8',
+			'From: Alkalidesigns <no-reply@alkalidesigns.com>'
+		];
+		wp_mail(
+			$email,
+			"Your 2FA Verification Code",
+			"Your 2FA code is: <strong>$code</strong><br>This code is valid for 5 minutes.",
+			$headers
+		);
+	
+		wc_add_notice(__('A new 2FA code has been sent to your email.'), 'success');
+	}
 
     // VERIFY CODE logic
     if(isset($_POST['submit_2fa_code']) && isset($_SESSION['pending_2fa_user'])) {
-        $user_id = intval($_SESSION['pending_2fa_user']);
-        $code = sanitize_text_field($_POST['code']);
-        $real_code = get_user_meta($user_id, 'user_2fa_code', true);
-        $expires = get_user_meta($user_id, 'user_2fa_expires', true);
-
-        if($code == $real_code && time() < $expires) {
-            wp_set_auth_cookie($user_id);
-            wp_set_current_user($user_id);
-            delete_user_meta($user_id, 'user_2fa_code');
-            delete_user_meta($user_id, 'user_2fa_expires');
-            unset($_SESSION['pending_2fa_user']);
-            wp_redirect(wc_get_page_permalink('myaccount'));
-            exit;
-        } else {
-            wc_add_notice(__('Invalid or expired 2FA code.'), 'error');
-        }
-    }
+		$user_id = intval($_SESSION['pending_2fa_user']);
+		$code = sanitize_text_field($_POST['code']);
+		$real_code = get_user_meta($user_id, 'user_2fa_code', true);
+		$expires = get_user_meta($user_id, 'user_2fa_expires', true);
+	
+		if($code == $real_code && time() < $expires) {
+			wp_set_auth_cookie($user_id);
+			wp_set_current_user($user_id);
+			delete_user_meta($user_id, 'user_2fa_code');
+			delete_user_meta($user_id, 'user_2fa_expires');
+			unset($_SESSION['pending_2fa_user']);
+			wp_redirect(wc_get_page_permalink('myaccount'));
+			exit;
+		} else {
+			wc_add_notice(__('Invalid or expired 2FA code.'), 'error');
+		}
+	}
 
 });
 
