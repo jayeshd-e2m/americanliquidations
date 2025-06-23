@@ -96,7 +96,7 @@ defined( 'ABSPATH' ) || exit;
 									$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 								} else {
 									// No thumbnail: use fallback image
-									$no_image_url = get_template_directory_uri() . '/images/no-image.jpg';
+									$no_image_url = get_template_directory_uri() . '/wp-content/uploads/2025/06/noimg-AL.jpg';
 									$thumbnail = '<img src="' . esc_url($no_image_url) . '" alt="' . esc_attr($_product->get_name()) . '" class="woocommerce-placeholder wp-post-image" style="object-fit:cover; width:100px; height:100px;">';
 								}
 

@@ -43,7 +43,7 @@ function fetch_cart_items() {
         
             // Render HTML
             echo "<div class='cart-item flex gap-6 mb-12 relative' data-cart-key='$key'>";
-            $thumb_url = !empty($thumb) ? $thumb : get_template_directory_uri() . '/images/no-image.jpg';
+            $thumb_url = !empty($thumb) ? $thumb : get_template_directory_uri() . '/wp-content/uploads/2025/06/noimg-AL.jpg';
             echo "<div class='flex h-full'>
                 <img class='rounded-[5px] h-[60px] w-[60px] object-cover' src='$thumb_url' />
             </div>";
