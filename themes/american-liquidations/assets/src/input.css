@@ -1838,6 +1838,20 @@ div#gform_1_validation_container .gform-icon {
     border-radius: 8px;
 }
 
+.woocommerce-form-2fa input[name="code"]{
+    border: 1px solid #f4f4f4;
+    height: 38px;
+    border-radius: 4px;
+}
+
+
+.woocommerce-form-2fa button{
+    @bg-primary;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+}
 /* Responsive CSS */
 
 @media (min-width: 2000px){
