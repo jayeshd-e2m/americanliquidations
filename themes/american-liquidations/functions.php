@@ -461,10 +461,16 @@ add_action('init', function() {
 			'Content-Type: text/html; charset=UTF-8',
 			'From: Alkalidesigns <no-reply@alkalidesigns.com>'
 		];
+		$message = "Your Two-Factor Authentication (2FA) code is: <strong>$code</strong><br>
+		For your security, please use this code within the next 5 minutes to complete your sign-in process.<br><br>
+		If you did not request this code, please ignore this email.<br><br>
+		Thank you,<br>
+		American Liquidations Security Team";
+
 		wp_mail(
 			$email,
 			"Your 2FA Verification Code",
-			"Your 2FA code is: <strong>$code</strong><br>This code is valid for 5 minutes.",
+			$message,
 			$headers
 		);
 	
