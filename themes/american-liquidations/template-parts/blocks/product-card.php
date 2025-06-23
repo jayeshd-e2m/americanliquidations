@@ -13,7 +13,12 @@ global $product;
 			echo '<span class="is-tag z-10 absolute top-2 left-2 out-of-stock bg-primary font-bold tracking-[0.06em] py-0.5 px-2 md:px-3 rounded-full md:text-[12px] text-[12px] !text-white uppercase inline-block align-top font-barlow">Out of Stock</span>';
 		}
 		echo '<a href="'.esc_url(get_permalink($product->get_id())).'">';
-        echo get_the_post_thumbnail($product->get_id(), 'medium'); 
+        if (has_post_thumbnail($product->get_id())) {
+			echo get_the_post_thumbnail($product->get_id(), 'medium');
+		} else {
+			// Update the path below to where your fallback image is stored
+			echo '<img src="' . esc_url($site_url) . '/wp-content/uploads/2025/06/noimg-AL.jpg" alt="No Image" class="w-full h-full object-cover" />';
+		}
 		echo '</a>';
 		?>
     </div>
