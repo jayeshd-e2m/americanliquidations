@@ -144,10 +144,11 @@ if(is_wc_endpoint_url( 'register' )){
 
                                 // Show the form
                                 ?>
-                                <form method="post" class="woocommerce-form woocommerce-form-2fa">
+                               <form method="post" class="woocommerce-form woocommerce-form-2fa">
                                     <label>Enter the 2FA code sent to your email:</label>
                                     <input type="text" name="code" maxlength="6" required />
                                     <button type="submit" name="submit_2fa_code"><?= esc_html__('Verify Code') ?></button>
+                                    <button type="submit" name="resend_2fa_code" style="margin-left:10px"><?= esc_html__('Resend Code') ?></button>
                                 </form>
                                 <script>document.querySelector('.woocommerce-form-login').style.display='none';</script>
                                 <?php

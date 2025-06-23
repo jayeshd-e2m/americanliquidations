@@ -1846,7 +1846,7 @@ div#gform_1_validation_container .gform-icon {
 }
 
 
-.woocommerce-form-2fa button{
+.woocommerce-form-2fa [name="submit_2fa_code"]{
     @apply bg-primary;
   padding: 10px 20px;
   border-radius: 4px;
