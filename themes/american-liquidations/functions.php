@@ -397,11 +397,9 @@ function send_2fa_code_to_email($user_id) {
     $user_email = $user_info->user_email;
 
     // Prepare mail headers
-	$domain = parse_url(home_url(), PHP_URL_HOST);
-
     $headers = [
         'Content-Type: text/html; charset=UTF-8',
-        'From: American Liquidations <no-reply@' . $domain . '>'
+        'From: American	Liquidations <no-reply@americanliquidations.com>'
     ];
 
     // Prepare and send mail
