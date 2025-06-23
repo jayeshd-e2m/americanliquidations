@@ -106,39 +106,54 @@ if(is_wc_endpoint_url( 'register' )){
 
                         </form>
                         <?php wc_print_notices(); ?>
-                        <?php
-                        if (isset($_SESSION['pending_2fa_user'])) {
-                            wc_print_notices();
-                            ?>
-                            <form method="post" class="woocommerce-form woocommerce-form-2fa">
-                                <label>Enter the 2FA code sent to your email:</label>
-                                <input type="text" name="code" maxlength="6" required />
-                                <button type="submit" name="submit_2fa_code"><?= __('Verify Code') ?></button>
-                            </form>
-                            <script>document.querySelector('.woocommerce-form-login').style.display='none';</script>
                             <?php
-                        }
+                            if (isset($_SESSION['pending_2fa_user'])) {
 
-                        $user_id      = /* get the user id from session or login context */;
-                        $submitted_code = sanitize_text_field($_POST['otp_code']);
-                        $saved_code     = get_user_meta($user_id, 'my_2fa_otp_code', true);
-                        $saved_time     = get_user_meta($user_id, 'my_2fa_otp_time', true);
+                                // Handle form POST only if submitted
+                                if ( isset($_POST['submit_2fa_code']) ) {
+                                    $user_id = $_SESSION['pending_2fa_user'];
+                                    $submitted_code = sanitize_text_field($_POST['code']); // match input name
+                                    $saved_code = get_user_meta($user_id, 'my_2fa_otp_code', true);
+                                    $saved_time = get_user_meta($user_id, 'my_2fa_otp_time', true);
 
-                        if ( $saved_code && $submitted_code == $saved_code ) {
-                            if ( time() - $saved_time <= 300 ) { // Not expired!
-                                // Success!
-                                delete_user_meta($user_id, 'my_2fa_otp_code');
-                                delete_user_meta($user_id, 'my_2fa_otp_time');
-                                // Continue login
-                            } else {
-                                // Code has expired
-                                // Show error: "Code expired"
+                                    if ( $saved_code && $submitted_code == $saved_code ) {
+                                        if ( time() - (int)$saved_time <= 300 ) { // 5min expiry
+                                            // Success! Log user in:
+                                            delete_user_meta($user_id, 'my_2fa_otp_code');
+                                            delete_user_meta($user_id, 'my_2fa_otp_time');
+                                            // WooCommerce login:
+                                            wc_set_customer_auth_cookie($user_id);
+
+                                            // Clean up session
+                                            unset($_SESSION['pending_2fa_user']);
+
+                                            // Redirect to account page or wherever
+                                            wp_safe_redirect( wc_get_page_permalink('myaccount') );
+                                            exit;
+                                        } else {
+                                            wc_add_notice('Your verification code has expired. Please login again.', 'error');
+                                            // Optional: Clean up so user must login again
+                                            delete_user_meta($user_id, 'my_2fa_otp_code');
+                                            delete_user_meta($user_id, 'my_2fa_otp_time');
+                                            unset($_SESSION['pending_2fa_user']);
+                                        }
+                                    } else {
+                                        wc_add_notice('Invalid verification code.', 'error');
+                                    }
+                                }
+
+                                // Show the form
+                                ?>
+                               <form method="post" class="woocommerce-form woocommerce-form-2fa">
+                                    <label>Enter the 2FA code sent to your email:</label>
+                                    <input type="text" name="code" maxlength="6" required />
+                                    <button type="submit" name="submit_2fa_code"><?= esc_html__('Verify Code') ?></button>
+                                    <button type="submit" name="resend_2fa_code" style="margin-left:10px"><?= esc_html__('Resend Code') ?></button>
+                                </form>
+                                <script>document.querySelector('.woocommerce-form-login').style.display='none';</script>
+                                <?php
                             }
-                        } else {
-                            // Incorrect code
-                            // Show error: "Invalid code"
-                        }
-                        ?>
+                            ?>
                     </main>
 
                 </div>
