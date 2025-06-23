@@ -372,3 +372,93 @@ function custom_product_search() {
 
 	wp_send_json_success($html);
 }
+
+
+
+
+
+
+
+add_action('init', function(){
+    if(!session_id()) session_start();
+});
+
+
+function send_2fa_code_to_email($user_id) {
+    // Generate a 6-digit code
+    $code = rand(100000, 999999);
+
+    // Store code and expiration (5 min) in user meta
+    update_user_meta($user_id, 'pending_2fa_code', $code);
+    update_user_meta($user_id, 'pending_2fa_expiry', time() + 300); // 5 min expiry
+
+    // Get user email
+    $user_info = get_userdata($user_id);
+    $user_email = $user_info->user_email;
+
+    // Prepare and send mail
+    $subject = 'Your 2FA Verification Code';
+    $message = "Your 2FA code is: $code
+This code is valid for 5 minutes.";
+    wp_mail($user_email, $subject, $message);
+}
+
+
+add_filter('wp_authenticate_user', function($user, $password) {
+    if (!$user || is_wp_error($user)) return $user;
+    $has2FA = get_user_meta($user->ID, 'user_2fa_enabled', true) === 'yes';
+    if ($has2FA) {
+        // Send 2FA code
+        send_2fa_code_to_email($user->ID);
+        
+        // Set temporary session flag or cookie for 2FA required
+        $_SESSION['2fa_user_id'] = $user->ID; // Make sure sessions are enabled
+        // Prevent normal login, force redirect to 2FA page
+        return new WP_Error('2fa_required', 'Two-Factor Authentication is required. Check your email for the code.');
+    }
+    return $user;
+}, 10, 2);
+
+
+add_action('woocommerce_login_form_start', 'custom_2fa_show_code_form');
+function custom_2fa_show_code_form() {
+    if (!empty($_SESSION['2fa_user'])) {
+        ?>
+        <div class="woocommerce-Notice woocommerce-Notice--info">
+            <?php _e('Enter the 2FA code sent to your email:'); ?>
+        </div>
+        <form method="post" class="woocommerce-form woocommerce-form-2fa">
+            <p>
+                <label for="2fa_code"><?php _e('2FA Code'); ?></label>
+                <input type="text" name="2fa_code" id="2fa_code" required autocomplete="one-time-code">
+            </p>
+            <button type="submit" name="submit_2fa" class="button"><?php _e('Verify Code'); ?></button>
+        </form>
+        <?php
+        // Prevent showing the main login form again
+        echo "<script>document.querySelector('.woocommerce-form-login').style.display='none';</script>";
+    }
+}
+
+
+add_action('init', function(){
+    if(isset($_POST['submit_2fa_code']) && isset($_SESSION['pending_2fa_user'])) {
+        $user_id = intval($_SESSION['pending_2fa_user']);
+        $code = sanitize_text_field($_POST['code']);
+        $real_code = get_user_meta($user_id, 'user_2fa_code', true);
+        $expires = get_user_meta($user_id, 'user_2fa_expires', true);
+
+        if($code == $real_code && time() < $expires) {
+            // Success! Log user in.
+            wp_set_auth_cookie($user_id);
+            wp_set_current_user($user_id);
+            delete_user_meta($user_id, 'user_2fa_code');
+            delete_user_meta($user_id, 'user_2fa_expires');
+            unset($_SESSION['pending_2fa_user']);
+            wp_redirect(wc_get_page_permalink('myaccount'));
+            exit;
+        } else {
+            wc_add_notice(__('Invalid or expired 2FA code.'), 'error');
+        }
+    }
+});

@@ -93,43 +93,15 @@ add_action('wp_ajax_edit_user_password', function() {
 });
 
 
+add_action( 'wp_ajax_toggle_2fa_setting', function() {
+    $user_id = get_current_user_id();
+    if (!$user_id) wp_send_json_error('Not logged in');
 
-// 2FA
+    $enable_2fa = $_POST['enable_2fa'] === 'yes' ? 'yes' : 'no';
+    update_user_meta($user_id, 'user_2fa_enabled', $enable_2fa);
 
-// add_action( 'wp_ajax_toggle_2fa_setting', function() {
-//     $user_id = get_current_user_id();
-//     if (!$user_id) wp_send_json_error('Not logged in');
-
-//     $enable_2fa = $_POST['enable_2fa'] === 'yes' ? 'yes' : 'no';
-//     update_user_meta($user_id, 'user_2fa_enabled', $enable_2fa);
-
-//     wp_send_json_success();
-// });
-
-// add_filter('authenticate', function($user, $username, $password){
-    // if (is_a($user, 'WP_User')) {
-    //     $is_2fa = get_user_meta($user->ID, 'user_2fa_enabled', true) === 'yes';
-    //     if ($is_2fa) {
-    //         // Generate 6 digit code
-    //         $code = rand(100000, 999999);
-    //         update_user_meta($user->ID, 'user_2fa_code', $code);
-    //         update_user_meta($user->ID, 'user_2fa_expires', time() + 300); // 5 mins expiry
-
-    //         // SEND SMS: (example, use your SMS provider)
-    //         $phone = get_user_meta($user->ID, 'user_phone', true);
-    //         my_send_sms($phone, "Your login code: $code");
-
-    //         // Save info in session to check after
-    //         $_SESSION['pending_2fa_user'] = $user->ID;
-
-    //         // Instead of logging in, redirect to 2FA verification page
-    //         wp_redirect( site_url('/2fa-verification/') ); // Make this page!
-    //         exit;
-    //     }
-    // }
-    // return $user;
-// }, 99, 3);
-
+    wp_send_json_success();
+});
 
 
 
