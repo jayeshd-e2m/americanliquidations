@@ -48,7 +48,7 @@ function custom_shop_shortcode($atts) {
             </div>
         </div>
         <div class="container flex gap-8 2xl:gap-12 flex-wrap md:flex-nowrap px-[30px] md:px-0">
-            <div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px]">
+            <div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px] pl-0">
                 <div class="filter-wrapper">
                     <div class="filter-search mb-10">
                         <h4 class="mb-3 text-black/60 text-[24px]">Search Products</h4>
@@ -62,7 +62,7 @@ function custom_shop_shortcode($atts) {
                     ?>
                 </div>
             </div>
-            <div class="shop-items-cover w-full md:w-[calc(100%_-_275px)] xl:w-[calc(100%_-_355px)] pr-0 md:pr-5 xl:pr-12">
+            <div class="shop-items-cover w-full md:w-[calc(100%_-_275px)] xl:w-[calc(100%_-_355px)] pr-0">
 				<div class="shop-items-header hidden md:flex items-end justify-end gap-5  mb-10">
 					<div class="flex justify-end">
 						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px] gap-2">
