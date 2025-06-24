@@ -253,7 +253,8 @@ jQuery(document).ready(function($){
 
 function shopSidebarWidth(){
 	if(jQuery('.shop-sidebar').length){
-		jQuery('.shop-sidebar').offset().left;
+		var oLeft = jQuery('.shop-sidebar').offset().left;
+		jQuery('.shop-sidebar:after').css('right',oLeft);
 	}
 }
 
