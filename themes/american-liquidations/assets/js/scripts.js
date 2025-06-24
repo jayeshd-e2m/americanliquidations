@@ -247,8 +247,20 @@ jQuery(document).ready(function($){
 	// 	})
 	// },1000)
 	
+	shopSidebarWidth();
 
+})
 
+function shopSidebarWidth(){
+	if(jQuery('.shop-sidebar').length){
+		jQuery('.shop-sidebar').offset().left;
+	}
+}
+
+jQuery(window).resize(function(){
+	setTimeout(function(){
+		shopSidebarWidth();
+	},100)
 })
 
 jQuery(window).scroll(function(){
