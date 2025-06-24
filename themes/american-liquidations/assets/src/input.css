@@ -1865,26 +1865,24 @@ div#gform_1_validation_container .gform-icon {
 
 
 .shop-wrapper{padding-right: 50px;padding-left: 50px;}
+.shop-sidebar:after {content: '';display: block;position: absolute;top: 0;background: red;height: 100%;left: calc(-50vw + 610px);width: calc(50vw - 610px);}
 
 @media (min-width: 1420px) {
     .shop-wrapper{
         max-width: 1420px;
         margin: 0 auto;
     }
+    .shop-sidebar:after {left: calc(-50vw + 710px);width: calc(50vw - 710px);}
 }
 
-
-    
-
-
 @media (min-width: 2000px){
-    .shop-wrapper{
+    /*.shop-wrapper{
         max-width: 2000px;
         margin: 0 auto;
     }
     .shop-sidebar{
         width: 400px;
-    }
+    }*/
 }
 @media (max-width: 1350px){
     .container{
