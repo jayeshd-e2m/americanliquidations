@@ -1873,7 +1873,7 @@ div#gform_1_validation_container .gform-icon {
   height: 600px;
   overflow-y: auto;
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #888 #f1f1f1; /* Firefox */
+  scrollbar-color: #fb0404 #FFFFFF;
 }
 
 /* Webkit-based browsers (Chrome, Safari, Edge) */
@@ -1882,18 +1882,14 @@ div#gform_1_validation_container .gform-icon {
 }
 
 .filter-dropdown-content::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #FFFFFF;
   border-radius: 10px;
 }
 
 .filter-dropdown-content::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: fb0404;
   border-radius: 10px;
-  border: 2px solid #f1f1f1;
-}
-
-.filter-dropdown-content::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  border: 2px solid #FFFFFF;
 }
 
 
