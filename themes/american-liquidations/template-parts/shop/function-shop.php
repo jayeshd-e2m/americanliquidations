@@ -49,6 +49,7 @@ function custom_shop_shortcode($atts) {
         </div>
         <div class="container flex gap-8 2xl:gap-12 flex-wrap md:flex-nowrap">
             <div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px]">
+                <span class="shop-sidebar-overlay"></span>
                 <div class="filter-wrapper">
                     <div class="filter-search mb-10">
                         <h4 class="mb-3 text-black/60 text-[24px]">Search Products</h4>

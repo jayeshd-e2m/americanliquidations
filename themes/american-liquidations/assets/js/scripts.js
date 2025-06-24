@@ -254,7 +254,7 @@ jQuery(document).ready(function($){
 function shopSidebarWidth(){
 	if(jQuery('.shop-sidebar').length){
 		var oLeft = jQuery('.shop-sidebar').offset().left;
-		jQuery('.shop-sidebar:after').css('right',oLeft);
+		jQuery('.shop-sidebar .shop-sidebar-overlay').css('right',oLeft);
 	}
 }
 
