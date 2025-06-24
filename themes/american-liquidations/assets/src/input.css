@@ -1955,6 +1955,8 @@ div#gform_1_validation_container .gform-icon {
 }
 
 @media (max-width: 767px){
+    .shop-sidebar{border-radius:15px;}
+    .shop-sidebar:after{content:'';display:none !important;}
     .container{
         padding-left: 30px;
         padding-right: 30px;
