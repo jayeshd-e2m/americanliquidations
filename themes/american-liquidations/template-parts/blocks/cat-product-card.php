@@ -18,7 +18,7 @@ global $product;
 				echo get_the_post_thumbnail($product->get_id(), 'medium');
 			} else {
 				// Update the path below to where your fallback image is stored
-				echo '<img src="' . esc_url(site_url()) . '/wp-content/uploads/woocommerce-placeholder.png" alt="No Image" class="w-full h-full object-cover" />';
+				echo '<img src="' . esc_url(site_url()) . '/wp-content/uploads/2025/06/placeholder-img.png" alt="No Image" class="w-full h-full object-cover" />';
 			}
 		echo '</a>';
 
