@@ -19,7 +19,7 @@ function custom_shop_shortcode($atts) {
         <div class="container text-center mb-7 lg:mb-24 featured-product-heading">
             <h2>Featured Products</h2>
         </div>
-        <div class="container flex gap-3 justify-center mb-8 md:hidden flex-wrap md:flex-nowrap px-7 md:px-0">
+        <div class="container flex gap-3 justify-center mb-8 md:hidden flex-wrap md:flex-nowrap">
             <div class="flex justify-end">
                 <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[10px] md:px-[20px]">
                     <span class="text-[14px] font-semibold flex items-center">
@@ -47,7 +47,7 @@ function custom_shop_shortcode($atts) {
                 </div>
             </div>
         </div>
-        <div class="container flex gap-8 2xl:gap-12 flex-wrap md:flex-nowrap px-[30px] md:px-0">
+        <div class="container flex gap-8 2xl:gap-12 flex-wrap md:flex-nowrap">
             <div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px] pl-0">
                 <div class="filter-wrapper">
                     <div class="filter-search mb-10">
