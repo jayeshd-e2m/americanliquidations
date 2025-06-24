@@ -1867,7 +1867,7 @@ div#gform_1_validation_container .gform-icon {
 /*.shop-wrapper{padding-right: 50px;padding-left: 50px;}*/
 
 .shop-sidebar{position:relative;border-radius: 0px 15px 15px 0px;padding-left:0px !important;}
-.shop-sidebar:after {content: '';display: block;position: absolute;top: 0;background: rgb(245 245 245/var(--tw-bg-opacity,1));height: 100%;right: 100%;width: 100vw;;border-radius:0;}
+.shop-sidebar:after {content: '';display: block;position: absolute;top: 0;background: rgb(245 245 245/var(--tw-bg-opacity,1));height: 100%;right: 100%;width: 100vw;;border-radius:15px 0 0 15px ;}
 
 
 .filter-dropdown-content {max-height: 500px;overflow-y: auto;scrollbar-width: thin;scrollbar-color: #fb0404 #ffffff;}
