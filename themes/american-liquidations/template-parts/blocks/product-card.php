@@ -14,7 +14,7 @@ global $product;
 		}
 		echo '<a href="'.esc_url(get_permalink($product->get_id())).'">';
         if (has_post_thumbnail($product->get_id())) {
-			echo get_the_post_thumbnail($product->get_id(), 'medium');
+			echo get_the_post_thumbnail($product->get_id(), 'full');
 		} else {
 			// Update the path below to where your fallback image is stored
 			echo '<img src="' . esc_url(site_url()) . '/wp-content/uploads/woocommerce-placeholder.png" alt="No Image" class="w-full h-full object-cover" />';

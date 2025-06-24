@@ -6,7 +6,8 @@ if (!is_a($product, 'WC_Product')) {
 global $product;
 ?>
 
-<div class="product-card rounded-[15px] bg-white relative overflow-hidden">
+
+<div class="product-card rounded-[15px] bg-white relative overflow-hidden flex flex-col h-full">
 
     <div class="product-card-img pt-[72%] bg-[#6988730D] rounded-[15px] relative overflow-hidden">
 		<?php if (!$product->is_in_stock()) {
@@ -25,29 +26,31 @@ global $product;
 		?>
     </div>
 
-    <div class="product-card-content pt-10 px-5 pb-7">
-        <h5 class="mb-4 is-title"><a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"><?php echo esc_html( get_the_title( $product->get_id() ) ); ?></a></h5>
-		<div class="flex justify-between gap-2 flex-wrap">
-			<p class="text-[18px] text-black font-medium font-barlow is-price">
-				<?php echo $product->get_price_html(); ?>
-				<?php if($product->get_meta('_msrp_price')){ 
-					$msrp = $product->get_meta('_msrp_price');
-					?> 
-					<span class="block text-[12px] text-[#C8C8C8] w-full">MSRP: <?php echo wc_price($msrp);?></span>
-				<?php }
+    <div class="product-card-content pt-10 px-5 pb-7 flex flex-col flex-grow">
+    	<div class="product-card-text flex-grow">
+	        <h5 class="mb-4 is-title"><a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"><?php echo esc_html( get_the_title( $product->get_id() ) ); ?></a></h5>
+			<div class="flex justify-between gap-2 flex-wrap">
+				<p class="text-[18px] text-black font-medium font-barlow is-price">
+					<?php echo $product->get_price_html(); ?>
+					<?php if($product->get_meta('_msrp_price')){ 
+						$msrp = $product->get_meta('_msrp_price');
+						?> 
+						<span class="block text-[12px] text-[#C8C8C8] w-full">MSRP: <?php echo wc_price($msrp);?></span>
+					<?php }
+					?>
+				</p>
+				<?php if(get_field('location', $product->get_id())){ ?>
+					<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt=""><?php echo get_field('location', $product->get_id()); ?></span>
+				<?php } ?>
+			</div>
+			<div class="font-medium mt-5 is-description text-sm lg:text-md">
+				<?php
+					$description = wp_strip_all_tags($product->get_short_description());
+					$words = explode(' ', $description);
+					$trimmed = implode(' ', array_slice($words, 0, 9));
+					echo esc_html($trimmed);
 				?>
-			</p>
-			<?php if(get_field('location', $product->get_id())){ ?>
-				<span class="text-[12px] font-semibold flex items-center gap-1 text-[#C8C8C8] font-barlow is-location"><img width="8" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/location.svg" alt=""><?php echo get_field('location', $product->get_id()); ?></span>
-			<?php } ?>
-		</div>
-		<div class="font-medium mt-5 is-description text-sm lg:text-md">
-			<?php
-				$description = wp_strip_all_tags($product->get_short_description());
-				$words = explode(' ', $description);
-				$trimmed = implode(' ', array_slice($words, 0, 9));
-				echo esc_html($trimmed);
-			?>
+			</div>
 		</div>
 		<div class="flex items-center gap-5 mt-6 is-buttons flex-wrap">
 			<a href="<?php echo esc_url(get_permalink($product->get_id())); ?>" class="btn" style="width: 100%;">BUY NOW</a>
