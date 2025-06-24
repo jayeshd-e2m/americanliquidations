@@ -1872,25 +1872,29 @@ div#gform_1_validation_container .gform-icon {
 .filter-dropdown-content {
   height: 600px;
   overflow-y: auto;
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #fb0404 #FFFFFF;
+  scrollbar-width: thin;
+  scrollbar-color: #fb0404 #ffffff;
 }
 
-/* Webkit-based browsers (Chrome, Safari, Edge) */
 .filter-dropdown-content::-webkit-scrollbar {
   width: 8px;
 }
 
 .filter-dropdown-content::-webkit-scrollbar-track {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 10px;
 }
 
 .filter-dropdown-content::-webkit-scrollbar-thumb {
-  background-color: fb0404;
+  background-color: #fb0404; /* Add the missing # */
   border-radius: 10px;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
 }
+
+.filter-dropdown-content::-webkit-scrollbar-thumb:hover {
+  background-color: #c90202;
+}
+
 
 
 @media (min-width: 1420px) {
