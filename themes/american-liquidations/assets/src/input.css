@@ -1865,36 +1865,15 @@ div#gform_1_validation_container .gform-icon {
 
 
 /*.shop-wrapper{padding-right: 50px;padding-left: 50px;}*/
-.filter-dropdown-content{max-height:600px;overflow-y: auto;}
+
 .shop-sidebar{position:relative;border-radius: 0px 15px 0px;padding-left:0px !important;}
 .shop-sidebar:after {content: '';display: block;position: absolute;top: 0;background: rgb(245 245 245/var(--tw-bg-opacity,1));height: 100%;right: 100%;width: 100vw;;border-radius:15px 0px 15px;}
 
-.filter-dropdown-content {
-  height: 500px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #fb0404 #ffffff;
-}
 
-.filter-dropdown-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.filter-dropdown-content::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-radius: 10px;
-}
-
-.filter-dropdown-content::-webkit-scrollbar-thumb {
-  background-color: #fb0404; /* Add the missing # */
-  border-radius: 10px;
-  border: 2px solid #ffffff;
-}
-
-.filter-dropdown-content::-webkit-scrollbar-thumb:hover {
-  background-color: #c90202;
-}
-
+.filter-dropdown-content {max-height: 500px;overflow-y: auto;scrollbar-width: thin;scrollbar-color: #fb0404 #ffffff;}
+.filter-dropdown-content::-webkit-scrollbar {width: 8px;}
+.filter-dropdown-content::-webkit-scrollbar-track {background: #ffffff;border-radius: 10px;}
+.filter-dropdown-content::-webkit-scrollbar-thumb {background-color: #fb0404;border-radius: 10px;border: 2px solid #ffffff;}
 
 
 @media (min-width: 1420px) {
