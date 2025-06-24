@@ -25,7 +25,7 @@ global $product;
 		?>
     </div>
 
-    <div class="abcd product-card-content pt-10 px-5 pb-7">
+    <div class="product-card-content pt-10 px-5 pb-7">
         <h5 class="mb-4 is-title"><a href="<?php echo esc_url(get_permalink($product->get_id())); ?>"><?php echo esc_html( get_the_title( $product->get_id() ) ); ?></a></h5>
 		<div class="flex justify-between gap-2 flex-wrap">
 			<p class="text-[18px] text-black font-medium font-barlow is-price">
