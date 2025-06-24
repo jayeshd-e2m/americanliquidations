@@ -1963,7 +1963,7 @@ div#gform_1_validation_container .gform-icon {
 }
 
 @media (max-width: 767px){
-    .shop-sidebar{border-radius:15px;    padding: 2rem;}
+    .shop-sidebar{border-radius:15px;    padding: 2rem !important;}
     .shop-sidebar:after{content:'';display:none !important;}
     .container{
         padding-left: 30px;
