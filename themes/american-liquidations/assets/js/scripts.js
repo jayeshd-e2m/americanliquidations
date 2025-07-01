@@ -83,6 +83,7 @@ jQuery(document).ready(function($){
 	// product add to cart button
 
 	$(document).on('click', '.custom-add-to-cart', function(e) {
+		e.preventDefault();
         var $btn = $(this);
         $btn.addClass('loading');
     });
