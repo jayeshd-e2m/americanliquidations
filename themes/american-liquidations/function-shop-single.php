@@ -128,11 +128,25 @@ function check_cart_compatibility() {
     $cart_has_other = false;
     foreach ($cart as $cart_item_key => $cart_item) {
         $cart_product_id = $cart_item['product_id'];
+
+        // Check if same product (for single quantity restriction)
+        if ($cart_product_id == $product_id) {
+            $same_product_in_cart = true;
+        }
+        
         if (has_term('truckloads', 'product_cat', $cart_product_id)) {
             $cart_has_truckload = true;
         } else {
             $cart_has_other = true;
         }
+    }
+
+    // 1. Enforce single quantity per product
+    if ($same_product_in_cart) {
+        wp_send_json_error(array(
+            'error_type' => 'single_quantity'
+        ));
+        return;
     }
 
     if ($is_truckload && $cart_has_other) {
