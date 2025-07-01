@@ -27,16 +27,43 @@
         <!-- Price Filter -->
         <div class="filter-dropdown mb-10">
 			<h5 class="filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold text-[18px]">Price</span> <span class="dropdown-arrow"></span></h5>
+			
+			<?php
+			global $wpdb;
 
+			// Get min price
+			$min_price = $wpdb->get_var("
+				SELECT MIN(CAST(pm.meta_value AS UNSIGNED))
+				FROM {$wpdb->posts} p
+				INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+				WHERE p.post_type = 'product'
+				AND p.post_status = 'publish'
+				AND pm.meta_key = '_price'
+			");
+
+			// Get max price
+			$max_price = $wpdb->get_var("
+				SELECT MAX(CAST(pm.meta_value AS UNSIGNED))
+				FROM {$wpdb->posts} p
+				INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+				WHERE p.post_type = 'product'
+				AND p.post_status = 'publish'
+				AND pm.meta_key = '_price'
+			");
+
+			// Provide fallback if empty (e.g. no products)
+			if(!$min_price) $min_price = 0;
+			if(!$max_price) $max_price = 1000; // fallback
+			?>
 			<div class="price-range-wrapper">
 				<input type="text" id="price-range" name="price_range" value="" />
 				<div class="flex justify-between text-[12px] mt-2 font-medium">
-					<span>$<span id="min-price-label">100</span></span>
-					<span>$<span id="max-price-label">1000</span></span>
+					<span>$<span id="min-price-label"><?php echo number_format($min_price); ?></span></span>
+					<span>$<span id="max-price-label"><?php echo number_format($max_price); ?></span></span>
 				</div>
 				<!-- Hidden inputs for form data -->
-				<input type="hidden" name="min_price" id="min-price" value="100">
-				<input type="hidden" name="max_price" id="max-price" value="100000">
+				<input type="hidden" name="min_price" id="min-price" value="<?php echo esc_attr($min_price); ?>">
+				<input type="hidden" name="max_price" id="max-price" value="<?php echo esc_attr($max_price); ?>">
 			</div>
 		</div>
 

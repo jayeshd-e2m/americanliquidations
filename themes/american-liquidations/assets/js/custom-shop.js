@@ -65,12 +65,15 @@ jQuery(document).ready(function($) {
     // Optionally trigger initial load on page ready (if needed)
     // fetchFilteredProducts(1);
 
+    var minPrice = parseInt($('.price-range-wrapper').data('minprice'));
+    var maxPrice = parseInt($('.price-range-wrapper').data('maxprice'));
+
     $("#price-range").ionRangeSlider({
         type: "double",
-        min: 0,
-        max: 10000,
-        from: 100,
-        to: 10000,
+        min: minPrice,
+        max: maxPrice,
+        from: minPrice,
+        to: maxPrice,
         prefix: "$",
         skin: "round",
         onStart: function (data) {
