@@ -55,7 +55,7 @@
 			if(!$min_price) $min_price = 0;
 			if(!$max_price) $max_price = 1000; // fallback
 			?>
-			<div class="price-range-wrapper">
+			<div class="price-range-wrapper" data-minprice="<?php echo esc_attr($min_price); ?>" data-maxprice="<?php echo esc_attr($max_price); ?>">
 				<input type="text" id="price-range" name="price_range" value="" />
 				<div class="flex justify-between text-[12px] mt-2 font-medium">
 					<span>$<span id="min-price-label"><?php echo number_format($min_price); ?></span></span>
