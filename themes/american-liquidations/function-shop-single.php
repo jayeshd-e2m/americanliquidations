@@ -109,7 +109,6 @@ function check_cart_compatibility() {
 
     $product = wc_get_product($product_id);
 
-    
     if (!$product->is_in_stock()) {
         wp_send_json_error(array(
             'message'    => 'Out of stock',
@@ -126,14 +125,12 @@ function check_cart_compatibility() {
     
     $cart_has_truckload = false;
     $cart_has_other = false;
+    $cart_quantity = 0;
     foreach ($cart as $cart_item_key => $cart_item) {
         $cart_product_id = $cart_item['product_id'];
-
-        // Check if same product (for single quantity restriction)
         if ($cart_product_id == $product_id) {
-            $same_product_in_cart = true;
+            $cart_quantity += $cart_item['quantity'];
         }
-        
         if (has_term('truckloads', 'product_cat', $cart_product_id)) {
             $cart_has_truckload = true;
         } else {
@@ -141,10 +138,18 @@ function check_cart_compatibility() {
         }
     }
 
-    // 1. Enforce single quantity per product
-    if ($same_product_in_cart) {
+    $max_allowed = $product->get_stock_quantity();
+    $requested_quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+
+    if ($max_allowed === 1 && ($cart_quantity + $requested_quantity > 1)) {
         wp_send_json_error(array(
             'error_type' => 'single_quantity'
+        ));
+        return;
+    }
+    if ($max_allowed !== null && ($cart_quantity + $requested_quantity > $max_allowed)) {
+        wp_send_json_error(array(
+            'error_type' => 'out_of_stock' // or 'too_many'
         ));
         return;
     }
@@ -156,9 +161,7 @@ function check_cart_compatibility() {
         wp_send_json_error(array('error_type' => 'truckload_in_cart'));
         return;
     }
-    
 
-    
     wp_send_json_success();
 }
 
