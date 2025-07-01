@@ -229,11 +229,11 @@
 <div id="cart-single-quantity-popup" class="cart-popup-overlay fixed bg-black/60 top-0 left-0 w-full h-full z-[9999] flex items-center justify-center" style="display: none;">
     <div class="cart-popup-content p-12 bg-white max-w-[835px] mx-auto rounded-[20px]">
         <div class="cart-popup-header flex justify-between gap-10">
-            <h4>Sorry, you can only purchase one of this product.</h4>
+            <h4>Sorry, Only one product is left.</h4>
             <button class="cart-popup-close"><img src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/menu-close.svg" alt=""></button>
         </div>
         <div class="cart-popup-body font-medium text-black/40 mt-6">
-            <p>There is already one of this product in your cart. You cannot add more than one.</p>
+            <p>It's already in your cart and you cannot add more of this product.</p>
         </div>
     </div>
 </div>
