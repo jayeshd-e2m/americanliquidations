@@ -539,6 +539,9 @@ function custom_filter_payment_gateways_by_category( $available_gateways ) {
         }
     }
 
+	echo "\n<!-- Available gateways: " . print_r( $available_gateways, true ) . " -->\n";
+
+	wp_notice($available_gateways);
     // Enable ACH payment (Stripe) only if truckloads found in cart
     if ( ! $found_truckload ) {
         // Change 'stripe_ach' to the gateway ID for your ACH payment
