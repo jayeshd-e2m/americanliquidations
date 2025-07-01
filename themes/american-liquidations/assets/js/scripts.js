@@ -94,97 +94,98 @@ jQuery(document).ready(function($){
 
 	// Gravity form
 	function customFileUploadDesign(formId) {
-		console.log('inside');
-		const fileInput = document.querySelector("#input_2_8");
-		// if (!fileInput) return;
-	
-		const container = fileInput.parentNode;
-	
-		// Remove any previous custom UI to avoid duplicates
-		const existingCustomBox = container.querySelector('.custom-upload-wrapper');
-		if (existingCustomBox) existingCustomBox.remove();
-	
-		// Check if GF's server-side preview for this field is present
-		const previewList = container.querySelector('.ginput_preview_list');
-	
-		// Watch for deletion of the preview list (GF's delete button)
-		if (previewList) {
-			const observer = new MutationObserver(function (mutations) {
-				mutations.forEach(function (mutation) {
-					// If any children were removed (file preview was deleted)
-					if (mutation.type === "childList") {
-						// Check if the previewList is now empty
-						if (previewList.children.length === 0) {
-							// Remove previewList from DOM so it doesn't block rendering
-							previewList.remove();
-							// Re-render custom UI
-							customFileUploadDesign(formId);
+		if(jQuery('#input_2_8').length){
+			const fileInput = document.querySelector("#input_2_8");
+			// if (!fileInput) return;
+		
+			const container = fileInput.parentNode;
+		
+			// Remove any previous custom UI to avoid duplicates
+			const existingCustomBox = container.querySelector('.custom-upload-wrapper');
+			if (existingCustomBox) existingCustomBox.remove();
+		
+			// Check if GF's server-side preview for this field is present
+			const previewList = container.querySelector('.ginput_preview_list');
+		
+			// Watch for deletion of the preview list (GF's delete button)
+			if (previewList) {
+				const observer = new MutationObserver(function (mutations) {
+					mutations.forEach(function (mutation) {
+						// If any children were removed (file preview was deleted)
+						if (mutation.type === "childList") {
+							// Check if the previewList is now empty
+							if (previewList.children.length === 0) {
+								// Remove previewList from DOM so it doesn't block rendering
+								previewList.remove();
+								// Re-render custom UI
+								customFileUploadDesign(formId);
+							}
 						}
-					}
+					});
 				});
-			});
+			
+				observer.observe(previewList, { childList: true, subtree: false });
+			
+				// Hide file input while native preview exists
+				fileInput.style.display = "none";
+				return;
+			}
 		
-			observer.observe(previewList, { childList: true, subtree: false });
+			// Otherwise, render our custom UI
+			const wrapper = document.createElement('div');
+			wrapper.className = 'custom-upload-wrapper';
+			container.insertBefore(wrapper, fileInput);
 		
-			// Hide file input while native preview exists
-			fileInput.style.display = "none";
-			return;
-		}
-	
-		// Otherwise, render our custom UI
-		const wrapper = document.createElement('div');
-		wrapper.className = 'custom-upload-wrapper';
-		container.insertBefore(wrapper, fileInput);
-	
-		// Hide the actual file input for styling
-		fileInput.style.display = 'none';
-	
-		function renderUploadBox() {
-			wrapper.innerHTML = '';
-			const uploadBox = document.createElement('div');
-			uploadBox.className = 'upload-box';
-			uploadBox.textContent = "+ Upload a File";
-			uploadBox.addEventListener("click", function () {
-				fileInput.click();
-			});
-			wrapper.appendChild(uploadBox);
-		}
-	
-		function renderFileBox(file) {
-			wrapper.innerHTML = '';
-			const fileBox = document.createElement('div');
-			fileBox.className = 'file-box';
-			fileBox.textContent = file.name;
-	
-			const deleteBtn = document.createElement('span');
-			deleteBtn.className = 'dashicons dashicons-trash';
-			deleteBtn.innerHTML = '';
-			deleteBtn.title = "Delete File";
-			deleteBtn.style.cursor = "pointer";
-			deleteBtn.style.marginLeft = "12px";
-			deleteBtn.addEventListener('click', function() {
-				fileInput.value = '';
-				renderUploadBox();
-			});
-			fileBox.appendChild(deleteBtn);
-			wrapper.appendChild(fileBox);
-		}
-	
-		// Initial render
-		if (fileInput.files && fileInput.files.length > 0) {
-			renderFileBox(fileInput.files[0]);
-		} else {
-			renderUploadBox();
-		}
-	
-		// Keep in sync as user interacts
-		fileInput.addEventListener("change", function () {
+			// Hide the actual file input for styling
+			fileInput.style.display = 'none';
+		
+			function renderUploadBox() {
+				wrapper.innerHTML = '';
+				const uploadBox = document.createElement('div');
+				uploadBox.className = 'upload-box';
+				uploadBox.textContent = "+ Upload a File";
+				uploadBox.addEventListener("click", function () {
+					fileInput.click();
+				});
+				wrapper.appendChild(uploadBox);
+			}
+		
+			function renderFileBox(file) {
+				wrapper.innerHTML = '';
+				const fileBox = document.createElement('div');
+				fileBox.className = 'file-box';
+				fileBox.textContent = file.name;
+		
+				const deleteBtn = document.createElement('span');
+				deleteBtn.className = 'dashicons dashicons-trash';
+				deleteBtn.innerHTML = '';
+				deleteBtn.title = "Delete File";
+				deleteBtn.style.cursor = "pointer";
+				deleteBtn.style.marginLeft = "12px";
+				deleteBtn.addEventListener('click', function() {
+					fileInput.value = '';
+					renderUploadBox();
+				});
+				fileBox.appendChild(deleteBtn);
+				wrapper.appendChild(fileBox);
+			}
+		
+			// Initial render
 			if (fileInput.files && fileInput.files.length > 0) {
 				renderFileBox(fileInput.files[0]);
 			} else {
 				renderUploadBox();
 			}
-		});
+		
+			// Keep in sync as user interacts
+			fileInput.addEventListener("change", function () {
+				if (fileInput.files && fileInput.files.length > 0) {
+					renderFileBox(fileInput.files[0]);
+				} else {
+					renderUploadBox();
+				}
+			});
+		}
 	}
 	
 	// Listen for GF render events and initial load
