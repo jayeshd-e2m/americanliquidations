@@ -509,3 +509,41 @@ add_action( 'wp_logout', function() {
     wp_redirect( home_url( '/my-account/' ) );
     exit;
 });
+
+
+// Payment for Truckloads and other categories
+
+add_filter( 'woocommerce_available_payment_gateways', 'custom_filter_payment_gateways_by_category' );
+
+function custom_filter_payment_gateways_by_category( $available_gateways ) {
+    if ( is_admin() ) {
+        return $available_gateways;
+    }
+
+    // Replace 'truckloads' with your actual truckloads category slug
+    $category_slug = 'truckloads';
+
+    $found_truckload = false;
+
+    // Loop through cart items
+    foreach ( WC()->cart->get_cart() as $cart_item ) {
+        $product_id = $cart_item['product_id'];
+        $terms = get_the_terms( $product_id, 'product_cat' );
+        if ( $terms && ! is_wp_error( $terms ) ) {
+            foreach ( $terms as $term ) {
+                if ( $term->slug === $category_slug ) {
+                    $found_truckload = true;
+                    break 2;
+                }
+            }
+        }
+    }
+
+    // Enable ACH payment (Stripe) only if truckloads found in cart
+    if ( ! $found_truckload ) {
+        // Change 'stripe_ach' to the gateway ID for your ACH payment
+        unset( $available_gateways['stripe_ach'] );
+    }
+
+    return $available_gateways;
+}
