@@ -43,7 +43,7 @@
 		<div class="cta-inner relative max-w-[820px] mx-auto text-center">
 			<h2 class="text-white mb-5"><?php echo get_field('cta_title','option'); ?></h2>
 			<div class="max-w-[720px] mx-auto text-white/60"><?php echo get_field('cta_content','option'); ?></div>
-			<div class="subscribe-cover text-white/60 mt-5">
+			<div class="subscribe-cover text-white mt-5">
 				<?php echo do_shortcode('[gravityform id="3" title="false"]'); ?>
 			</div>
 		</div>
