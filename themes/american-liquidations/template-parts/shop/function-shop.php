@@ -71,7 +71,7 @@ function custom_shop_shortcode($atts) {
 								<img class="mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
                                 <span class="w-[80px] text-black/30">Filter by: </span>
 							</span>
-							<select name="stock_status" id="stock-status-desktop" class="w-full border-none outline-none text-black font-semibold">
+							<select name="stock_status" id="stock-status-desktop" class="w-full border-none !outline-none text-black font-semibold">
 								<option value="">Stock</option>
 								<option value="instock">In</option>
 								<option value="outofstock">Out</option>
@@ -84,7 +84,7 @@ function custom_shop_shortcode($atts) {
 								<img class="mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/sort-by-price.svg" alt="">
                                 <span class="w-[75px] text-black/30">Sort by:</span>
 							</span>
-							<select name="price_low_high" id="sort-price-dropdown-desktop" class="w-full border-none outline-none text-black font-semibold">
+							<select name="price_low_high" id="sort-price-dropdown-desktop" class="w-full border-none !outline-none text-black font-semibold">
 								<option value="">Price</option>
 								<option value="price_asc">Low</option>
 								<option value="price_desc">High</option>
