@@ -38,7 +38,7 @@
 <?php } ?>
 
 <?php $cta_bg =  get_field('cta_bg','option')?>
-<div class="cta-block relative py-[90px]" style="background-image: url(<?php echo $cta_bg['url']; ?>); background-size: cover;background-position: center;">
+<div class="cta-block relative py-[90px]" id="subscribe-form" style="background-image: url(<?php echo $cta_bg['url']; ?>); background-size: cover;background-position: center;">
 	<div class="container">
 		<div class="cta-inner relative max-w-[820px] mx-auto text-center">
 			<h2 class="text-white mb-5"><?php echo get_field('cta_title','option'); ?></h2>
