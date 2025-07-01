@@ -228,6 +228,7 @@
 <script>
 jQuery(document).ready(function($) {
 	$('.custom-add-to-cart').on('click', function(e) {
+		console.log('clicked');
 		e.preventDefault();
 
 		var $button = $(this);
