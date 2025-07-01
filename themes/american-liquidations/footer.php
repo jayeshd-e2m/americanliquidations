@@ -227,7 +227,7 @@
 
 <script>
 jQuery(document).ready(function($) {
-	$('.custom-add-to-cart').on('click', function(e) {
+	$(document).on('click','.custom-add-to-cart', function(e) {
 		console.log('clicked');
 		e.preventDefault();
 
