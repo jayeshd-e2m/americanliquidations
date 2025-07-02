@@ -92,4 +92,5 @@ if ( $customer_orders ) : ?>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<?php echo do_shortcode('[simpay id="9050"]'); ?>
 <?php endif; ?>

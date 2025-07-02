@@ -65,7 +65,7 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 		<?php endforeach; ?>
 	</table>
 
-	<?php echo do_shortcode('[simpay id="9048"]'); ?>
+	
 
 <?php else : ?>
 
