@@ -65,6 +65,8 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 		<?php endforeach; ?>
 	</table>
 
+	<?php echo do_shortcode('[simpay id="9048"]'); ?>
+
 <?php else : ?>
 
 	<?php wc_print_notice( esc_html__( 'No saved methods found.', 'woocommerce' ), 'notice' ); ?>
