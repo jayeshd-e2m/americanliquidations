@@ -513,36 +513,36 @@ add_action( 'wp_logout', function() {
 
 // Payment for Truckloads and other categories
 
-add_filter( 'woocommerce_available_payment_gateways', 'custom_filter_payment_gateways_by_category' );
-function custom_filter_payment_gateways_by_category( $available_gateways ) {
-    if ( is_admin() ) {
-        return $available_gateways;
-    }
+// add_filter( 'woocommerce_available_payment_gateways', 'custom_filter_payment_gateways_by_category' );
+// function custom_filter_payment_gateways_by_category( $available_gateways ) {
+//     if ( is_admin() ) {
+//         return $available_gateways;
+//     }
 
-    $category_slug = 'truckloads';
-    $found_truckload = false;
+//     $category_slug = 'truckloads';
+//     $found_truckload = false;
 
-    foreach ( WC()->cart->get_cart() as $cart_item ) {
-        $product_id = $cart_item['product_id'];
-        if ( has_term( $category_slug, 'product_cat', $product_id ) ) {
-            $found_truckload = true;
-            break;
-        }
-    }
+//     foreach ( WC()->cart->get_cart() as $cart_item ) {
+//         $product_id = $cart_item['product_id'];
+//         if ( has_term( $category_slug, 'product_cat', $product_id ) ) {
+//             $found_truckload = true;
+//             break;
+//         }
+//     }
     
-    // For debugging: error_log(print_r($available_gateways, true));
+//     // For debugging: error_log(print_r($available_gateways, true));
 
-    if ( $found_truckload ) {
-        // Only enable stripe_ach -- remove all others
-        foreach ( $available_gateways as $gateway_id => $gateway ) {
-            if ( $gateway_id !== 'stripe_ach' ) {
-                unset( $available_gateways[ $gateway_id ] );
-            }
-        }
-    } else {
-        // Remove stripe_ach if not a truckload
-        unset( $available_gateways['stripe_ach'] );
-    }
+//     if ( $found_truckload ) {
+//         // Only enable stripe_ach -- remove all others
+//         foreach ( $available_gateways as $gateway_id => $gateway ) {
+//             if ( $gateway_id !== 'stripe_ach' ) {
+//                 unset( $available_gateways[ $gateway_id ] );
+//             }
+//         }
+//     } else {
+//         // Remove stripe_ach if not a truckload
+//         unset( $available_gateways['stripe_ach'] );
+//     }
 
-    return $available_gateways;
-}
+//     return $available_gateways;
+// }
