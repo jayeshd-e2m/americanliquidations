@@ -533,16 +533,16 @@ function custom_filter_payment_gateways_by_category( $available_gateways ) {
     // For debugging: error_log(print_r($available_gateways, true));
 
     if ( $found_truckload ) {
-        // Only enable stripe_ach -- remove all others
+        // Only enable plaid_ach -- remove all others
         foreach ( $available_gateways as $gateway_id => $gateway ) {
-            if ( $gateway_id !== 'stripe_ach' ) {
+            if ( $gateway_id !== 'plaid_ach' ) {
                 unset( $available_gateways[ $gateway_id ] );
             }
         }
     } else {
-        // Remove stripe_ach if not a truckload
-        unset( $available_gateways['stripe_ach'] );
+        // Remove plaid_ach if not a truckload
+        unset( $available_gateways['plaid_ach'] );
     }
 
     return $available_gateways;
-}
+} 
