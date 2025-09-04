@@ -41,7 +41,7 @@ function custom_shopitem_shortcode( $atts ) {
         }
         echo '</div>';
     } else {
-        echo '<p>No products found in this category.</p>';
+        echo '<p class="text-center">No products found in this category.</p>';
     }
 
     wp_reset_postdata();
