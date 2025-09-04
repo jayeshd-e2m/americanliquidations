@@ -42,7 +42,7 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 			echo '</div>';
 			wp_reset_postdata();
 		} else {
-			echo '<p>No Truck Load products available at the moment.</p>';
+			echo '<p class="mt-4 text-center">No Truck Load products available at the moment.</p>';
 		}
 		?>
 		<div class="text-center mt-12">
