@@ -546,3 +546,6 @@ function custom_filter_payment_gateways_by_category( $available_gateways ) {
 
     return $available_gateways;
 } 
+
+//disable shipping and only allow pickup
+add_filter( 'woocommerce_cart_needs_shipping', '__return_false' );
