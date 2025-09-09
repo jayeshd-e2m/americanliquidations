@@ -54,7 +54,7 @@
 		?>
 
         <!-- Price Filter -->
-        <div class="filter-dropdown mb-10">
+        <div class="filter-dropdown my-10">
 			<h5 class="filter-dropdown-heading relative"><span class="opacity-60 text-black font-bold text-[18px]">Price</span> <span class="dropdown-arrow"></span></h5>
 			
 			<?php
