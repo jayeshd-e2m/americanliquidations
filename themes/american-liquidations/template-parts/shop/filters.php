@@ -2,27 +2,42 @@
 
     <form id="custom-shop-filters">
         <!-- Categories (radio) -->
-		 <input type="search" name="initial_search" id="initial_search" style="display:none;" val="<?php echo $search_keyword = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : ''; ?>">
-        <div class="filter-dropdown mb-10">
-            <h5 class="mb-4 filter-dropdown-heading relative text-[18px]"><span class="opacity-60 text-black font-bold">Categories</span> <span class="dropdown-arrow"></span></h5>
-			<div class="filter-dropdown-content space-y-4">
-				<?php
-				$preselected_cat = get_query_var('preselected_cat');
-				$terms = get_terms('product_cat', ['hide_empty' => true]);
-				
-				$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
-				?>
-				<input type="hidden" name="initial_category" id="initial_category" value="<?php echo esc_attr($selected_category); ?>">
-				<?php 
-				foreach ($terms as $term) {
-					$checked = ($term->slug === $selected_category) ? 'checked' : '';
-					echo '<div>';
-					echo '<label class="font-medium custom-radio-box"><input type="radio" name="categories" value="' . esc_attr($term->slug) . '" ' . $checked . '><span class="input-radio-custom"></span>' . esc_html($term->name) . '</label>';
-					echo '</div>';
-				}
-				?>
-			</div>
-        </div>
+		<?php
+		$preselected_cat = get_query_var('preselected_cat');
+		$terms = get_terms([
+			'taxonomy' => 'product_cat',
+			'hide_empty' => true,
+			'parent' => 0, // Only top-level categories (parents)
+		]);
+		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
+		?>
+		<input type="hidden" name="initial_category" id="initial_category" value="<?php echo esc_attr($selected_category); ?>">
+		<?php
+		foreach ($terms as $parent) {
+			$checked = ($parent->slug === $selected_category) ? 'checked' : '';
+			echo '<div>';
+			echo '<label class="font-medium custom-radio-box">';
+			echo '<input type="radio" name="categories" value="' . esc_attr($parent->slug) . '" ' . $checked . '>';
+			echo '<span class="input-radio-custom"></span>' . esc_html($parent->name) . '</label>';
+
+			// Now fetch direct children for this parent
+			$children = get_terms([
+				'taxonomy' => 'product_cat',
+				'hide_empty' => true,
+				'parent' => $parent->term_id,
+			]);
+			foreach ($children as $child) {
+				$checked_child = ($child->slug === $selected_category) ? 'checked' : '';
+				echo '<div style="margin-left: 20px; margin-top: 10px;">';
+				echo '<label class="font-medium custom-radio-box">';
+				echo '<input type="radio" name="categories" value="' . esc_attr($child->slug) . '" ' . $checked_child . '>';
+				echo '<span class="input-radio-custom"></span>' . esc_html($child->name) . '</label>';
+				echo '</div>';
+			}
+
+			echo '</div>'; // end parent container
+		}
+		?>
 
         <!-- Price Filter -->
         <div class="filter-dropdown mb-10">
