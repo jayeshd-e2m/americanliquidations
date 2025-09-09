@@ -6,7 +6,7 @@
 		$preselected_cat = get_query_var('preselected_cat');
 		$terms = get_terms([
 			'taxonomy' => 'product_cat',
-			'hide_empty' => true,
+			'hide_empty' => false,
 			'parent' => 0, // Only top-level categories (parents)
 		]);
 		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
@@ -15,7 +15,7 @@
 		$preselected_cat = get_query_var('preselected_cat');
 		$terms = get_terms([
 			'taxonomy' => 'product_cat',
-			'hide_empty' => true,
+			'hide_empty' => false,
 			'parent' => 0, // Only top-level categories (parents)
 		]);
 		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
