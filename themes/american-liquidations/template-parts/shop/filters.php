@@ -35,7 +35,9 @@
 				'hide_empty' => true,
 				'parent' => $parent->term_id,
 			]);
-			echo '<div class="ml-5 mb-3">';
+			if($children){
+				echo '<div class="ml-5 mb-3">';
+			}
 			foreach ($children as $child) {
 				$checked_child = ($child->slug === $selected_category) ? 'checked' : '';
 				echo '<div>';
@@ -44,7 +46,9 @@
 				echo '<span class="input-radio-custom"></span>' . esc_html($child->name) . '</label>';
 				echo '</div>';
 			}
-			echo '</div>';
+			if($children){
+				echo '</div>';
+			}
 			echo '</div>'; // end parent container
 		}
 		?>
