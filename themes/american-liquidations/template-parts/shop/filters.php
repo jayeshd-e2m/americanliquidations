@@ -11,15 +11,6 @@
 		]);
 		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
 		?>
-		<?php
-		$preselected_cat = get_query_var('preselected_cat');
-		$terms = get_terms([
-			'taxonomy' => 'product_cat',
-			'hide_empty' => false,
-			'parent' => 0, // Only top-level categories (parents)
-		]);
-		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
-		?>
 		<input type="hidden" name="initial_category" id="initial_category" value="<?php echo esc_attr($selected_category); ?>">
 		<?php
 		foreach ($terms as $parent) {
