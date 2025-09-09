@@ -35,15 +35,16 @@
 				'hide_empty' => true,
 				'parent' => $parent->term_id,
 			]);
+			echo '<div class="ml-5 mb-3">';
 			foreach ($children as $child) {
 				$checked_child = ($child->slug === $selected_category) ? 'checked' : '';
-				echo '<div class="ml-5 mb-3">';
+				echo '<div>';
 				echo '<label class="font-medium custom-radio-box">';
 				echo '<input type="radio" name="categories" value="' . esc_attr($child->slug) . '" ' . $checked_child . '>';
 				echo '<span class="input-radio-custom"></span>' . esc_html($child->name) . '</label>';
 				echo '</div>';
 			}
-
+			echo '</div>';
 			echo '</div>'; // end parent container
 		}
 		?>
