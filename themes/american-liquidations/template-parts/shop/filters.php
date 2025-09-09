@@ -36,7 +36,7 @@
 				'parent' => $parent->term_id,
 			]);
 			if($children){
-				echo '<div class="ml-5 mb-3">';
+				echo '<div class="ml-5 mb-3 mt-1">';
 			}
 			foreach ($children as $child) {
 				$checked_child = ($child->slug === $selected_category) ? 'checked' : '';
