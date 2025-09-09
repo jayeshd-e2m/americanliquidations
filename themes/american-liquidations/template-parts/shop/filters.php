@@ -11,6 +11,15 @@
 		]);
 		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
 		?>
+		<?php
+		$preselected_cat = get_query_var('preselected_cat');
+		$terms = get_terms([
+			'taxonomy' => 'product_cat',
+			'hide_empty' => true,
+			'parent' => 0, // Only top-level categories (parents)
+		]);
+		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
+		?>
 		<input type="hidden" name="initial_category" id="initial_category" value="<?php echo esc_attr($selected_category); ?>">
 		<?php
 		foreach ($terms as $parent) {
@@ -26,17 +35,14 @@
 				'hide_empty' => true,
 				'parent' => $parent->term_id,
 			]);
-			
-				echo '<div class="ml-5 mb-2">';
 			foreach ($children as $child) {
 				$checked_child = ($child->slug === $selected_category) ? 'checked' : '';
-				echo '<div>';
+				echo '<div class="ml-5 mb-3">';
 				echo '<label class="font-medium custom-radio-box">';
 				echo '<input type="radio" name="categories" value="' . esc_attr($child->slug) . '" ' . $checked_child . '>';
 				echo '<span class="input-radio-custom"></span>' . esc_html($child->name) . '</label>';
 				echo '</div>';
 			}
-				echo '</div>'
 
 			echo '</div>'; // end parent container
 		}
