@@ -24,7 +24,7 @@
 		<?php
 		foreach ($terms as $parent) {
 			$checked = ($parent->slug === $selected_category) ? 'checked' : '';
-			echo '<div class=" mb-3">';
+			echo '<div class="mb-4">';
 			echo '<label class="font-medium custom-radio-box">';
 			echo '<input type="radio" name="categories" value="' . esc_attr($parent->slug) . '" ' . $checked . '>';
 			echo '<span class="input-radio-custom"></span>' . esc_html($parent->name) . '</label>';
@@ -41,7 +41,7 @@
 			}
 			foreach ($children as $child) {
 				$checked_child = ($child->slug === $selected_category) ? 'checked' : '';
-				echo '<div class="mb-1">';
+				echo '<div class="mb-2">';
 				echo '<label class="font-medium custom-radio-box">';
 				echo '<input type="radio" name="categories" value="' . esc_attr($child->slug) . '" ' . $checked_child . '>';
 				echo '<span class="input-radio-custom"></span>' . esc_html($child->name) . '</label>';
