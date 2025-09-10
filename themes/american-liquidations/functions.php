@@ -549,3 +549,25 @@ function custom_filter_payment_gateways_by_category( $available_gateways ) {
 
 //disable shipping and only allow pickup
 add_filter( 'woocommerce_cart_needs_shipping', '__return_false' );
+
+
+add_action( 'pre_get_posts', 'show_only_selected_categories_in_shop' );
+function show_only_selected_categories_in_shop( $q ) {
+    if ( ! is_admin() && $q->is_main_query() && is_shop() ) {
+        $q->set( 'tax_query', array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field'    => 'slug',
+                'terms'    => array( 
+                    'amazon-pallets', 'amz-apparel-p', 'amz-gm-p', 'amz-hba-p','amz-shoes-p',
+                    'bjs-pallets', 'bj-gm-p',
+                    'home-depot-pallets', 'hd-gm-p', 'hd-ope-p',
+					'macys-pallets', 'mcy-apparel-p', 'mcy-gm-p',
+					'sams-club', 'sc-apparel-p', 'sc-gm-p',
+					'target', 'tgt-gm-p', 'tgt-apparel-p',
+                ),
+                'operator' => 'IN',
+            ),
+        ));
+    }
+}
