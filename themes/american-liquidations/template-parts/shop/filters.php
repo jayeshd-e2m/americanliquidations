@@ -3,11 +3,20 @@
     <form id="custom-shop-filters">
         <!-- Categories (radio) -->
 		<?php
+		$allowed_category_slugs = [
+			'amazon-pallets', 'amz-apparel-p', 'amz-gm-p', 'amz-hba-p','amz-shoes-p',
+			'bjs-pallets', 'bj-gm-p',
+			'home-depot-pallets', 'hd-gm-p', 'hd-ope-p',
+			'macys-pallets', 'mcy-apparel-p', 'mcy-gm-p',
+			'sams-club', 'sc-apparel-p', 'sc-gm-p',
+			'target', 'tgt-gm-p', 'tgt-apparel-p',
+		];
 		$preselected_cat = get_query_var('preselected_cat');
 		$terms = get_terms([
 			'taxonomy' => 'product_cat',
 			'hide_empty' => false,
-			'parent' => 0, // Only top-level categories (parents)
+			'parent' => 0,
+			'slug' => $allowed_category_slugs,
 		]);
 		$selected_category = isset($_GET['categories']) ? sanitize_text_field($_GET['categories']) : $preselected_cat;
 		?>
@@ -25,6 +34,7 @@
 				'taxonomy' => 'product_cat',
 				'hide_empty' => true,
 				'parent' => $parent->term_id,
+				'slug' => $allowed_category_slugs
 			]);
 			if($children){
 				echo '<div class="ml-5 mt-1">';
