@@ -37,7 +37,7 @@
 				'slug' => $allowed_category_slugs
 			]);
 			if($children){
-				echo '<div class="ml-5 mt-1">';
+				echo '<div class="ml-5 mt-2">';
 			}
 			foreach ($children as $child) {
 				$checked_child = ($child->slug === $selected_category) ? 'checked' : '';
