@@ -32,7 +32,7 @@
 			// Now fetch direct children for this parent
 			$children = get_terms([
 				'taxonomy' => 'product_cat',
-				'hide_empty' => true,
+				'hide_empty' => false,
 				'parent' => $parent->term_id,
 				'slug' => $allowed_category_slugs
 			]);
