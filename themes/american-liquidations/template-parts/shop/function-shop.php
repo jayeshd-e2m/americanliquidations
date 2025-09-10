@@ -124,6 +124,15 @@ add_shortcode('custom_shop', 'custom_shop_shortcode');
 
 // Function to get filtered products and pagination HTML separately
 function custom_ajax_shop_products($filters = []) {
+    $allowed_category_slugs = [
+        'amazon-pallets', 'amz-apparel-p', 'amz-gm-p', 'amz-hba-p','amz-shoes-p',
+        'bjs-pallets', 'bj-gm-p',
+        'home-depot-pallets', 'hd-gm-p', 'hd-ope-p',
+        'macys-pallets', 'mcy-apparel-p', 'mcy-gm-p',
+        'sams-club', 'sc-apparel-p', 'sc-gm-p',
+        'target', 'tgt-gm-p', 'tgt-apparel-p',
+    ];
+
     $paged = !empty($filters['paged']) ? intval($filters['paged']) : 1;
 
     $args = [
@@ -136,23 +145,30 @@ function custom_ajax_shop_products($filters = []) {
     $tax_query = [];
     $meta_query = [];
 
-    // Preselected category from shortcode
+    $requested_cats = [];
+
+    // If user or shortcode is requesting specific category/categories, validate them
     if (!empty($filters['category'])) {
-        $tax_query[] = [
-            'taxonomy' => 'product_cat',
-            'field'    => 'slug',
-            'terms'    => sanitize_text_field($filters['category']),
-        ];
+        $filter_cat = sanitize_text_field($filters['category']);
+        if (in_array($filter_cat, $allowed_category_slugs)) {
+            $requested_cats[] = $filter_cat;
+        }
+    }
+    if (!empty($filters['categories'])) {
+        $filter_cats = is_array($filters['categories']) ? array_map('sanitize_text_field', $filters['categories']) : [sanitize_text_field($filters['categories'])];
+        $requested_cats = array_intersect($filter_cats, $allowed_category_slugs);
+    }
+    // If nothing requested or request is invalid, fallback to ALL allowed categories
+    if (empty($requested_cats)) {
+        $requested_cats = $allowed_category_slugs;
     }
 
-    // Category from filters (overrides preselected if present)
-    if (!empty($filters['categories'])) {
-        $tax_query[] = [
-            'taxonomy' => 'product_cat',
-            'field'    => 'slug',
-            'terms'    => is_array($filters['categories']) ? array_map('sanitize_text_field', $filters['categories']) : [sanitize_text_field($filters['categories'])],
-        ];
-    }
+    $tax_query[] = [
+        'taxonomy' => 'product_cat',
+        'field'    => 'slug',
+        'terms'    => $requested_cats,
+        'operator' => 'IN'
+    ];
 
     if (!empty($tax_query)) {
         $args['tax_query'] = $tax_query;
