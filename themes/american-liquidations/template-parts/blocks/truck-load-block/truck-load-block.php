@@ -5,9 +5,10 @@ Name: Truck Load Block
 <?php
 $block_class = get_field('advanced') ? get_field('block_class') : '';
 $block_id = get_field('advanced') ? get_field('block_id') : '';
+$section_visible = get_field('section_visible');
 ?>
 
-<section class="bg-gray py-16 lg:py-24<?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
+<section class="bg-gray py-16 lg:py-24 <?php if(!$section_visible){ ?> hide <?php } ?><?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
 		<div class="section-heading max-w-[660px] mx-auto text-center">
 			<h2 class="mb-4"><?php echo get_field('truckload_title'); ?></h2>
