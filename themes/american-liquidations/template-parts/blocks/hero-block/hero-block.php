@@ -52,21 +52,29 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 			<div class="w-full lg:w-1/2 xl:w-[45%] lg:pl-8 mt-10 lg:mt-0">
 				<div class="grid grid-cols-2 gap-3 small-product-card">
 					<?php
-					$hero_products = get_field('hero_products');
-					if( $hero_products ):
-						foreach( $hero_products as $post ):
-							setup_postdata( $post );
-							$product = wc_get_product( $post->ID );
+					$args = array(
+						'post_type'      => 'product',
+						'posts_per_page' => 4, // Change this number to how many recent products you want
+						'orderby'        => 'date',
+						'order'          => 'DESC'
+					);
+
+					$recent_products = new WP_Query( $args );
+
+					if ( $recent_products->have_posts() ) :
+						while ( $recent_products->have_posts() ) : $recent_products->the_post();
+							$product = wc_get_product( get_the_ID() );
 							if ( $product ) {
 								set_query_var( 'product', $product );
 								get_template_part( 'template-parts/blocks/product-card' );
 							}
-						endforeach;
+						endwhile;
 						wp_reset_postdata();
 					endif;
 					?>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </section>
