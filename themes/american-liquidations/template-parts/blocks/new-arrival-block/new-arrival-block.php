@@ -20,6 +20,13 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 			'orderby'        => 'date',
 			'post_status'    => 'publish',
 			'order'          => 'DESC',
+			'meta_query'     => [
+				[
+					'key'     => '_stock_status',
+					'value'   => 'instock',
+					'compare' => '='
+				]
+			]
 		);
 
 		$new_arrival_query = new WP_Query($args);
