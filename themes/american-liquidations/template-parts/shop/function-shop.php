@@ -65,10 +65,10 @@ function custom_shop_shortcode($atts) {
             </div>
             <div class="shop-items-cover w-full md:w-[calc(100%_-_275px)] xl:w-[calc(100%_-_355px)] pr-0">
 				<div class="shop-items-header hidden md:flex items-end justify-end gap-5  mb-10">
-					<div class="flex justify-end">
+					<!-- <div class="flex justify-end">
 						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px] gap-2">
 							<span class="text-[14px] font-semibold flex items-center">
-								<img class="mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
+								<img class="mr-2" src="<?php //echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
                                 <span class="w-[80px] text-black/30">Filter by: </span>
 							</span>
 							<select name="stock_status" id="stock-status-desktop" class="w-full border-none !outline-none text-black font-semibold">
@@ -77,7 +77,7 @@ function custom_shop_shortcode($atts) {
 								<option value="outofstock">Out</option>
 							</select>
 						</div>
-					</div>
+					</div> -->
 					<div class="flex justify-end">
 						<div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[20px] gap-2">
 							<span class="text-[14px] font-semibold flex items-center">
