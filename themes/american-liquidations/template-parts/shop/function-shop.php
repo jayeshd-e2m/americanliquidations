@@ -20,10 +20,10 @@ function custom_shop_shortcode($atts) {
             <h2>Featured Products</h2>
         </div>
         <div class="container flex gap-3 justify-center mb-8 md:hidden flex-wrap md:flex-nowrap">
-            <div class="flex justify-end">
+            <!-- <div class="flex justify-end">
                 <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[10px] md:px-[20px]">
                     <span class="text-[14px] font-semibold flex items-center">
-                        <img class="mr-1 md:mr-2" src="<?php echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
+                        <img class="mr-1 md:mr-2" src="<?php //echo site_url(); ?>/wp-content/uploads/2025/05/filter-by.svg" alt="">
                         <span class="w-[80px] text-black/30">Filter by: </span>
                     </span>
                     <select name="stock_status" id="stock-status-mobile" class="w-full border-none outline-none text-sm text-black font-semibold">
@@ -32,7 +32,7 @@ function custom_shop_shortcode($atts) {
                         <option value="outofstock">Out</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="flex justify-end">
                 <div class="border border-[#D0D5DD] rounded-[8px] flex items-center py-[10px] px-[10px] md:px-[20px]">
                     <span class="text-[14px] font-semibold flex items-center">
