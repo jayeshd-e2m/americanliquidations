@@ -307,7 +307,7 @@ function handle_ajax_shop_filter() {
         'max_price'  => sanitize_text_field($_POST['max_price']),
         'sort_by'    => sanitize_text_field($_POST['sort_by']),
         'paged'      => isset($_POST['paged']) ? intval($_POST['paged']) : 1,
-		'stock_status' => isset($_POST['stock_status']) ? sanitize_text_field($_POST['stock_status']) : '',
+		'stock_status' => isset($_POST['stock_status']) ? sanitize_text_field($_POST['stock_status']) : 'instock',
         'search' => isset($_POST['initial_search']) ? sanitize_text_field($_POST['initial_search']) : '',
     ];
 
