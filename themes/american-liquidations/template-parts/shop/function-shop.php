@@ -201,14 +201,14 @@ function custom_ajax_shop_products($filters = []) {
     }
 
     // Stock status
-    if (!empty($filters['stock_status'])) {
+    //if (!empty($filters['stock_status'])) {
         $meta_query[] = [
             'key'     => '_stock_status',
             // 'value'   => sanitize_text_field($filters['stock_status']),
             'value' => 'instock',
             'compare' => '=',
         ];
-    }
+   // }
 
     if (!empty($meta_query)) {
         $args['meta_query'] = $meta_query;
