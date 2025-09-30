@@ -513,46 +513,40 @@ add_action( 'wp_logout', function() {
 
 // Payment for Truckloads and other categories
 
-add_filter('woocommerce_available_payment_gateways', 'custom_filter_payment_gateways_by_category');
-function custom_filter_payment_gateways_by_category($available_gateways) {
-    if (is_admin()) {
+add_filter( 'woocommerce_available_payment_gateways', 'custom_filter_payment_gateways_by_category' );
+function custom_filter_payment_gateways_by_category( $available_gateways ) {
+    if ( is_admin() ) {
         return $available_gateways;
     }
 
     $category_slug = 'truckloads';
     $found_truckload = false;
 
-    // Check if any cart item is in the truckloads category
-    foreach (WC()->cart->get_cart() as $cart_item) {
+    foreach ( WC()->cart->get_cart() as $cart_item ) {
         $product_id = $cart_item['product_id'];
-        if (has_term($category_slug, 'product_cat', $product_id)) {
+        if ( has_term( $category_slug, 'product_cat', $product_id ) ) {
             $found_truckload = true;
             break;
         }
     }
+    
+    // For debugging: error_log(print_r($available_gateways, true));
 
-    // Set gateway IDs. Change 'plaid_ach' and 'stripe' to your actual gateway IDs if different.
-    $plaid_gateway_id = 'plaid_ach';
-    $stripe_gateway_id = 'stripe';
-
-    if ($found_truckload) {
-        // Only enable Plaid ACH, remove all others
-        foreach ($available_gateways as $gateway_id => $gateway) {
-            if ($gateway_id !== $plaid_gateway_id) {
-                unset($available_gateways[$gateway_id]);
+    if ( $found_truckload ) {
+        // Remove plaid_ach if not a truckload
+		foreach ( $available_gateways as $gateway_id => $gateway ) {
+            if ( $gateway_id !== 'plaid_ach' ) {
+                unset( $available_gateways[ $gateway_id ] );
             }
         }
     } else {
-        // Only enable Stripe, remove all others (including Plaid if present)
-        foreach ($available_gateways as $gateway_id => $gateway) {
-            if ($gateway_id !== $stripe_gateway_id) {
-                unset($available_gateways[$gateway_id]);
-            }
-        }
+        // Only enable plaid_ach -- remove all others
+		unset( $available_gateways['plaid_ach'] );
+        
     }
 
     return $available_gateways;
-}
+} 
 
 //disable shipping and only allow pickup
 add_filter( 'woocommerce_cart_needs_shipping', '__return_false' );
