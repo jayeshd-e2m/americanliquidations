@@ -513,35 +513,42 @@ add_action( 'wp_logout', function() {
 
 // Payment for Truckloads and other categories
 
-add_filter( 'woocommerce_available_payment_gateways', 'custom_filter_payment_gateways_by_category' );
-function custom_filter_payment_gateways_by_category( $available_gateways ) {
-    if ( is_admin() ) {
+add_filter('woocommerce_available_payment_gateways', 'custom_filter_payment_gateways_by_category');
+function custom_filter_payment_gateways_by_category($available_gateways) {
+    if (is_admin()) {
         return $available_gateways;
     }
 
     $category_slug = 'truckloads';
     $found_truckload = false;
 
-    foreach ( WC()->cart->get_cart() as $cart_item ) {
+    // Check if any cart item is in the truckloads category
+    foreach (WC()->cart->get_cart() as $cart_item) {
         $product_id = $cart_item['product_id'];
-        if ( has_term( $category_slug, 'product_cat', $product_id ) ) {
+        if (has_term($category_slug, 'product_cat', $product_id)) {
             $found_truckload = true;
             break;
         }
     }
-    
-    // For debugging: error_log(print_r($available_gateways, true));
 
-    if ( $found_truckload ) {
-        // Only enable stripe_ach -- remove all others
-        foreach ( $available_gateways as $gateway_id => $gateway ) {
-            if ( $gateway_id !== 'stripe_ach' ) {
-                unset( $available_gateways[ $gateway_id ] );
+    // Set gateway IDs. Change 'plaid_ach' and 'stripe' to your actual gateway IDs if different.
+    $plaid_gateway_id = 'plaid_ach';
+    $stripe_gateway_id = 'stripe';
+
+    if ($found_truckload) {
+        // Only enable Plaid ACH, remove all others
+        foreach ($available_gateways as $gateway_id => $gateway) {
+            if ($gateway_id !== $plaid_gateway_id) {
+                unset($available_gateways[$gateway_id]);
             }
         }
     } else {
-        // Remove stripe_ach if not a truckload
-        unset( $available_gateways['stripe_ach'] );
+        // Only enable Stripe, remove all others (including Plaid if present)
+        foreach ($available_gateways as $gateway_id => $gateway) {
+            if ($gateway_id !== $stripe_gateway_id) {
+                unset($available_gateways[$gateway_id]);
+            }
+        }
     }
 
     return $available_gateways;
