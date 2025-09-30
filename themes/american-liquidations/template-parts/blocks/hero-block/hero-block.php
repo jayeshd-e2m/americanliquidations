@@ -56,7 +56,14 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 						'post_type'      => 'product',
 						'posts_per_page' => 4, // Change this number to how many recent products you want
 						'orderby'        => 'date',
-						'order'          => 'DESC'
+						'order'          => 'DESC',
+						'meta_query'     => [
+							[
+								'key'     => '_stock_status',
+								'value'   => 'instock',
+								'compare' => '='
+							]
+						]
 					);
 
 					$recent_products = new WP_Query( $args );
