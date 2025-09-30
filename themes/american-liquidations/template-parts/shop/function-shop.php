@@ -140,6 +140,13 @@ function custom_ajax_shop_products($filters = []) {
         'posts_per_page' => 15,
         'paged'          => $paged,
         'post_status'    => 'publish',
+        'meta_query'     => [
+            [
+                'key'     => '_stock_status',
+                'value'   => 'instock',
+                'compare' => '='
+            ]
+        ]
     ];
 
     $tax_query = [];
