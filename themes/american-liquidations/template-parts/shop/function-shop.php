@@ -204,7 +204,8 @@ function custom_ajax_shop_products($filters = []) {
     if (!empty($filters['stock_status'])) {
         $meta_query[] = [
             'key'     => '_stock_status',
-            'value'   => sanitize_text_field($filters['stock_status']),
+            // 'value'   => sanitize_text_field($filters['stock_status']),
+            'value' => 'instock',
             'compare' => '=',
         ];
     }
@@ -307,7 +308,7 @@ function handle_ajax_shop_filter() {
         'max_price'  => sanitize_text_field($_POST['max_price']),
         'sort_by'    => sanitize_text_field($_POST['sort_by']),
         'paged'      => isset($_POST['paged']) ? intval($_POST['paged']) : 1,
-		'stock_status' => isset($_POST['stock_status']) ? sanitize_text_field($_POST['stock_status']) : 'instock',
+		'stock_status' => isset($_POST['stock_status']) ? sanitize_text_field($_POST['stock_status']) : '',
         'search' => isset($_POST['initial_search']) ? sanitize_text_field($_POST['initial_search']) : '',
     ];
 
