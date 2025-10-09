@@ -1959,7 +1959,9 @@ div#gform_1_validation_container .gform-icon {
     .item-lable {
         min-width: 140px;
     }
-
+    .mobile-header-nav .custom-logo-link img {
+        max-width: 200px;
+    }
 }
 
 @media (max-width: 767px){
