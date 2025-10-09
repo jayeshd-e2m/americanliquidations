@@ -1875,6 +1875,9 @@ div#gform_1_validation_container .gform-icon {
 .filter-dropdown-content::-webkit-scrollbar-track {background: #ffffff;border-radius: 10px;}
 .filter-dropdown-content::-webkit-scrollbar-thumb {background-color: #fb0404;border-radius: 10px;border: 2px solid #ffffff;}
 
+.header-logo-img img{
+    max-width: 150px !important;
+}
 
 @media (min-width: 1420px) {
     /*.shop-wrapper{

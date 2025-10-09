@@ -2,7 +2,7 @@
     <div class="flex items-center gap-x-12 xl:gap-x-24">
         <div class="block font-barlow font-bold text-black text-md  md:text-xs">
             <div 
-                class="block max-w-26 md:max-w-40"
+                class="block max-w-26 md:max-w-40 header-logo-img"
                 >
                 <?php the_custom_logo(); ?>
             </div>
