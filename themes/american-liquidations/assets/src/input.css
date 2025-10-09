@@ -2068,6 +2068,9 @@ div#gform_1_validation_container .gform-icon {
     .shop-sidebar .shop-sidebar-overlay{
         display: none;
     }
+    .header-logo-img img {
+        min-width: 115px;
+    }
    
 }
 
