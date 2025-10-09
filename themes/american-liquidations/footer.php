@@ -57,7 +57,7 @@
 				<?php 
 				$image = get_field('footer_logo','option');
 				if( !empty( $image ) ): ?>
-					<img class="max-w-[160px] lg:max-w-[222px] xl:max-w-[252px]" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+					<img class="!max-w-[160px] lg:!max-w-[222px] xl:!max-w-[252px]" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 				<?php endif; ?>
 			</a>
 
