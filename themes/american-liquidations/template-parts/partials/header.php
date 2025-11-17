@@ -28,6 +28,7 @@
     <div class="flex items-center gap-7">
         <!-- Phone Number -->
         <a href="tel:2035874132" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
+        <a href="tel:2035874132" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
         <div class="flex items-center gap-2">
             <div class="has-cart">
                 <?php
