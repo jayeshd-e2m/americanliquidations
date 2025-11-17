@@ -27,8 +27,30 @@
 
     <div class="flex items-center gap-7">
         <!-- Phone Number -->
-        <a href="tel:2035874132" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
-        <a href="tel:2035874132" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132">203-587-4132</a>
+        <div>
+        <span>Water Berry - 
+            <?php 
+            $link = get_field('phone_number','option');
+            if( $link ): 
+                $link_url = $link['url'];
+                $link_title = $link['title'];
+                $link_target = $link['target'] ? $link['target'] : '_self';
+                ?>
+                <a class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" href="tel:<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+            <?php endif; ?>
+        </span>
+       <span>Milford - 
+            <?php 
+            $link = get_field('phone_number_milford','option');
+            if( $link ): 
+                $link_url = $link['url'];
+                $link_title = $link['title'];
+                $link_target = $link['target'] ? $link['target'] : '_self';
+                ?>
+                <a class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" href="tel:<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+            <?php endif; ?>
+        </span>
+        </div>
         <div class="flex items-center gap-2">
             <div class="has-cart">
                 <?php
