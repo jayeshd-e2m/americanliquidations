@@ -28,28 +28,12 @@
     <div class="flex items-center gap-7">
         <!-- Phone Number -->
         <div>
-            <span>Water Berry - 
-                <?php 
-                $link = get_field('phone_number','option');
-                if( $link ): 
-                    $link_url = $link['url'];
-                    $link_title = $link['title'];
-                    $link_target = $link['target'] ? $link['target'] : '_self';
-                    ?>
-                    <a class="text-black hover:underline hidden lg:block font-medium" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
-                <?php endif; ?>
-            </span>
+        <span>Water Berry -  
+            <a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>"><?php echo get_field('phone_number','option'); ?></a>
+        </span>
         <span>Milford - 
-                <?php 
-                $link = get_field('phone_number_milford','option');
-                if( $link ): 
-                    $link_url = $link['url'];
-                    $link_title = $link['title'];
-                    $link_target = $link['target'] ? $link['target'] : '_self';
-                    ?>
-                    <a class="text-black hover:underline hidden lg:block font-medium" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
-                <?php endif; ?>
-            </span>
+            <a href="tel:<?php echo get_field('phone_number_milford','option'); ?>" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number_milford','option'); ?>"><?php echo get_field('phone_number_milford','option'); ?></a>
+        </span>
         </div>
         <div class="flex items-center gap-2">
             <div class="has-cart">
