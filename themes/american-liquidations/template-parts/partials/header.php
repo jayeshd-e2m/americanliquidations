@@ -29,7 +29,7 @@
         <!-- Phone Number -->
         <div>
         <span class="flex items-center">Water Berry -  
-            <a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>"> <?php echo get_field('phone_number','option'); ?></a>
+            <a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>">&nbsp;<?php echo get_field('phone_number','option'); ?></a>
         </span>
         <span class="flex items-center">Milford - 
             <a href="tel:<?php echo get_field('phone_number_milford','option'); ?>" class="text-black hover:underline hidden lg:block font-medium" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number_milford','option'); ?>"> <?php echo get_field('phone_number_milford','option'); ?></a>
