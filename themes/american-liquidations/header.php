@@ -64,7 +64,6 @@
 					<div class="block text-white text-sm md:text-left font-bold"><?php echo get_field('heading_3','option'); ?></div>
 				<?php } ?>
 
-				<a href="#" class="btn w-full !text-[12px]">Get Directions</a>
 				<?php 
 				$link = get_field('top_button','option');
 				if( $link ): 
