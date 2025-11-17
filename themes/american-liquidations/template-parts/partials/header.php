@@ -1,5 +1,5 @@
 <div class="container flex justify-between py-4 gap-6 md:py-3">
-    <div class="flex items-center gap-x-10 xl:gap-x-24">
+    <div class="flex items-center gap-x-8 xl:gap-x-24">
         <div class="block font-barlow font-bold text-black text-md  md:text-xs">
             <div 
                 class="block max-w-24 md:max-w-40 header-logo-img"
