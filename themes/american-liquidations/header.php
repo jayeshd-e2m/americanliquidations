@@ -65,6 +65,15 @@
 				<?php } ?>
 
 				<a href="#" class="btn w-full !text-[12px]">Get Directions</a>
+				<?php 
+				$link = get_field('top_button','option');
+				if( $link ): 
+					$link_url = $link['url'];
+					$link_title = $link['title'];
+					$link_target = $link['target'] ? $link['target'] : '_self';
+					?>
+					<a class="btn w-full !text-[12px]" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+				<?php endif; ?>
 			</div>
 			<div class="bg-white p-4 space-y-3.5">
 				<div class="flex justify-between items-center">
