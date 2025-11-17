@@ -16,7 +16,7 @@
                 </svg>
                 <form class="w-full relative header-form-cover" role="search" method="get" action="<?php echo home_url('/shop/'); ?>">
                     <label for="topbar-search" class="sr-only">Search site</label>
-                    <input id="topbar-search" type="search" name="search" placeholder="Search" autocomplete="off" class="header-search-input bg-transparent border-[#D0D5DD] py-2 pl-9 pr-4 focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-lg w-full text-sm min-w-[320px] xl:min-w-[420px] max-w-[100%]">
+                    <input id="topbar-search" type="search" name="search" placeholder="Search" autocomplete="off" class="header-search-input bg-transparent border-[#D0D5DD] py-2 pl-9 pr-4 focus:outline-none focus:ring-2 focus:ring-primary-700 rounded-lg w-full text-sm min-w-[240px] xl:min-w-[420px] max-w-[100%]">
                     <div class="header-result-cover absolute z-50 bg-white w-full top-[100%] mt-2 hidden shadow rounded-lg max-h-96 overflow-auto">
                         <ul class="header-result-list"></ul>
                     </div>
