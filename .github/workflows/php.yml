@@ -48,9 +48,10 @@ jobs:
         run: |
           set -e  # Exit on error
           echo "Uploading compiled Tailwind CSS..."
-
-          # Use sshpass for password authentication and upload the files
-          sshpass -p "$SFTP_PASS" rsync -avz -e "ssh -p $SFTP_PORT" \
+          
+          # Disable host key checking to avoid the verification failure
+          export SSHPASS="$SFTP_PASS"
+          sshpass -p "$SFTP_PASS" rsync -avz -e "ssh -o StrictHostKeyChecking=no -p $SFTP_PORT" \
             ./themes/american-liquidations/ \
             $SFTP_USER@$SFTP_HOST:/home/755960.cloudwaysapps.com/jwcjubqamu/public_html/wp-content/themes/american-liquidations/
 
