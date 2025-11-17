@@ -244,6 +244,7 @@ select {
     background-position: center right 24px;
     background-repeat: no-repeat;
     padding-right: 40px;
+    white-space: nowrap;
     @apply bg-primary;
     @apply text-white;
     @apply border-primary;
