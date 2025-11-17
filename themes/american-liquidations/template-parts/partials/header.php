@@ -31,7 +31,7 @@
             <span class="flex items-center hidden lg:block font-medium text-xs xl:text-base">Water Berry -  
                 <a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>">&nbsp;<?php echo get_field('phone_number','option'); ?></a>
             </span>
-            <span class="flex items-center hidden lg:block font-medium">Milford - 
+            <span class="flex items-center hidden lg:block font-medium text-xs xl:text-base">Milford - 
                 <a href="tel:<?php echo get_field('phone_number_milford','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number_milford','option'); ?>">&nbsp;<?php echo get_field('phone_number_milford','option'); ?></a>
             </span>
         </div>
