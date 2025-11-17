@@ -100,9 +100,16 @@
 					</form>
 				</div>
 
+				<div>
+					<span class="flex items-center hidden lg:block font-medium">Water Berry -  
+						<a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>">&nbsp;<?php echo get_field('phone_number','option'); ?></a>
+					</span>
+					<span class="flex items-center hidden lg:block font-medium">Milford - 
+						<a href="tel:<?php echo get_field('phone_number_milford','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number_milford','option'); ?>">&nbsp;<?php echo get_field('phone_number_milford','option'); ?></a>
+					</span>
+				</div>
 				<div class="flex justify-between items-center gap-3 mobile-phone-cart">
 					<!-- Phone Number -->
-					<a href="tel:2035874132" class="text-black hover:underline font-medium" itemprop="telephone" aria-label="Call us at 203-587-4132" data-jptgbfonts="{&quot;fontFamily&quot;:&quot;Inter, sans-serif&quot;,&quot;fontWeight&quot;:&quot;500&quot;,&quot;fontStyle&quot;:&quot;normal&quot;}">203-587-4132</a>
 					<div class="flex items-center gap-2">
 					<div class="">
 						<?php
