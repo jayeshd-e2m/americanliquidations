@@ -101,7 +101,7 @@
 				</div>
 
 				<div>
-					<span class="flex items-center font-medium">Water Berry -  
+					<span class="flex items-center font-medium">Waterbury -  
 						<a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>">&nbsp;<?php echo get_field('phone_number','option'); ?></a>
 					</span>
 					<span class="flex items-center font-medium">Milford - 
