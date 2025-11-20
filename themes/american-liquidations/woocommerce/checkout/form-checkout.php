@@ -75,6 +75,22 @@ defined( 'ABSPATH' ) || exit;
 										<span class="text-xs font-medium">Subtotal</span>
 										<span class="text-xs font-medium"><?php wc_cart_totals_subtotal_html(); ?></span>
 									</div>
+									<?php
+									// Get chosen shipping method
+									$chosen_methods = WC()->session->get( 'chosen_shipping_methods' );
+									$chosen_method  = ! empty( $chosen_methods[0] ) ? $chosen_methods[0] : '';
+
+									// Check if the selected method is Uber Freight (Replace "uber_freight" with actual ID if different)
+									if ( WC()->cart->get_shipping_total() > 0 && strpos( $chosen_method, 'uber_freight' ) !== false ) {
+										$freight_cost = WC()->cart->get_shipping_total();
+									?>
+										<div class="flex justify-between mb-4">
+											<span class="text-xs font-medium">Freight Shipping</span>
+											<span class="text-xs font-medium price-font-medium">
+												<?php echo wc_price( $freight_cost ); ?>
+											</span>
+										</div>
+									<?php } ?>
 									<?php if ( WC()->cart->get_shipping_total() > 0 ) : ?>
 									<div class="flex justify-between mb-4">
 										<span class="text-xs font-medium">Shipping</span>
