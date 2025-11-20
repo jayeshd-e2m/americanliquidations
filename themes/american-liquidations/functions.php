@@ -572,16 +572,3 @@ function show_only_selected_categories_in_shop( $q ) {
         ));
     }
 }
-
-
-add_action( 'woocommerce_cart_calculate_fees', 'add_uber_freight_fee_to_cart' );
-
-function add_uber_freight_fee_to_cart( $cart ) {
-    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
-
-    $uber_freight_price = WC()->session->get( 'uber_freight_price' );
-
-    if ( ! empty( $uber_freight_price ) ) {
-        $cart->add_fee( __( 'Uber Freight', 'your-text-domain' ), $uber_freight_price );
-    }
-}
