@@ -76,7 +76,7 @@ defined( 'ABSPATH' ) || exit;
 										<span class="font-medium"><?php wc_cart_totals_subtotal_html(); ?></span>
 									</div>
 									
-									<div class="flex justify-between mb-6 asd">
+									<div class="flex justify-between mb-6 font-medium">
 									<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
 										<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
 											<th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
