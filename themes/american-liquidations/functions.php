@@ -574,27 +574,27 @@ function show_only_selected_categories_in_shop( $q ) {
 }
 
 
-function set_uber_freight_price_in_session() {
+add_action( 'woocommerce_before_calculate_totals', 'set_uber_freight_price_in_session', 10, 1 );
+function set_uber_freight_price_in_session( $cart ) {
     if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
         return;
     }
 
-    // Example: Get Uber Freight price (from your integration)
-    $uber_freight_price = get_uber_freight_quote(); // Use your real API call or logic
+    // 🔧 Replace this with your actual Uber Freight API logic
+    $uber_freight_price = get_uber_freight_quote(); 
 
-    // Store it in WooCommerce session
-    if ( ! is_null( $uber_freight_price ) ) {
-        WC()->session->set( 'uber_freight_price', $uber_freight_price );
+    // Store the price in session
+    if ( ! empty( $uber_freight_price ) ) {
+        WC()->session->set( 'uber_freight_price', floatval( $uber_freight_price ) );
     }
 }
-add_action( 'woocommerce_before_calculate_totals', 'set_uber_freight_price_in_session' );
 
-add_action( 'woocommerce_checkout_update_order_review', 'update_uber_freight_on_checkout', 10, 1 );
-function update_uber_freight_on_checkout( $post_data ) {
+add_action( 'woocommerce_checkout_update_order_review', 'update_uber_freight_during_checkout', 10, 1 );
+function update_uber_freight_during_checkout( $post_data ) {
     parse_str( $post_data, $data );
 
-    // Example: dynamically recalculate based on address
-    $new_freight_price = get_uber_freight_quote( $data ); // Use your logic
+    // Recalculate Uber Freight price based on address, if needed
+    $new_uber_freight_price = get_uber_freight_quote( $data ); // Your logic here
 
-    WC()->session->set( 'uber_freight_price', $new_freight_price );
+    WC()->session->set( 'uber_freight_price', floatval( $new_uber_freight_price ) );
 }
