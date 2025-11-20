@@ -76,6 +76,13 @@ defined( 'ABSPATH' ) || exit;
 										<span class="text-xs font-medium"><?php wc_cart_totals_subtotal_html(); ?></span>
 									</div>
 									
+									<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
+										<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+											<th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
+											<td data-title="<?php echo esc_attr( wc_cart_totals_coupon_label( $coupon, false ) ); ?>"><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
+										</tr>
+									<?php endforeach; ?>
+
 									<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
 
 										<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
@@ -92,6 +99,13 @@ defined( 'ABSPATH' ) || exit;
 										</tr>
 
 									<?php endif; ?>
+
+									<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
+										<tr class="fee">
+											<th><?php echo esc_html( $fee->name ); ?></th>
+											<td data-title="<?php echo esc_attr( $fee->name ); ?>"><?php wc_cart_totals_fee_html( $fee ); ?></td>
+										</tr>
+									<?php endforeach; ?>
 
 									<?php if ( WC()->cart->get_shipping_total() > 0 ) : ?>
 									<div class="flex justify-between mb-4">
