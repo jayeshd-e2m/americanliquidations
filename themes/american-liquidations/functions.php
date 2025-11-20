@@ -572,3 +572,29 @@ function show_only_selected_categories_in_shop( $q ) {
         ));
     }
 }
+
+
+function set_uber_freight_price_in_session() {
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+        return;
+    }
+
+    // Example: Get Uber Freight price (from your integration)
+    $uber_freight_price = get_uber_freight_quote(); // Use your real API call or logic
+
+    // Store it in WooCommerce session
+    if ( ! is_null( $uber_freight_price ) ) {
+        WC()->session->set( 'uber_freight_price', $uber_freight_price );
+    }
+}
+add_action( 'woocommerce_before_calculate_totals', 'set_uber_freight_price_in_session' );
+
+add_action( 'woocommerce_checkout_update_order_review', 'update_uber_freight_on_checkout', 10, 1 );
+function update_uber_freight_on_checkout( $post_data ) {
+    parse_str( $post_data, $data );
+
+    // Example: dynamically recalculate based on address
+    $new_freight_price = get_uber_freight_quote( $data ); // Use your logic
+
+    WC()->session->set( 'uber_freight_price', $new_freight_price );
+}
