@@ -72,8 +72,8 @@ defined( 'ABSPATH' ) || exit;
 								</div>
 								<div class="checkout-subtotal-items mt-6">
 									<div class="flex justify-between mb-6">
-										<span class="text-xs font-medium">Subtotal</span>
-										<span class="text-xs font-medium"><?php wc_cart_totals_subtotal_html(); ?></span>
+										<span class="font-medium">Subtotal</span>
+										<span class="font-medium"><?php wc_cart_totals_subtotal_html(); ?></span>
 									</div>
 									
 									<div class="flex justify-between mb-6 asd">
