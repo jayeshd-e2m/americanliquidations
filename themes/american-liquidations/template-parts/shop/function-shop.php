@@ -299,6 +299,18 @@ function custom_ajax_shop_products($filters = []) {
     ];
 }
 
+add_action( 'pre_get_posts', function( $q ) {
+    if ( is_admin() || ! $q->is_main_query() ) return;
+
+    // Only on WooCommerce product category archives
+    if ( is_tax( 'product_cat' ) ) {
+        $q->set( 'posts_per_page', 12 ); // set your per-page
+        $q->set( 'orderby', 'date' );
+        $q->set( 'order', 'DESC' );
+    }
+});
+
+
 
 // AJAX handler
 function handle_ajax_shop_filter() {
