@@ -2,30 +2,44 @@
 function custom_shopitem_shortcode( $atts ) {
     // Get the shortcode attributes
     $atts = shortcode_atts( array(
-        'cat'   => '',     // category slug
-        'limit' => 12,     // number of products
-        'columns' => 4,    // number of columns
-        'orderby' => 'date',
-        'order' => 'DESC',
+        'cat'      => '',
+        'orderby'  => 'date',
+        'order'    => 'DESC',
+        'per_page' => 12,
+        'paged'    => '', 
     ), $atts, 'shopitem' );
 
     // Start output buffering
     ob_start();
 
+    $paged = 1;
+
+    if ( $atts['paged'] !== '' ) {
+        $paged = max( 1, (int) $atts['paged'] );
+    } else {
+        $q_paged = get_query_var( 'paged' );
+        $p_paged = get_query_var( 'page' ); // needed on some setups (static front page)
+        $paged   = max( 1, (int) $q_paged, (int) $p_paged );
+    }
+
     // Build the query args
     $args = array(
         'post_type' => 'product',
-        'posts_per_page' => intval( $atts['limit'] ),
+        'posts_per_page' => (int) $atts['per_page'],
+        'paged'          => $paged,
         'orderby' => sanitize_text_field( $atts['orderby'] ),
         'order' => sanitize_text_field( $atts['order'] ),
-        'tax_query' => array(
+    );
+
+    if ( ! empty( $atts['cat'] ) ) {
+        $args['tax_query'] = array(
             array(
                 'taxonomy' => 'product_cat',
                 'field'    => 'slug',
                 'terms'    => sanitize_text_field( $atts['cat'] ),
             ),
-        ),
-    );
+        );
+    }
 
     $query = new WP_Query( $args );
 
@@ -40,6 +54,23 @@ function custom_shopitem_shortcode( $atts ) {
 			}
         }
         echo '</div>';
+
+        $big = 999999999;
+        $paginate_links = paginate_links( array(
+            'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'format'    => '?paged=%#%',
+            'current'   => max( 1, $paged ),
+            'total'     => (int) $query->max_num_pages,
+            'mid_size'  => 2,
+            'end_size'  => 1,
+            'prev_text' => '&laquo; Prev',
+            'next_text' => 'Next &raquo;',
+            'type'      => 'list',
+        ) );
+
+        if ( $paginate_links ) {
+            echo '<nav class="shopitem-pagination mt-8">' . $paginate_links . '</nav>';
+        }
     } else {
         echo '<p class="text-center">No products found in this category.</p>';
     }
