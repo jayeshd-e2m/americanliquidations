@@ -97,7 +97,7 @@ function render_custom_pagination_buttons( $query ) {
     ob_start();
     ?>
     <div class="mt-10 flex justify-center gap-2">
-        <div class="custom-pagination mt-10 flex justify-center gap-2">
+        <div class="mt-10 flex justify-center gap-2">
             <?php
             $prev_page = null;
             foreach ( $pages as $p ) {
@@ -110,7 +110,7 @@ function render_custom_pagination_buttons( $query ) {
                 // Build link: page 1 should be base; others base + page/{n}/
                 $url = ( $p === 1 ) ? $base : trailingslashit( $base . 'page/' . $p );
 
-                $common = 'pagination-button px-4 py-2 border rounded hover:bg-black hover:text-white';
+                $common = 'px-4 py-2 border rounded hover:bg-black hover:text-white';
                 if ( $p === $current ) {
                     // Current page: not clickable
                     printf(
