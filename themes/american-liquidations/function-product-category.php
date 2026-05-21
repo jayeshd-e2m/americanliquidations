@@ -55,15 +55,7 @@ function custom_shopitem_shortcode( $atts ) {
         }
         echo '</div>';
 
-        $base = trailingslashit( home_url( add_query_arg( array(), $GLOBALS['wp']->request ) ) );
-
-        echo paginate_links( array(
-            'base'      => $base . 'page/%#%/',
-            'format'    => '',
-            'current'   => max( 1, get_query_var('paged'), get_query_var('page') ),
-            'total'     => $query->max_num_pages,
-            'type'      => 'list',
-        ) );
+        echo render_custom_pagination_buttons( $query );
 
     } else {
         echo '<p class="text-center">No products found in this category.</p>';
@@ -74,3 +66,75 @@ function custom_shopitem_shortcode( $atts ) {
     return ob_get_clean();
 }
 add_shortcode( 'shopitem', 'custom_shopitem_shortcode' );
+
+
+function render_custom_pagination_buttons( $query ) {
+    if ( ! $query || $query->max_num_pages <= 1 ) return '';
+
+    global $wp;
+
+    // Current page (works for /page/2/ and for static front page setups)
+    $current = max( 1, (int) get_query_var('paged'), (int) get_query_var('page') );
+
+    // Base URL of the current request (e.g. /product-category/truckloads/)
+    $base = trailingslashit( home_url( $wp->request ) );
+
+    $total = (int) $query->max_num_pages;
+
+    // Build a list of pages like WP does (1,2,3,4,...,9,10)
+    $pages = array();
+    $pages[] = 1;
+
+    for ( $i = max( 2, $current - 2 ); $i <= min( $total - 1, $current + 2 ); $i++ ) {
+        $pages[] = $i;
+    }
+
+    if ( $total > 1 ) $pages[] = $total;
+
+    $pages = array_values( array_unique( $pages ) );
+    sort( $pages );
+
+    ob_start();
+    ?>
+    <div class="mt-10 flex justify-center gap-2">
+        <div class="custom-pagination mt-10 flex justify-center gap-2">
+            <?php
+            $prev_page = null;
+            foreach ( $pages as $p ) {
+
+                // Ellipsis
+                if ( $prev_page && $p > $prev_page + 1 ) {
+                    echo '<span class="pagination-ellipsis px-2 py-2">...</span>';
+                }
+
+                // Build link: page 1 should be base; others base + page/{n}/
+                $url = ( $p === 1 ) ? $base : trailingslashit( $base . 'page/' . $p );
+
+                $common = 'pagination-button px-4 py-2 border rounded hover:bg-black hover:text-white';
+                if ( $p === $current ) {
+                    // Current page: not clickable
+                    printf(
+                        '<span class="%s bg-black text-white noclick" aria-current="page">%d</span>',
+                        esc_attr( $common ),
+                        (int) $p
+                    );
+                } else {
+                    printf(
+                        '<a class="%s bg-white" href="%s" data-page="%d">%d</a>',
+                        esc_attr( $common ),
+                        esc_url( $url ),
+                        (int) $p,
+                        (int) $p
+                    );
+                }
+
+                $prev_page = $p;
+            }
+            ?>
+        </div>
+    </div>
+    <?php
+
+    return ob_get_clean();
+}
+
