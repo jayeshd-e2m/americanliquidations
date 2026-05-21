@@ -68,22 +68,29 @@ function custom_shopitem_shortcode( $atts ) {
 add_shortcode( 'shopitem', 'custom_shopitem_shortcode' );
 
 
+function custom_pagination_base_url() {
+    global $wp;
+
+    // Current path without domain, e.g. "product-category/truckloads/page/2"
+    $path = $wp->request;
+
+    // Remove trailing /page/{number} from the path
+    $path = preg_replace( '#/page/\d+/?$#', '', $path );
+
+    // Build clean base URL, e.g. https://site.com/product-category/truckloads/
+    return trailingslashit( home_url( $path ) );
+}
+
+
 function render_custom_pagination_buttons( $query ) {
     if ( ! $query || $query->max_num_pages <= 1 ) return '';
 
-    global $wp;
-
-    // Current page (works for /page/2/ and for static front page setups)
     $current = max( 1, (int) get_query_var('paged'), (int) get_query_var('page') );
+    $base    = custom_pagination_base_url();
+    $total   = (int) $query->max_num_pages;
 
-    // Base URL of the current request (e.g. /product-category/truckloads/)
-    $base = trailingslashit( home_url( $wp->request ) );
-
-    $total = (int) $query->max_num_pages;
-
-    // Build a list of pages like WP does (1,2,3,4,...,9,10)
-    $pages = array();
-    $pages[] = 1;
+    // Decide which pages to show (similar to your example)
+    $pages = array(1);
 
     for ( $i = max( 2, $current - 2 ); $i <= min( $total - 1, $current + 2 ); $i++ ) {
         $pages[] = $i;
@@ -94,25 +101,22 @@ function render_custom_pagination_buttons( $query ) {
     $pages = array_values( array_unique( $pages ) );
     sort( $pages );
 
-    ob_start();
-    ?>
+    ob_start(); ?>
     <div class="mt-10 flex justify-center gap-2">
-        <div class="mt-10 flex justify-center gap-2">
+        <div class="custom-pagination mt-10 flex justify-center gap-2">
             <?php
-            $prev_page = null;
+            $prev = null;
             foreach ( $pages as $p ) {
 
-                // Ellipsis
-                if ( $prev_page && $p > $prev_page + 1 ) {
+                if ( $prev && $p > $prev + 1 ) {
                     echo '<span class="pagination-ellipsis px-2 py-2">...</span>';
                 }
 
-                // Build link: page 1 should be base; others base + page/{n}/
                 $url = ( $p === 1 ) ? $base : trailingslashit( $base . 'page/' . $p );
 
-                $common = 'px-4 py-2 border rounded hover:bg-black hover:text-white';
+                $common = 'pagination-button px-4 py-2 border rounded hover:bg-black hover:text-white';
+
                 if ( $p === $current ) {
-                    // Current page: not clickable
                     printf(
                         '<span class="%s bg-black text-white noclick" aria-current="page">%d</span>',
                         esc_attr( $common ),
@@ -128,13 +132,13 @@ function render_custom_pagination_buttons( $query ) {
                     );
                 }
 
-                $prev_page = $p;
+                $prev = $p;
             }
             ?>
         </div>
     </div>
     <?php
-
     return ob_get_clean();
 }
+
 
