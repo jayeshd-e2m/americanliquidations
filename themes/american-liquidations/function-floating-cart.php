@@ -66,14 +66,14 @@ function fetch_cart_items() {
         }
         echo "</div>";
         // Subtotal
-        $cart_subtotal = WC()->cart->get_subtotal();
-        $amount_needed2 = 150 - $cart_subtotal;
-        if ( $cart_subtotal < 150 ) {
-            echo "<h6 class='text-primary font-semibold mt-4 text-center'>Add $".$amount_needed2." amount for discount</h6>";
-        }
-        echo "<div class='cart-subtotal flex justify-center items-center py-3 pt-6'>
-            <span class='text-2xl font-semibold text-[#444]'>Subtotal: <span class='text-primary cart-sub-total-text'>" . WC()->cart->get_cart_subtotal() . "</span></span>
-        </div>";
+        // $cart_subtotal = WC()->cart->get_subtotal();
+        // $amount_needed2 = 150 - $cart_subtotal;
+        // if ( $cart_subtotal < 150 ) {
+        //     echo "<h6 class='text-primary font-semibold mt-4 text-center'>Add $".$amount_needed2." amount for discount</h6>";
+        // }
+        // echo "<div class='cart-subtotal flex justify-center items-center py-3 pt-6'>
+        //     <span class='text-2xl font-semibold text-[#444]'>Subtotal: <span class='text-primary cart-sub-total-text'>" . WC()->cart->get_cart_subtotal() . "</span></span>
+        // </div>";
         ?>
 
         <?php 
