@@ -46,7 +46,7 @@ if ($term && $term->slug === 'truckloads') {
 <?php 
 $term = get_queried_object();
 if ($term && $term->slug === 'truckloads') { ?>
-	<div class="shop-taxonomy-cover py-12 md:py-24 bg-gray">
+	<div class="shop-taxonomy-cover py-12 md:py-24 bg-gray asdasd">
 		<div class="container">
 			<h2 class="text-center mb-12 text-[24px] md:text-[32px]">Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory</h2>
 			<?php 
