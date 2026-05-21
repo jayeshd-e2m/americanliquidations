@@ -55,22 +55,16 @@ function custom_shopitem_shortcode( $atts ) {
         }
         echo '</div>';
 
-        $big = 999999999;
-        $paginate_links = paginate_links( array(
-            'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-            'format'    => '?paged=%#%',
-            'current'   => max( 1, $paged ),
-            'total'     => (int) $query->max_num_pages,
-            'mid_size'  => 2,
-            'end_size'  => 1,
-            'prev_text' => '&laquo; Prev',
-            'next_text' => 'Next &raquo;',
+        $base = trailingslashit( home_url( add_query_arg( array(), $GLOBALS['wp']->request ) ) );
+
+        echo paginate_links( array(
+            'base'      => $base . 'page/%#%/',
+            'format'    => '',
+            'current'   => max( 1, get_query_var('paged'), get_query_var('page') ),
+            'total'     => $query->max_num_pages,
             'type'      => 'list',
         ) );
 
-        if ( $paginate_links ) {
-            echo '<nav class="shopitem-pagination mt-8">' . $paginate_links . '</nav>';
-        }
     } else {
         echo '<p class="text-center">No products found in this category.</p>';
     }
