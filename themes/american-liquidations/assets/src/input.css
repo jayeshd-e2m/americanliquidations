@@ -1405,7 +1405,7 @@ div#gform_1_validation_container .gform-icon {
 .site-header .menu-item-has-children > .sub-menu {
     position: absolute;
     top: calc(100% + 40px);
-    left: calc(50% - 20px);
+    left: 50%;
     width: 100%;
     @apply bg-black;
     min-width: 180px;
