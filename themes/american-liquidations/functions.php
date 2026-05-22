@@ -572,3 +572,17 @@ function show_only_selected_categories_in_shop( $q ) {
         ));
     }
 }
+
+add_filter( 'woocommerce_countries_allowed_countries', function( $countries ) {
+    return array(
+        'US' => 'United States (US)',
+        'CA' => 'Canada',
+    );
+});
+
+add_filter( 'woocommerce_countries_shipping_countries', function( $countries ) {
+    return array(
+        'US' => 'United States (US)',
+        'CA' => 'Canada',
+    );
+});
