@@ -1878,6 +1878,9 @@ div#gform_1_validation_container .gform-icon {
 .body-content > .wp-block-columns {
     padding: 40px 0;
 }
+.wp-block-columns p:last-child {
+    margin-bottom: 0;
+}
 
 @media (min-width: 1420px) {
     /*.shop-wrapper{
