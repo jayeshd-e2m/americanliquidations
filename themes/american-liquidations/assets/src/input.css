@@ -322,15 +322,15 @@ footer .btn-red:hover {
 }
 
 @media (min-width: 1024px){
-    #menu-header-menu > li:nth-child(4n+1) {
+    /* #menu-header-menu > li:nth-child(4n+1) {
         border-right: 1px solid #ffffff4d;
         padding-right: 40px;
     }
 
     #menu-header-menu > li:nth-child(4n) {
-        border-right: 1px solid #ffffff4d;
+        border-right: 1px solid #ffffff4d; 
         padding-right: 40px;
-    }
+    } */   
 }
 
 .cta-block:before {
@@ -841,7 +841,7 @@ body ul.psfw-social-icons{
     background: #f5f5f5;
 }
 
-.tax-product_cat .footer-boxes-cover{
+.tax-product_cat:not(.term-truckloads) .footer-boxes-cover{
     display: none;
 }
 
@@ -1899,12 +1899,12 @@ div#gform_1_validation_container .gform-icon {
         padding-right: 30px;
         padding-left: 30px;
     }
-    #menu-header-menu > li:nth-child(4n+1) {
+    /* #menu-header-menu > li:nth-child(4n+1) {
         padding-right: 20px;
     }
     #menu-header-menu > li:nth-child(4n) {
         padding-right: 20px;
-    }
+    } */
 }
 
 @media (max-width: 1199px){

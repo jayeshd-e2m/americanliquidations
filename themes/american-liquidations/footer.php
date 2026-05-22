@@ -11,7 +11,7 @@
 
 ?>
 
-<?php if(!is_front_page() && ! is_product()){ ?>
+<?php if(!is_front_page() && ! is_product() && ! ( is_tax('product_cat', 'truckloads') || is_product_category('truckloads'))){ ?>
 	<section class="py-14 footer-boxes-cover">
 		<div class="container">
 			<div class="grid mobile-grid-1 grid-cols-2 md:grid-cols-4 gap-4">

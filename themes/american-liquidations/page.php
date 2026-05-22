@@ -26,23 +26,28 @@ get_header();
 						<p><?php if(get_field('pd_description')){ ?><?php echo get_field('pd_description'); ?><?php } ?></p>
 					</div>
 				<?php } ?>
+				<?php 
+				$link = get_field('pd_button');
+				if( $link ): 
+					$link_url = $link['url'];
+					$link_title = $link['title'];
+					$link_target = $link['target'] ? $link['target'] : '_self';
+					?>
+					<div class="mt-6">
+						<a class="btn btn-arrow btn-red" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php } ?>
+			<?php
+			while ( have_posts() ) :
+				the_post();
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+				get_template_part( 'template-parts/content', 'page' );
 
-			get_template_part( 'template-parts/content', 'page' );
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
+			endwhile; // End of the loop.
+			?>
 
 	</main><!-- #main -->
 
