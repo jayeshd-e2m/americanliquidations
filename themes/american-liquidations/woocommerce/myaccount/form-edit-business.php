@@ -291,36 +291,82 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 						<input type="text" name="business_zipcode" value="<?php echo esc_attr($business_zipcode); ?>" required>
 					</div>
 
+					<?php
+					// WooCommerce countries/states
+					$wc_countries = new WC_Countries();
+					$all_countries = $wc_countries->get_countries();
+					$all_states    = $wc_countries->get_states();
+
+					// Allow only US & CA
+					$allowed = array('US', 'CA');
+					$countries = array_intersect_key($all_countries, array_flip($allowed));
+					$states    = array_intersect_key($all_states, array_flip($allowed));
+					?>
+
 					<div class="form-group mb-3">
-						<label>Country</label>
-						<?php
-						$states       = $wc_countries->get_states();
-						$allowed = array( 'US', 'CA' );
-						$countries = array_intersect_key( $countries, array_flip( $allowed ) );
-						?>
-						<select name="business_country" id="business_country_select" required>
-							<option value="">Select Country</option>
-							<?php foreach ( $countries as $code => $label ) : ?>
-								<option value="<?php echo esc_attr($code); ?>" <?php selected( $business_country, $code ); ?>>
-									<?php echo esc_html($label); ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
+					<label>Country</label>
+					<select name="business_country" id="business_country_select" required>
+						<option value="">Select Country</option>
+						<?php foreach ($countries as $code => $label): ?>
+						<option value="<?php echo esc_attr($code); ?>" <?php selected($business_country, $code); ?>>
+							<?php echo esc_html($label); ?>
+						</option>
+						<?php endforeach; ?>
+					</select>
 					</div>
 
 					<div class="form-group mb-3">
-						<label>State</label>
-						<select name="business_state" id="business_state_select" required>
-							<option value="">Select State</option>
-							<?php
-							if (!empty($business_country) && isset($states[$business_country])) {
-								foreach ($states[$business_country] as $code => $label) {
-									echo '<option value="' . esc_attr($code) . '" ' . selected($business_state, $code, false) . '>' . esc_html($label) . '</option>';
-								}
-							}
-							?>
-						</select>
+					<label>State / Province</label>
+					<select name="business_state" id="business_state_select" required>
+						<option value="">Select State/Province</option>
+						<?php
+						// Pre-populate on page load (edit form / validation fail, etc.)
+						if ( !empty($business_country) && isset($states[$business_country]) ) {
+						foreach ( $states[$business_country] as $code => $label ) {
+							echo '<option value="' . esc_attr($code) . '" ' . selected($business_state, $code, false) . '>' . esc_html($label) . '</option>';
+						}
+						}
+						?>
+					</select>
 					</div>
+
+					<script>
+					document.addEventListener('DOMContentLoaded', function () {
+					const countryEl = document.getElementById('business_country_select');
+					const stateEl   = document.getElementById('business_state_select');
+
+					const STATES = <?php echo wp_json_encode($states); ?>;
+					const selectedState = <?php echo wp_json_encode((string) $business_state); ?>;
+
+					function fillStates(country) {
+						stateEl.innerHTML = '<option value="">Select State/Province</option>';
+
+						if (!country || !STATES[country]) return;
+
+						Object.entries(STATES[country]).forEach(([code, label]) => {
+						const opt = document.createElement('option');
+						opt.value = code;
+						opt.textContent = label;
+
+						if (selectedState && selectedState === code) {
+							opt.selected = true;
+						}
+						stateEl.appendChild(opt);
+						});
+					}
+
+					// Update when country changes
+					countryEl.addEventListener('change', function () {
+						// clear selectedState when changing country
+						stateEl.value = '';
+						fillStates(this.value);
+					});
+
+					// Initial load
+					fillStates(countryEl.value);
+					});
+					</script>
+
 					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
 					<button type="submit">Save</button>
 					<button type="button" class="custom-modal-close">Cancel</button>
