@@ -72,7 +72,7 @@
             <?php
                 wp_nav_menu( array(
                     'menu'           => 'Header Menu',
-                    'menu_class'     => 'flex justify-between items-center gap-x-4 py-5 text-white text-sm',
+                    'menu_class'     => 'flex justify-center items-center gap-x-20 py-5 text-white text-sm',
                     'container'      => false,
                     'menu_id' => 'menu-header-menu',
                 ) );
