@@ -293,14 +293,10 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 
 					<div class="form-group mb-3">
 						<label>Country</label>
-						<?php
-						$allowed = array( 'US', 'CA' );
-						$countries = array_intersect_key( $countries, array_flip( $allowed ) );
-						?>
 						<select name="business_country" id="business_country_select" required>
 							<option value="">Select Country</option>
-							<?php foreach ( $countries as $code => $label ) : ?>
-								<option value="<?php echo esc_attr($code); ?>" <?php selected( $business_country, $code ); ?>>
+							<?php foreach ($countries as $code => $label): ?>
+								<option value="<?php echo esc_attr($code); ?>" <?php selected($business_country, $code); ?>>
 									<?php echo esc_html($label); ?>
 								</option>
 							<?php endforeach; ?>
