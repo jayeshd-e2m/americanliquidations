@@ -2082,6 +2082,9 @@ div#gform_1_validation_container .gform-icon {
     .header-logo-img img {
         min-width: 115px;
     }
+    .body-content > .wp-block-columns {
+        padding: 20px 0;
+    }
    
 }
 
