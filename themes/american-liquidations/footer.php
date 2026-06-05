@@ -242,7 +242,7 @@
 <div id="gf-popup-overlay" class="gf-popup-overlay">
 	<div class="gf-popup-box">
 		<button type="button" id="gf-popup-close" class="gf-popup-close" aria-label="Close">&times;</button>
-		<div class="gf-popup-content">
+		<div class="gf-popup-content subscribe-cover">
 			<?php echo do_shortcode('[gravityform id="3" title="false"]'); ?>
 		</div>
 	</div>
