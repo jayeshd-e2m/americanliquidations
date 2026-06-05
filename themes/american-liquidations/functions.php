@@ -586,3 +586,19 @@ add_filter( 'woocommerce_countries_shipping_countries', function( $countries ) {
         'CA' => 'Canada',
     );
 });
+
+
+
+// Taxonomy filter
+
+add_action('wp_ajax_filter_shopitems', 'filter_shopitems_callback');
+add_action('wp_ajax_nopriv_filter_shopitems', 'filter_shopitems_callback');
+function filter_shopitems_callback() {
+    check_ajax_referer('shopitem_filter_nonce', 'nonce');
+
+    $cat = isset($_POST['cat']) ? sanitize_title( wp_unslash($_POST['cat']) ) : '';
+    if ( $cat ) {
+        echo do_shortcode('[shopitem cat="' . esc_attr($cat) . '"]');
+    }
+    wp_die();
+}
