@@ -325,7 +325,6 @@
 		overlay.addEventListener('click', function (e) {
 			if (e.target === overlay) {
 				overlay.classList.remove('is-visible');
-				setCookie('gf_popup_closed', '1', 24);
 			}
 		});
 	})();
