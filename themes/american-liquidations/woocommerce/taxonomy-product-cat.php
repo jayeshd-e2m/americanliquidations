@@ -58,11 +58,32 @@ if ($term && $term->slug === 'truckloads') { ?>
 
 				<?php
 				// Subcategories of the current term; fall back to top-level product cats
-				$filter_terms = get_terms( array(
-					'taxonomy'   => 'product_cat',
-					'parent'     => $term->term_id,
-					'hide_empty' => true,
+				$product_ids = get_posts( array(
+					'post_type'      => 'product',
+					'post_status'    => 'publish',
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+					'tax_query'      => array(
+						array(
+							'taxonomy' => 'product_cat',
+							'field'    => 'term_id',
+							'terms'    => $term->term_id,
+						),
+					),
 				) );
+				$filter_terms = array();
+				if ( ! empty( $product_ids ) ) {
+					// All product_cat terms assigned to those products
+					$assigned = wp_get_object_terms( $product_ids, 'product_cat' );
+					if ( ! is_wp_error( $assigned ) ) {
+						foreach ( $assigned as $t ) {
+							// Skip the current term itself (that's the "All" button)
+							if ( $t->term_id !== $term->term_id ) {
+								$filter_terms[ $t->term_id ] = $t; // keyed = auto-dedupe
+							}
+						}
+					}
+				}
 				if ( empty( $filter_terms ) || is_wp_error( $filter_terms ) ) {
 					$filter_terms = get_terms( array(
 						'taxonomy'   => 'product_cat',
