@@ -66,7 +66,7 @@
 				<?php
 				if( have_rows('social_icons','option') ):
 					while( have_rows('social_icons','option') ) : the_row(); ?>
-					<a href="<?php echo get_sub_field('social_url','option'); ?>" class="text-primary hover:text-white">
+					<a href="<?php echo get_sub_field('social_url','option'); ?>" class="text-primary hover:text-white" target="_blank">
 						<?php
 							echo get_sub_field('social_icon','option');
 						?>
