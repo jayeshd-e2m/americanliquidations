@@ -34,4 +34,20 @@ add_action( 'init', function() {
 	remove_action( 'woocommerce_shop_loop_header', 'woocommerce_product_taxonomy_archive_header', 10 );
 	remove_action( 'woocommerce_shop_loop_header', 'woocommerce_product_archive_description', 10 );
 });
+
+
+
+// Taxonomy filter
+
+add_action('wp_ajax_filter_shopitems', 'filter_shopitems_callback');
+add_action('wp_ajax_nopriv_filter_shopitems', 'filter_shopitems_callback');
+function filter_shopitems_callback() {
+    check_ajax_referer('shopitem_filter_nonce', 'nonce');
+
+    $cat = isset($_POST['cat']) ? sanitize_title( wp_unslash($_POST['cat']) ) : '';
+    if ( $cat ) {
+        echo do_shortcode('[shopitem cat="' . esc_attr($cat) . '"]');
+    }
+    wp_die();
+}
 ?>

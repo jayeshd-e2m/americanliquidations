@@ -48,12 +48,80 @@ $term = get_queried_object();
 if ($term && $term->slug === 'truckloads') { ?>
 	<div class="shop-taxonomy-cover py-12 md:py-24 bg-gray">
 		<div class="container">
-			<h2 class="text-center mb-12 text-[24px] md:text-[32px]">Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory</h2>
-			<?php 
+			<?php
 			$term = get_queried_object();
-			if ( $term && ! is_wp_error( $term ) ) {
-				echo do_shortcode('[shopitem cat="' . esc_attr( $term->slug ) . '"]');
-			}?>
+			if ( $term && ! is_wp_error( $term ) ) :
+			?>
+				<h2 class="text-center mb-12 text-[24px] md:text-[32px]">
+					Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory
+				</h2>
+
+				<?php
+				// Subcategories of the current term; fall back to top-level product cats
+				$filter_terms = get_terms( array(
+					'taxonomy'   => 'product_cat',
+					'parent'     => $term->term_id,
+					'hide_empty' => true,
+				) );
+				if ( empty( $filter_terms ) || is_wp_error( $filter_terms ) ) {
+					$filter_terms = get_terms( array(
+						'taxonomy'   => 'product_cat',
+						'parent'     => 0,
+						'hide_empty' => true,
+					) );
+				}
+				?>
+
+				<?php if ( ! empty( $filter_terms ) && ! is_wp_error( $filter_terms ) ) : ?>
+					<div class="shopitem-filter flex flex-wrap justify-center gap-3 mb-10">
+						<button type="button" class="shopitem-filter-btn is-active"
+								data-cat="<?php echo esc_attr( $term->slug ); ?>">
+							All <?php echo esc_html( $term->name ); ?>
+						</button>
+						<?php foreach ( $filter_terms as $ft ) : ?>
+							<button type="button" class="shopitem-filter-btn"
+									data-cat="<?php echo esc_attr( $ft->slug ); ?>">
+								<?php echo esc_html( $ft->name ); ?>
+							</button>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+
+				<div id="shopitem-results">
+					<?php echo do_shortcode('[shopitem cat="' . esc_attr( $term->slug ) . '"]'); ?>
+				</div>
+
+				<script>
+				(function () {
+					var ajaxurl = '<?php echo esc_url( admin_url('admin-ajax.php') ); ?>';
+					var nonce   = '<?php echo wp_create_nonce('shopitem_filter_nonce'); ?>';
+					var buttons = document.querySelectorAll('.shopitem-filter-btn');
+					var results = document.getElementById('shopitem-results');
+
+					buttons.forEach(function (btn) {
+						btn.addEventListener('click', function () {
+							var cat = this.getAttribute('data-cat');
+							buttons.forEach(function (b) { b.classList.remove('is-active'); });
+							this.classList.add('is-active');
+							results.style.opacity = '0.4';
+
+							var data = new FormData();
+							data.append('action', 'filter_shopitems');
+							data.append('nonce', nonce);
+							data.append('cat', cat);
+
+							fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
+								.then(function (r) { return r.text(); })
+								.then(function (html) {
+									results.innerHTML = html;
+									results.style.opacity = '1';
+								})
+								.catch(function () { results.style.opacity = '1'; });
+						});
+					});
+				})();
+				</script>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php }else{
