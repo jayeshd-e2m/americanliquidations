@@ -44,7 +44,7 @@
 			<h2 class="text-white mb-5"><?php echo get_field('cta_title','option'); ?></h2>
 			<div class="max-w-[720px] mx-auto text-white/60"><?php echo get_field('cta_content','option'); ?></div>
 			<div class="subscribe-cover text-white mt-5">
-				<?php echo do_shortcode('[gravityform id="3" title="false"]'); ?>
+				<?php echo do_shortcode('[gravityform id="3" title="false"  ajax="true"]'); ?>
 			</div>
 		</div>
 	</div>
