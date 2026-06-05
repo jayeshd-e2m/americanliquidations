@@ -1889,6 +1889,22 @@ div#gform_1_validation_container .gform-icon {
     margin-bottom: 0;
 }
 
+.shopitem-filter-btn {
+    padding: 8px 18px;
+    border: 1px solid rgba(8,4,4,.6);
+    border-radius: 9999px;
+    background: #fff;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.shopitem-filter-btn:hover { border-color: rgb(8 4 4/var(--tw-bg-opacity,1)); }
+.shopitem-filter-btn.is-active {
+    background: rgb(8 4 4/var(--tw-bg-opacity,1));
+    color: #fff;
+    border-color: rgb(8 4 4/var(--tw-bg-opacity,1));
+}
+#shopitem-results { transition: opacity .2s ease; }
+
 @media (min-width: 1420px) {
     /*.shop-wrapper{
         max-width: 1515px;
