@@ -253,7 +253,7 @@
 		display: none;
 		position: fixed;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.6);
+		background: rgb(255 255 255 / 80%);
 		z-index: 99999;
 		justify-content: center;
 		align-items: center;
@@ -263,7 +263,7 @@
 	}
 	.gf-popup-box {
 		position: relative;
-		background: #fff;
+		background: #000;
 		width: 90%;
 		max-width: 600px;
 		max-height: 90vh;
