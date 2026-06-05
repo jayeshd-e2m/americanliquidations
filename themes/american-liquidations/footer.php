@@ -247,7 +247,7 @@
 			<div class="max-w-[720px] mx-auto text-white/60 mb-5">
 				<p>Want to stay up to date on the liquidations market? Subscribe to our newsletter for free content!</p>
 			</div>
-			<?php echo do_shortcode('[gravityform id="3" title="false" ajax="true"]'); ?>
+			<?php echo do_shortcode('[gravityform id="4" title="false" ajax="true"]'); ?>
 		</div>
 	</div>
 </div>
