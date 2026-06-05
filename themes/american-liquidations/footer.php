@@ -290,6 +290,10 @@
 	.gf-popup-close:hover {
 		color: #e00;
 	}
+	.gf-popup-content.subscribe-cover .gform-footer .gform_button:hover {
+		background-color: transparent;
+		border-color: #fff;
+	}
 </style>
 
 <script>
