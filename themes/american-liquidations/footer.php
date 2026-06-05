@@ -242,7 +242,7 @@
 <div id="gf-popup-overlay" class="gf-popup-overlay">
 	<div class="gf-popup-box">
 		<button type="button" id="gf-popup-close" class="gf-popup-close" aria-label="Close">&times;</button>
-		<div class="gf-popup-content subscribe-cover text-center">
+		<div class="gf-popup-content subscribe-cover text-center text-white">
 			<h2 class="text-white mb-5">Subscribe to our <span>NEWSLETTER</span></h2>
 			<div class="max-w-[720px] mx-auto text-white/60 mb-5">
 				<p>Want to stay up to date on the liquidations market? Subscribe to our newsletter for free content!</p>
