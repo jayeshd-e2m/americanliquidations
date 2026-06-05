@@ -1410,7 +1410,7 @@ div#gform_1_validation_container .gform-icon {
     @apply bg-black;
     min-width: 180px;
     z-index: 1111;
-    text-align: center;
+    text-align: left;
     transform: translateX(-50%);
     visibility: hidden;
     opacity: 0;
