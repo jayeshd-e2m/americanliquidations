@@ -1564,7 +1564,9 @@ div#gform_1_validation_container .gform-icon {
     height: 40px !important;
 }
 
-
+.wp-block-separator{
+    margin-bottom: 20px;
+}
 
 
 
