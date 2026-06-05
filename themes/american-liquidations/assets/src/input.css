@@ -1905,6 +1905,43 @@ div#gform_1_validation_container .gform-icon {
 }
 #shopitem-results { transition: opacity .2s ease; }
 
+/* direction popup */
+.direction-popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        z-index: 99999;
+        justify-content: center;
+        align-items: center;
+    }
+    .direction-popup.is-visible { display: flex; }
+    .direction-popup-box {
+        position: relative;
+        background: #fff;
+        width: 90%;
+        max-width: 420px;
+        padding: 32px 24px 24px;
+        border-radius: 10px;
+        box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    }
+    .direction-popup-close {
+        position: absolute; top: 8px; right: 12px;
+        background: none; border: none;
+        font-size: 26px; line-height: 1; cursor: pointer; color: #333;
+    }
+    .direction-popup-close:hover { color: #080404; }
+    .direction-popup-title { margin: 0 0 18px; text-align: center; font-size: 20px; }
+    .direction-popup-list { display: flex; flex-direction: column; gap: 12px; }
+    .direction-popup-item {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 14px 18px; border: 1px solid #ddd; border-radius: 8px;
+        text-decoration: none; color: #080404; transition: all .2s ease;
+    }
+    .direction-popup-item:hover { background: #080404; color: #fff; border-color: #080404; }
+    .direction-popup-name { font-weight: 600; }
+    .direction-popup-go { font-size: 14px; opacity: .85; }
+
 @media (min-width: 1420px) {
     /*.shop-wrapper{
         max-width: 1515px;
