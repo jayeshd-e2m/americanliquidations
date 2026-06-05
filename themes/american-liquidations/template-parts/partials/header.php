@@ -28,12 +28,15 @@
     <div class="flex items-center gap-7">
         <!-- Phone Number -->
         <div>
-            <span class="flex items-center hidden lg:block font-medium text-sm xl:text-base">Waterbury -&nbsp;
-                <a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>"><?php echo get_field('phone_number','option'); ?></a>
-            </span>
-            <span class="flex items-center hidden lg:block font-medium text-sm xl:text-base">Milford -&nbsp;
-                <a href="tel:<?php echo get_field('phone_number_milford','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number_milford','option'); ?>"><?php echo get_field('phone_number_milford','option'); ?></a>
-            </span>
+            <?php 
+                if( have_rows('phone_numbers_repeater','option') ):
+                    while( have_rows('phone_numbers_repeater','option') ) : the_row(); ?>
+                        <span class="flex items-center hidden lg:block font-medium text-sm xl:text-base"><?php echo get_sub_field('area_label','option'); ?> -  
+                            <a href="tel:<?php echo get_sub_field('area_phone_number','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_sub_field('area_phone_number','option'); ?>">&nbsp;<?php echo get_sub_field('area_phone_number','option'); ?></a>
+                        </span>
+                    <?php endwhile;
+                endif;
+            ?>
         </div>
         <div class="flex items-center gap-2">
             <div class="has-cart">
