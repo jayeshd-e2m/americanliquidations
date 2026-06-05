@@ -101,12 +101,16 @@
 				</div>
 
 				<div>
-					<span class="flex items-center font-medium">Waterbury -  
-						<a href="tel:<?php echo get_field('phone_number','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number','option'); ?>">&nbsp;<?php echo get_field('phone_number','option'); ?></a>
-					</span>
-					<span class="flex items-center font-medium">Milford - 
-						<a href="tel:<?php echo get_field('phone_number_milford','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_field('phone_number_milford','option'); ?>">&nbsp;<?php echo get_field('phone_number_milford','option'); ?></a>
-					</span>
+					
+					<?php 
+						if( have_rows('phone_numbers_repeater','option') ):
+							while( have_rows('phone_numbers_repeater','option') ) : the_row(); ?>
+								<span class="flex items-center font-medium"><?php echo get_sub_field('area_label','option'); ?> -  
+									<a href="tel:<?php echo get_sub_field('area_phone_number','option'); ?>" class="text-black hover:underline" itemprop="telephone" aria-label="Call us at <?php echo get_sub_field('area_phone_number','option'); ?>">&nbsp;<?php echo get_sub_field('area_phone_number','option'); ?></a>
+								</span>
+							<?php endwhile;
+						endif;
+					?>
 				</div>
 				<div class="flex justify-between items-center gap-3 mobile-phone-cart">
 					<!-- Phone Number -->
