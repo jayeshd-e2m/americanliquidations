@@ -1450,7 +1450,8 @@ div#gform_1_validation_container .gform-icon {
 }
 
 .site-header .menu-item:hover > a {
-    @apply text-primary;
+    @apply text-white;
+    @apply bg-primary;
 }
 
 .site-header .menu-item-has-children > .sub-menu:after {
