@@ -1939,7 +1939,7 @@ div#gform_1_validation_container .gform-icon {
         text-decoration: none; color: #080404; transition: all .2s ease;
     }
     .direction-popup-item:hover { background: #080404; color: #fff; border-color: #080404; }
-    .direction-popup-name { font-weight: 600; }
+    .direction-popup-name { font-weight: 600; line-height: 1;}
     .direction-popup-go { font-size: 14px; opacity: .85; }
 
 @media (min-width: 1420px) {
