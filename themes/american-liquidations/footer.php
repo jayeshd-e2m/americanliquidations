@@ -343,8 +343,8 @@ $locations = array(
         'address' => '204 Austin Rd, Waterbury, CT, USA, 06705',
     ),
     array(
-        'name'    => 'Milford',
-        'address' => 'Milford',
+        'name'    => 'Milford, CT',
+        'address' => 'Milford, CT',
     ),
 );
 ?>
