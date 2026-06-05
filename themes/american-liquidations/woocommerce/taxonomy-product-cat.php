@@ -118,6 +118,7 @@ if ($term && $term->slug === 'truckloads') { ?>
 					var nonce   = '<?php echo wp_create_nonce('shopitem_filter_nonce'); ?>';
 					var buttons = document.querySelectorAll('.shopitem-filter-btn');
 					var results = document.getElementById('shopitem-results');
+					
 
 					buttons.forEach(function (btn) {
 						btn.addEventListener('click', function () {
@@ -130,6 +131,7 @@ if ($term && $term->slug === 'truckloads') { ?>
 							data.append('action', 'filter_shopitems');
 							data.append('nonce', nonce);
 							data.append('cat', cat);
+							data.append('base', '<?php echo esc_attr( $term->slug ); ?>'); // current = truckload
 
 							fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
 								.then(function (r) { return r.text(); })

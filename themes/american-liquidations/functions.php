@@ -596,9 +596,55 @@ add_action('wp_ajax_nopriv_filter_shopitems', 'filter_shopitems_callback');
 function filter_shopitems_callback() {
     check_ajax_referer('shopitem_filter_nonce', 'nonce');
 
-    $cat = isset($_POST['cat']) ? sanitize_title( wp_unslash($_POST['cat']) ) : '';
-    if ( $cat ) {
-        echo do_shortcode('[shopitem cat="' . esc_attr($cat) . '"]');
+    $cat  = isset($_POST['cat'])  ? sanitize_title( wp_unslash($_POST['cat']) )  : '';
+    $base = isset($_POST['base']) ? sanitize_title( wp_unslash($_POST['base']) ) : '';
+
+    if ( ! $cat ) { wp_die(); }
+
+    // Only narrow when a sub-filter is chosen (not the "All Truckload" button)
+    if ( $base && $cat !== $base ) {
+        $GLOBALS['shopitem_base_cat'] = $base;
+        add_action('pre_get_posts', 'shopitem_add_base_cat');
     }
+
+    echo do_shortcode('[shopitem cat="' . esc_attr($cat) . '"]');
+
+    remove_action('pre_get_posts', 'shopitem_add_base_cat');
+    unset($GLOBALS['shopitem_base_cat']);
+
     wp_die();
+}
+
+function shopitem_add_base_cat( $query ) {
+    if ( empty( $GLOBALS['shopitem_base_cat'] ) ) {
+        return;
+    }
+
+    // Only touch the shortcode's product query
+    $existing = $query->get('tax_query');
+    $is_product_query = (bool) $query->get('product_cat');
+    if ( is_array($existing) ) {
+        foreach ( $existing as $clause ) {
+            if ( is_array($clause) && ( $clause['taxonomy'] ?? '' ) === 'product_cat' ) {
+                $is_product_query = true;
+                break;
+            }
+        }
+    }
+    if ( ! $is_product_query ) {
+        return;
+    }
+
+    // Keep whatever the shortcode already queried, AND require the base (truckload) cat
+    $new = array( 'relation' => 'AND' );
+    if ( ! empty( $existing ) ) {
+        $new[] = $existing;
+    }
+    $new[] = array(
+        'taxonomy' => 'product_cat',
+        'field'    => 'slug',
+        'terms'    => $GLOBALS['shopitem_base_cat'],
+    );
+
+    $query->set('tax_query', $new);
 }
