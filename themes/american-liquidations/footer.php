@@ -334,6 +334,94 @@
 	})();
 </script>
 
+<!-- Location popup -->
+ <?php
+// Define your two locations here
+$locations = array(
+    array(
+        'name'    => 'Bristol, CT',
+        'address' => '123 Main St, Bristol, CT 06010',
+    ),
+    array(
+        'name'    => 'Second Location',
+        'address' => '456 Example Ave, Hartford, CT 06103',
+    ),
+);
+?>
+<div id="direction-popup" class="direction-popup">
+    <div class="direction-popup-box">
+        <button type="button" class="direction-popup-close" id="direction-popup-close" aria-label="Close">&times;</button>
+        <h3 class="direction-popup-title">Choose a Location</h3>
+        <div class="direction-popup-list">
+            <?php foreach ( $locations as $loc ) : ?>
+                <a class="direction-popup-item"
+                   href="https://www.google.com/maps/dir/?api=1&destination=<?php echo rawurlencode( $loc['address'] ); ?>"
+                   target="_blank" rel="noopener noreferrer">
+                    <span class="direction-popup-name"><?php echo esc_html( $loc['name'] ); ?></span>
+                    <span class="direction-popup-go">Get Directions →</span>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+
+<style>
+    .direction-popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        z-index: 99999;
+        justify-content: center;
+        align-items: center;
+    }
+    .direction-popup.is-visible { display: flex; }
+    .direction-popup-box {
+        position: relative;
+        background: #fff;
+        width: 90%;
+        max-width: 420px;
+        padding: 32px 24px 24px;
+        border-radius: 10px;
+        box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    }
+    .direction-popup-close {
+        position: absolute; top: 8px; right: 12px;
+        background: none; border: none;
+        font-size: 26px; line-height: 1; cursor: pointer; color: #333;
+    }
+    .direction-popup-close:hover { color: #e00; }
+    .direction-popup-title { margin: 0 0 18px; text-align: center; font-size: 20px; }
+    .direction-popup-list { display: flex; flex-direction: column; gap: 12px; }
+    .direction-popup-item {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 14px 18px; border: 1px solid #ddd; border-radius: 8px;
+        text-decoration: none; color: #111; transition: all .2s ease;
+    }
+    .direction-popup-item:hover { background: #111; color: #fff; border-color: #111; }
+    .direction-popup-name { font-weight: 600; }
+    .direction-popup-go { font-size: 14px; opacity: .85; }
+</style>
+
+<script>
+(function () {
+    var btn   = document.getElementById('get-direction-btn');
+    var popup = document.getElementById('direction-popup');
+    var close = document.getElementById('direction-popup-close');
+    if (!btn || !popup) return;
+
+    btn.addEventListener('click', function () {
+        popup.classList.add('is-visible');
+    });
+    close.addEventListener('click', function () {
+        popup.classList.remove('is-visible');
+    });
+    popup.addEventListener('click', function (e) {
+        if (e.target === popup) popup.classList.remove('is-visible');
+    });
+})();
+</script>
+
 <script>
 jQuery(document).ready(function($) {
 	$(document).on('click','.custom-add-to-cart', function(e) {
