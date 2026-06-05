@@ -390,15 +390,15 @@ $locations = array(
         background: none; border: none;
         font-size: 26px; line-height: 1; cursor: pointer; color: #333;
     }
-    .direction-popup-close:hover { color: #e00; }
+    .direction-popup-close:hover { color: #080404; }
     .direction-popup-title { margin: 0 0 18px; text-align: center; font-size: 20px; }
     .direction-popup-list { display: flex; flex-direction: column; gap: 12px; }
     .direction-popup-item {
         display: flex; justify-content: space-between; align-items: center;
         padding: 14px 18px; border: 1px solid #ddd; border-radius: 8px;
-        text-decoration: none; color: #111; transition: all .2s ease;
+        text-decoration: none; color: #080404; transition: all .2s ease;
     }
-    .direction-popup-item:hover { background: #111; color: #fff; border-color: #111; }
+    .direction-popup-item:hover { background: #080404; color: #fff; border-color: #080404; }
     .direction-popup-name { font-weight: 600; }
     .direction-popup-go { font-size: 14px; opacity: .85; }
 </style>
