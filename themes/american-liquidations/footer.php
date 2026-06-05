@@ -344,7 +344,7 @@ $locations = array(
     ),
     array(
         'name'    => 'Milford, CT',
-        'address' => 'Milford, CT',
+        'address' => '56 Turnpike Square, Milford, CT 06461',
     ),
 );
 ?>
