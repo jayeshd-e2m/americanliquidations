@@ -9,12 +9,12 @@ $block_id = get_field('advanced') ? get_field('block_id') : '';
 
 <section class="bg-gray py-12 md:py-24<?php echo esc_attr($block_class); ?>" <?php if ($block_id): ?>id="<?php echo esc_attr($block_id); ?>"<?php endif; ?>>
 	<div class="container">
-		<div class="flex flex-wrap md:flex-nowrap gap-6 lg:gap-12 items-center">
+		<div class="flex flex-wrap md:flex-nowrap gap-6 lg:gap-12">
 			<div class="w-full md:w-1/2 mb-4 md:mb-0">
 				<?php 
 				$image = get_field('two_col_image');
 				if( !empty( $image ) ): ?>
-					<img class="rounded-[15px]" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+					<img class="rounded-[15px] sticky top-0" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 				<?php endif; ?>
 			</div>
 			<div class="w-full md:w-1/2 space-y-5">
