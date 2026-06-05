@@ -238,6 +238,95 @@
     </div>
 </div>
 
+<!-- Form popup -->
+<div id="gf-popup-overlay" class="gf-popup-overlay">
+	<div class="gf-popup-box">
+		<button type="button" id="gf-popup-close" class="gf-popup-close" aria-label="Close">&times;</button>
+		<div class="gf-popup-content">
+			<?php echo do_shortcode('[gravityform id="3" title="false"]'); ?>
+		</div>
+	</div>
+</div>
+
+<style>
+	.gf-popup-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 99999;
+		justify-content: center;
+		align-items: center;
+	}
+	.gf-popup-overlay.is-visible {
+		display: flex;
+	}
+	.gf-popup-box {
+		position: relative;
+		background: #fff;
+		width: 90%;
+		max-width: 600px;
+		max-height: 90vh;
+		overflow-y: auto;
+		padding: 40px 30px 30px;
+		border-radius: 8px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+	}
+	.gf-popup-close {
+		position: absolute;
+		top: 10px;
+		right: 14px;
+		background: none;
+		border: none;
+		font-size: 28px;
+		line-height: 1;
+		cursor: pointer;
+		color: #333;
+	}
+	.gf-popup-close:hover {
+		color: #e00;
+	}
+</style>
+
+<script>
+	(function () {
+		// --- Cookie helpers ---
+		function setCookie(name, value, hours) {
+			var d = new Date();
+			d.setTime(d.getTime() + (hours * 60 * 60 * 1000));
+			document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
+		}
+		function getCookie(name) {
+			var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+			return match ? match[2] : null;
+		}
+
+		var overlay = document.getElementById('gf-popup-overlay');
+		var closeBtn = document.getElementById('gf-popup-close');
+
+		// Only show if the cookie isn't set
+		if (getCookie('gf_popup_closed') === null) {
+			setTimeout(function () {
+				overlay.classList.add('is-visible');
+			}, 15000); // 15 seconds
+		}
+
+		// Close button -> hide + set 24h cookie
+		closeBtn.addEventListener('click', function () {
+			overlay.classList.remove('is-visible');
+			setCookie('gf_popup_closed', '1', 24); // expires in 24 hours
+		});
+
+		// Optional: clicking the dark backdrop also closes it
+		overlay.addEventListener('click', function (e) {
+			if (e.target === overlay) {
+				overlay.classList.remove('is-visible');
+				setCookie('gf_popup_closed', '1', 24);
+			}
+		});
+	})();
+</script>
+
 <script>
 jQuery(document).ready(function($) {
 	$(document).on('click','.custom-add-to-cart', function(e) {
