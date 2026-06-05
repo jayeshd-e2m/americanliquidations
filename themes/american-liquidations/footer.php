@@ -285,7 +285,7 @@
 		font-size: 28px;
 		line-height: 1;
 		cursor: pointer;
-		color: #333;
+		color: #fff;
 	}
 	.gf-popup-close:hover {
 		color: #e00;
