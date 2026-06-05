@@ -339,12 +339,12 @@
 // Define your two locations here
 $locations = array(
     array(
-        'name'    => 'Bristol, CT',
-        'address' => '123 Main St, Bristol, CT 06010',
+        'name'    => 'Waterbury, CT',
+        'address' => '204 Austin Rd, Waterbury, CT, USA, 06705',
     ),
     array(
-        'name'    => 'Second Location',
-        'address' => '456 Example Ave, Hartford, CT 06103',
+        'name'    => 'Milford',
+        'address' => 'Milford',
     ),
 );
 ?>
