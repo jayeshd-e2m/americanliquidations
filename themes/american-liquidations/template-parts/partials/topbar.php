@@ -38,7 +38,7 @@ $link_classes = 'text-white text-sm hover:underline ';
                     $link_title = $link['title'];
                     $link_target = $link['target'] ? $link['target'] : '_self';
                     ?>
-                    <button type="button" class="btn btn-small btn-arrow hover:text-white hover:bg-transparent hover:border-white header-top-btn"><?php echo esc_html( $link_title ); ?></button>
+                    <button type="button"  id="get-direction-btn" class="btn btn-small btn-arrow hover:text-white hover:bg-transparent hover:border-white header-top-btn"><?php echo esc_html( $link_title ); ?></button>
                 <?php endif; ?>
             </div>
         </div>
