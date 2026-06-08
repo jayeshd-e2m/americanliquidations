@@ -81,6 +81,31 @@ if ($term && $term->slug === 'truckloads') {
 		) );
 	}
 
+	// Price range scoped to this term's products
+	$tl_min_price = null;
+	$tl_max_price = null;
+	if ( ! empty( $product_ids ) ) {
+		$prices = array();
+		foreach ( $product_ids as $pid ) {
+			$p = function_exists( 'wc_get_product' ) ? wc_get_product( $pid ) : null;
+			if ( $p ) {
+				$pr = $p->get_price();
+				if ( $pr !== '' && $pr !== null ) {
+					$prices[] = (float) $pr;
+				}
+			}
+		}
+		if ( ! empty( $prices ) ) {
+			$tl_min_price = (int) floor( min( $prices ) );
+			$tl_max_price = (int) ceil( max( $prices ) );
+		}
+	}
+	if ( $tl_min_price === null ) $tl_min_price = 0;
+	if ( $tl_max_price === null ) $tl_max_price = 1000;
+
+	set_query_var( 'truckload_min_price', $tl_min_price );
+	set_query_var( 'truckload_max_price', $tl_max_price );
+
 	// "Matches" count for the sidebar search box
 	$count = is_array( $product_ids ) ? count( $product_ids ) : 0;
 
@@ -130,34 +155,66 @@ if ($term && $term->slug === 'truckloads') {
 	</div>
 
 	<script>
-	(function () {
+	jQuery(function ($) {
 		var ajaxurl = '<?php echo esc_url( admin_url('admin-ajax.php') ); ?>';
 		var nonce   = '<?php echo wp_create_nonce('shopitem_filter_nonce'); ?>';
-		var radios  = document.querySelectorAll('#truckload-shop-filters input[name="truckload_cat"]');
-		var results = document.getElementById('shopitem-results');
+		var base    = '<?php echo esc_attr( $term->slug ); ?>';
+		var $results  = $('#shopitem-results');
+		var $minInput = $('#tl-min-price');
+		var $maxInput = $('#tl-max-price');
 
-		radios.forEach(function (radio) {
-			radio.addEventListener('change', function () {
-				if ( ! this.checked ) return;
-				var cat = this.value;
-				results.style.opacity = '0.4';
+		function currentCat() {
+			return $('#truckload-shop-filters input[name="truckload_cat"]:checked').val() || base;
+		}
 
-				var data = new FormData();
-				data.append('action', 'filter_shopitems');
-				data.append('nonce', nonce);
-				data.append('cat', cat);
-				data.append('base', '<?php echo esc_attr( $term->slug ); ?>');
+		function runFilter() {
+			$results.css('opacity', '0.4');
+			var data = new FormData();
+			data.append('action', 'filter_shopitems');
+			data.append('nonce', nonce);
+			data.append('cat', currentCat());
+			data.append('base', base);
+			data.append('min_price', $minInput.val());
+			data.append('max_price', $maxInput.val());
 
-				fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
-					.then(function (r) { return r.text(); })
-					.then(function (html) {
-						results.innerHTML = html;
-						results.style.opacity = '1';
-					})
-					.catch(function () { results.style.opacity = '1'; });
-			});
+			fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
+				.then(function (r) { return r.text(); })
+				.then(function (html) { $results.html(html); $results.css('opacity', '1'); })
+				.catch(function () { $results.css('opacity', '1'); });
+		}
+
+		// Category change
+		$('#truckload-shop-filters input[name="truckload_cat"]').on('change', function () {
+			if (this.checked) runFilter();
 		});
-	})();
+
+		// Price slider (ionRangeSlider)
+		var $wrap = $('.price-range-wrapper');
+		var minP = parseInt($wrap.data('minprice'), 10) || 0;
+		var maxP = parseInt($wrap.data('maxprice'), 10) || 1000;
+
+		if ($.fn.ionRangeSlider) {
+			$('#tl-price-range').ionRangeSlider({
+				type: 'double',
+				min: minP,
+				max: maxP,
+				from: minP,
+				to: maxP,
+				prefix: '$',
+				onChange: function (d) {
+					$('#tl-min-price-label').text(Math.round(d.from).toLocaleString());
+					$('#tl-max-price-label').text(Math.round(d.to).toLocaleString());
+					$minInput.val(d.from);
+					$maxInput.val(d.to);
+				},
+				onFinish: function (d) {
+					$minInput.val(d.from);
+					$maxInput.val(d.to);
+					runFilter();
+				}
+			});
+		}
+	});
 	</script>
 
 <?php } else {
