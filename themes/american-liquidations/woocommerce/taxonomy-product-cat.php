@@ -160,8 +160,8 @@ if ($term && $term->slug === 'truckloads') {
 		var nonce   = '<?php echo wp_create_nonce('shopitem_filter_nonce'); ?>';
 		var base    = '<?php echo esc_attr( $term->slug ); ?>';
 		var $results  = $('#shopitem-results');
-		var $minInput = $('#tl-min-price');
-		var $maxInput = $('#tl-max-price');
+		var $minInput = $('#min-price');
+		var $maxInput = $('#max-price');
 
 		function currentCat() {
 			return $('#truckload-shop-filters input[name="truckload_cat"]:checked').val() || base;
@@ -194,17 +194,17 @@ if ($term && $term->slug === 'truckloads') {
 		var maxP = parseInt($wrap.data('maxprice'), 10) || 1000;
 
 		if ($.fn.ionRangeSlider) {
-			$('#tl-price-range').ionRangeSlider({
+			$('#price-range').ionRangeSlider({
 				type: 'double',
 				min: minP,
 				max: maxP,
 				from: minP,
 				to: maxP,
 				prefix: '$',
-				skin: "round",
+				skin: 'round',
 				onChange: function (d) {
-					$('#tl-min-price-label').text(Math.round(d.from).toLocaleString());
-					$('#tl-max-price-label').text(Math.round(d.to).toLocaleString());
+					$('#min-price-label').text(Math.round(d.from).toLocaleString());
+					$('#max-price-label').text(Math.round(d.to).toLocaleString());
 					$minInput.val(d.from);
 					$maxInput.val(d.to);
 				},
