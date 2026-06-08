@@ -89,7 +89,7 @@ if ($term && $term->slug === 'truckloads') {
 	set_query_var( 'truckload_filter_terms', $filter_terms );
 	?>
 
-	<div class="shop-taxonomy-cover py-12 md:py-24">
+	<div class="shop-taxonomy-cover py-12 md:py-24 bg-gray">
 		<div class="container">
 			<h2 class="text-center mb-12 text-[24px] md:text-[32px]">
 				Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory
@@ -98,8 +98,8 @@ if ($term && $term->slug === 'truckloads') {
 			<div class="flex gap-8 2xl:gap-12 flex-wrap md:flex-nowrap">
 
 				<!-- Sidebar -->
-				<div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px]">
-					<span class="shop-sidebar-overlay"></span>
+				<div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-white p-8 2xl:p-12 rounded-[15px]">
+					<span class="shop-sidebar-overlay" style="background: #fff"></span>
 					<div class="filter-wrapper">
 						<div class="filter-search mb-10">
 							<h4 class="mb-3 text-black/60 text-[24px]">Search Products</h4>
