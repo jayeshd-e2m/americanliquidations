@@ -133,14 +133,13 @@ if ($term && $term->slug === 'truckloads') {
 	(function () {
 		var ajaxurl = '<?php echo esc_url( admin_url('admin-ajax.php') ); ?>';
 		var nonce   = '<?php echo wp_create_nonce('shopitem_filter_nonce'); ?>';
-		var buttons = document.querySelectorAll('.shopitem-filter-btn');
+		var radios  = document.querySelectorAll('#truckload-shop-filters input[name="truckload_cat"]');
 		var results = document.getElementById('shopitem-results');
 
-		buttons.forEach(function (btn) {
-			btn.addEventListener('click', function () {
-				var cat = this.getAttribute('data-cat');
-				buttons.forEach(function (b) { b.classList.remove('is-active'); });
-				this.classList.add('is-active');
+		radios.forEach(function (radio) {
+			radio.addEventListener('change', function () {
+				if ( ! this.checked ) return;
+				var cat = this.value;
 				results.style.opacity = '0.4';
 
 				var data = new FormData();
