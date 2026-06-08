@@ -40,20 +40,7 @@ function custom_shopitem_shortcode( $atts ) {
         );
     }
 
-    // Price filter
-    $min_price = ( $atts['min_price'] !== '' ) ? (float) $atts['min_price'] : '';
-    $max_price = ( $atts['max_price'] !== '' ) ? (float) $atts['max_price'] : '';
-    if ( $min_price !== '' && $max_price !== '' ) {
-        $args['meta_query'] = array(
-            array(
-                'key'     => '_price',
-                'value'   => array( $min_price, $max_price ),
-                'compare' => 'BETWEEN',
-                'type'    => 'NUMERIC',
-            ),
-        );
-    }
-
+    // Build meta_query (price + location together)
     $meta_query = array();
 
     $min_price = ( $atts['min_price'] !== '' ) ? (float) $atts['min_price'] : '';
@@ -84,6 +71,7 @@ function custom_shopitem_shortcode( $atts ) {
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) {
+        echo '<span class="shopitem-found-count" data-count="' . esc_attr( (int) $query->found_posts ) . '" style="display:none"></span>';
         echo '<div class="mobile-grid-1 grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-12">';
         while ( $query->have_posts() ) {
             $query->the_post();
@@ -97,6 +85,7 @@ function custom_shopitem_shortcode( $atts ) {
 
         echo render_custom_pagination_buttons( $query );
     } else {
+        echo '<span class="shopitem-found-count" data-count="0" style="display:none"></span>';
         echo '<p class="text-center">No products found in this category.</p>';
     }
 

@@ -199,7 +199,14 @@ if ($term && $term->slug === 'truckloads') {
 
 			fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
 				.then(function (r) { return r.text(); })
-				.then(function (html) { $results.html(html); $results.css('opacity', '1'); })
+				.then(function (html) {
+					$results.html(html);
+					$results.css('opacity', '1');
+					var c = $results.find('.shopitem-found-count').data('count');
+					if ( typeof c !== 'undefined' ) {
+						$('.search-match-box').text(c);
+					}
+				})
 				.catch(function () { $results.css('opacity', '1'); });
 		}
 
