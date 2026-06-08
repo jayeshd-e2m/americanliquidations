@@ -201,6 +201,7 @@ if ($term && $term->slug === 'truckloads') {
 				from: minP,
 				to: maxP,
 				prefix: '$',
+				skin: "round",
 				onChange: function (d) {
 					$('#tl-min-price-label').text(Math.round(d.from).toLocaleString());
 					$('#tl-max-price-label').text(Math.round(d.to).toLocaleString());
