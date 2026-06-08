@@ -78,6 +78,29 @@ function custom_shopitem_shortcode( $atts ) {
 }
 add_shortcode( 'shopitem', 'custom_shopitem_shortcode' );
 
+function filter_shopitems() {
+    check_ajax_referer( 'shopitem_filter_nonce', 'nonce' );
+
+    $cat       = isset( $_POST['cat'] ) ? sanitize_text_field( $_POST['cat'] ) : '';
+    $min_price = isset( $_POST['min_price'] ) ? (float) $_POST['min_price'] : '';
+    $max_price = isset( $_POST['max_price'] ) ? (float) $_POST['max_price'] : '';
+
+    if ( $cat === '' ) {
+        $cat = isset( $_POST['base'] ) ? sanitize_text_field( $_POST['base'] ) : '';
+    }
+
+    $shortcode  = '[shopitem cat="' . esc_attr( $cat ) . '"';
+    if ( $min_price !== '' && $max_price !== '' ) {
+        $shortcode .= ' min_price="' . esc_attr( $min_price ) . '"';
+        $shortcode .= ' max_price="' . esc_attr( $max_price ) . '"';
+    }
+    $shortcode .= ']';
+
+    echo do_shortcode( $shortcode );
+    wp_die();
+}
+add_action( 'wp_ajax_filter_shopitems', 'filter_shopitems' );
+add_action( 'wp_ajax_nopriv_filter_shopitems', 'filter_shopitems' );
 
 function custom_pagination_base_url() {
     global $wp;
