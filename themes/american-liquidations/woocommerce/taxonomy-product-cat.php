@@ -45,114 +45,128 @@ if ($term && $term->slug === 'truckloads') {
 
 <?php 
 $term = get_queried_object();
-if ($term && $term->slug === 'truckloads') { ?>
-	<div class="shop-taxonomy-cover py-12 md:py-24 bg-gray">
+if ($term && $term->slug === 'truckloads') {
+
+	// Build the list of filter terms (subcats used by products in this term)
+	$product_ids = get_posts( array(
+		'post_type'      => 'product',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field'    => 'term_id',
+				'terms'    => $term->term_id,
+			),
+		),
+	) );
+
+	$filter_terms = array();
+	if ( ! empty( $product_ids ) ) {
+		$assigned = wp_get_object_terms( $product_ids, 'product_cat' );
+		if ( ! is_wp_error( $assigned ) ) {
+			foreach ( $assigned as $t ) {
+				if ( $t->term_id !== $term->term_id ) {
+					$filter_terms[ $t->term_id ] = $t; // keyed = auto-dedupe
+				}
+			}
+		}
+	}
+	if ( empty( $filter_terms ) ) {
+		$filter_terms = get_terms( array(
+			'taxonomy'   => 'product_cat',
+			'parent'     => 0,
+			'hide_empty' => true,
+		) );
+	}
+
+	// "Matches" count for the sidebar search box
+	$count = is_array( $product_ids ) ? count( $product_ids ) : 0;
+
+	// Pass data into the sidebar partial
+	set_query_var( 'truckload_term', $term );
+	set_query_var( 'truckload_filter_terms', $filter_terms );
+	?>
+
+	<div class="shop-taxonomy-cover py-12 md:py-24">
 		<div class="container">
-			<?php
-			$term = get_queried_object();
-			if ( $term && ! is_wp_error( $term ) ) :
-			?>
-				<h2 class="text-center mb-12 text-[24px] md:text-[32px]">
-					Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory
-				</h2>
+			<h2 class="text-center mb-12 text-[24px] md:text-[32px]">
+				Shop Our Current <?php echo esc_html( $term->name ); ?> Inventory
+			</h2>
 
-				<?php
-				// Subcategories of the current term; fall back to top-level product cats
-				$product_ids = get_posts( array(
-					'post_type'      => 'product',
-					'post_status'    => 'publish',
-					'posts_per_page' => -1,
-					'fields'         => 'ids',
-					'tax_query'      => array(
-						array(
-							'taxonomy' => 'product_cat',
-							'field'    => 'term_id',
-							'terms'    => $term->term_id,
-						),
-					),
-				) );
-				$filter_terms = array();
-				if ( ! empty( $product_ids ) ) {
-					// All product_cat terms assigned to those products
-					$assigned = wp_get_object_terms( $product_ids, 'product_cat' );
-					if ( ! is_wp_error( $assigned ) ) {
-						foreach ( $assigned as $t ) {
-							// Skip the current term itself (that's the "All" button)
-							if ( $t->term_id !== $term->term_id ) {
-								$filter_terms[ $t->term_id ] = $t; // keyed = auto-dedupe
-							}
-						}
-					}
-				}
-				if ( empty( $filter_terms ) || is_wp_error( $filter_terms ) ) {
-					$filter_terms = get_terms( array(
-						'taxonomy'   => 'product_cat',
-						'parent'     => 0,
-						'hide_empty' => true,
-					) );
-				}
-				?>
+			<div class="flex gap-8 2xl:gap-12 flex-wrap md:flex-nowrap">
 
-				<?php if ( ! empty( $filter_terms ) && ! is_wp_error( $filter_terms ) ) : ?>
-					<div class="shopitem-filter flex flex-wrap justify-center gap-3 mb-10">
-						<button type="button" class="shopitem-filter-btn is-active"
-								data-cat="<?php echo esc_attr( $term->slug ); ?>">
-							All <?php echo esc_html( $term->name ); ?>
-						</button>
-						<?php foreach ( $filter_terms as $ft ) : ?>
-							<button type="button" class="shopitem-filter-btn"
-									data-cat="<?php echo esc_attr( $ft->slug ); ?>">
-								<?php echo esc_html( $ft->name ); ?>
-							</button>
-						<?php endforeach; ?>
+				<!-- Sidebar -->
+				<div class="shop-sidebar w-full md:w-[275px] xl:w-[355px] bg-gray p-8 2xl:p-12 rounded-[15px]">
+					<span class="shop-sidebar-overlay"></span>
+					<div class="filter-wrapper">
+						<div class="filter-search mb-10">
+							<h4 class="mb-3 text-black/60 text-[24px]">Search Products</h4>
+							<p class="font-medium opacity-[40%]">
+								Store / Search : <span class="search-match-box"><?php echo esc_html( $count ); ?></span> Matches
+							</p>
+						</div>
+						<?php get_template_part( 'template-parts/shop/function-truckload-sidebar' ); ?>
 					</div>
-				<?php endif; ?>
-
-				<div id="shopitem-results">
-					<?php echo do_shortcode('[shopitem cat="' . esc_attr( $term->slug ) . '"]'); ?>
 				</div>
 
-				<script>
-				(function () {
-					var ajaxurl = '<?php echo esc_url( admin_url('admin-ajax.php') ); ?>';
-					var nonce   = '<?php echo wp_create_nonce('shopitem_filter_nonce'); ?>';
-					var buttons = document.querySelectorAll('.shopitem-filter-btn');
-					var results = document.getElementById('shopitem-results');
-					
+				<!-- Items -->
+				<div class="shop-items-cover w-full md:w-[calc(100%_-_275px)] xl:w-[calc(100%_-_355px)] pr-0">
+					<div id="custom-shop-loader" class="hidden text-center py-8 sticky top-[50%]">
+						<svg class="mx-auto animate-spin h-8 w-8 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+						</svg>
+					</div>
 
-					buttons.forEach(function (btn) {
-						btn.addEventListener('click', function () {
-							var cat = this.getAttribute('data-cat');
-							buttons.forEach(function (b) { b.classList.remove('is-active'); });
-							this.classList.add('is-active');
-							results.style.opacity = '0.4';
+					<div id="shopitem-results">
+						<?php echo do_shortcode('[shopitem cat="' . esc_attr( $term->slug ) . '"]'); ?>
+					</div>
+				</div>
 
-							var data = new FormData();
-							data.append('action', 'filter_shopitems');
-							data.append('nonce', nonce);
-							data.append('cat', cat);
-							data.append('base', '<?php echo esc_attr( $term->slug ); ?>'); // current = truckload
-
-							fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
-								.then(function (r) { return r.text(); })
-								.then(function (html) {
-									results.innerHTML = html;
-									results.style.opacity = '1';
-								})
-								.catch(function () { results.style.opacity = '1'; });
-						});
-					});
-				})();
-				</script>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
-<?php }else{
+
+	<script>
+	(function () {
+		var ajaxurl = '<?php echo esc_url( admin_url('admin-ajax.php') ); ?>';
+		var nonce   = '<?php echo wp_create_nonce('shopitem_filter_nonce'); ?>';
+		var buttons = document.querySelectorAll('.shopitem-filter-btn');
+		var results = document.getElementById('shopitem-results');
+
+		buttons.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var cat = this.getAttribute('data-cat');
+				buttons.forEach(function (b) { b.classList.remove('is-active'); });
+				this.classList.add('is-active');
+				results.style.opacity = '0.4';
+
+				var data = new FormData();
+				data.append('action', 'filter_shopitems');
+				data.append('nonce', nonce);
+				data.append('cat', cat);
+				data.append('base', '<?php echo esc_attr( $term->slug ); ?>');
+
+				fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
+					.then(function (r) { return r.text(); })
+					.then(function (html) {
+						results.innerHTML = html;
+						results.style.opacity = '1';
+					})
+					.catch(function () { results.style.opacity = '1'; });
+			});
+		});
+	})();
+	</script>
+
+<?php } else {
 	echo '<div class="is-other-product">';
 	$current_cat = get_queried_object();
-    if ($current_cat && !is_wp_error($current_cat)) {
-        echo do_shortcode('[custom_shop cat="' . esc_attr($current_cat->slug) . '"]');
-    }
+	if ( $current_cat && ! is_wp_error( $current_cat ) ) {
+		echo do_shortcode('[custom_shop cat="' . esc_attr( $current_cat->slug ) . '"]');
+	}
 	echo '</div>';
 }
 ?>
