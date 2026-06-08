@@ -3,6 +3,7 @@ $term         = get_query_var( 'truckload_term' );
 $filter_terms = get_query_var( 'truckload_filter_terms' );
 $tl_min_price = get_query_var( 'truckload_min_price' );
 $tl_max_price = get_query_var( 'truckload_max_price' );
+$tl_locations = get_query_var( 'truckload_locations' );
 
 if ( $term && ! is_wp_error( $term ) ) : ?>
 	<div class="filter-wrapper">
@@ -38,6 +39,25 @@ if ( $term && ! is_wp_error( $term ) ) : ?>
 					<input type="hidden" name="max_price" id="max-price" value="<?php echo esc_attr( $tl_max_price ); ?>">
 				</div>
 			</div>
+
+            <!-- Location Filter -->
+            <?php if ( ! empty( $tl_locations ) ) : ?>
+                <div class="filter-dropdown mb-10">
+                    <h5 class="mb-4 filter-dropdown-heading relative text-[18px]"><span class="opacity-60 text-black font-bold">Location</span> <span class="dropdown-arrow"></span></h5>
+                    <div class="filter-dropdown-content">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="custom-radio-box"><input type="radio" name="truckload_location" value="" checked><span class="input-radio-custom"></span>All Locations</label>
+                            </div>
+                            <?php foreach ( $tl_locations as $loc ) : ?>
+                                <div>
+                                    <label class="custom-radio-box"><input type="radio" name="truckload_location" value="<?php echo esc_attr( $loc ); ?>"><span class="input-radio-custom"></span><?php echo esc_html( $loc ); ?></label>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
 		</form>
 	</div>
 <?php endif; ?>

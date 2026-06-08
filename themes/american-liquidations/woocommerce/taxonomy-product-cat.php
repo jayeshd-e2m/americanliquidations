@@ -106,6 +106,21 @@ if ($term && $term->slug === 'truckloads') {
 	set_query_var( 'truckload_min_price', $tl_min_price );
 	set_query_var( 'truckload_max_price', $tl_max_price );
 
+	// Distinct ACF locations across this term's products
+	$tl_locations = array();
+	if ( ! empty( $product_ids ) ) {
+		foreach ( $product_ids as $pid ) {
+			$loc = trim( (string) get_field( 'location', $pid ) );
+			if ( $loc !== '' ) {
+				$tl_locations[ $loc ] = true; // key = auto-dedupe
+			}
+		}
+	}
+	$tl_locations = array_keys( $tl_locations );
+	sort( $tl_locations );
+
+	set_query_var( 'truckload_locations', $tl_locations );
+
 	// "Matches" count for the sidebar search box
 	$count = is_array( $product_ids ) ? count( $product_ids ) : 0;
 
@@ -167,6 +182,10 @@ if ($term && $term->slug === 'truckloads') {
 			return $('#truckload-shop-filters input[name="truckload_cat"]:checked').val() || base;
 		}
 
+		function currentLocation() {
+			return $('#truckload-shop-filters input[name="truckload_location"]:checked').val() || '';
+		}
+
 		function runFilter() {
 			$results.css('opacity', '0.4');
 			var data = new FormData();
@@ -176,6 +195,7 @@ if ($term && $term->slug === 'truckloads') {
 			data.append('base', base);
 			data.append('min_price', $minInput.val());
 			data.append('max_price', $maxInput.val());
+			data.append('location', currentLocation());
 
 			fetch(ajaxurl, { method: 'POST', body: data, credentials: 'same-origin' })
 				.then(function (r) { return r.text(); })
@@ -185,6 +205,10 @@ if ($term && $term->slug === 'truckloads') {
 
 		// Category change
 		$('#truckload-shop-filters input[name="truckload_cat"]').on('change', function () {
+			if (this.checked) runFilter();
+		});
+
+		$('#truckload-shop-filters input[name="truckload_location"]').on('change', function () {
 			if (this.checked) runFilter();
 		});
 

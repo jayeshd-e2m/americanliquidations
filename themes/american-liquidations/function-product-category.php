@@ -8,6 +8,7 @@ function custom_shopitem_shortcode( $atts ) {
         'paged'     => '',
         'min_price' => '',
         'max_price' => '',
+        'location'  => '',
     ), $atts, 'shopitem' );
 
     ob_start();
@@ -51,6 +52,33 @@ function custom_shopitem_shortcode( $atts ) {
                 'type'    => 'NUMERIC',
             ),
         );
+    }
+
+    $meta_query = array();
+
+    $min_price = ( $atts['min_price'] !== '' ) ? (float) $atts['min_price'] : '';
+    $max_price = ( $atts['max_price'] !== '' ) ? (float) $atts['max_price'] : '';
+    if ( $min_price !== '' && $max_price !== '' ) {
+        $meta_query[] = array(
+            'key'     => '_price',
+            'value'   => array( $min_price, $max_price ),
+            'compare' => 'BETWEEN',
+            'type'    => 'NUMERIC',
+        );
+    }
+
+    $location = sanitize_text_field( $atts['location'] );
+    if ( $location !== '' ) {
+        $meta_query[] = array(
+            'key'     => 'location',
+            'value'   => $location,
+            'compare' => '=',
+        );
+    }
+
+    if ( ! empty( $meta_query ) ) {
+        $meta_query['relation'] = 'AND';
+        $args['meta_query']     = $meta_query;
     }
 
     $query = new WP_Query( $args );
