@@ -202,10 +202,17 @@ if ($term && $term->slug === 'truckloads') {
 				.then(function (html) {
 					$results.html(html);
 					$results.css('opacity', '1');
-					var c = $results.find('.shopitem-found-count').data('count');
-					if ( typeof c !== 'undefined' ) {
-						$('.search-match-box').text(c);
+
+					var $marker = $results.find('.shopitem-found-count');
+					var c;
+					if ( $marker.length ) {
+						c = $marker.attr('data-count');
 					}
+					if ( c === undefined || c === null || c === '' ) {
+						// fallback: count rendered cards (current page only)
+						c = $results.find('.mobile-grid-1').children().length;
+					}
+					$('.search-match-box').text(c);
 				})
 				.catch(function () { $results.css('opacity', '1'); });
 		}
