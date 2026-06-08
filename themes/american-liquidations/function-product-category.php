@@ -1,34 +1,32 @@
 <?php 
 function custom_shopitem_shortcode( $atts ) {
-    // Get the shortcode attributes
     $atts = shortcode_atts( array(
-        'cat'      => '',
-        'orderby'  => 'date',
-        'order'    => 'DESC',
-        'per_page' => 12,
-        'paged'    => '', 
+        'cat'       => '',
+        'orderby'   => 'date',
+        'order'     => 'DESC',
+        'per_page'  => 12,
+        'paged'     => '',
+        'min_price' => '',
+        'max_price' => '',
     ), $atts, 'shopitem' );
 
-    // Start output buffering
     ob_start();
 
     $paged = 1;
-
     if ( $atts['paged'] !== '' ) {
         $paged = max( 1, (int) $atts['paged'] );
     } else {
         $q_paged = get_query_var( 'paged' );
-        $p_paged = get_query_var( 'page' ); // needed on some setups (static front page)
+        $p_paged = get_query_var( 'page' );
         $paged   = max( 1, (int) $q_paged, (int) $p_paged );
     }
 
-    // Build the query args
     $args = array(
-        'post_type' => 'product',
+        'post_type'      => 'product',
         'posts_per_page' => (int) $atts['per_page'],
         'paged'          => $paged,
-        'orderby' => sanitize_text_field( $atts['orderby'] ),
-        'order' => sanitize_text_field( $atts['order'] ),
+        'orderby'        => sanitize_text_field( $atts['orderby'] ),
+        'order'          => sanitize_text_field( $atts['order'] ),
     );
 
     if ( ! empty( $atts['cat'] ) ) {
@@ -41,6 +39,20 @@ function custom_shopitem_shortcode( $atts ) {
         );
     }
 
+    // Price filter
+    $min_price = ( $atts['min_price'] !== '' ) ? (float) $atts['min_price'] : '';
+    $max_price = ( $atts['max_price'] !== '' ) ? (float) $atts['max_price'] : '';
+    if ( $min_price !== '' && $max_price !== '' ) {
+        $args['meta_query'] = array(
+            array(
+                'key'     => '_price',
+                'value'   => array( $min_price, $max_price ),
+                'compare' => 'BETWEEN',
+                'type'    => 'NUMERIC',
+            ),
+        );
+    }
+
     $query = new WP_Query( $args );
 
     if ( $query->have_posts() ) {
@@ -48,15 +60,14 @@ function custom_shopitem_shortcode( $atts ) {
         while ( $query->have_posts() ) {
             $query->the_post();
             $product = wc_get_product( get_the_ID() );
-			if ( $product ) {
-				set_query_var( 'product', $product );
-				get_template_part( 'template-parts/blocks/cat-product-card' );
-			}
+            if ( $product ) {
+                set_query_var( 'product', $product );
+                get_template_part( 'template-parts/blocks/cat-product-card' );
+            }
         }
         echo '</div>';
 
         echo render_custom_pagination_buttons( $query );
-
     } else {
         echo '<p class="text-center">No products found in this category.</p>';
     }
