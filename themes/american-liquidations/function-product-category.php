@@ -112,6 +112,7 @@ function filter_shopitems() {
     $cat       = isset( $_POST['cat'] ) ? sanitize_text_field( $_POST['cat'] ) : '';
     $min_price = isset( $_POST['min_price'] ) ? (float) $_POST['min_price'] : '';
     $max_price = isset( $_POST['max_price'] ) ? (float) $_POST['max_price'] : '';
+    $location  = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
 
     if ( $cat === '' ) {
         $cat = isset( $_POST['base'] ) ? sanitize_text_field( $_POST['base'] ) : '';
@@ -121,6 +122,9 @@ function filter_shopitems() {
     if ( $min_price !== '' && $max_price !== '' ) {
         $shortcode .= ' min_price="' . esc_attr( $min_price ) . '"';
         $shortcode .= ' max_price="' . esc_attr( $max_price ) . '"';
+    }
+    if ( $location !== '' ) {
+        $shortcode .= ' location="' . esc_attr( $location ) . '"';
     }
     $shortcode .= ']';
 
