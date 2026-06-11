@@ -119,33 +119,58 @@ if ($term && $term->slug === 'truckloads') {
 
 	set_query_var( 'truckload_locations', $tl_locations );
 
-	// Map of category slug => locations that have in-stock products (for cross-filtering the sidebar)
-	$cat_locations = array();
-	$base_slug     = $term->slug; // 'truckloads'
+	// Per-category context: in-stock locations + price range, for cross-filtering the sidebar
+	$cat_context = array();
+	$base_slug   = $term->slug;
 
 	if ( ! empty( $product_ids ) ) {
 		foreach ( $product_ids as $pid ) {
 			$product = function_exists( 'wc_get_product' ) ? wc_get_product( $pid ) : null;
-			if ( $product && ! $product->is_in_stock() ) {
-				continue; // keep this consistent with the in-stock button logic
-			}
-
-			$loc = trim( (string) get_field( 'location', $pid ) );
-			if ( $loc === '' ) {
+			if ( ! $product || ! $product->is_in_stock() ) {
 				continue;
 			}
 
-			$cat_locations[ $base_slug ][ $loc ] = true; // "All Truckload"
+			$price = $product->get_price();
+			$price = ( $price === '' || $price === null ) ? null : (float) $price;
+			$loc   = trim( (string) get_field( 'location', $pid ) );
 
+			// Buckets this product feeds: base ("All Truckload") + each store category
+			$slugs  = array( $base_slug );
 			$pterms = wp_get_object_terms( $pid, 'product_cat' );
 			if ( ! is_wp_error( $pterms ) ) {
 				foreach ( $pterms as $t ) {
 					if ( $t->term_id !== $term->term_id ) {
-						$cat_locations[ $t->slug ][ $loc ] = true;
+						$slugs[] = $t->slug;
+					}
+				}
+			}
+
+			foreach ( $slugs as $slug ) {
+				if ( ! isset( $cat_context[ $slug ] ) ) {
+					$cat_context[ $slug ] = array( 'locations' => array(), 'min' => null, 'max' => null );
+				}
+				if ( $loc !== '' ) {
+					$cat_context[ $slug ]['locations'][ $loc ] = true;
+				}
+				if ( $price !== null ) {
+					if ( $cat_context[ $slug ]['min'] === null || $price < $cat_context[ $slug ]['min'] ) {
+						$cat_context[ $slug ]['min'] = $price;
+					}
+					if ( $cat_context[ $slug ]['max'] === null || $price > $cat_context[ $slug ]['max'] ) {
+						$cat_context[ $slug ]['max'] = $price;
 					}
 				}
 			}
 		}
+	}
+
+	// Normalize for JS
+	foreach ( $cat_context as $slug => $data ) {
+		$locs = array_keys( $data['locations'] );
+		sort( $locs );
+		$cat_context[ $slug ]['locations'] = $locs;
+		$cat_context[ $slug ]['min'] = $data['min'] === null ? $tl_min_price : (int) floor( $data['min'] );
+		$cat_context[ $slug ]['max'] = $data['max'] === null ? $tl_max_price : (int) ceil( $data['max'] );
 	}
 	foreach ( $cat_locations as $slug => $locs ) {
 		$list = array_keys( $locs );
@@ -212,13 +237,19 @@ if ($term && $term->slug === 'truckloads') {
 
 		var catLocations = <?php echo wp_json_encode( $cat_locations ); ?>;
 
+		var catContext = <?php echo wp_json_encode( $cat_context ); ?>;
+
+		function ctxFor(slug) {
+			return catContext[slug] || catContext[base] || { locations: [], min: minP, max: maxP };
+		}
+
 		function syncLocations() {
-			var allowed = catLocations[currentCat()] || catLocations[base] || [];
+			var allowed = ctxFor(currentCat()).locations;
 			$('#truckload-shop-filters input[name="truckload_location"]').each(function () {
 				var $input = $(this), val = $input.val(), $row = $input.closest('div');
-				if (val === '') { $row.show(); return; }          // always keep "All Locations"
+				if (val === '') { $row.show(); return; }
 				if (allowed.indexOf(val) === -1) {
-					if ($input.is(':checked')) {                   // selected one just became invalid
+					if ($input.is(':checked')) {
 						$('#truckload-shop-filters input[name="truckload_location"][value=""]').prop('checked', true);
 					}
 					$row.hide();
@@ -227,6 +258,19 @@ if ($term && $term->slug === 'truckloads') {
 				}
 			});
 		}
+
+		function syncPrice() {
+			var ctx = ctxFor(currentCat());
+			var slider = $('#price-range').data('ionRangeSlider');
+			if (slider) {
+				slider.update({ min: ctx.min, max: ctx.max, from: ctx.min, to: ctx.max });
+			}
+			$minInput.val(ctx.min);
+			$maxInput.val(ctx.max);
+			$('#min-price-label').text(Number(ctx.min).toLocaleString());
+			$('#max-price-label').text(Number(ctx.max).toLocaleString());
+		}
+
 
 		function currentCat() {
 			return $('#truckload-shop-filters input[name="truckload_cat"]:checked').val() || base;
@@ -270,12 +314,14 @@ if ($term && $term->slug === 'truckloads') {
 		// Category change
 		$('#truckload-shop-filters input[name="truckload_cat"]').on('change', function () {
 			if (this.checked) {
-				syncLocations();   // hide invalid locations + reset selection if needed
-				runFilter();       // now queries with a valid location
+				syncLocations();
+				syncPrice();   // rescale slider to this category's real range
+				runFilter();   // now queries with a valid price band
 			}
 		});
 
-		syncLocations(); // run once on load so the initial state is correct
+		syncLocations();
+		syncPrice();
 
 		$('#truckload-shop-filters input[name="truckload_location"]').on('change', function () {
 			if (this.checked) runFilter();
