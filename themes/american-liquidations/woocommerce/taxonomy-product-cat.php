@@ -119,6 +119,40 @@ if ($term && $term->slug === 'truckloads') {
 
 	set_query_var( 'truckload_locations', $tl_locations );
 
+	// Map of category slug => locations that have in-stock products (for cross-filtering the sidebar)
+	$cat_locations = array();
+	$base_slug     = $term->slug; // 'truckloads'
+
+	if ( ! empty( $product_ids ) ) {
+		foreach ( $product_ids as $pid ) {
+			$product = function_exists( 'wc_get_product' ) ? wc_get_product( $pid ) : null;
+			if ( $product && ! $product->is_in_stock() ) {
+				continue; // keep this consistent with the in-stock button logic
+			}
+
+			$loc = trim( (string) get_field( 'location', $pid ) );
+			if ( $loc === '' ) {
+				continue;
+			}
+
+			$cat_locations[ $base_slug ][ $loc ] = true; // "All Truckload"
+
+			$pterms = wp_get_object_terms( $pid, 'product_cat' );
+			if ( ! is_wp_error( $pterms ) ) {
+				foreach ( $pterms as $t ) {
+					if ( $t->term_id !== $term->term_id ) {
+						$cat_locations[ $t->slug ][ $loc ] = true;
+					}
+				}
+			}
+		}
+	}
+	foreach ( $cat_locations as $slug => $locs ) {
+		$list = array_keys( $locs );
+		sort( $list );
+		$cat_locations[ $slug ] = $list;
+	}
+
 	// "Matches" count for the sidebar search box
 	$count = is_array( $product_ids ) ? count( $product_ids ) : 0;
 
@@ -176,6 +210,24 @@ if ($term && $term->slug === 'truckloads') {
 		var $minInput = $('#min-price');
 		var $maxInput = $('#max-price');
 
+		var catLocations = <?php echo wp_json_encode( $cat_locations ); ?>;
+
+		function syncLocations() {
+			var allowed = catLocations[currentCat()] || catLocations[base] || [];
+			$('#truckload-shop-filters input[name="truckload_location"]').each(function () {
+				var $input = $(this), val = $input.val(), $row = $input.closest('div');
+				if (val === '') { $row.show(); return; }          // always keep "All Locations"
+				if (allowed.indexOf(val) === -1) {
+					if ($input.is(':checked')) {                   // selected one just became invalid
+						$('#truckload-shop-filters input[name="truckload_location"][value=""]').prop('checked', true);
+					}
+					$row.hide();
+				} else {
+					$row.show();
+				}
+			});
+		}
+
 		function currentCat() {
 			return $('#truckload-shop-filters input[name="truckload_cat"]:checked').val() || base;
 		}
@@ -217,8 +269,13 @@ if ($term && $term->slug === 'truckloads') {
 
 		// Category change
 		$('#truckload-shop-filters input[name="truckload_cat"]').on('change', function () {
-			if (this.checked) runFilter();
+			if (this.checked) {
+				syncLocations();   // hide invalid locations + reset selection if needed
+				runFilter();       // now queries with a valid location
+			}
 		});
+
+		syncLocations(); // run once on load so the initial state is correct
 
 		$('#truckload-shop-filters input[name="truckload_location"]').on('change', function () {
 			if (this.checked) runFilter();
