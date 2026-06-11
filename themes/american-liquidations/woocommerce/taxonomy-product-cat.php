@@ -65,11 +65,9 @@ if ($term && $term->slug === 'truckloads') {
 	$filter_terms = array();
 	if ( ! empty( $product_ids ) ) {
 		$assigned = wp_get_object_terms( $product_ids, 'product_cat' );
-		if ( ! is_wp_error( $assigned ) ) {
-			foreach ( $assigned as $t ) {
-				if ( $t->term_id !== $term->term_id ) {
-					$filter_terms[ $t->term_id ] = $t; // keyed = auto-dedupe
-				}
+		foreach ( $assigned as $t ) {
+			if ( $t->term_id !== $term->term_id ) {
+				$filter_terms[ $t->term_id ] = $t; // keyed = auto-dedupe
 			}
 		}
 	}

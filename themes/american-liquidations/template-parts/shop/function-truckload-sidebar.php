@@ -17,6 +17,7 @@ if ( $term && ! is_wp_error( $term ) ) : ?>
 			</div>
 			<?php if ( ! empty( $filter_terms ) && ! is_wp_error( $filter_terms ) ) : ?>
 				<?php foreach ( $filter_terms as $ft ) : ?>
+					<?php if ( ! al_term_has_instock_products( $ft ) ) { continue; } ?>
 					<div class="mb-4">
 						<label class="font-medium custom-radio-box">
 							<input type="radio" name="truckload_cat" value="<?php echo esc_attr( $ft->slug ); ?>">
@@ -61,3 +62,4 @@ if ( $term && ! is_wp_error( $term ) ) : ?>
 		</form>
 	</div>
 <?php endif; ?>
+

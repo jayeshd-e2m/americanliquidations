@@ -345,6 +345,38 @@ function custom_shop_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'custom_shop_enqueue_scripts');
 
+/**
+ * True if the given term has at least one published, in-stock product.
+ */
+function al_term_has_instock_products( $term ) {
+	if ( ! $term || is_wp_error( $term ) ) {
+		return false;
+	}
+
+	$query = new WP_Query( array(
+		'post_type'      => 'product',
+		'post_status'    => 'publish',
+		'posts_per_page' => 1,
+		'fields'         => 'ids',
+		'no_found_rows'  => true,
+		'tax_query'      => array(
+			array(
+				'taxonomy' => $term->taxonomy,   // uses the term's own taxonomy
+				'field'    => 'term_id',
+				'terms'    => $term->term_id,
+			),
+		),
+		'meta_query'     => array(
+			array(
+				'key'   => '_stock_status',
+				'value' => 'instock',
+			),
+		),
+	) );
+
+	return $query->have_posts();
+}
+
 
 // Remove default WooCommerce hooks (optional)
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
