@@ -23,7 +23,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
+<?php wp_body_open(); ?> 
 
 <!-- Floating cart -->
 <div id="cart-dropdown" class="fixed top-0 right-[-500px] w-full max-w-[500px] bg-white shadow-lg z-[999999] h-full overflow-y-auto overflow-x-hidden flex flex-wrap content-between">
