@@ -26,7 +26,7 @@
 <?php wp_body_open(); ?>
 
 <!-- Floating cart -->
-<div id="cart-dropdown" class="fixed top-0 right-[-500px] w-full max-w-[500px] bg-white shadow-lg z-[9999] h-full overflow-y-auto overflow-x-hidden flex flex-wrap content-between">
+<div id="cart-dropdown" class="fixed top-0 right-[-500px] w-full max-w-[500px] bg-white shadow-lg z-[999999] h-full overflow-y-auto overflow-x-hidden flex flex-wrap content-between">
     <div>
         <div class="cart-header flex justify-between items-center p-6">
             <h6 class="text-[21px]">Cart</h6>
