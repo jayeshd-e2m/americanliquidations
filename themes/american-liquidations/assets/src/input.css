@@ -935,7 +935,7 @@ label.gfield_label .gfield_required .gfield_required:after {
     background: transparent;
     border: 1px solid hsl(0deg 33% 2% / 20%);
     border-radius: 8px;
-    font-size: 14px !important; 
+    font-size: 14px !important;
     @apply !text-black/60;
 }
 input:focus,
