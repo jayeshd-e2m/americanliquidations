@@ -43,7 +43,7 @@ $description = get_field( 'forgot_description', $my_account_page_id );
 
 				<p class="woocommerce-form-row woocommerce-form-row--first form-row">
 					<label for="user_login" class="text-black/60 text-sm font-semibold"><?php esc_html_e( 'Username or Email Address', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
-					<input class="woocommerce-Input woocommerce-Input--text input-text !border-[#080404]/5 w-full !rounded-lg" type="text" name="user_login" id="user_login" autocomplete="username" required aria-required="true" />
+					<input class="woocommerce-Input woocommerce-Input--text input-text !border-[#080404]/20 w-full !rounded-lg" type="text" name="user_login" id="user_login" autocomplete="username" required aria-required="true" />
 				</p>
 
 				<div class="clear"></div>

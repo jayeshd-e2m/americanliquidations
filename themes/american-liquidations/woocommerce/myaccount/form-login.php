@@ -109,13 +109,13 @@ if(is_wc_endpoint_url( 'register' )){
 
                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide !mb-4">
                             <label for="username" class="text-sm font-semibold"><?php esc_html_e( 'Username or Email Address', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-                            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text !border-[#080404]/5"
+                            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text !border-[#080404]/20"
                                 name="username" id="username" autocomplete="username"
                                 value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" />
                         </p>
                         <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                             <label for="password" class="text-sm font-semibold"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-                            <input class="woocommerce-Input woocommerce-Input--text input-text !border-[#080404]/5" type="password"
+                            <input class="woocommerce-Input woocommerce-Input--text input-text !border-[#080404]/20" type="password"
                                 name="password" id="password" autocomplete="current-password" />
                         </p>
 
