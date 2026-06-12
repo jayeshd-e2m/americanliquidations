@@ -933,7 +933,7 @@ label.gfield_label .gfield_required .gfield_required:after {
 
 .contact-form-right input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]), .contact-form-right textarea {
     background: transparent;
-    border: 1px solid hsl(0deg 33% 2% / 5%);
+    border: 1px solid hsl(0deg 33% 2% / 20%);
     border-radius: 8px;
     font-size: 14px !important;
     @apply !text-black/60;
@@ -1266,7 +1266,7 @@ div#gform_1_validation_container .gform-icon {
 
 
 .checkout-card input, .checkout-card select, .checkout-card .select2-selection {
-    border-color: hsl(0deg 33% 2% / 5%) !important;
+    border-color: hsl(0deg 33% 2% / 20%) !important;
     height: 40px !important;
     padding-left: 15px !important;
     padding-right: 15px !important;
