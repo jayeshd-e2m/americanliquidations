@@ -696,7 +696,7 @@ body ul.psfw-social-icons{
 .custom-modal form input:not([type="checkbox"]),
 .custom-modal form select {
     height: 40px;
-    border: 1px solid hsl(0deg 33% 2% / 5%);
+    border: 1px solid hsl(0deg 33% 2% / 20%);
     padding: 3px 15px;
     border-radius: 8px;
     @apply text-black/60;
