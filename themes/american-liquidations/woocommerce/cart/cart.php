@@ -201,7 +201,7 @@ defined( 'ABSPATH' ) || exit;
 							<?php if ( wc_coupons_enabled() ) { ?>
 								<div class="coupon my-[5px] cart-coupon-cover">
 									<label for="coupon_code" class="screen-reader-text"><?php esc_html_e( 'Coupon:', 'woocommerce' ); ?></label> 
-									<input type="text" name="coupon_code" class="input-text cart-coupon-input min-w-[180px] !border-[#080404]/5 !rounded-lg text-sm !px-4 !py-[5px]" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" />
+									<input type="text" name="coupon_code" class="input-text cart-coupon-input min-w-[180px] !border-[#080404]/20 !rounded-lg text-sm !px-4 !py-[5px]" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" />
 									<button type="submit" class="btn btn-red btn-arrow btn-small<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_html_e( 'Apply coupon', 'woocommerce' ); ?></button>
 									<?php do_action( 'woocommerce_cart_coupon' ); ?>
 								</div>
