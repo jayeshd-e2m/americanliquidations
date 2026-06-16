@@ -183,7 +183,16 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 					<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Business Address</div>
 					<div class="flex gap-24">
 						<div class="text-sm">
-							<?php echo esc_html($business_address); ?> <?php echo esc_html($business_city); ?> <?php echo esc_html($business_zipcode); ?> <?php echo esc_html($business_state); ?> <?php echo esc_html($business_country); ?>
+							<?php
+							echo esc_html(implode(' ', array_filter([
+								$business_address,
+								$business_address_2,
+								$business_city,
+								$business_zipcode,
+								$business_state,
+								$business_country,
+							])));
+							?>
 						</div>
 					</div>
 					<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-address">Edit</button>
