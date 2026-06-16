@@ -36,7 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['business_edit_field']
 
     if (array_key_exists($field, $field_map)) {
         update_user_meta($user_id, $field_map[$field], $value);
-        // Simple redirect to avoid form resubmission
+
+        // The address modal carries extra fields the single-value handler ignores.
+        if ($field === 'business_address') {
+            $extra_fields = ['business_city', 'business_zipcode', 'business_country', 'business_state'];
+            foreach ($extra_fields as $key) {
+                if (isset($_POST[$key])) {
+                    update_user_meta($user_id, $key, sanitize_text_field($_POST[$key]));
+                }
+            }
+        }
+
         wp_redirect( esc_url( add_query_arg('profile-updated','1', wc_get_account_endpoint_url('business-profile') ) ) );
         exit;
     }
