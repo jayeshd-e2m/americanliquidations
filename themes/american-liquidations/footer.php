@@ -62,7 +62,7 @@
 			</a>
 
 			<!-- Social Icons -->
-			<div class="flex items-center space-x-2.5 text-[11px]">
+			<div class="flex items-center space-x-2.5 text-[16px]">
 				<?php
 				if( have_rows('social_icons','option') ):
 					while( have_rows('social_icons','option') ) : the_row(); ?>
@@ -108,7 +108,7 @@
 					<span class="text-white text-xs font-bold tracking-[0.15em] font-barlow">SOCIAL</span>
 
 					<!-- Social Icons -->
-					<div class="flex items-center space-x-2.5 text-[11px]">
+					<div class="flex items-center space-x-2.5 text-[16px]">
 						<?php
 						if( have_rows('social_icons','option') ):
 							while( have_rows('social_icons','option') ) : the_row(); ?>
