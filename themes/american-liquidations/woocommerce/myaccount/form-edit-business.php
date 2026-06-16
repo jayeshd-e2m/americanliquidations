@@ -154,7 +154,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 				</div>
 				<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-name">Edit</button>
 			</div>
-		</div>
+		</div> 
 
 		<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full mb-5">
 			<div class="info-item-inner relative pr-10">
