@@ -53,7 +53,7 @@
 	<div class="bg-black/70 w-screen absolute left-0 top-0 h-full z-[1000] mobile-header-overlay" aria-hidden="true"></div>
 	<nav aria-label="Primary navigation" class="mobile-header-nav bg-black shadow-md z-[1001] h-screen absolute left-0 top-0 w-[95%] max-w-[450px] overflow-y-auto">
 		<div class="block lg:hidden">
-			<div aria-label="Top promotional links" class="bg-primary space-y-6 p-6">
+			<div aria-label="Top promotional links" class="bg-primary space-y-3 p-6">
 				<?php if(get_field('heading_1','option')){ ?>
 					<div class="block text-white text-sm md:text-left font-bold"><?php echo get_field('heading_1','option'); ?></div>
 				<?php } ?>
