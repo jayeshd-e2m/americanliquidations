@@ -99,15 +99,20 @@ function filter_shopitems() {
     check_ajax_referer( 'shopitem_filter_nonce', 'nonce' );
 
     $cat       = isset( $_POST['cat'] ) ? sanitize_text_field( $_POST['cat'] ) : '';
+    $base      = isset( $_POST['base'] ) ? sanitize_text_field( $_POST['base'] ) : '';
     $min_price = isset( $_POST['min_price'] ) ? (float) $_POST['min_price'] : '';
     $max_price = isset( $_POST['max_price'] ) ? (float) $_POST['max_price'] : '';
     $location  = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
 
     if ( $cat === '' ) {
-        $cat = isset( $_POST['base'] ) ? sanitize_text_field( $_POST['base'] ) : '';
+        $cat = $base;
     }
 
     $shortcode  = '[shopitem cat="' . esc_attr( $cat ) . '"';
+    // Pass base so the shortcode can scope to truckloads AND the selected cat
+    if ( $base !== '' ) {
+        $shortcode .= ' base="' . esc_attr( $base ) . '"';
+    }
     if ( $min_price !== '' && $max_price !== '' ) {
         $shortcode .= ' min_price="' . esc_attr( $min_price ) . '"';
         $shortcode .= ' max_price="' . esc_attr( $max_price ) . '"';
