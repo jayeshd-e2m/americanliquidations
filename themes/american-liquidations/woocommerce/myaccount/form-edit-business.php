@@ -184,7 +184,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 					<div class="flex gap-24">
 						<div class="text-sm">
 							<?php
-							echo esc_html(implode(' ', array_filter([
+							echo esc_html(implode(', ', array_filter([
 								$business_address,
 								$business_address_2,
 								$business_city,
