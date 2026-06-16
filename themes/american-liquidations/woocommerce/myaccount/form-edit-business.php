@@ -301,7 +301,6 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 			<div class="custom-modal">
 				<h5 class="mb-4">Edit Employer Identification Number (EIN)</h5>
 				<form method="post" autocomplete="off">
-					<label>EIN</label>
 					<input type="text" name="business_edit_value" value="<?php echo esc_attr($ein); ?>" required>
 					<input type="hidden" name="business_edit_field" value="business_ein">
 					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
@@ -318,7 +317,6 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 			<div class="custom-modal">
 				<h5 class="mb-4">Edit Business Phone Number</h5>
 				<form method="post" autocomplete="off">
-					<label>Phone Number</label>
 					<input type="tel" name="business_edit_value" value="<?php echo esc_attr($business_phone); ?>" required>
 					<input type="hidden" name="business_edit_field" value="business_phone">
 					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
@@ -447,7 +445,6 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 			<div class="custom-modal">
 				<h5 class="mb-4">Edit Business Type</h5>
 				<form method="post" autocomplete="off">
-					<label>Type</label>
 					<input type="text" name="business_edit_value" value="<?php echo esc_attr($business_type); ?>" required>
 					<input type="hidden" name="business_edit_field" value="business_type">
 					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
