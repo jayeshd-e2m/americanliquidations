@@ -2,6 +2,7 @@
 function custom_shopitem_shortcode( $atts ) {
     $atts = shortcode_atts( array(
         'cat'       => '',
+        'base'      => '',
         'orderby'   => 'date',
         'order'     => 'DESC',
         'per_page'  => 12,
@@ -30,14 +31,37 @@ function custom_shopitem_shortcode( $atts ) {
         'order'          => sanitize_text_field( $atts['order'] ),
     );
 
-    if ( ! empty( $atts['cat'] ) ) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'product_cat',
-                'field'    => 'slug',
-                'terms'    => sanitize_text_field( $atts['cat'] ),
-            ),
+    $base = sanitize_text_field( $atts['base'] );
+    $cat  = sanitize_text_field( $atts['cat'] );
+
+    $tax_query = array( 'relation' => 'AND' );
+
+    // Always scope to the base term (truckloads) when provided
+    if ( $base !== '' ) {
+        $tax_query[] = array(
+            'taxonomy' => 'product_cat',
+            'field'    => 'slug',
+            'terms'    => $base,
         );
+    }
+
+    // Add the selected sub-category only if it differs from base
+    if ( $cat !== '' && $cat !== $base ) {
+        $tax_query[] = array(
+            'taxonomy' => 'product_cat',
+            'field'    => 'slug',
+            'terms'    => $cat,
+        );
+    }
+
+    // If only base (or only cat) was given, we still have one clause — that's fine.
+    // Drop the relation key if there's just a single clause, to keep things clean.
+    if ( count( $tax_query ) === 2 ) { // 'relation' + one clause
+        unset( $tax_query['relation'] );
+    }
+
+    if ( count( $tax_query ) > 0 ) {
+        $args['tax_query'] = $tax_query;
     }
 
     // Build meta_query (price + location together)

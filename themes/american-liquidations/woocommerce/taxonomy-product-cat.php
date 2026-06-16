@@ -218,7 +218,7 @@ if ($term && $term->slug === 'truckloads') {
 					</div>
 
 					<div id="shopitem-results">
-						<?php echo do_shortcode('[shopitem cat="' . esc_attr( $term->slug ) . '"]'); ?>
+						<?php echo do_shortcode('[shopitem cat="' . esc_attr( $term->slug ) . '" base="' . esc_attr( $term->slug ) . '"]'); ?>
 					</div>
 				</div>
 
