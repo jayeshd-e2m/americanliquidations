@@ -27,6 +27,8 @@ if (
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['business_edit_field']) && check_admin_referer('edit_business_field', 'edit_business_nonce')) {
     $field_map = [
+		'business_name'    => 'business_name',
+    	'business_ein'     => 'business_ein',
         'business_phone'   => 'business_phone',
         'business_address' => 'business_address',
         'business_type'    => 'business_type',
@@ -150,6 +152,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 						<?php echo esc_html($business_name); ?>
 					</div>
 				</div>
+				<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-name">Edit</button>
 			</div>
 		</div>
 
@@ -162,6 +165,7 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 						<?php echo esc_html($ein); ?>
 					</div>
 				</div>
+				<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-ein">Edit</button>
 			</div>
 		</div>
 
@@ -277,7 +281,35 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 		</div>
 
 		
+		<!-- Business Name Modal -->
+		<div id="modal-business-name" class="custom-modal-overlay" style="display:none;">
+			<div class="custom-modal">
+				<h5 class="mb-4">Edit Business Name</h5>
+				<form method="post" autocomplete="off">
+					<label>Business Name</label>
+					<input type="text" name="business_edit_value" value="<?php echo esc_attr($business_name); ?>" required>
+					<input type="hidden" name="business_edit_field" value="business_name">
+					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
+					<button type="submit">Save</button>
+					<button type="button" class="custom-modal-close">Cancel</button>
+				</form>
+			</div>
+		</div>
 
+		<!-- Business EIN Modal -->
+		<div id="modal-business-ein" class="custom-modal-overlay" style="display:none;">
+			<div class="custom-modal">
+				<h5 class="mb-4">Edit Employer Identification Number (EIN)</h5>
+				<form method="post" autocomplete="off">
+					<label>EIN</label>
+					<input type="text" name="business_edit_value" value="<?php echo esc_attr($ein); ?>" required>
+					<input type="hidden" name="business_edit_field" value="business_ein">
+					<?php wp_nonce_field('edit_business_field', 'edit_business_nonce'); ?>
+					<button type="submit">Save</button>
+					<button type="button" class="custom-modal-close">Cancel</button>
+				</form>
+			</div>
+		</div>
 
 
 
