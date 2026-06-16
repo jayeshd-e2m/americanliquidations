@@ -178,27 +178,29 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 					<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-phone">Edit</button>
 				</div>
 			</div>
-			<div class="info-item-inner relative pr-10">
-				<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Business Address</div>
-				<div class="flex gap-24">
-					<div class="text-sm">
-						<?php
-						// Resolve full country and state names from codes
-						$biz_full_country = isset($countries[$business_country]) ? $countries[$business_country] : $business_country;
-						$biz_full_state   = (isset($states[$business_country]) && isset($states[$business_country][$business_state]))
-							? $states[$business_country][$business_state]
-							: $business_state;
+			<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full">
+				<div class="info-item-inner relative pr-10">
+					<div class="section-label text-[20px] font-bold mb-6 md:mb-10">Business Address</div>
+					<div class="flex gap-24">
+						<div class="text-sm">
+							<?php
+							// Resolve full country and state names from codes
+							$biz_full_country = isset($countries[$business_country]) ? $countries[$business_country] : $business_country;
+							$biz_full_state   = (isset($states[$business_country]) && isset($states[$business_country][$business_state]))
+								? $states[$business_country][$business_state]
+								: $business_state;
 
-						echo esc_html(implode(', ', array_filter([
-							$business_address,
-							$business_address_2,
-							$business_city,
-							trim("{$business_zipcode} {$biz_full_state} {$biz_full_country}"),
-						])));
-						?>
+							echo esc_html(implode(', ', array_filter([
+								$business_address,
+								$business_address_2,
+								$business_city,
+								trim("{$business_zipcode} {$biz_full_state} {$biz_full_country}"),
+							])));
+							?>
+						</div>
 					</div>
+					<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-address">Edit</button>
 				</div>
-				<button class="edit-section absolute top-0 right-0 text-primary/60 text-sm font-semibold" data-modal="modal-business-address">Edit</button>
 			</div>
 			<div class="info-section bg-white p-7 md:p-12 rounded-[15px] w-full">
 				<div class="info-item-inner relative pr-10">
