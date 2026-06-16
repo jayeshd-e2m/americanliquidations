@@ -39,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['business_edit_field']
 
         // The address modal carries extra fields the single-value handler ignores.
         if ($field === 'business_address') {
-            $extra_fields = ['business_city', 'business_zipcode', 'business_country', 'business_state'];
-            foreach ($extra_fields as $key) {
-                if (isset($_POST[$key])) {
-                    update_user_meta($user_id, $key, sanitize_text_field($_POST[$key]));
-                }
-            }
-        }
+			$extra_fields = ['business_address_2', 'business_city', 'business_zipcode', 'business_country', 'business_state'];
+			foreach ($extra_fields as $key) {
+				if (isset($_POST[$key])) {
+					update_user_meta($user_id, $key, sanitize_text_field($_POST[$key]));
+				}
+			}
+		}
 
         wp_redirect( esc_url( add_query_arg('profile-updated','1', wc_get_account_endpoint_url('business-profile') ) ) );
         exit;
@@ -99,7 +99,15 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
             <div class="flex lg:items-center justify-between gap-5 flex-col lg:flex-row">
                 <!-- Replace with some dynamic business address or phone if you want -->
 				 <span class="text-black/60 text-xs max-w-[220px]">
-					<?php $display_address = trim("{$business_address}, {$business_address_2}, {$business_city} {$business_zipcode} {$full_country}");?>
+					<?php
+					$parts = array_filter([
+						$business_address,
+						$business_address_2,
+						trim("{$business_city} {$business_zipcode}"),
+						$full_country,
+					]);
+					$display_address = implode(', ', $parts);
+					?>
                 	<?php echo $business_address ? esc_html($display_address) : "Address not provided yet."; ?><br>
 				</span>
 				<button id="open-business-info-modal" class="text-primary/60 font-semibold text-sm hover:text-primary text-left">View or Update</button>
@@ -290,6 +298,10 @@ $full_state = (isset($states[$country]) && isset($states[$country][$state])) ? $
 						<label>Address</label>
 						<input type="text" name="business_edit_value" value="<?php echo esc_attr($business_address); ?>" required>
 						<input type="hidden" name="business_edit_field" value="business_address">
+					</div>
+					<div class="form-group mb-3">
+						<label>Address Line 2</label>
+						<input type="text" name="business_address_2" value="<?php echo esc_attr($business_address_2); ?>">
 					</div>
 					<div class="form-group mb-3">
 						<label>City</label>
