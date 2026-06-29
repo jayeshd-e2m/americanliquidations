@@ -660,23 +660,3 @@ add_filter('pre_http_request', function ($preempt, $parsed_args, $url) {
     }
     return $preempt; // leave all other requests untouched
 }, 10, 3);
-
-add_action('init', function () {
-    if (!current_user_can('manage_options')) return; // admin only
-    if (!isset($_GET['plaid_inspect'])) return;        // only when you ask for it
-
-    global $wpdb;
-    $table = $wpdb->prefix . 'plaid_ach_accounts';
-
-    $accounts = $wpdb->get_results("SELECT * FROM {$table}", ARRAY_A);
-    error_log('PLAID INSPECT - accounts table: ' . json_encode($accounts));
-
-    $meta = $wpdb->get_results(
-        "SELECT umeta_id, user_id, meta_key, meta_value
-         FROM {$wpdb->usermeta}
-         WHERE meta_key LIKE '%plaid%'", ARRAY_A
-    );
-    error_log('PLAID INSPECT - usermeta: ' . json_encode($meta));
-
-    wp_die('Plaid inspect done. Check your debug log.');
-});
