@@ -648,3 +648,15 @@ function shopitem_add_base_cat( $query ) {
 
     $query->set('tax_query', $new);
 }
+
+
+add_filter('pre_http_request', function ($preempt, $parsed_args, $url) {
+    // Only act on the dead Plaid development host
+    if (strpos($url, 'development.plaid.com') !== false) {
+        $fixed_url = str_replace('development.plaid.com', 'production.plaid.com', $url);
+        // Re-issue the request to the correct host.
+        // This filter won't loop because the new URL no longer contains "development.plaid.com".
+        return wp_remote_request($fixed_url, $parsed_args);
+    }
+    return $preempt; // leave all other requests untouched
+}, 10, 3);
